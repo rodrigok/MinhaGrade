@@ -1,0 +1,592 @@
+[
+  {
+    "_id":"SI-1-4132",
+    "course": "SI",
+    "semester":"1",
+    "code":4132,
+    "name":"Algoritmos",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-1-4133",
+    "course": "SI",
+    "semester":"1",
+    "code":4133,
+    "name":"Introdução à Computação",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-1-4134",
+    "course": "SI",
+    "semester":"1",
+    "code":4134,
+    "name":"Lógica e Matemática Discreta",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-1-4305",
+    "course": "SI",
+    "semester":"1",
+    "code":4305,
+    "name":"Matemática Fundamental",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-1-4406",
+    "course": "SI",
+    "semester":"1",
+    "code":4406,
+    "name":"Português",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-1-4407",
+    "course": "SI",
+    "semester":"1",
+    "code":4407,
+    "name":"Metodologia Científica",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-2-4138",
+    "course": "SI",
+    "semester":"2",
+    "code":4138,
+    "name":"Arquitetura de Computadores",
+    "requirement":["4133"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-2-4174",
+    "course": "SI",
+    "semester":"2",
+    "code":4174,
+    "name":"Programação I",
+    "requirement":["4132"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-2-4306",
+    "course": "SI",
+    "semester":"2",
+    "code":4306,
+    "name":"Matemática Financeira",
+    "requirement":["4305"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-2-4307",
+    "course": "SI",
+    "semester":"2",
+    "code":4307,
+    "name":"Probabilidade e Estatística",
+    "requirement":["4305"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-2-4408",
+    "course": "SI",
+    "semester":"2",
+    "code":4408,
+    "name":"Filosofia",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4139",
+    "course": "SI",
+    "semester":"3",
+    "code":4139,
+    "name":"Estrutura de Dados",
+    "requirement":["4132"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4140",
+    "course": "SI",
+    "semester":"3",
+    "code":4140,
+    "name":"Organização de Dados",
+    "requirement":["4174"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4141",
+    "course": "SI",
+    "semester":"3",
+    "code":4141,
+    "name":"Teleprocessamento",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4175",
+    "course": "SI",
+    "semester":"3",
+    "code":4175,
+    "name":"Programação II",
+    "requirement":["4174"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4204",
+    "course": "SI",
+    "semester":"3",
+    "code":4204,
+    "name":"Teoria Geral da Administração",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-3-4409",
+    "course": "SI",
+    "semester":"3",
+    "code":4409,
+    "name":"Sociologia",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4142",
+    "course": "SI",
+    "semester":"4",
+    "code":4142,
+    "name":"Sistemas Operacionais",
+    "requirement":["4138"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4143",
+    "course": "SI",
+    "semester":"4",
+    "code":4143,
+    "name":"Análise de Sistemas I",
+    "requirement":["4140"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4145",
+    "course": "SI",
+    "semester":"4",
+    "code":4145,
+    "name":"Redes de Computadores",
+    "requirement":["4141"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4146",
+    "course": "SI",
+    "semester":"4",
+    "code":4146,
+    "name":"Linguagens de Programação",
+    "requirement":["4174"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4176",
+    "course": "SI",
+    "semester":"4",
+    "code":4176,
+    "name":"Programação III",
+    "requirement":["4134",4175],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-4-4205",
+    "course": "SI",
+    "semester":"4",
+    "code":4205,
+    "name":"Administração Financeira",
+    "requirement":["4204"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4144",
+    "course": "SI",
+    "semester":"5",
+    "code":4144,
+    "name":"Análise de Sistemas II",
+    "requirement":["4143"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4147",
+    "course": "SI",
+    "semester":"5",
+    "code":4147,
+    "name":"Compiladores",
+    "requirement":["4146",4176],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4148",
+    "course": "SI",
+    "semester":"5",
+    "code":4148,
+    "name":"Banco de Dados I",
+    "requirement":["4139",4140],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4151",
+    "course": "SI",
+    "semester":"5",
+    "code":4151,
+    "name":"Tópicos Especiais em Sistemas de Informação",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4177",
+    "course": "SI",
+    "semester":"5",
+    "code":4177,
+    "name":"Complexidade de Algoritmos",
+    "requirement":["4139",4176],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-5-4308",
+    "course": "SI",
+    "semester":"5",
+    "code":4308,
+    "name":"Geometria Analítica e Álgebra Linear",
+    "requirement":["4305"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4149",
+    "course": "SI",
+    "semester":"6",
+    "code":4149,
+    "name":"Banco de Dados II",
+    "requirement":["4148"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4152",
+    "course": "SI",
+    "semester":"6",
+    "code":4152,
+    "name":"Engenharia de Software",
+    "requirement":["4144"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4153",
+    "course": "SI",
+    "semester":"6",
+    "code":4153,
+    "name":"Sistemas de Informação",
+    "requirement":["4143"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4154",
+    "course": "SI",
+    "semester":"6",
+    "code":4154,
+    "name":"Sistemas Distribuídos",
+    "requirement":["4145",4175],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4155",
+    "course": "SI",
+    "semester":"6",
+    "code":4155,
+    "name":"Inteligência Artificial",
+    "requirement":["4176"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-6-4156",
+    "course": "SI",
+    "semester":"6",
+    "code":4156,
+    "name":"Estágio Profissional",
+    "requirement":["C88"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-7-4157",
+    "course": "SI",
+    "semester":"7",
+    "code":4157,
+    "name":"Computação Gráfica",
+    "requirement":["4175",4308],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-7-4158",
+    "course": "SI",
+    "semester":"7",
+    "code":4158,
+    "name":"Segurança e Auditoria de Sistemas",
+    "requirement":["4145"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-7-4159",
+    "course": "SI",
+    "semester":"7",
+    "code":4159,
+    "name":"Aplicações Industriais e Comerciais",
+    "requirement":["4153"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-7-4160",
+    "course": "SI",
+    "semester":"7",
+    "code":4160,
+    "name":"Gerência de Projetos",
+    "requirement":["4152"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-7-4178",
+    "course": "SI",
+    "semester":"7",
+    "code":4178,
+    "name":"Trabalho de Conclusão I",
+    "requirement":["4156"],
+    "credit":8,
+    "workload":120
+  },
+  {
+    "_id":"SI-7-4410",
+    "course": "SI",
+    "semester":"7",
+    "code":4410,
+    "name":"Legislação e Informática",
+    "requirement":["C80"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-8-4163",
+    "course": "SI",
+    "semester":"8",
+    "code":4163,
+    "name":"Avaliação de Desempenho de Sistemas",
+    "requirement":["4158"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-8-4179",
+    "course": "SI",
+    "semester":"8",
+    "code":4179,
+    "name":"Trabalho de Conclusão II",
+    "requirement":["4178"],
+    "credit":8,
+    "workload":120
+  },
+  {
+    "_id":"SI-8-4206",
+    "course": "SI",
+    "semester":"8",
+    "code":4206,
+    "name":"Empreendedorismo",
+    "requirement":["4204"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-8-4411",
+    "course": "SI",
+    "semester":"8",
+    "code":4411,
+    "name":"Computador e Sociedade",
+    "requirement":["4408"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4164",
+    "course": "SI",
+    "semester":"E",
+    "code":4164,
+    "name":"Inglês Técnico",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4165",
+    "course": "SI",
+    "semester":"E",
+    "code":4165,
+    "name":"Informática nas Organizações",
+    "requirement":["4133"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4166",
+    "course": "SI",
+    "semester":"E",
+    "code":4166,
+    "name":"Sistemas Cooperativos",
+    "requirement":["4153"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4167",
+    "course": "SI",
+    "semester":"E",
+    "code":4167,
+    "name":"Tópicos Avançados em Sistemas de Informação",
+    "requirement":["4175"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4168",
+    "course": "SI",
+    "semester":"E",
+    "code":4168,
+    "name":"Aplicações Especiais em Informática",
+    "requirement":["4175"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4169",
+    "course": "SI",
+    "semester":"E",
+    "code":4169,
+    "name":"Autoria e Design na Internet I",
+    "requirement":["4133"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4170",
+    "course": "SI",
+    "semester":"E",
+    "code":4170,
+    "name":"Autoria e Design na Internet II",
+    "requirement":["4169"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4171",
+    "course": "SI",
+    "semester":"E",
+    "code":4171,
+    "name":"Programação para Internet I",
+    "requirement":["4175"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4172",
+    "course": "SI",
+    "semester":"E",
+    "code":4172,
+    "name":"Programação para Internet II",
+    "requirement":["4171"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4173",
+    "course": "SI",
+    "semester":"E",
+    "code":4173,
+    "name":"Ferramentas Gráficas e Multimídia",
+    "requirement":["4133"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4207",
+    "course": "SI",
+    "semester":"E",
+    "code":4207,
+    "name":"Finanças Corporativas",
+    "requirement":["4205"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4208",
+    "course": "SI",
+    "semester":"E",
+    "code":4208,
+    "name":"Economia e Finanças Públicas",
+    "requirement":["4205"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4309",
+    "course": "SI",
+    "semester":"E",
+    "code":4309,
+    "name":"Cálculo",
+    "requirement":["4305"],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"SI-E-4412",
+    "course": "SI",
+    "semester":"E",
+    "code":4412,
+    "name":"Língua Brasileira de Sinais - Libras",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  }
+]

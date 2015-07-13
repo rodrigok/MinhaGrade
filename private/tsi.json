@@ -1,0 +1,312 @@
+[
+  {
+    "_id":"TSI-1-44174",
+    "course": "TSI",
+    "semester":"1",
+    "code":44174,
+    "name":"Algoritmos e Programação",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-1-44406",
+    "course": "TSI",
+    "semester":"1",
+    "code":44406,
+    "name":"Português",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-1-44169",
+    "course": "TSI",
+    "semester":"1",
+    "code":44169,
+    "name":"Autoria e Design na Internet I",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-1-44133",
+    "course": "TSI",
+    "semester":"1",
+    "code":44133,
+    "name":"Introdução à Computação",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-1-44134",
+    "course": "TSI",
+    "semester":"1",
+    "code":44134,
+    "name":"Lógica e Matemática Discreta",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-2-44175",
+    "course": "TSI",
+    "semester":"2",
+    "code":44175,
+    "name":"Laboratório de Programação de Computadores I",
+    "requirement":[44174],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-2-44412",
+    "course": "TSI",
+    "semester":"2",
+    "code":44412,
+    "name":"Ética e Legislação para Informática",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-2-44170",
+    "course": "TSI",
+    "semester":"2",
+    "code":44170,
+    "name":"Autoria e Design na Internet II",
+    "requirement":[44169],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-2-44138",
+    "course": "TSI",
+    "semester":"2",
+    "code":44138,
+    "name":"Arquitetura de Computadores",
+    "requirement":[44133],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-2-44178",
+    "course": "TSI",
+    "semester":"2",
+    "code":44178,
+    "name":"Redes de Computadores I",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-3-44176",
+    "course": "TSI",
+    "semester":"3",
+    "code":44176,
+    "name":"Laboratório de Programação de Computadores II",
+    "requirement":[44175],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-3-44164",
+    "course": "TSI",
+    "semester":"3",
+    "code":44164,
+    "name":"Inglês Técnico",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-3-44179",
+    "course": "TSI",
+    "semester":"3",
+    "code":44179,
+    "name":"Redes de Computadores II",
+    "requirement":[44178],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-3-44139",
+    "course": "TSI",
+    "semester":"3",
+    "code":44139,
+    "name":"Estrutura de Dados",
+    "requirement":[44174],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-3-44140",
+    "course": "TSI",
+    "semester":"3",
+    "code":44140,
+    "name":"Organização de Dados",
+    "requirement":[44175],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-4-44177",
+    "course": "TSI",
+    "semester":"4",
+    "code":44177,
+    "name":"Laboratório de Programação de Computadores III",
+    "requirement":[44176],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-4-44180",
+    "course": "TSI",
+    "semester":"4",
+    "code":44180,
+    "name":"Banco de Dados",
+    "requirement":[44140],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-4-44143",
+    "course": "TSI",
+    "semester":"4",
+    "code":44143,
+    "name":"Análise de Sistemas I",
+    "requirement":[44175],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-4-44142",
+    "course": "TSI",
+    "semester":"4",
+    "code":44142,
+    "name":"Sistemas Operacionais",
+    "requirement":[44138],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-4-44157",
+    "course": "TSI",
+    "semester":"4",
+    "code":44157,
+    "name":"Computação Gráfica",
+    "requirement":[44176],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-5-44171",
+    "course": "TSI",
+    "semester":"5",
+    "code":44171,
+    "name":"Programação para Internet Internet",
+    "requirement":[44176,4418],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-5-44209",
+    "course": "TSI",
+    "semester":"5",
+    "code":44209,
+    "name":"Empreendedorismo e Administração",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-5-44181",
+    "course": "TSI",
+    "semester":"5",
+    "code":44181,
+    "name":"Segurança na Internet",
+    "requirement":[44179],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-5-44182",
+    "course": "TSI",
+    "semester":"5",
+    "code":44182,
+    "name":"Banco de Dados para Sistemas Web",
+    "requirement":[44180],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-5-44144",
+    "course": "TSI",
+    "semester":"5",
+    "code":44144,
+    "name":"Análise de Sistemas II",
+    "requirement":[44143],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-6-44172",
+    "course": "TSI",
+    "semester":"6",
+    "code":44172,
+    "name":"Programação para Internet II",
+    "requirement":[44171],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-6-44152",
+    "course": "TSI",
+    "semester":"6",
+    "code":44152,
+    "name":"Engenharia de Software",
+    "requirement":[44144],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-6-44160",
+    "course": "TSI",
+    "semester":"6",
+    "code":44160,
+    "name":"Gerência de Projetos",
+    "requirement":[44143],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-6-44411",
+    "course": "TSI",
+    "semester":"6",
+    "code":44411,
+    "name":"Computador e Sociedade",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  },
+  {
+    "_id":"TSI-6-44183",
+    "course": "TSI",
+    "semester":"6",
+    "code":44183,
+    "name":"Projeto Prático de Sistemas",
+    "requirement":[44144,44171],
+    "credit":18,
+    "workload":270
+  },
+  {
+    "_id":"TSI-E-44413",
+    "course": "TSI",
+    "semester":"E",
+    "code":44413,
+    "name":"Língua Brasileira de Sinais - Libras",
+    "requirement":[],
+    "credit":4,
+    "workload":60
+  }
+]

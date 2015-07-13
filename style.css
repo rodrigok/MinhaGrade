@@ -1,0 +1,16 @@
+/* CSS declarations go here */
+select:focus {
+	outline: 1px solid blue;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr {
+	height: 26px;
+}
+
+td, th {
+  padding: 0 10px;
+}

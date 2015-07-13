@@ -1,0 +1,56 @@
+<head>
+  <title>MinhaGrade</title>
+</head>
+
+<body>
+  {{> loginButtons}}
+
+  {{> grade}}
+</body>
+
+<template name="grade">
+	<table>
+		<tr>
+			{{#if currentUser}}
+			<th>Status</th>
+			{{/if}}
+			<th>Semestre</th>
+			<th>Código</th>
+			<th>Nome</th>
+			<th>Dependencias</th>
+			<th>Créditos</th>
+			<th>Carga Horária</th>
+		</tr>
+		{{#each grade}}
+			<tr style="{{lineStyle}}">
+				{{#if currentUser}}
+				<td>
+					<select>
+						<option value="pending" {{isSelected 'pending'}}>--</option>
+						<option value="doing" {{isSelected 'doing'}}>Cursando</option>
+						<option value="done" {{isSelected 'done'}}>Concluído</option>
+					</select>
+				</td>
+				{{/if}}
+				<td>
+					{{semester}}
+				</td>
+				<td>
+					{{code}}
+				</td>
+				<td>
+					{{name}}
+				</td>
+				<td>
+					{{requirement}}
+				</td>
+				<td>
+					{{credit}}
+				</td>
+				<td>
+					{{workload}}
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+</template>
