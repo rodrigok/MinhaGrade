@@ -1,7 +1,5 @@
 Template.gradeItem.onRendered ->
-	el = @find('div.label')
-	if el?
-		$(el).popup({})
+	@$('div.label').popup({})
 
 Template.gradeItem.helpers
 	lineStyle: ->
