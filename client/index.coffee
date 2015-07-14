@@ -1,7 +1,9 @@
-Template.grade.helpers
-	grade: ->
-		return Grade.find({course: 'SI'})
+Template.gradeItem.onRendered ->
+	el = @find('div.label')
+	if el?
+		$(el).popup({})
 
+Template.gradeItem.helpers
 	lineStyle: ->
 		user = Meteor.user()
 		styles = []
@@ -26,8 +28,32 @@ Template.grade.helpers
 				selected: true
 			}
 
+	getGradeItemByCode: (code) ->
+		return Grade.findOne({code: parseInt(code)})
 
-Template.grade.events
+	requirementColor: (_id) ->
+		user = Meteor.user()
+		switch user.grade?[_id]
+			when 'done'
+				return 'grey'
+			when 'doing'
+				return 'orange'
+			else
+				return 'red'
+
+
+Template.gradeItem.events
 	'change select': (e) ->
 		status = $(e.target).val()
 		Meteor.call 'updateGradeItem', @_id, status
+
+
+
+
+Template.grade.onCreated ->
+	@subscribe 'Grade'
+	@subscribe 'userGradeInfo'
+
+Template.grade.helpers
+	grade: ->
+		return Grade.find({course: 'SI'})

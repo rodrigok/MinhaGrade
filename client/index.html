@@ -3,54 +3,66 @@
 </head>
 
 <body>
-  {{> loginButtons}}
+	<div class="ui container">
+		{{> loginButtons}}
+	</div>
 
-  {{> grade}}
+	<div class="ui container">
+		{{> grade}}
+	</div>
 </body>
 
 <template name="grade">
-	<table>
-		<tr>
-			{{#if currentUser}}
-			<th>Status</th>
-			{{/if}}
-			<th>Semestre</th>
-			<th>Código</th>
-			<th>Nome</th>
-			<th>Dependencias</th>
-			<th>Créditos</th>
-			<th>Carga Horária</th>
-		</tr>
-		{{#each grade}}
-			<tr style="{{lineStyle}}">
+	{{#if Template.subscriptionsReady}}
+	<table class="ui celled padded table">
+		<thead>
+			<tr>
 				{{#if currentUser}}
-				<td>
-					<select>
-						<option value="pending" {{isSelected 'pending'}}>--</option>
-						<option value="doing" {{isSelected 'doing'}}>Cursando</option>
-						<option value="done" {{isSelected 'done'}}>Concluído</option>
-					</select>
-				</td>
+				<th>Status</th>
 				{{/if}}
-				<td>
-					{{semester}}
-				</td>
-				<td>
-					{{code}}
-				</td>
-				<td>
-					{{name}}
-				</td>
-				<td>
-					{{requirement}}
-				</td>
-				<td>
-					{{credit}}
-				</td>
-				<td>
-					{{workload}}
-				</td>
+				<th>Semestre</th>
+				<th>Código - Nome</th>
+				<th>Dependencias</th>
+				<th>Créditos / Carga Horária</th>
 			</tr>
-		{{/each}}
+		</thead>
+		<tbody>
+			{{#each grade}}
+				{{> gradeItem}}
+			{{/each}}
+		</tbody>
 	</table>
+	{{/if}}
+</template>
+
+<template name="gradeItem">
+	<tr style="{{lineStyle}}">
+		{{#if currentUser}}
+		<td>
+			<select class="ui dropdown">
+				<option value="pending" {{isSelected 'pending'}}>Pendente</option>
+				<option value="doing" {{isSelected 'doing'}}>Cursando</option>
+				<option value="done" {{isSelected 'done'}}>Concluído</option>
+			</select>
+		</td>
+		{{/if}}
+		<td>
+			{{semester}}
+		</td>
+		<td>
+			{{code}} - {{name}}
+		</td>
+		<td>
+			{{#if requirement}}
+				{{#each requirement}}
+					{{#with getGradeItemByCode .}}
+						<div class="ui {{requirementColor _id}} horizontal label" data-content="{{name}} - Semestre {{semester}}" data-variation="wide">{{code}}</div>
+					{{/with}}
+				{{/each}}
+			{{/if}}
+		</td>
+		<td>
+			{{credit}} / {{workload}}
+		</td>
+	</tr>
 </template>

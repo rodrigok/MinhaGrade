@@ -1,16 +1,10 @@
 /* CSS declarations go here */
 select:focus {
-	outline: 1px solid blue;
+	box-shadow: 0 0 2px #00F;
 }
 
-table {
-	border-collapse: collapse;
-}
-
-tr {
-	height: 26px;
-}
-
-td, th {
-  padding: 0 10px;
+.ui.grey.labels .label, .ui.grey.label {
+	background-color: #EAEAEA !important;
+	border-color: #767676 !important;
+	color: #CCC !important;
 }

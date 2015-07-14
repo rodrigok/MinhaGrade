@@ -1,2 +1,2 @@
-Meteor.subscribe 'Grade'
-Meteor.subscribe 'userGradeInfo'
+# Meteor.subscribe 'Grade'
+# Meteor.subscribe 'userGradeInfo'
