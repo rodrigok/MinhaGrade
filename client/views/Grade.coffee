@@ -1,6 +1,6 @@
 Template.Grade.onCreated ->
 	@subscribe 'Grade'
-	@subscribe 'userGradeInfo'
+	@subscribe 'userGradeInfo', @data.email
 
 Template.Grade.helpers
 	grade: ->

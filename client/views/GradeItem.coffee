@@ -4,6 +4,8 @@ Template.GradeItem.onRendered ->
 Template.GradeItem.helpers
 	lineStyle: ->
 		user = Meteor.user()
+		if Router.current().params.email?
+			user = Meteor.users.findOne({'emails.address': Router.current().params.email})
 		styles = []
 
 		if @semester is 'E'
@@ -31,6 +33,8 @@ Template.GradeItem.helpers
 
 	requirementColor: (_id) ->
 		user = Meteor.user()
+		if Router.current().params.email?
+			user = Meteor.users.findOne({'emails.address': Router.current().params.email})
 		switch user?.grade?[_id]
 			when 'done'
 				return 'grey'
