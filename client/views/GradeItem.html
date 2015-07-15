@@ -1,41 +1,4 @@
-<head>
-  <title>MinhaGrade</title>
-</head>
-
-<body>
-	<div class="ui container">
-		{{> loginButtons}}
-	</div>
-
-	<div class="ui container">
-		{{> grade}}
-	</div>
-</body>
-
-<template name="grade">
-	{{#if Template.subscriptionsReady}}
-	<table class="ui celled padded table">
-		<thead>
-			<tr>
-				{{#if currentUser}}
-				<th>Status</th>
-				{{/if}}
-				<th>Semestre</th>
-				<th>Código - Nome</th>
-				<th>Dependencias</th>
-				<th>Créditos / Carga Horária</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each grade}}
-				{{> gradeItem}}
-			{{/each}}
-		</tbody>
-	</table>
-	{{/if}}
-</template>
-
-<template name="gradeItem">
+<template name="GradeItem">
 	<tr style="{{lineStyle}}">
 		{{#if currentUser}}
 		<td>
