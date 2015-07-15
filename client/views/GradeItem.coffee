@@ -43,6 +43,9 @@ Template.GradeItem.helpers
 			else
 				return 'red'
 
+	canEdit: ->
+		return Meteor.user()? and not Router.current().params.email?
+
 
 Template.GradeItem.events
 	'change select': (e) ->

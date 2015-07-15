@@ -1,6 +1,6 @@
 <template name="GradeItem">
 	<tr style="{{lineStyle}}">
-		{{#if currentUser}}
+		{{#if canEdit}}
 		<td>
 			<select class="ui dropdown">
 				<option value="pending" {{isSelected 'pending'}}>Pendente</option>
