@@ -20,35 +20,3 @@
 	</table>
 	{{/if}}
 </template>
-
-<template name="gradeItem">
-	<tr style="{{lineStyle}}">
-		{{#if currentUser}}
-		<td>
-			<select class="ui dropdown">
-				<option value="pending" {{isSelected 'pending'}}>Pendente</option>
-				<option value="doing" {{isSelected 'doing'}}>Cursando</option>
-				<option value="done" {{isSelected 'done'}}>Concluído</option>
-			</select>
-		</td>
-		{{/if}}
-		<td>
-			{{semester}}
-		</td>
-		<td>
-			{{code}} - {{name}}
-		</td>
-		<td>
-			{{#if requirement}}
-				{{#each requirement}}
-					{{#with getGradeItemByCode .}}
-						<div class="ui {{requirementColor _id}} horizontal label" data-content="{{name}} - Semestre {{semester}}" data-variation="wide">{{code}}</div>
-					{{/with}}
-				{{/each}}
-			{{/if}}
-		</td>
-		<td>
-			{{credit}} / {{workload}}
-		</td>
-	</tr>
-</template>
