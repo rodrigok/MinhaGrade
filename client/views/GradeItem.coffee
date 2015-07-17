@@ -51,3 +51,8 @@ Template.GradeItem.events
 	'change select': (e) ->
 		status = $(e.target).val()
 		Meteor.call 'updateGradeItem', @_id, status
+
+	'click .info.icon.link': (e) ->
+		Session.set 'modalInfoTitle', @name
+		Session.set 'modalInfoDescription', @description
+		Session.set 'modalInfoShow', true

@@ -7,4 +7,4 @@ Meteor.publish 'userGradeInfo', (email) ->
 		query =
 			'emails.address': email
 
-	return Meteor.users.find(query, {fields: {grade: 1, emails: 1}})
+	return Meteor.users.find(query, {fields: {grade: 1, emails: 1}, sort: {_id: 1}})

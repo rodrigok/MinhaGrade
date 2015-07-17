@@ -8,10 +8,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Conceitos básicos de Algoritmos e Programação, incluindo algoritmos em contextos computacionais e não
-        computacionais; resolução de problemas; algoritmos e códigos de programação puramente sequenciais, seleção e
-        repetição; conceitos de variável, constante e atribuição de dados; tipos de dados. Ambientes de programação: uso de
-        uma Linguagem de Programação."    
+    "description":"Conceitos básicos de Algoritmos e Programação, incluindo algoritmos em contextos computacionais e não<br/>computacionais; resolução de problemas; algoritmos e códigos de programação puramente sequenciais, seleção e<br/>repetição; conceitos de variável, constante e atribuição de dados; tipos de dados. Ambientes de programação: uso de<br/>uma Linguagem de Programação."    
   },
   {
     "_id":"SI-1-4133",
@@ -22,9 +19,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Computador convencional: Modelo de Von Neumann; Sistemas numéricos; Representações de dados; Álgebra
-        Booleana; Aritmética binária; Circuitos combinacionais; Circuitos seqüenciais; Microprocessadores, Memórias; Sistemas
-        de entrada/saída."
+    "description":"Computador convencional: Modelo de Von Neumann; Sistemas numéricos; Representações de dados; Álgebra<br/>Booleana; Aritmética binária; Circuitos combinacionais; Circuitos seqüenciais; Microprocessadores, Memórias; Sistemas<br/>de entrada/saída."
   },
   {
     "_id":"SI-1-4134",
@@ -35,8 +30,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Teoria de conjuntos. Lógica proposicional. Lógica de predicados. Indução matemática. Técnicas de demonstração.
-        Relações e funções. Grafos e árvores. Estruturas algébricas."    
+    "description":"Teoria de conjuntos. Lógica proposicional. Lógica de predicados. Indução matemática. Técnicas de demonstração.<br/>Relações e funções. Grafos e árvores. Estruturas algébricas."    
   },
   {
     "_id":"SI-1-4305",
@@ -47,8 +41,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Revisão de equações de 1o. e 2o. graus; matrizes determinantes; sistemas lineares; geometria plana; geometria
-        espacial; trigonometria plana; equações exponenciais e logaritmos."
+    "description":"Revisão de equações de 1o. e 2o. graus; matrizes determinantes; sistemas lineares; geometria plana; geometria<br/>espacial; trigonometria plana; equações exponenciais e logaritmos."
   },
   {
     "_id":"SI-1-4406",
@@ -70,9 +63,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Estudo das formas de conhecimento e as relações entre Ciência, ideologia e ética. Análise da pesquisa como atividade
-        acadêmica. Orientação na elaboração e execução de projetos de pesquisa e apresentação de trabalhos científicos.
-        Ciência e Tecnologia. Planejamento e formulação da pesquisa científica e do desenvolvimento tecnológico."    
+    "description":"Estudo das formas de conhecimento e as relações entre Ciência, ideologia e ética. Análise da pesquisa como atividade<br/>acadêmica. Orientação na elaboração e execução de projetos de pesquisa e apresentação de trabalhos científicos.<br/>Ciência e Tecnologia. Planejamento e formulação da pesquisa científica e do desenvolvimento tecnológico."    
   },
   {
     "_id":"SI-2-4138",
@@ -83,9 +74,7 @@
     "requirement":["4133"],
     "credit":4,
     "workload":60,
-    "description":"Conceitos básicos de arquitetura; Organização de computadores; Microprocessadores (organização, linguagem
-        Assembly); Barramentos; Hierarquia da memória: memória virtual e memória cache; Paralelismo; Pipeline; Arquiteturas
-        RISC e CISC; Multiprocessadores."    
+    "description":"Conceitos básicos de arquitetura; Organização de computadores; Microprocessadores (organização, linguagem<br/>Assembly); Barramentos; Hierarquia da memória: memória virtual e memória cache; Paralelismo; Pipeline; Arquiteturas<br/>RISC e CISC; Multiprocessadores."    
   },
   {
     "_id":"SI-2-4174",
@@ -96,8 +85,7 @@
     "requirement":["4132"],
     "credit":4,
     "workload":60,
-    "description":"Estruturas compostas de dados: Vetores, Matrizes e Registros; Tipos de Dados definidos pelo programador;
-        Modularização (Procedimentos e Funções)."    
+    "description":"Estruturas compostas de dados: Vetores, Matrizes e Registros; Tipos de Dados definidos pelo programador;<br/>Modularização (Procedimentos e Funções)."    
   },
   {
     "_id":"SI-2-4306",
@@ -108,10 +96,7 @@
     "requirement":["4305"],
     "credit":4,
     "workload":60,
-    "description":"Desenvolver o estudo de razão e objetivos da matemática financeira; Conceito de juros; Unidade de medida; Tipos de
-        juros; Simbologia; Fluxo de caixa; Juro e montante; Descontos e equivalência de capitais dos juros simples e dos juros
-        compostos a fim de que o aluno tenha uma noção geral dos conteúdos de matemática financeira e de sua aplicabilidade
-        no dia-a-dia."    
+    "description":"Desenvolver o estudo de razão e objetivos da matemática financeira; Conceito de juros; Unidade de medida; Tipos de<br/>juros; Simbologia; Fluxo de caixa; Juro e montante; Descontos e equivalência de capitais dos juros simples e dos juros<br/>compostos a fim de que o aluno tenha uma noção geral dos conteúdos de matemática financeira e de sua aplicabilidade<br/>no dia-a-dia."    
   },
   {
     "_id":"SI-2-4307",
@@ -122,9 +107,7 @@
     "requirement":["4305"],
     "credit":4,
     "workload":60,
-    "description":"Eventos. Experimentos aleatórios. Probabilidade clássica, freqüêncial, condicional. Teorema de Bayes. Independência
-        de Eventos. Variáveis aleatórias. Momentos. Transformação de variáveis aleatórias. Convergência. Confiabilidade. Teste
-        de aderência. Teste de normalidade. Assimetria. Curtose. Escores normais. Análise de variância. Correlação."    
+    "description":"Eventos. Experimentos aleatórios. Probabilidade clássica, freqüêncial, condicional. Teorema de Bayes. Independência<br/>de Eventos. Variáveis aleatórias. Momentos. Transformação de variáveis aleatórias. Convergência. Confiabilidade. Teste<br/>de aderência. Teste de normalidade. Assimetria. Curtose. Escores normais. Análise de variância. Correlação."    
   },
   {
     "_id":"SI-2-4408",
@@ -135,8 +118,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"O ser e a existência. Conhecimento filosófico. Métodos da filosofia. As diversas partes da filosofia e sua inter-relação.
-        Filosofia e ciência."    
+    "description":"O ser e a existência. Conhecimento filosófico. Métodos da filosofia. As diversas partes da filosofia e sua inter-relação.<br/>Filosofia e ciência."    
   },
   {
     "_id":"SI-3-4139",
@@ -147,10 +129,7 @@
     "requirement":["4132"],
     "credit":4,
     "workload":60,
-    "description":"Manipulação de cadeias; Estruturas de dados lineares: vetores, matrizes, pilhas, filas e listas encadeadas; Aplicações
-        práticas; Ordenação de dados por inserção e troca; Estruturas de dados não lineares: árvores, matrizes esparsas e
-        grafos; Árvores e suas generalizações: árvores binárias, árvores de busca, árvores balanceadas (AVL), árvores B e B+;
-        Aplicações de árvores."    
+    "description":"Manipulação de cadeias; Estruturas de dados lineares: vetores, matrizes, pilhas, filas e listas encadeadas; Aplicações<br/>práticas; Ordenação de dados por inserção e troca; Estruturas de dados não lineares: árvores, matrizes esparsas e<br/>grafos; Árvores e suas generalizações: árvores binárias, árvores de busca, árvores balanceadas (AVL), árvores B e B+;<br/>Aplicações de árvores."    
   },
   {
     "_id":"SI-3-4140",
@@ -161,9 +140,7 @@
     "requirement":["4174"],
     "credit":4,
     "workload":60,
-    "description":"Conceito de arquivo; Modelagem física e meios de armazenamento; Organização primária de arquivos: seqüencial,
-        seqüencial indexado, indexado, direto, direto calculado ("HASH"); Estruturas de índices: listas invertidas, mapas, árvores;
-        Ordenação de arquivos; Complexidade dos algoritmos apresentados."    
+    "description":"Conceito de arquivo; Modelagem física e meios de armazenamento; Organização primária de arquivos: seqüencial,<br/>seqüencial indexado, indexado, direto, direto calculado (\"HASH\"); Estruturas de índices: listas invertidas, mapas, árvores;<br/>Ordenação de arquivos; Complexidade dos algoritmos apresentados."    
   },
   {
     "_id":"SI-3-4141",
@@ -174,9 +151,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Fundamentos da comunicação de dados; Conceitos de teoria de informação; Noções básicas de teleprocessamento:
-        tipos de enlace, códigos, modos e meios de transmissão; Comunicação de dados: características, transmissão síncrona
-        e assíncrona, interfaces analógicas e digitais."    
+    "description":"Fundamentos da comunicação de dados; Conceitos de teoria de informação; Noções básicas de teleprocessamento:<br/>tipos de enlace, códigos, modos e meios de transmissão; Comunicação de dados: características, transmissão síncrona<br/>e assíncrona, interfaces analógicas e digitais."    
   },
   {
     "_id":"SI-3-4175",
@@ -187,8 +162,7 @@
     "requirement":["4174"],
     "credit":4,
     "workload":60,
-    "description":"Noções de arquivos em programação; Introdução a conjuntos e lógica; Tipos abstratos de dados; Programação com
-        ponteiros; Indireção; Programação com listas; Noções de recursividade em programação."    
+    "description":"Noções de arquivos em programação; Introdução a conjuntos e lógica; Tipos abstratos de dados; Programação com<br/>ponteiros; Indireção; Programação com listas; Noções de recursividade em programação."    
   },
   {
     "_id":"SI-3-4204",
@@ -199,8 +173,7 @@
     "requirement":[],
     "credit":4,
     "workload":60,
-    "description":"Antecedentes históricos da Administração. Teorias Administrativas: Científica; Clássica; Relações Humanas;
-        Comportamentalista; Burocrática; Estruturalista; Sistêmica; Contingencial; Teorias da Administração hoje."    
+    "description":"Antecedentes históricos da Administração. Teorias Administrativas: Científica; Clássica; Relações Humanas;<br/>Comportamentalista; Burocrática; Estruturalista; Sistêmica; Contingencial; Teorias da Administração hoje."    
   },
   {
     "_id":"SI-3-4409",
@@ -222,11 +195,7 @@
     "requirement":["4138"],
     "credit":4,
     "workload":60,
-    "description":"Introdução a Sistemas Operacionais; Sistemas multiprogramáveis; Processo; Comunicação entre processos;
-        Concorrência / Deadlock; Gerência do processador; Gerenciamento de memória; Memória virtual; Gerência de
-        dispositivos de entrada e saída; Núcleo de sistemas operacionais multiprogramados ("Kernel"); Estudo das
-        características e comparação entre os diferentes sistemas operacionais atualmente utilizados; Estudo do sistema
-        operacional Linux; Exercícios e trabalhos para implementação dos conteúdos estudados."    
+    "description":"Introdução a Sistemas Operacionais; Sistemas multiprogramáveis; Processo; Comunicação entre processos;<br/>Concorrência / Deadlock; Gerência do processador; Gerenciamento de memória; Memória virtual; Gerência de<br/>dispositivos de entrada e saída; Núcleo de sistemas operacionais multiprogramados (\"Kernel\"); Estudo das<br/>características e comparação entre os diferentes sistemas operacionais atualmente utilizados; Estudo do sistema<br/>operacional Linux; Exercícios e trabalhos para implementação dos conteúdos estudados."    
   },
   {
     "_id":"SI-4-4143",
@@ -237,11 +206,7 @@
     "requirement":["4140"],
     "credit":4,
     "workload":60,
-    "description":"Conceito de Sistemas: modelagem de sistemas, organizações como sistemas, estruturas organizacionais, administração
-        e controle, sistemas administrativos, sistemas de informação; Estudo do ciclo de vida de um sistema; Análise e
-        modelagem de dados com ênfase na integração de aplicações; Análise de negócios: técnicas de entrevista, modelagem
-        E-R, diagrama hierárquico de funções, diagrama de fluxo de dados, dicionário de dados, português estruturado, tabelas
-        de decisão; Projeto estruturado: diagramas de estruturas."    
+    "description":"Conceito de Sistemas: modelagem de sistemas, organizações como sistemas, estruturas organizacionais, administração<br/>e controle, sistemas administrativos, sistemas de informação; Estudo do ciclo de vida de um sistema; Análise e<br/>modelagem de dados com ênfase na integração de aplicações; Análise de negócios: técnicas de entrevista, modelagem<br/>E-R, diagrama hierárquico de funções, diagrama de fluxo de dados, dicionário de dados, português estruturado, tabelas<br/>de decisão; Projeto estruturado: diagramas de estruturas."    
   },
   {
     "_id":"SI-4-4145",
@@ -252,10 +217,7 @@
     "requirement":["4141"],
     "credit":4,
     "workload":60,
-    "description":"Introdução às redes de comunicações; Protocolos e serviços de comunicação; Terminologia, topologias, modelos de
-        arquitetura e aplicações; Especificação de protocolos; Internet e Intranets; Interconexão de redes; Redes de alta
-        velocidade; Introdução à administração de redes (sistemas de administração de redes, fontes e fluxos de informação
-        para administração e objetivos estratégicos); Tecnologias e suporte à administração de redes."    
+    "description":"Introdução às redes de comunicações; Protocolos e serviços de comunicação; Terminologia, topologias, modelos de<br/>arquitetura e aplicações; Especificação de protocolos; Internet e Intranets; Interconexão de redes; Redes de alta<br/>velocidade; Introdução à administração de redes (sistemas de administração de redes, fontes e fluxos de informação<br/>para administração e objetivos estratégicos); Tecnologias e suporte à administração de redes."    
   },
   {
     "_id":"SI-4-4146",
@@ -266,9 +228,7 @@
     "requirement":["4174"],
     "credit":4,
     "workload":60,
-    "description":"Conceitos; Paradigmas de linguagens de programação: imperativas, funcionais, lógicas e orientadas a objetos;
-        Linguagens de Script; Noções de semântica formal; Teoria dos tipos: sistemas de tipos, polimorfismo; Verificação e
-        inferência de tipos; Semântica formal de tipos."    
+    "description":"Conceitos; Paradigmas de linguagens de programação: imperativas, funcionais, lógicas e orientadas a objetos;<br/>Linguagens de Script; Noções de semântica formal; Teoria dos tipos: sistemas de tipos, polimorfismo; Verificação e<br/>inferência de tipos; Semântica formal de tipos."    
   },
   {
     "_id":"SI-4-4176",
@@ -279,9 +239,7 @@
     "requirement":["4134",4175],
     "credit":4,
     "workload":60,
-    "description":"Conceitos e terminologia de orientação a objetos; Linguagens orientadas a objetos versus baseadas em objetos;
-        Histórico e "survey" sobre linguagens orientadas a objetos; Técnicas de modularização/decomposição de software;
-        Objetos; Classes; Herança simples e múltipla; Polimorfismo; Utilização de uma linguagem orientada a objetos."    
+    "description":"Conceitos e terminologia de orientação a objetos; Linguagens orientadas a objetos versus baseadas em objetos;<br/>Histórico e \"survey\" sobre linguagens orientadas a objetos; Técnicas de modularização/decomposição de software;<br/>Objetos; Classes; Herança simples e múltipla; Polimorfismo; Utilização de uma linguagem orientada a objetos."    
   },
   {
     "_id":"SI-4-4205",
@@ -292,11 +250,7 @@
     "requirement":["4204"],
     "credit":4,
     "workload":60,
-    "description":"A função econômica e financeira nas empresas. Análise das demonstrações financeiras. Administração do capital de giro
-        (capital circulante líquido, administração financeira de estoques, administração de duplicatas). Administração de
-        disponibilidades. Fontes de recursos. Análise de investimentos. Alavancagem operacional e financeira, custo e estrutura
-        de capital. A função orçamentária. Considerações gerais. Peças orçamentárias, demonstrações financeiras e controle
-        orçamentário."    
+    "description":"A função econômica e financeira nas empresas. Análise das demonstrações financeiras. Administração do capital de giro<br/>(capital circulante líquido, administração financeira de estoques, administração de duplicatas). Administração de<br/>disponibilidades. Fontes de recursos. Análise de investimentos. Alavancagem operacional e financeira, custo e estrutura<br/>de capital. A função orçamentária. Considerações gerais. Peças orçamentárias, demonstrações financeiras e controle<br/>orçamentário."    
   },
   {
     "_id":"SI-5-4144",
@@ -307,11 +261,7 @@
     "requirement":["4143"],
     "credit":4,
     "workload":60,
-    "description":"Os processos de análise e projeto orientado a objetos; Por que utilizar orientação a objetos? Análise e projeto orientado
-        a objetos segundo diferentes autores; Análise e projeto orientado explorando conceitos de orientação a objetos: classe,
-        atributos, herança, encapsulamento, polimorfismo, generalização e composição; O processo de análise e projeto
-        orientado a objetos: detalhamento segundo um dos autores; Linguagens de descrição de análise e projeto orientado a
-        objetos."    
+    "description":"Os processos de análise e projeto orientado a objetos; Por que utilizar orientação a objetos? Análise e projeto orientado<br/>a objetos segundo diferentes autores; Análise e projeto orientado explorando conceitos de orientação a objetos: classe,<br/>atributos, herança, encapsulamento, polimorfismo, generalização e composição; O processo de análise e projeto<br/>orientado a objetos: detalhamento segundo um dos autores; Linguagens de descrição de análise e projeto orientado a<br/>objetos."    
   },
   {
     "_id":"SI-5-4147",
@@ -322,9 +272,7 @@
     "requirement":["4146",4176],
     "credit":4,
     "workload":60,
-    "description":"Aborda técnicas, métodos e algoritmos utilizados no projeto de compiladores, incluindo a análise léxica, sintática e
-        semântica, verificação de tipos, registros de ativação, representação intermediária, geração de código, análise de fluxo
-        de dados, técnicas de otimização, gerenciamento de memória e compilação para linguagens de programação."    
+    "description":"Aborda técnicas, métodos e algoritmos utilizados no projeto de compiladores, incluindo a análise léxica, sintática e<br/>semântica, verificação de tipos, registros de ativação, representação intermediária, geração de código, análise de fluxo<br/>de dados, técnicas de otimização, gerenciamento de memória e compilação para linguagens de programação."    
   },
   {
     "_id":"SI-5-4148",
@@ -335,11 +283,7 @@
     "requirement":["4139",4140],
     "credit":4,
     "workload":60,
-    "description":"Origem e objetivos de Sistemas de Gerência de Banco de Dados (SGBD); Interfaces de SGBD; Abordagens hierárquica,
-        rede, relacional e orientado a objetos; Estudo de sistemas disponíveis; Aspectos de modelagem e projeto de banco de
-        dados; Aspectos operacionais: arquitetura, segurança, integridade, concorrência, recuperação após falha, gerenciamento
-        de transações; Linguagens de consulta; Arquitetura de SGDB; Técnicas de reconhecimento e interpretação; Técnicas de
-        organização física dos dados; SQL."    
+    "description":"Origem e objetivos de Sistemas de Gerência de Banco de Dados (SGBD); Interfaces de SGBD; Abordagens hierárquica,<br/>rede, relacional e orientado a objetos; Estudo de sistemas disponíveis; Aspectos de modelagem e projeto de banco de<br/>dados; Aspectos operacionais: arquitetura, segurança, integridade, concorrência, recuperação após falha, gerenciamento<br/>de transações; Linguagens de consulta; Arquitetura de SGDB; Técnicas de reconhecimento e interpretação; Técnicas de<br/>organização física dos dados; SQL."    
   },
   {
     "_id":"SI-5-4151",
@@ -361,9 +305,7 @@
     "requirement":["4139",4176],
     "credit":4,
     "workload":60,
-    "description":"Apresenta conceitos de modelos de computação e ferramentas para medida de desempenho de algoritmos. Discute
-        técnicas de projeto eficiente de algoritmos: programação dinâmica, divisão e conquista, algoritmos gulosos, métodos de
-        busca e ordenação e algoritmos para problemas básicos em grafos. Classes de problemas: P, NP, NP-Completa."    
+    "description":"Apresenta conceitos de modelos de computação e ferramentas para medida de desempenho de algoritmos. Discute<br/>técnicas de projeto eficiente de algoritmos: programação dinâmica, divisão e conquista, algoritmos gulosos, métodos de<br/>busca e ordenação e algoritmos para problemas básicos em grafos. Classes de problemas: P, NP, NP-Completa."    
   },
   {
     "_id":"SI-5-4308",
@@ -374,9 +316,7 @@
     "requirement":["4305"],
     "credit":4,
     "workload":60,
-    "description":"Sistemas de equações lineares. Matrizes. Vetores. Espaços vetoriais. Dependência e independência linear.
-        Transformações lineares. Reta no plano e no espaço. Planos. Posições relativas. Intersecções. Distâncias e ângulos.
-        Curvas e superfícies. Círculo e esfera. Coordenadas polares, cilíndricas e esféricas."    
+    "description":"Sistemas de equações lineares. Matrizes. Vetores. Espaços vetoriais. Dependência e independência linear.<br/>Transformações lineares. Reta no plano e no espaço. Planos. Posições relativas. Intersecções. Distâncias e ângulos.<br/>Curvas e superfícies. Círculo e esfera. Coordenadas polares, cilíndricas e esféricas."    
   },
   {
     "_id":"SI-6-4149",
@@ -387,10 +327,7 @@
     "requirement":["4148"],
     "credit":4,
     "workload":60,
-    "description":"Ao término da disciplina, o aluno deverá estar apto a discernir e optar pelas diferentes plataformas de banco de dados
-        existentes. A disciplina deve Propiciar ao aluno familiarização com Administração de bancos de dados, modelagem de
-        Bancos de Dados Orientado a Objetos e Bancos de Dados Distribuídos. Familiarizar o aluno com o estado da arte na
-        pesquisa de Banco de Dados e suas diversas aplicações."    
+    "description":"Ao término da disciplina, o aluno deverá estar apto a discernir e optar pelas diferentes plataformas de banco de dados<br/>existentes. A disciplina deve Propiciar ao aluno familiarização com Administração de bancos de dados, modelagem de<br/>Bancos de Dados Orientado a Objetos e Bancos de Dados Distribuídos. Familiarizar o aluno com o estado da arte na<br/>pesquisa de Banco de Dados e suas diversas aplicações."    
   },
   {
     "_id":"SI-6-4152",
@@ -401,11 +338,7 @@
     "requirement":["4144"],
     "credit":4,
     "workload":60,
-    "description":"Processo de desenvolvimento de software; Ciclo de vida de desenvolvimento de software; Qualidade de software;
-        Técnicas de planejamento e gerenciamento de software; Gerenciamento de configuração de software; Engenharia de
-        requisitos; Métodos de análise e de projeto de software; Garantia de qualidade de software; Verificação, validação e
-        teste; Manutenção; Documentação; Padrões de desenvolvimento; Re-uso; Engenharia reversa; Reengenharia;
-        Ambientes de desenvolvimento de software; Métricas de Software; Interface Homem-Máquina."    
+    "description":"Processo de desenvolvimento de software; Ciclo de vida de desenvolvimento de software; Qualidade de software;<br/>Técnicas de planejamento e gerenciamento de software; Gerenciamento de configuração de software; Engenharia de<br/>requisitos; Métodos de análise e de projeto de software; Garantia de qualidade de software; Verificação, validação e<br/>teste; Manutenção; Documentação; Padrões de desenvolvimento; Re-uso; Engenharia reversa; Reengenharia;<br/>Ambientes de desenvolvimento de software; Métricas de Software; Interface Homem-Máquina."    
   },
   {
     "_id":"SI-6-4153",
@@ -416,14 +349,7 @@
     "requirement":["4143"],
     "credit":4,
     "workload":60,
-    "description":"Fundamentos e classificação de sistemas de informação; O papel da informação no contexto empresarial; Gestão da
-        informação; Sistemas de Informações Gerenciais (SIG); Administração de Sistemas de Informação: planejamento
-        estratégico, gerência de custos de sistemas de informação, qualidade, segurança e auditoria de informática, gerência de
-        pessoal para sistemas de informação; Sistemas de Apoio a Decisão (SAD), Sistemas de Informações Executivas (SIE);
-        Aplicações: Software de Gestão Empresarial (ERP), Gerenciamento do Relacionamento com os Consumidores (CRM),
-        Resposta Eficiente ao Consumidor (ECR), Gestão da Cadeia de Suprimentos (Supply Chain), Sistema de Informações
-        de Marketing (SIM), Sistema de Inteligência Competitiva (SIC), Business Intelligence (BI), Data Warehouse, Database
-        Marketing, Comércio Eletrônico; Estudo de casos."
+    "description":"Fundamentos e classificação de sistemas de informação; O papel da informação no contexto empresarial; Gestão da<br/>informação; Sistemas de Informações Gerenciais (SIG); Administração de Sistemas de Informação: planejamento<br/>estratégico, gerência de custos de sistemas de informação, qualidade, segurança e auditoria de informática, gerência de<br/>pessoal para sistemas de informação; Sistemas de Apoio a Decisão (SAD), Sistemas de Informações Executivas (SIE);<br/>Aplicações: Software de Gestão Empresarial (ERP), Gerenciamento do Relacionamento com os Consumidores (CRM),<br/>Resposta Eficiente ao Consumidor (ECR), Gestão da Cadeia de Suprimentos (Supply Chain), Sistema de Informações<br/>de Marketing (SIM), Sistema de Inteligência Competitiva (SIC), Business Intelligence (BI), Data Warehouse, Database<br/>Marketing, Comércio Eletrônico; Estudo de casos."
   },
   {
     "_id":"SI-6-4154",
@@ -434,9 +360,7 @@
     "requirement":["4145",4175],
     "credit":4,
     "workload":60,
-    "description":"Esta disciplina faz uma introdução aos conceitos básicos sobre sistemas distribuídos, apresentando suas características
-        e possíveis aplicações, descrevendo os modelos, métodos, técnicas, algoritmos e ferramentas voltados para a
-        implementação eficiente destes sistemas utilizando as tecnologias acadêmicas e comerciais atualmente disponíveis."
+    "description":"Esta disciplina faz uma introdução aos conceitos básicos sobre sistemas distribuídos, apresentando suas características<br/>e possíveis aplicações, descrevendo os modelos, métodos, técnicas, algoritmos e ferramentas voltados para a<br/>implementação eficiente destes sistemas utilizando as tecnologias acadêmicas e comerciais atualmente disponíveis."
   },
   {
     "_id":"SI-6-4155",
@@ -447,12 +371,7 @@
     "requirement":["4176"],
     "credit":4,
     "workload":60,
-    "description":"Histórico; Linguagens simbólicas; Programação em lógica; Cláusulas de Horn; Unificação; Resolução; Meta-predicados;
-        Prolog; Métodos de resolução de problemas; Busca em espaço de estados; Redução de problemas; Busca em
-        profundidade; Busca em largura; Uso de heurísticas; Representação do conhecimento; Regras de produção; Redes
-        semânticas; Redes neurais: noções do sistema nervoso, aprendizado; Algoritmos genéticos; Sistemas multi-agentes;
-        Robótica; Integração entre redes neurais e inteligência artificial; Implementação, simulação e aplicações de redes
-        neurais."
+    "description":"Histórico; Linguagens simbólicas; Programação em lógica; Cláusulas de Horn; Unificação; Resolução; Meta-predicados;<br/>Prolog; Métodos de resolução de problemas; Busca em espaço de estados; Redução de problemas; Busca em<br/>profundidade; Busca em largura; Uso de heurísticas; Representação do conhecimento; Regras de produção; Redes<br/>semânticas; Redes neurais: noções do sistema nervoso, aprendizado; Algoritmos genéticos; Sistemas multi-agentes;<br/>Robótica; Integração entre redes neurais e inteligência artificial; Implementação, simulação e aplicações de redes<br/>neurais."
   },
   {
     "_id":"SI-6-4156",
@@ -463,12 +382,7 @@
     "requirement":["C88"],
     "credit":4,
     "workload":60,
-    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa científica ou em organização privada ou pública -
-        orientado por um supervisor de estágio - com o objetivo de adquirir experiência e por em prática os conhecimentos
-        teóricos adquiridos no decorrer do curso; Orientação para a fase inicial do trabalho de conclusão do Curso de Sistemas
-        de Informação; Projeto teórico ou prático orientado por um docente da Faculdade de Informática, acompanhado por
-        monografia redigida pelo aluno; Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um
-        professor da Faculdade."
+    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa científica ou em organização privada ou pública -<br/>orientado por um supervisor de estágio - com o objetivo de adquirir experiência e por em prática os conhecimentos<br/>teóricos adquiridos no decorrer do curso; Orientação para a fase inicial do trabalho de conclusão do Curso de Sistemas<br/>de Informação; Projeto teórico ou prático orientado por um docente da Faculdade de Informática, acompanhado por<br/>monografia redigida pelo aluno; Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um<br/>professor da Faculdade."
   },
   {
     "_id":"SI-7-4157",
@@ -479,10 +393,7 @@
     "requirement":["4175",4308],
     "credit":4,
     "workload":60,
-    "description":"Apresentar ao aluno o histórico, definições, aplicações e tecnologias relacionados à computação gráfica. Representação
-        de Objetos. Visualização bi-dimensional e tri-dimensional. Transformações entre sistemas de coordenadas.
-        Transformações de objetos (translação, rotação e escalamento). Técnicas de projeção. Técnidas de recorte. Modelos de
-        iluminação."
+    "description":"Apresentar ao aluno o histórico, definições, aplicações e tecnologias relacionados à computação gráfica. Representação<br/>de Objetos. Visualização bi-dimensional e tri-dimensional. Transformações entre sistemas de coordenadas.<br/>Transformações de objetos (translação, rotação e escalamento). Técnicas de projeção. Técnidas de recorte. Modelos de<br/>iluminação."
   },
   {
     "_id":"SI-7-4158",
@@ -493,9 +404,7 @@
     "requirement":["4145"],
     "credit":4,
     "workload":60,
-    "description":"Auditoria de sistemas; Metodologias de auditoria; Análise de riscos em sistemas de informação; Segurança lógica e
-        física de sistemas; Planos de contingência; Técnicas de avaliação de sistemas; Aspectos especiais: vírus, fraudes,
-        criptografia, acesso não autorizado."
+    "description":"Auditoria de sistemas; Metodologias de auditoria; Análise de riscos em sistemas de informação; Segurança lógica e<br/>física de sistemas; Planos de contingência; Técnicas de avaliação de sistemas; Aspectos especiais: vírus, fraudes,<br/>criptografia, acesso não autorizado."
   },
   {
     "_id":"SI-7-4159",
@@ -517,11 +426,7 @@
     "requirement":["4152"],
     "credit":4,
     "workload":60,
-    "description":"Sistemas de gestão industrial e fluxo básico de informações em sistemas automatizados; Aplicação da informática no
-        controle de sistemas de manufatura: sistema de controle dos processos de fabricação, planejamento de capacidade,
-        controle de estoques e de custos, planejamento e controle da produção, integração com as áreas administrativofinanceiras;
-        Aplicações nas operações comerciais; Codificação de produtos; Código de barras: padrões internacionais;
-        Equipamentos de codificação e leitura; Integração de sistemas."
+    "description":"Sistemas de gestão industrial e fluxo básico de informações em sistemas automatizados; Aplicação da informática no<br/>controle de sistemas de manufatura: sistema de controle dos processos de fabricação, planejamento de capacidade,<br/>controle de estoques e de custos, planejamento e controle da produção, integração com as áreas administrativofinanceiras;<br/>Aplicações nas operações comerciais; Codificação de produtos; Código de barras: padrões internacionais;<br/>Equipamentos de codificação e leitura; Integração de sistemas."
   },
   {
     "_id":"SI-7-4178",
@@ -532,10 +437,7 @@
     "requirement":["4156"],
     "credit":8,
     "workload":120,
-    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um
-        docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;
-        Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do
-        Trabalho de Conclusão."
+    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
   },
   {
     "_id":"SI-7-4410",
@@ -546,9 +448,7 @@
     "requirement":["C80"],
     "credit":4,
     "workload":60,
-    "description":"Lei do Software. Lei do Direito Autoral. Lei da Propriedade Industrial. Código de Defesa do Consumidor em Produtos de
-        Informática. Contratos em Tecnologia da Informação. Licenças de Uso. Registro do Software. Questões Legais em
-        Pirataria de Software. Prevenção Jurídica em Tecnologia da Informação."
+    "description":"Lei do Software. Lei do Direito Autoral. Lei da Propriedade Industrial. Código de Defesa do Consumidor em Produtos de<br/>Informática. Contratos em Tecnologia da Informação. Licenças de Uso. Registro do Software. Questões Legais em<br/>Pirataria de Software. Prevenção Jurídica em Tecnologia da Informação."
   },
   {
     "_id":"SI-8-4163",
@@ -559,9 +459,7 @@
     "requirement":["4158"],
     "credit":4,
     "workload":60,
-    "description":"Conceitos fundamentais e técnicas de avaliação de desempenho de sistemas computacionais; Conceitos de métricas e
-        de carga; Seleção e caracterização de carga; Conceitos e tipos de monitores; Planejamento de capacidade;
-        Benchmarking; Simulação de sistemas; Modelos de filas e redes de fila de espera."
+    "description":"Conceitos fundamentais e técnicas de avaliação de desempenho de sistemas computacionais; Conceitos de métricas e<br/>de carga; Seleção e caracterização de carga; Conceitos e tipos de monitores; Planejamento de capacidade;<br/>Benchmarking; Simulação de sistemas; Modelos de filas e redes de fila de espera."
   },
   {
     "_id":"SI-8-4179",
@@ -572,10 +470,7 @@
     "requirement":["4178"],
     "credit":8,
     "workload":120,
-    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um
-        docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;
-        Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do
-        Trabalho de Conclusão."
+    "description":"Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
   },
   {
     "_id":"SI-8-4206",
@@ -586,9 +481,7 @@
     "requirement":["4204"],
     "credit":4,
     "workload":60,
-    "description":"Conceito de empreendedorismo; estudo dos mecanismos e procedimentos para criação de empresas; o processo
-        comportamental; fatores de sucesso; o perfil do empreendedor; desenvolvimento de habilidades empreendedoras;
-        competitividade; recursos humanos; marketing; qualidade; inovação."
+    "description":"Conceito de empreendedorismo; estudo dos mecanismos e procedimentos para criação de empresas; o processo<br/>comportamental; fatores de sucesso; o perfil do empreendedor; desenvolvimento de habilidades empreendedoras;<br/>competitividade; recursos humanos; marketing; qualidade; inovação."
   },
   {
     "_id":"SI-8-4411",
@@ -599,10 +492,7 @@
     "requirement":["4408"],
     "credit":4,
     "workload":60,
-    "description":"Aspectos sociais, econômicos, legais e profissionais da informática; Atuação do profissional no mercado de trabalho;
-        Ética profissional; Segurança, privacidade, direitos de propriedade, acesso não autorizado; Aspectos estratégicos do
-        controle da tecnologia; Aplicações da informática nas diversas áreas: científica, administrativa, jurídica, humanística,
-        educacional, etc; O impacto das tecnologias de informação, comunicação e de automação na sociedade; Tendências."
+    "description":"Aspectos sociais, econômicos, legais e profissionais da informática; Atuação do profissional no mercado de trabalho;<br/>Ética profissional; Segurança, privacidade, direitos de propriedade, acesso não autorizado; Aspectos estratégicos do<br/>controle da tecnologia; Aplicações da informática nas diversas áreas: científica, administrativa, jurídica, humanística,<br/>educacional, etc; O impacto das tecnologias de informação, comunicação e de automação na sociedade; Tendências."
   },
   {
     "_id":"SI-E-4164",
