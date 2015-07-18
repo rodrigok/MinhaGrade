@@ -1,5 +1,5 @@
 <head>
-  <title>Grade Faccat</title>
+	<title>Grade Faccat</title>
 </head>
 
 <body>
@@ -7,10 +7,21 @@
 
 <template name="Layout">
 	<div class="ui container">
-		{{> loginButtons}}
-	</div>
+		<div class="ui menu">
+			<div class="header item">
+				Grade Faccat
+			</div>
+			<a class="item {{isActive 'si'}}" href="/si">
+				Grade SI
+			</a>
+			<a class="item {{isActive 'tsi'}}" href="/tsi">
+				Grade tSI
+			</a>
+			<div class="right menu">
+				{{> loginButtons}}
+			</div>
+		</div>
 
-	<div class="ui container">
 		{{> yield}}
 	</div>
 </template>

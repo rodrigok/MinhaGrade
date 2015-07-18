@@ -6,9 +6,9 @@
 
 meteor-platform
 coffeescript
-accounts-ui
 accounts-password
 semantic:ui
 flemay:less-autoprefixer
 iron:router
 meteorhacks:kadira
+iandouglas:accounts-ui-semantic-ui
