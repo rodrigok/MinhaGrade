@@ -43,20 +43,20 @@ Router.route '/my/:course/:email',
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Grade'
-			Meteor.subscribe 'userGradeInfo'
+			Meteor.subscribe 'userGradeInfo', @params.email
 		]
 
 	action: ->
 		course = @params.course.toLowerCase()
 		if course not in ['si', 'tsi']
-			return @redirect "/course/si/#{params.email}"
+			return @redirect "/course/si/#{@params.email}"
 
 		Session.set 'grade', course
 
 		Session.set 'grade-filter-status', @params.query.status
 
 		@render 'Grade',
-		data:
-			email: @params.email
+			data:
+				email: @params.email
 
 	fastRender: true
