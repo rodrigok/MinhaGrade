@@ -3,10 +3,20 @@ Router.configure
 
 
 Router.route '/', ->
-	@redirect '/si'
+	return @redirect '/course/si'
 
 
-Router.route '/si',
+Router.route '/si', ->
+	return @redirect '/course/si'
+
+
+Router.route '/tsi', ->
+	return @redirect '/course/tsi'
+
+
+Router.route '/course/:course',
+	name: 'course'
+
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Grade'
@@ -14,13 +24,22 @@ Router.route '/si',
 		]
 
 	action: ->
-		Session.set 'grade', 'si'
+		course = @params.course.toLowerCase()
+		if course not in ['si', 'tsi']
+			return @redirect '/course/si'
+
+		Session.set 'grade', course
+
+		Session.set 'grade-filter-status', @params.query.status
+
 		@render 'Grade'
 
 	fastRender: true
 
 
-Router.route '/tsi',
+Router.route '/my/:course/:email',
+	name: 'my'
+
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Grade'
@@ -28,19 +47,16 @@ Router.route '/tsi',
 		]
 
 	action: ->
-		Session.set 'grade', 'tsi'
-		@render 'Grade'
+		course = @params.course.toLowerCase()
+		if course not in ['si', 'tsi']
+			return @redirect "/course/si/#{params.email}"
 
-	fastRender: true
+		Session.set 'grade', course
 
+		Session.set 'grade-filter-status', @params.query.status
 
-Router.route '/my/:email', ->
-	@wait Meteor.subscribe 'Grade'
-	@wait Meteor.subscribe 'userGradeInfo', @params.email
-
-	if not @ready()
-		return @render 'Loading'
-
-	@render 'Grade',
+		@render 'Grade',
 		data:
 			email: @params.email
+
+	fastRender: true

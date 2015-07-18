@@ -13,11 +13,19 @@ Template.GradeItem.helpers
 		else if @semester % 2 is 0
 			styles.push 'background-color: #f1f1f1'
 
-		switch user?.grade?[@_id]
+		itemStatus = user?.grade?[@_id]
+		itemStatus ?= 'pending'
+
+		switch itemStatus
 			when 'done'
 				styles.push 'color: lightgray'
 			when 'doing'
 				styles.push 'color: orange'
+
+		filterStatus = Session.get('grade-filter-status')
+		if filterStatus?
+			if filterStatus isnt itemStatus
+				styles.push 'display: none'
 
 		return styles.join '; '
 

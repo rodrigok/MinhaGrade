@@ -1,11 +1,22 @@
 <template name="Grade">
 	{{> GradeInfo}}
+
+	{{#if canEdit}}
+		Compartilhar: <a href="{{url}}" target="_blank">{{url}}</a>
+	{{/if}}
 	{{#if Template.subscriptionsReady}}
 	<table class="ui celled padded table">
 		<thead>
 			<tr>
 				{{#if canEdit}}
-				<th>Status</th>
+				<th>
+					<select class="ui dropdown">
+						<option value="all" {{isSelected 'all'}}>Todos os Status</option>
+						<option value="pending" {{isSelected 'pending'}}>Pendentes</option>
+						<option value="doing" {{isSelected 'doing'}}>Cursando</option>
+						<option value="done" {{isSelected 'done'}}>Concluídas</option>
+					</select>
+				</th>
 				{{/if}}
 				<th>Semestre</th>
 				<th>Código - Nome</th>
