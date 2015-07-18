@@ -12,3 +12,4 @@ flemay:less-autoprefixer
 iron:router
 meteorhacks:kadira
 iandouglas:accounts-ui-semantic-ui
+meteorhacks:fast-render
