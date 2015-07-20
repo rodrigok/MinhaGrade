@@ -5,7 +5,16 @@
 				<div>
 					{{gradeItem.name}}
 					<div class="sub header" style="{{style}}">
-						{{calendarItem.teacher}}
+						<div>
+							<i class="student icon"></i>
+							<span class="detail">{{calendarItem.teacher}}</span>
+						</div>
+						<div>
+							<i class="users icon"></i>
+							{{calendarItem.interested}}
+							<span class="detail">interessados</span>
+						</div>
+						<div class="ui bottom attached label">{{calendarItem.interested}}</div>
 					</div>
 					{{#if canMarkInterrest}}
 						{{#if intereseted}}

@@ -10,3 +10,18 @@ Meteor.methods
 			Meteor.users.update(this.userId, $push: update)
 		else
 			Meteor.users.update(this.userId, $pull: update)
+
+		count = Meteor.users.find(update, {fields: {_id: 1}}).count()
+
+		query =
+			_id: calendarId
+			grade:
+				$elemMatch:
+					_id: gradeItemId
+					day: day
+					shift: shift
+
+		update = {}
+		update['grade.$.interested'] = count
+
+		Calendar.update query, $set: update
