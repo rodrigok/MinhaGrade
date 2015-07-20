@@ -1,9 +1,54 @@
 <template name="Grade">
 	{{> GradeInfo}}
 
-	{{#if canEdit}}
-		Compartilhar: <a href="{{url}}" target="_blank">{{url}}</a>
-	{{/if}}
+	<div class="ui three column grid">
+		<div class="column">
+			<div class="ui fluid card">
+				<div class="content">
+					<div class="header">Compartilhar</div>
+					<div class="description">
+						<div class="ui fluid left icon input large">
+							<input type="text" class="autoselect" value="{{url}}">
+							<i class="linkify icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{#with percentageDone}}
+			<div class="column">
+				<div class="ui fluid card">
+					<div class="content">
+						<div class="header">Conclusão do curso</div>
+						<div class="description">
+							<div class="ui progress success">
+								<div class="label">{{done}} de {{total}}</div>
+								<div class="bar" style="transition-duration: 300ms; -webkit-transition-duration: 300ms; width: {{./percentageDone}}%;">
+									<div class="progress">{{./percentageDone}}%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="ui fluid card">
+					<div class="content">
+						<div class="header">Conclusão do curso + cursando</div>
+						<div class="description">
+							<div class="ui progress warning">
+								<div class="label">{{doing}} de {{total}}</div>
+								<div class="bar" style="transition-duration: 300ms; -webkit-transition-duration: 300ms; width: {{percentageDoing}}%;">
+									<div class="progress">{{percentageDoing}}%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{{/with}}
+	</div>
+
 	{{#if Template.subscriptionsReady}}
 	<table class="ui celled padded table">
 		<thead>

@@ -27,6 +27,40 @@ Template.Grade.helpers
 
 		return Router.url('my', params, params)
 
+	percentageDone: ->
+		user = Meteor.user()
+		if Router.current().params.email?
+			user = Meteor.users.findOne({'emails.address': Router.current().params.email})
+
+		if not user?
+			return
+
+		grade = Session.get('grade').toUpperCase()
+		if not grade in ['SI', 'TSI']
+			grade = 'SI'
+
+		grade = Grade.find({course: grade}).fetch()
+
+		total = 0
+		done = 0
+		doing = 0
+
+		for item in grade
+			if item.semester isnt 'E'
+				total++
+				if user?.grade?[item._id] is 'done'
+					done++
+					doing++
+				else if user?.grade?[item._id] is 'doing'
+					doing++
+
+		return {
+			percentageDone: Math.round(100 / total * done)
+			percentageDoing: Math.round(100 / total * doing)
+			total: total
+			done: done
+			doing: doing
+		}
 
 
 Template.Grade.events
@@ -45,3 +79,6 @@ Template.Grade.events
 			delete query.status
 
 		Router.go route.route.getName(), route.params, {query: query}
+
+	'click input.autoselect': (e) ->
+		$(e.target).select()
