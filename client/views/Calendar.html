@@ -1,0 +1,115 @@
+<template name="Calendar">
+	<table class="ui definition very compact celled table">
+		<thead>
+			<tr>
+				<th></th>
+				<th width="16.66%">Segunda</th>
+				<th width="16.66%">Terça</th>
+				<th width="16.66%">Quarta</th>
+				<th width="16.66%">Quinta</th>
+				<th width="16.66%">Sexta</th>
+				<th width="16.66%">Sábado</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#with calendar}}
+				{{#if s3}}
+					<tr>
+						<td colspan="7">
+							<strong>Turno da noite</strong>
+						</td>
+					</tr>
+					{{#each s3}}
+						<tr>
+							<td>
+								{{semester}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d2}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d3}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d4}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d5}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d6}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d7}}
+							</td>
+						</tr>
+					{{/each}}
+				{{/if}}
+				{{#if s2}}
+					<tr>
+						<td colspan="7">
+							<strong>Turno da tarde</strong>
+						</td>
+					</tr>
+					{{#each s2}}
+						<tr>
+							<td>
+								{{semester}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d2}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d3}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d4}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d5}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d6}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d7}}
+							</td>
+						</tr>
+					{{/each}}
+				{{/if}}
+				{{#if s1}}
+					<tr>
+						<td colspan="7">
+							<strong>Turno da manhã</strong>
+						</td>
+					</tr>
+					{{#each s1}}
+						<tr>
+							<td>
+								{{semester}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d2}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d3}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d4}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d5}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d6}}
+							</td>
+							<td>
+								{{> CalendarItem item=value.d7}}
+							</td>
+						</tr>
+					{{/each}}
+				{{/if}}
+			{{/with}}
+		</tbody>
+	</table>
+</template>

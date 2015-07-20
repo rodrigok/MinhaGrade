@@ -60,3 +60,20 @@ Router.route '/my/:course/:email',
 				email: @params.email
 
 	fastRender: true
+
+
+Router.route '/calendar/:calendarName/:course?',
+	name: 'calendar'
+
+	waitOn: ->
+		return [
+			Meteor.subscribe 'Calendar', @params.calendarName
+			Meteor.subscribe 'Grade'
+			Meteor.subscribe 'userGradeInfo'
+		]
+
+	action: ->
+		@render 'Calendar'
+
+	fastRender: true
+

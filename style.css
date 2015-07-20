@@ -8,3 +8,7 @@ select:focus {
 	border-color: #767676 !important;
 	color: #CCC !important;
 }
+
+.calendar-item .sub.header {
+	margin-bottom: 3px !important;
+}
