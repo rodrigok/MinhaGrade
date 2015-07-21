@@ -12,3 +12,7 @@ select:focus {
 .calendar-item .sub.header {
 	margin-bottom: 3px !important;
 }
+
+tr {
+	vertical-align: top;
+}

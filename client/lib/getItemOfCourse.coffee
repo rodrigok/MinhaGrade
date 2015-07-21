@@ -1,5 +1,9 @@
 @getItemOfCourse = (item) ->
-	grade = Session.get('grade').toUpperCase()
+	grade = Session.get('grade') or 'SI'
+	grade = grade.toUpperCase()
+
+	if not Match.test item, Object
+		return item
 
 	return {
 		_id: item._id
