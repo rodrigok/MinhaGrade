@@ -37,7 +37,12 @@ Template.GradeItem.helpers
 			}
 
 	getGradeItemByCode: (code) ->
-		return Grade.findOne({code: parseInt(code)})
+		grade = Session.get('grade').toUpperCase()
+
+		query = {}
+		query['code.' + grade] = code
+
+		return getItemOfCourse Grade.findOne(query)
 
 	requirementColor: (_id) ->
 		user = Meteor.user()
