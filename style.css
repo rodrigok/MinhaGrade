@@ -13,6 +13,6 @@ select:focus {
 	margin-bottom: 3px !important;
 }
 
-tr {
+.calendar tr {
 	vertical-align: top;
 }
