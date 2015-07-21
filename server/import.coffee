@@ -3,9 +3,9 @@ Meteor.methods
 		if not @userId
 			return
 
-		si = JSON.parse Assets.getText 'si.json'
-		tsi = JSON.parse Assets.getText 'tsi.json'
+		si = JSON.parse Assets.getText 'courses.json'
 
-		si = si.concat tsi
+		Grade.remove {}
+
 		for item in si
-			Grade.upsert {_id: item._id}, item
+			Grade.insert item

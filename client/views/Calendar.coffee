@@ -1,12 +1,22 @@
 Template.Calendar.helpers
 	calendar: ->
+		grade = Session.get('grade') or 'SI'
+		grade = grade.toUpperCase()
+
 		calendar = {}
 
 		calendarRecord = Calendar.findOne()
 		calendarGrade = calendarRecord.grade
 
 		for calendarGradeItem in calendarGrade
-			gradeItem = Grade.findOne(calendarGradeItem._id)
+			query =
+				_id: calendarGradeItem._id
+
+			query['code.' + grade] = $exists: true
+			gradeItem = getItemOfCourse Grade.findOne(query)
+
+			if not gradeItem?
+				continue
 
 			shift =  's' + calendarGradeItem.shift
 

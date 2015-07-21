@@ -1,5 +1,26 @@
 [
 	{
+		"_id": "wFQqx8gxdTGYZqZ5j",
+		"semester": {
+			"TSI": "6"
+		},
+		"code": {
+			"TSI": "44183"
+		},
+		"name": {
+			"TSI": "Projeto Prático de Sistemas"
+		},
+		"requirement": {
+			"TSI": [
+				"44144",
+				"44171"
+			]
+		},
+		"credit": 18,
+		"workload": 270
+	},
+	{
+		"_id": "CBCkDJTRtNv7wvPmQ",
 		"semester": {
 			"SI": "1",
 			"TSI": "1"
@@ -13,14 +34,19 @@
 			"TSI": "Algoritmos e Programação"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Conceitos básicos de Algoritmos e Programação, incluindo algoritmos em contextos computacionais e não<br/>computacionais; resolução de problemas; algoritmos e códigos de programação puramente sequenciais, seleção e<br/>repetição; conceitos de variável, constante e atribuição de dados; tipos de dados. Ambientes de programação: uso de<br/>uma Linguagem de Programação."    
+		"description": "Conceitos básicos de Algoritmos e Programação, incluindo algoritmos em contextos computacionais e não<br/>computacionais; resolução de problemas; algoritmos e códigos de programação puramente sequenciais, seleção e<br/>repetição; conceitos de variável, constante e atribuição de dados; tipos de dados. Ambientes de programação: uso de<br/>uma Linguagem de Programação."
 	},
 	{
+		"_id": "gXFLodhc6vZwsmKao",
 		"semester": {
 			"SI": "1",
 			"TSI": "1"
@@ -34,14 +60,19 @@
 			"TSI": "Introdução à Computação"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Computador convencional: Modelo de Von Neumann; Sistemas numéricos; Representações de dados; Álgebra<br/>Booleana; Aritmética binária; Circuitos combinacionais; Circuitos seqüenciais; Microprocessadores, Memórias; Sistemas<br/>de entrada/saída."
 	},
 	{
+		"_id": "kzDBYWAh8v3GRG2ak",
 		"semester": {
 			"SI": "1",
 			"TSI": "1"
@@ -55,14 +86,19 @@
 			"TSI": "Lógica e Matemática Discreta"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description":"Teoria de conjuntos. Lógica proposicional. Lógica de predicados. Indução matemática. Técnicas de demonstração.<br/>Relações e funções. Grafos e árvores. Estruturas algébricas."    
+		"description": "Teoria de conjuntos. Lógica proposicional. Lógica de predicados. Indução matemática. Técnicas de demonstração.<br/>Relações e funções. Grafos e árvores. Estruturas algébricas."
 	},
 	{
+		"_id": "BuDyZNSBmrrJjJHPK",
 		"semester": {
 			"SI": "1"
 		},
@@ -73,13 +109,36 @@
 			"SI": "Matemática Fundamental"
 		},
 		"requirement": {
-			"SI": []
+			"SI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Revisão de equações de 1o. e 2o. graus; matrizes determinantes; sistemas lineares; geometria plana; geometria<br/>espacial; trigonometria plana; equações exponenciais e logaritmos."
 	},
 	{
+		"_id": "2xRJCYe8oKubKZ3Yw",
+		"semester": {
+			"SI": "1"
+		},
+		"code": {
+			"SI": "4407"
+		},
+		"name": {
+			"SI": "Metodologia Científica"
+		},
+		"requirement": {
+			"SI": [
+
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Estudo das formas de conhecimento e as relações entre Ciência, ideologia e ética. Análise da pesquisa como atividade<br/>acadêmica. Orientação na elaboração e execução de projetos de pesquisa e apresentação de trabalhos científicos.<br/>Ciência e Tecnologia. Planejamento e formulação da pesquisa científica e do desenvolvimento tecnológico."
+	},
+	{
+		"_id": "9HQuEdLEJvRN9Jmmg",
 		"semester": {
 			"SI": "1",
 			"TSI": "1"
@@ -93,31 +152,19 @@
 			"TSI": "Português"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Desenvolvimento das habilidades de compreensão, interpretação e produção dos textos oral e escrito."    
+		"description": "Desenvolvimento das habilidades de compreensão, interpretação e produção dos textos oral e escrito."
 	},
 	{
-		"semester": {
-			"SI": "1"
-		},
-		"code": {
-			"SI": "4407"
-		},
-		"name": {
-			"SI": "Metodologia Científica"
-		},
-		"requirement": {
-			"SI": []
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Estudo das formas de conhecimento e as relações entre Ciência, ideologia e ética. Análise da pesquisa como atividade<br/>acadêmica. Orientação na elaboração e execução de projetos de pesquisa e apresentação de trabalhos científicos.<br/>Ciência e Tecnologia. Planejamento e formulação da pesquisa científica e do desenvolvimento tecnológico."    
-	},
-	{
+		"_id": "FGu9wCjF7oWp6oAb3",
 		"semester": {
 			"SI": "2",
 			"TSI": "2"
@@ -131,14 +178,79 @@
 			"TSI": "Arquitetura de Computadores"
 		},
 		"requirement": {
-			"SI": ["4133"],
-			"TSI": ["44133"]
+			"SI": [
+				"4133"
+			],
+			"TSI": [
+				"44133"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Conceitos básicos de arquitetura; Organização de computadores; Microprocessadores (organização, linguagem<br/>Assembly); Barramentos; Hierarquia da memória: memória virtual e memória cache; Paralelismo; Pipeline; Arquiteturas<br/>RISC e CISC; Multiprocessadores."
 	},
 	{
+		"_id": "GoobgS4Ati2sdPFyA",
+		"semester": {
+			"SI": "2"
+		},
+		"code": {
+			"SI": "4408"
+		},
+		"name": {
+			"SI": "Filosofia"
+		},
+		"requirement": {
+			"SI": [
+
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "O ser e a existência. Conhecimento filosófico. Métodos da filosofia. As diversas partes da filosofia e sua inter-relação.<br/>Filosofia e ciência."
+	},
+	{
+		"_id": "dti3ZtN9rpZN4jfDP",
+		"semester": {
+			"SI": "2"
+		},
+		"code": {
+			"SI": "4306"
+		},
+		"name": {
+			"SI": "Matemática Financeira"
+		},
+		"requirement": {
+			"SI": [
+				"4305"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Desenvolver o estudo de razão e objetivos da matemática financeira; Conceito de juros; Unidade de medida; Tipos de<br/>juros; Simbologia; Fluxo de caixa; Juro e montante; Descontos e equivalência de capitais dos juros simples e dos juros<br/>compostos a fim de que o aluno tenha uma noção geral dos conteúdos de matemática financeira e de sua aplicabilidade<br/>no dia-a-dia."
+	},
+	{
+		"_id": "aJBLSk4MpQ4czznYu",
+		"semester": {
+			"SI": "2"
+		},
+		"code": {
+			"SI": "4307"
+		},
+		"name": {
+			"SI": "Probabilidade e Estatística"
+		},
+		"requirement": {
+			"SI": [
+				"4305"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Eventos. Experimentos aleatórios. Probabilidade clássica, freqüêncial, condicional. Teorema de Bayes. Independência<br/>de Eventos. Variáveis aleatórias. Momentos. Transformação de variáveis aleatórias. Convergência. Confiabilidade. Teste<br/>de aderência. Teste de normalidade. Assimetria. Curtose. Escores normais. Análise de variância. Correlação."
+	},
+	{
+		"_id": "tciLNk496kNP74nrN",
 		"semester": {
 			"SI": "2",
 			"TSI": "2"
@@ -152,65 +264,19 @@
 			"TSI": "Laboratório de Programação de Computadores I"
 		},
 		"requirement": {
-			"SI": ["4132"],
-			"TSI": ["44174"]
+			"SI": [
+				"4132"
+			],
+			"TSI": [
+				"44174"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Estruturas compostas de dados: Vetores, Matrizes e Registros; Tipos de Dados definidos pelo programador;<br/>Modularização (Procedimentos e Funções)."    
+		"description": "Estruturas compostas de dados: Vetores, Matrizes e Registros; Tipos de Dados definidos pelo programador;<br/>Modularização (Procedimentos e Funções)."
 	},
 	{
-		"semester": {
-			"SI": "2"
-		},
-		"code": {
-			"SI": "4306"
-		},
-		"name": {
-			"SI": "Matemática Financeira"
-		},
-		"requirement": {
-			"SI": ["4305"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Desenvolver o estudo de razão e objetivos da matemática financeira; Conceito de juros; Unidade de medida; Tipos de<br/>juros; Simbologia; Fluxo de caixa; Juro e montante; Descontos e equivalência de capitais dos juros simples e dos juros<br/>compostos a fim de que o aluno tenha uma noção geral dos conteúdos de matemática financeira e de sua aplicabilidade<br/>no dia-a-dia."    
-	},
-	{
-		"semester": {
-			"SI": "2"
-		},
-		"code": {
-			"SI": "4307"
-		},
-		"name": {
-			"SI": "Probabilidade e Estatística"
-		},
-		"requirement": {
-			"SI": ["4305"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Eventos. Experimentos aleatórios. Probabilidade clássica, freqüêncial, condicional. Teorema de Bayes. Independência<br/>de Eventos. Variáveis aleatórias. Momentos. Transformação de variáveis aleatórias. Convergência. Confiabilidade. Teste<br/>de aderência. Teste de normalidade. Assimetria. Curtose. Escores normais. Análise de variância. Correlação."    
-	},
-	{
-		"semester": {
-			"SI": "2"
-		},
-		"code": {
-			"SI": "4408"
-		},
-		"name": {
-			"SI": "Filosofia"
-		},
-		"requirement": {
-			"SI": []
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "O ser e a existência. Conhecimento filosófico. Métodos da filosofia. As diversas partes da filosofia e sua inter-relação.<br/>Filosofia e ciência."    
-	},
-	{
+		"_id": "GYSQga5y7rky9AECD",
 		"semester": {
 			"SI": "3",
 			"TSI": "3"
@@ -224,14 +290,19 @@
 			"TSI": "Estrutura de Dados"
 		},
 		"requirement": {
-			"SI": ["4132"],
-			"TSI": ["44174"]
+			"SI": [
+				"4132"
+			],
+			"TSI": [
+				"44174"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Manipulação de cadeias; Estruturas de dados lineares: vetores, matrizes, pilhas, filas e listas encadeadas; Aplicações<br/>práticas; Ordenação de dados por inserção e troca; Estruturas de dados não lineares: árvores, matrizes esparsas e<br/>grafos; Árvores e suas generalizações: árvores binárias, árvores de busca, árvores balanceadas (AVL), árvores B e B+;<br/>Aplicações de árvores."    
+		"description": "Manipulação de cadeias; Estruturas de dados lineares: vetores, matrizes, pilhas, filas e listas encadeadas; Aplicações<br/>práticas; Ordenação de dados por inserção e troca; Estruturas de dados não lineares: árvores, matrizes esparsas e<br/>grafos; Árvores e suas generalizações: árvores binárias, árvores de busca, árvores balanceadas (AVL), árvores B e B+;<br/>Aplicações de árvores."
 	},
 	{
+		"_id": "KFAZPZbbpJWLhYd2i",
 		"semester": {
 			"SI": "3",
 			"TSI": "3"
@@ -245,35 +316,19 @@
 			"TSI": "Organização de Dados"
 		},
 		"requirement": {
-			"SI": ["4174"],
-			"TSI": ["44175"]
+			"SI": [
+				"4174"
+			],
+			"TSI": [
+				"44175"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Conceito de arquivo; Modelagem física e meios de armazenamento; Organização primária de arquivos: seqüencial,<br/>seqüencial indexado, indexado, direto, direto calculado (\"HASH\"); Estruturas de índices: listas invertidas, mapas, árvores;<br/>Ordenação de arquivos; Complexidade dos algoritmos apresentados."    
+		"description": "Conceito de arquivo; Modelagem física e meios de armazenamento; Organização primária de arquivos: seqüencial,<br/>seqüencial indexado, indexado, direto, direto calculado (\"HASH\"); Estruturas de índices: listas invertidas, mapas, árvores;<br/>Ordenação de arquivos; Complexidade dos algoritmos apresentados."
 	},
 	{
-		"semester": {
-			"SI": "3",
-			"TSI": "2"
-		},
-		"code": {
-			"SI": "4141",
-			"TSI": "44178"
-		},
-		"name": {
-			"SI": "Teleprocessamento",
-			"TSI": "Redes de Computadores I"
-		},
-		"requirement": {
-			"SI": [],
-			"TSI": []
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Fundamentos da comunicação de dados; Conceitos de teoria de informação; Noções básicas de teleprocessamento:<br/>tipos de enlace, códigos, modos e meios de transmissão; Comunicação de dados: características, transmissão síncrona<br/>e assíncrona, interfaces analógicas e digitais."
-	},
-	{
+		"_id": "j7YGZuBrLwy3bJBJH",
 		"semester": {
 			"SI": "3",
 			"TSI": "3"
@@ -287,31 +342,19 @@
 			"TSI": "Laboratório de Programação de Computadores II"
 		},
 		"requirement": {
-			"SI": ["4174"],
-			"TSI": ["44175"]
+			"SI": [
+				"4174"
+			],
+			"TSI": [
+				"44175"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Noções de arquivos em programação; Introdução a conjuntos e lógica; Tipos abstratos de dados; Programação com<br/>ponteiros; Indireção; Programação com listas; Noções de recursividade em programação."
 	},
 	{
-		"semester": {
-			"SI": "3"
-		},
-		"code": {
-			"SI": "4204"
-		},
-		"name": {
-			"SI": "Teoria Geral da Administração"
-		},
-		"requirement": {
-			"SI": []
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Antecedentes históricos da Administração. Teorias Administrativas: Científica; Clássica; Relações Humanas;<br/>Comportamentalista; Burocrática; Estruturalista; Sistêmica; Contingencial; Teorias da Administração hoje."    
-	},
-	{
+		"_id": "5QBSax4kcmgCd2hgN",
 		"semester": {
 			"SI": "3"
 		},
@@ -322,34 +365,82 @@
 			"SI": "Sociologia"
 		},
 		"requirement": {
-			"SI": []
+			"SI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Análise do pensamento sociológico, seu surgimento e evolução centrando em Conte, Durckein, Weber e Marx."    
+		"description": "Análise do pensamento sociológico, seu surgimento e evolução centrando em Conte, Durckein, Weber e Marx."
 	},
 	{
+		"_id": "gcPTjjQpMTLA3yRRy",
 		"semester": {
-			"SI": "4",
-			"TSI": "4"
+			"SI": "3",
+			"TSI": "2"
 		},
 		"code": {
-			"SI": "4142",
-			"TSI": "44142"
+			"SI": "4141",
+			"TSI": "44178"
 		},
 		"name": {
-			"SI": "Sistemas Operacionais",
-			"TSI": "Sistemas Operacionais"
+			"SI": "Teleprocessamento",
+			"TSI": "Redes de Computadores I"
 		},
 		"requirement": {
-			"SI": ["4138"],
-			"TSI": ["44138"]
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Introdução a Sistemas Operacionais; Sistemas multiprogramáveis; Processo; Comunicação entre processos;<br/>Concorrência / Deadlock; Gerência do processador; Gerenciamento de memória; Memória virtual; Gerência de<br/>dispositivos de entrada e saída; Núcleo de sistemas operacionais multiprogramados (\"Kernel\"); Estudo das<br/>características e comparação entre os diferentes sistemas operacionais atualmente utilizados; Estudo do sistema<br/>operacional Linux; Exercícios e trabalhos para implementação dos conteúdos estudados."
+		"description": "Fundamentos da comunicação de dados; Conceitos de teoria de informação; Noções básicas de teleprocessamento:<br/>tipos de enlace, códigos, modos e meios de transmissão; Comunicação de dados: características, transmissão síncrona<br/>e assíncrona, interfaces analógicas e digitais."
 	},
 	{
+		"_id": "xEEBixhnsLxMirdoD",
+		"semester": {
+			"SI": "3"
+		},
+		"code": {
+			"SI": "4204"
+		},
+		"name": {
+			"SI": "Teoria Geral da Administração"
+		},
+		"requirement": {
+			"SI": [
+
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Antecedentes históricos da Administração. Teorias Administrativas: Científica; Clássica; Relações Humanas;<br/>Comportamentalista; Burocrática; Estruturalista; Sistêmica; Contingencial; Teorias da Administração hoje."
+	},
+	{
+		"_id": "yhxejGL6E9HZZKmNw",
+		"semester": {
+			"SI": "4"
+		},
+		"code": {
+			"SI": "4205"
+		},
+		"name": {
+			"SI": "Administração Financeira"
+		},
+		"requirement": {
+			"SI": [
+				"4204"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "A função econômica e financeira nas empresas. Análise das demonstrações financeiras. Administração do capital de giro<br/>(capital circulante líquido, administração financeira de estoques, administração de duplicatas). Administração de<br/>disponibilidades. Fontes de recursos. Análise de investimentos. Alavancagem operacional e financeira, custo e estrutura<br/>de capital. A função orçamentária. Considerações gerais. Peças orçamentárias, demonstrações financeiras e controle<br/>orçamentário."
+	},
+	{
+		"_id": "KmuaJrLb2tYn3WKrJ",
 		"semester": {
 			"SI": "4",
 			"TSI": "4"
@@ -363,35 +454,19 @@
 			"TSI": "Análise de Sistemas I"
 		},
 		"requirement": {
-			"SI": ["4140"],
-			"TSI": ["44175"]
+			"SI": [
+				"4140"
+			],
+			"TSI": [
+				"44175"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Conceito de Sistemas: modelagem de sistemas, organizações como sistemas, estruturas organizacionais, administração<br/>e controle, sistemas administrativos, sistemas de informação; Estudo do ciclo de vida de um sistema; Análise e<br/>modelagem de dados com ênfase na integração de aplicações; Análise de negócios: técnicas de entrevista, modelagem<br/>E-R, diagrama hierárquico de funções, diagrama de fluxo de dados, dicionário de dados, português estruturado, tabelas<br/>de decisão; Projeto estruturado: diagramas de estruturas."
 	},
 	{
-		"semester": {
-			"SI": "4",
-			"TSI": "3"
-		},
-		"code": {
-			"SI": "4145",
-			"TSI": "44179"
-		},
-		"name": {
-			"SI": "Redes de Computadores",
-			"TSI": "Redes de Computadores II"
-		},
-		"requirement": {
-			"SI": ["4141"],
-			"TSI": ["44178"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Introdução às redes de comunicações; Protocolos e serviços de comunicação; Terminologia, topologias, modelos de<br/>arquitetura e aplicações; Especificação de protocolos; Internet e Intranets; Interconexão de redes; Redes de alta<br/>velocidade; Introdução à administração de redes (sistemas de administração de redes, fontes e fluxos de informação<br/>para administração e objetivos estratégicos); Tecnologias e suporte à administração de redes."
-	},
-	{
+		"_id": "GfTFnfu8np5Bi7Ljf",
 		"semester": {
 			"SI": "4"
 		},
@@ -402,13 +477,16 @@
 			"SI": "Linguagens de Programação"
 		},
 		"requirement": {
-			"SI": ["4174"]
+			"SI": [
+				"4174"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Conceitos; Paradigmas de linguagens de programação: imperativas, funcionais, lógicas e orientadas a objetos;<br/>Linguagens de Script; Noções de semântica formal; Teoria dos tipos: sistemas de tipos, polimorfismo; Verificação e<br/>inferência de tipos; Semântica formal de tipos."    
+		"description": "Conceitos; Paradigmas de linguagens de programação: imperativas, funcionais, lógicas e orientadas a objetos;<br/>Linguagens de Script; Noções de semântica formal; Teoria dos tipos: sistemas de tipos, polimorfismo; Verificação e<br/>inferência de tipos; Semântica formal de tipos."
 	},
 	{
+		"_id": "NDkYwnKG347LhstkJ",
 		"semester": {
 			"SI": "4",
 			"TSI": "4"
@@ -422,31 +500,72 @@
 			"TSI": "Laboratório de Programação de Computadores III"
 		},
 		"requirement": {
-			"SI": ["4134","4175"],
-			"TSI": ["44176"]
+			"SI": [
+				"4134",
+				"4175"
+			],
+			"TSI": [
+				"44176"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Conceitos e terminologia de orientação a objetos; Linguagens orientadas a objetos versus baseadas em objetos;<br/>Histórico e \"survey\" sobre linguagens orientadas a objetos; Técnicas de modularização/decomposição de software;<br/>Objetos; Classes; Herança simples e múltipla; Polimorfismo; Utilização de uma linguagem orientada a objetos."
 	},
 	{
+		"_id": "WuCwYHcHkqytZ7Ehu",
 		"semester": {
-			"SI": "4"
+			"SI": "4",
+			"TSI": "3"
 		},
 		"code": {
-			"SI": "4205"
+			"SI": "4145",
+			"TSI": "44179"
 		},
 		"name": {
-			"SI": "Administração Financeira"
+			"SI": "Redes de Computadores",
+			"TSI": "Redes de Computadores II"
 		},
 		"requirement": {
-			"SI": ["4204"]
+			"SI": [
+				"4141"
+			],
+			"TSI": [
+				"44178"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "A função econômica e financeira nas empresas. Análise das demonstrações financeiras. Administração do capital de giro<br/>(capital circulante líquido, administração financeira de estoques, administração de duplicatas). Administração de<br/>disponibilidades. Fontes de recursos. Análise de investimentos. Alavancagem operacional e financeira, custo e estrutura<br/>de capital. A função orçamentária. Considerações gerais. Peças orçamentárias, demonstrações financeiras e controle<br/>orçamentário."    
+		"description": "Introdução às redes de comunicações; Protocolos e serviços de comunicação; Terminologia, topologias, modelos de<br/>arquitetura e aplicações; Especificação de protocolos; Internet e Intranets; Interconexão de redes; Redes de alta<br/>velocidade; Introdução à administração de redes (sistemas de administração de redes, fontes e fluxos de informação<br/>para administração e objetivos estratégicos); Tecnologias e suporte à administração de redes."
 	},
 	{
+		"_id": "yyhkB28rTaPa6nKqD",
+		"semester": {
+			"SI": "4",
+			"TSI": "4"
+		},
+		"code": {
+			"SI": "4142",
+			"TSI": "44142"
+		},
+		"name": {
+			"SI": "Sistemas Operacionais",
+			"TSI": "Sistemas Operacionais"
+		},
+		"requirement": {
+			"SI": [
+				"4138"
+			],
+			"TSI": [
+				"44138"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Introdução a Sistemas Operacionais; Sistemas multiprogramáveis; Processo; Comunicação entre processos;<br/>Concorrência / Deadlock; Gerência do processador; Gerenciamento de memória; Memória virtual; Gerência de<br/>dispositivos de entrada e saída; Núcleo de sistemas operacionais multiprogramados (\"Kernel\"); Estudo das<br/>características e comparação entre os diferentes sistemas operacionais atualmente utilizados; Estudo do sistema<br/>operacional Linux; Exercícios e trabalhos para implementação dos conteúdos estudados."
+	},
+	{
+		"_id": "Aa4wtW59XY2i65ArH",
 		"semester": {
 			"SI": "5",
 			"TSI": "5"
@@ -460,31 +579,19 @@
 			"TSI": "Análise de Sistemas II"
 		},
 		"requirement": {
-			"SI": ["4143"],
-			"TSI": ["44143"]
+			"SI": [
+				"4143"
+			],
+			"TSI": [
+				"44143"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Os processos de análise e projeto orientado a objetos; Por que utilizar orientação a objetos? Análise e projeto orientado<br/>a objetos segundo diferentes autores; Análise e projeto orientado explorando conceitos de orientação a objetos: classe,<br/>atributos, herança, encapsulamento, polimorfismo, generalização e composição; O processo de análise e projeto<br/>orientado a objetos: detalhamento segundo um dos autores; Linguagens de descrição de análise e projeto orientado a<br/>objetos."
 	},
 	{
-		"semester": {
-			"SI": "5"
-		},
-		"code": {
-			"SI": "4147"
-		},
-		"name": {
-			"SI": "Compiladores"
-		},
-		"requirement": {
-			"SI": ["4146","4176"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Aborda técnicas, métodos e algoritmos utilizados no projeto de compiladores, incluindo a análise léxica, sintática e<br/>semântica, verificação de tipos, registros de ativação, representação intermediária, geração de código, análise de fluxo<br/>de dados, técnicas de otimização, gerenciamento de memória e compilação para linguagens de programação."    
-	},
-	{
+		"_id": "6v4GhJhhL2mXoFftW",
 		"semester": {
 			"SI": "5",
 			"TSI": "4"
@@ -498,31 +605,41 @@
 			"TSI": "Banco de Dados"
 		},
 		"requirement": {
-			"SI": ["4139","4140"],
-			"TSI": ["44140"]
+			"SI": [
+				"4139",
+				"4140"
+			],
+			"TSI": [
+				"44140"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Origem e objetivos de Sistemas de Gerência de Banco de Dados (SGBD); Interfaces de SGBD; Abordagens hierárquica,<br/>rede, relacional e orientado a objetos; Estudo de sistemas disponíveis; Aspectos de modelagem e projeto de banco de<br/>dados; Aspectos operacionais: arquitetura, segurança, integridade, concorrência, recuperação após falha, gerenciamento<br/>de transações; Linguagens de consulta; Arquitetura de SGDB; Técnicas de reconhecimento e interpretação; Técnicas de<br/>organização física dos dados; SQL."
 	},
 	{
+		"_id": "fpsCgBDNfsRqyfPLf",
 		"semester": {
 			"SI": "5"
 		},
 		"code": {
-			"SI": "4151"
+			"SI": "4147"
 		},
 		"name": {
-			"SI": "Tópicos Especiais em Sistemas de Informação"
+			"SI": "Compiladores"
 		},
 		"requirement": {
-			"SI": []
+			"SI": [
+				"4146",
+				"4176"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Enfocar os principais temas da área."    
+		"description": "Aborda técnicas, métodos e algoritmos utilizados no projeto de compiladores, incluindo a análise léxica, sintática e<br/>semântica, verificação de tipos, registros de ativação, representação intermediária, geração de código, análise de fluxo<br/>de dados, técnicas de otimização, gerenciamento de memória e compilação para linguagens de programação."
 	},
 	{
+		"_id": "hJoPXRWWjGcPjMPf7",
 		"semester": {
 			"SI": "5"
 		},
@@ -533,13 +650,17 @@
 			"SI": "Complexidade de Algoritmos"
 		},
 		"requirement": {
-			"SI": ["4139","4176"]
+			"SI": [
+				"4139",
+				"4176"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Apresenta conceitos de modelos de computação e ferramentas para medida de desempenho de algoritmos. Discute<br/>técnicas de projeto eficiente de algoritmos: programação dinâmica, divisão e conquista, algoritmos gulosos, métodos de<br/>busca e ordenação e algoritmos para problemas básicos em grafos. Classes de problemas: P, NP, NP-Completa."    
+		"description": "Apresenta conceitos de modelos de computação e ferramentas para medida de desempenho de algoritmos. Discute<br/>técnicas de projeto eficiente de algoritmos: programação dinâmica, divisão e conquista, algoritmos gulosos, métodos de<br/>busca e ordenação e algoritmos para problemas básicos em grafos. Classes de problemas: P, NP, NP-Completa."
 	},
 	{
+		"_id": "2kgDWpc9x42gqYeRu",
 		"semester": {
 			"SI": "5"
 		},
@@ -550,13 +671,36 @@
 			"SI": "Geometria Analítica e Álgebra Linear"
 		},
 		"requirement": {
-			"SI": ["4305"]
+			"SI": [
+				"4305"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
-		"description": "Sistemas de equações lineares. Matrizes. Vetores. Espaços vetoriais. Dependência e independência linear.<br/>Transformações lineares. Reta no plano e no espaço. Planos. Posições relativas. Intersecções. Distâncias e ângulos.<br/>Curvas e superfícies. Círculo e esfera. Coordenadas polares, cilíndricas e esféricas."    
+		"description": "Sistemas de equações lineares. Matrizes. Vetores. Espaços vetoriais. Dependência e independência linear.<br/>Transformações lineares. Reta no plano e no espaço. Planos. Posições relativas. Intersecções. Distâncias e ângulos.<br/>Curvas e superfícies. Círculo e esfera. Coordenadas polares, cilíndricas e esféricas."
 	},
 	{
+		"_id": "kvjyk5HoyMBfxqNox",
+		"semester": {
+			"SI": "5"
+		},
+		"code": {
+			"SI": "4151"
+		},
+		"name": {
+			"SI": "Tópicos Especiais em Sistemas de Informação"
+		},
+		"requirement": {
+			"SI": [
+
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Enfocar os principais temas da área."
+	},
+	{
+		"_id": "wr2zhqfbMF2rCpAto",
 		"semester": {
 			"SI": "6",
 			"TSI": "5"
@@ -570,14 +714,19 @@
 			"TSI": "Banco de Dados para Sistemas Web"
 		},
 		"requirement": {
-			"SI": ["4148"],
-			"TSI": ["44180"]
+			"SI": [
+				"4148"
+			],
+			"TSI": [
+				"44180"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Ao término da disciplina, o aluno deverá estar apto a discernir e optar pelas diferentes plataformas de banco de dados<br/>existentes. A disciplina deve Propiciar ao aluno familiarização com Administração de bancos de dados, modelagem de<br/>Bancos de Dados Orientado a Objetos e Bancos de Dados Distribuídos. Familiarizar o aluno com o estado da arte na<br/>pesquisa de Banco de Dados e suas diversas aplicações."
 	},
 	{
+		"_id": "gb6xP6rn6AXwqivsE",
 		"semester": {
 			"SI": "6",
 			"TSI": "6"
@@ -591,65 +740,19 @@
 			"TSI": "Engenharia de Software"
 		},
 		"requirement": {
-			"SI": ["4144"],
-			"TSI": ["44144"]
+			"SI": [
+				"4144"
+			],
+			"TSI": [
+				"44144"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Processo de desenvolvimento de software; Ciclo de vida de desenvolvimento de software; Qualidade de software;<br/>Técnicas de planejamento e gerenciamento de software; Gerenciamento de configuração de software; Engenharia de<br/>requisitos; Métodos de análise e de projeto de software; Garantia de qualidade de software; Verificação, validação e<br/>teste; Manutenção; Documentação; Padrões de desenvolvimento; Re-uso; Engenharia reversa; Reengenharia;<br/>Ambientes de desenvolvimento de software; Métricas de Software; Interface Homem-Máquina."
 	},
 	{
-		"semester": {
-			"SI": "6"
-		},
-		"code": {
-			"SI": "4153"
-		},
-		"name": {
-			"SI": "Sistemas de Informação"
-		},
-		"requirement": {
-			"SI": ["4143"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Fundamentos e classificação de sistemas de informação; O papel da informação no contexto empresarial; Gestão da<br/>informação; Sistemas de Informações Gerenciais (SIG); Administração de Sistemas de Informação: planejamento<br/>estratégico, gerência de custos de sistemas de informação, qualidade, segurança e auditoria de informática, gerência de<br/>pessoal para sistemas de informação; Sistemas de Apoio a Decisão (SAD), Sistemas de Informações Executivas (SIE);<br/>Aplicações: Software de Gestão Empresarial (ERP), Gerenciamento do Relacionamento com os Consumidores (CRM),<br/>Resposta Eficiente ao Consumidor (ECR), Gestão da Cadeia de Suprimentos (Supply Chain), Sistema de Informações<br/>de Marketing (SIM), Sistema de Inteligência Competitiva (SIC), Business Intelligence (BI), Data Warehouse, Database<br/>Marketing, Comércio Eletrônico; Estudo de casos."
-	},
-	{
-		"semester": {
-			"SI": "6"
-		},
-		"code": {
-			"SI": "4154"
-		},
-		"name": {
-			"SI": "Sistemas Distribuídos"
-		},
-		"requirement": {
-			"SI": ["4145","4175"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Esta disciplina faz uma introdução aos conceitos básicos sobre sistemas distribuídos, apresentando suas características<br/>e possíveis aplicações, descrevendo os modelos, métodos, técnicas, algoritmos e ferramentas voltados para a<br/>implementação eficiente destes sistemas utilizando as tecnologias acadêmicas e comerciais atualmente disponíveis."
-	},
-	{
-		"semester": {
-			"SI": "6"
-		},
-		"code": {
-			"SI": "4155"
-		},
-		"name": {
-			"SI": "Inteligência Artificial"
-		},
-		"requirement": {
-			"SI": ["4176"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Histórico; Linguagens simbólicas; Programação em lógica; Cláusulas de Horn; Unificação; Resolução; Meta-predicados;<br/>Prolog; Métodos de resolução de problemas; Busca em espaço de estados; Redução de problemas; Busca em<br/>profundidade; Busca em largura; Uso de heurísticas; Representação do conhecimento; Regras de produção; Redes<br/>semânticas; Redes neurais: noções do sistema nervoso, aprendizado; Algoritmos genéticos; Sistemas multi-agentes;<br/>Robótica; Integração entre redes neurais e inteligência artificial; Implementação, simulação e aplicações de redes<br/>neurais."
-	},
-	{
+		"_id": "aQ7XjcTvfL23y4GDC",
 		"semester": {
 			"SI": "6"
 		},
@@ -660,13 +763,96 @@
 			"SI": "Estágio Profissional"
 		},
 		"requirement": {
-			"SI": ["C88"]
+			"SI": [
+				"C88"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Trabalho a ser executado pelo aluno sob a forma de pesquisa científica ou em organização privada ou pública -<br/>orientado por um supervisor de estágio - com o objetivo de adquirir experiência e por em prática os conhecimentos<br/>teóricos adquiridos no decorrer do curso; Orientação para a fase inicial do trabalho de conclusão do Curso de Sistemas<br/>de Informação; Projeto teórico ou prático orientado por um docente da Faculdade de Informática, acompanhado por<br/>monografia redigida pelo aluno; Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um<br/>professor da Faculdade."
 	},
 	{
+		"_id": "sdipkhPuCqxd8Znq9",
+		"semester": {
+			"SI": "6"
+		},
+		"code": {
+			"SI": "4155"
+		},
+		"name": {
+			"SI": "Inteligência Artificial"
+		},
+		"requirement": {
+			"SI": [
+				"4176"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Histórico; Linguagens simbólicas; Programação em lógica; Cláusulas de Horn; Unificação; Resolução; Meta-predicados;<br/>Prolog; Métodos de resolução de problemas; Busca em espaço de estados; Redução de problemas; Busca em<br/>profundidade; Busca em largura; Uso de heurísticas; Representação do conhecimento; Regras de produção; Redes<br/>semânticas; Redes neurais: noções do sistema nervoso, aprendizado; Algoritmos genéticos; Sistemas multi-agentes;<br/>Robótica; Integração entre redes neurais e inteligência artificial; Implementação, simulação e aplicações de redes<br/>neurais."
+	},
+	{
+		"_id": "BiPoNSSvdX5pjNB9B",
+		"semester": {
+			"SI": "6"
+		},
+		"code": {
+			"SI": "4154"
+		},
+		"name": {
+			"SI": "Sistemas Distribuídos"
+		},
+		"requirement": {
+			"SI": [
+				"4145",
+				"4175"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Esta disciplina faz uma introdução aos conceitos básicos sobre sistemas distribuídos, apresentando suas características<br/>e possíveis aplicações, descrevendo os modelos, métodos, técnicas, algoritmos e ferramentas voltados para a<br/>implementação eficiente destes sistemas utilizando as tecnologias acadêmicas e comerciais atualmente disponíveis."
+	},
+	{
+		"_id": "8mx7diMjbJiWcke9h",
+		"semester": {
+			"SI": "6"
+		},
+		"code": {
+			"SI": "4153"
+		},
+		"name": {
+			"SI": "Sistemas de Informação"
+		},
+		"requirement": {
+			"SI": [
+				"4143"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Fundamentos e classificação de sistemas de informação; O papel da informação no contexto empresarial; Gestão da<br/>informação; Sistemas de Informações Gerenciais (SIG); Administração de Sistemas de Informação: planejamento<br/>estratégico, gerência de custos de sistemas de informação, qualidade, segurança e auditoria de informática, gerência de<br/>pessoal para sistemas de informação; Sistemas de Apoio a Decisão (SAD), Sistemas de Informações Executivas (SIE);<br/>Aplicações: Software de Gestão Empresarial (ERP), Gerenciamento do Relacionamento com os Consumidores (CRM),<br/>Resposta Eficiente ao Consumidor (ECR), Gestão da Cadeia de Suprimentos (Supply Chain), Sistema de Informações<br/>de Marketing (SIM), Sistema de Inteligência Competitiva (SIC), Business Intelligence (BI), Data Warehouse, Database<br/>Marketing, Comércio Eletrônico; Estudo de casos."
+	},
+	{
+		"_id": "PoDGWHaHr5T5Qwp8p",
+		"semester": {
+			"SI": "7"
+		},
+		"code": {
+			"SI": "4159"
+		},
+		"name": {
+			"SI": "Aplicações Industriais e Comerciais"
+		},
+		"requirement": {
+			"SI": [
+				"4153"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "XCKcid4ojbgpE6BQm",
 		"semester": {
 			"SI": "7",
 			"TSI": "4"
@@ -680,51 +866,20 @@
 			"TSI": "Computação Gráfica"
 		},
 		"requirement": {
-			"SI": ["4175","4308"],
-			"TSI": ["44176"]
+			"SI": [
+				"4175",
+				"4308"
+			],
+			"TSI": [
+				"44176"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Apresentar ao aluno o histórico, definições, aplicações e tecnologias relacionados à computação gráfica. Representação<br/>de Objetos. Visualização bi-dimensional e tri-dimensional. Transformações entre sistemas de coordenadas.<br/>Transformações de objetos (translação, rotação e escalamento). Técnicas de projeção. Técnidas de recorte. Modelos de<br/>iluminação."
 	},
 	{
-		"semester": {
-			"SI": "7",
-			"TSI": "5"
-		},
-		"code": {
-			"SI": "4158",
-			"TSI": "44181"
-		},
-		"name": {
-			"SI": "Segurança e Auditoria de Sistemas",
-			"TSI": "Computação Gráfica"
-		},
-		"requirement": {
-			"SI": ["4145"],
-			"TSI": ["44179"]
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Auditoria de sistemas; Metodologias de auditoria; Análise de riscos em sistemas de informação; Segurança lógica e<br/>física de sistemas; Planos de contingência; Técnicas de avaliação de sistemas; Aspectos especiais: vírus, fraudes,<br/>criptografia, acesso não autorizado."
-	},
-	{
-		"semester": {
-			"SI": "7"
-		},
-		"code": {
-			"SI": "4159"
-		},
-		"name": {
-			"SI": "Aplicações Industriais e Comerciais"
-		},
-		"requirement": {
-			"SI": ["4153"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
+		"_id": "xgDEz6cFZQJbnByQR",
 		"semester": {
 			"SI": "7",
 			"TSI": "6"
@@ -738,31 +893,19 @@
 			"TSI": "Gerência de Projetos"
 		},
 		"requirement": {
-			"SI": ["4152"],
-			"TSI": ["44143"]
+			"SI": [
+				"4152"
+			],
+			"TSI": [
+				"44143"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Sistemas de gestão industrial e fluxo básico de informações em sistemas automatizados; Aplicação da informática no<br/>controle de sistemas de manufatura: sistema de controle dos processos de fabricação, planejamento de capacidade,<br/>controle de estoques e de custos, planejamento e controle da produção, integração com as áreas administrativofinanceiras;<br/>Aplicações nas operações comerciais; Codificação de produtos; Código de barras: padrões internacionais;<br/>Equipamentos de codificação e leitura; Integração de sistemas."
 	},
 	{
-		"semester": {
-			"SI": "7"
-		},
-		"code": {
-			"SI": "4178"
-		},
-		"name": {
-			"SI": "Trabalho de Conclusão I"
-		},
-		"requirement": {
-			"SI": ["4156"]
-		},
-		"credit": 8,
-		"workload": 120,
-		"description": "Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
-	},
-	{
+		"_id": "PDsKNSWJwwhfzw99p",
 		"semester": {
 			"SI": "7",
 			"TSI": "2"
@@ -776,14 +919,65 @@
 			"TSI": "Ética e Legislação para Informática"
 		},
 		"requirement": {
-			"SI": ["C80"],
-			"TSI": []
+			"SI": [
+				"C80"
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Lei do Software. Lei do Direito Autoral. Lei da Propriedade Industrial. Código de Defesa do Consumidor em Produtos de<br/>Informática. Contratos em Tecnologia da Informação. Licenças de Uso. Registro do Software. Questões Legais em<br/>Pirataria de Software. Prevenção Jurídica em Tecnologia da Informação."
 	},
 	{
+		"_id": "RCCKPKN5eDyLHKa3F",
+		"semester": {
+			"SI": "7",
+			"TSI": "5"
+		},
+		"code": {
+			"SI": "4158",
+			"TSI": "44181"
+		},
+		"name": {
+			"SI": "Segurança e Auditoria de Sistemas",
+			"TSI": "Computação Gráfica"
+		},
+		"requirement": {
+			"SI": [
+				"4145"
+			],
+			"TSI": [
+				"44179"
+			]
+		},
+		"credit": 4,
+		"workload": 60,
+		"description": "Auditoria de sistemas; Metodologias de auditoria; Análise de riscos em sistemas de informação; Segurança lógica e<br/>física de sistemas; Planos de contingência; Técnicas de avaliação de sistemas; Aspectos especiais: vírus, fraudes,<br/>criptografia, acesso não autorizado."
+	},
+	{
+		"_id": "inmi7XzjcBKmS2Et7",
+		"semester": {
+			"SI": "7"
+		},
+		"code": {
+			"SI": "4178"
+		},
+		"name": {
+			"SI": "Trabalho de Conclusão I"
+		},
+		"requirement": {
+			"SI": [
+				"4156"
+			]
+		},
+		"credit": 8,
+		"workload": 120,
+		"description": "Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
+	},
+	{
+		"_id": "zw8mmB6zEWXCbFjFS",
 		"semester": {
 			"SI": "8"
 		},
@@ -794,51 +988,16 @@
 			"SI": "Avaliação de Desempenho de Sistemas"
 		},
 		"requirement": {
-			"SI": ["4158"]
+			"SI": [
+				"4158"
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Conceitos fundamentais e técnicas de avaliação de desempenho de sistemas computacionais; Conceitos de métricas e<br/>de carga; Seleção e caracterização de carga; Conceitos e tipos de monitores; Planejamento de capacidade;<br/>Benchmarking; Simulação de sistemas; Modelos de filas e redes de fila de espera."
 	},
 	{
-		"semester": {
-			"SI": "8"
-		},
-		"code": {
-			"SI": "4179"
-		},
-		"name": {
-			"SI": "Trabalho de Conclusão II"
-		},
-		"requirement": {
-			"SI": ["4178"]
-		},
-		"credit": 8,
-		"workload": 120,
-		"description": "Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
-	},
-	{
-		"semester": {
-			"SI": "8",
-			"TSI": "5"
-		},
-		"code": {
-			"SI": "4206",
-			"TSI": "44209"
-		},
-		"name": {
-			"SI": "Empreendedorismo",
-			"TSI": "Empreendedorismo e Administração"
-		},
-		"requirement": {
-			"SI": ["4204"],
-			"TSI": []
-		},
-		"credit": 4,
-		"workload": 60,
-		"description": "Conceito de empreendedorismo; estudo dos mecanismos e procedimentos para criação de empresas; o processo<br/>comportamental; fatores de sucesso; o perfil do empreendedor; desenvolvimento de habilidades empreendedoras;<br/>competitividade; recursos humanos; marketing; qualidade; inovação."
-	},
-	{
+		"_id": "3rMsaWrT6qj33ASrN",
 		"semester": {
 			"SI": "8",
 			"TSI": "6"
@@ -852,82 +1011,65 @@
 			"TSI": "Computador e Sociedade"
 		},
 		"requirement": {
-			"SI": ["4408"],
-			"TSI": []
+			"SI": [
+				"4408"
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60,
 		"description": "Aspectos sociais, econômicos, legais e profissionais da informática; Atuação do profissional no mercado de trabalho;<br/>Ética profissional; Segurança, privacidade, direitos de propriedade, acesso não autorizado; Aspectos estratégicos do<br/>controle da tecnologia; Aplicações da informática nas diversas áreas: científica, administrativa, jurídica, humanística,<br/>educacional, etc; O impacto das tecnologias de informação, comunicação e de automação na sociedade; Tendências."
 	},
 	{
+		"_id": "3vaPwRe2Mf5i4aaM6",
 		"semester": {
-			"SI": "E",
-			"TSI": "3"
+			"SI": "8",
+			"TSI": "5"
 		},
 		"code": {
-			"SI": "4164",
-			"TSI": "44164"
+			"SI": "4206",
+			"TSI": "44209"
 		},
 		"name": {
-			"SI": "Inglês Técnico",
-			"TSI": "Inglês Técnico"
+			"SI": "Empreendedorismo",
+			"TSI": "Empreendedorismo e Administração"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+				"4204"
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
-		"workload": 60
+		"workload": 60,
+		"description": "Conceito de empreendedorismo; estudo dos mecanismos e procedimentos para criação de empresas; o processo<br/>comportamental; fatores de sucesso; o perfil do empreendedor; desenvolvimento de habilidades empreendedoras;<br/>competitividade; recursos humanos; marketing; qualidade; inovação."
 	},
 	{
+		"_id": "Ft6wWEg9rzzFYRAai",
 		"semester": {
-			"SI": "E"
+			"SI": "8"
 		},
 		"code": {
-			"SI": "4165"
+			"SI": "4179"
 		},
 		"name": {
-			"SI": "Informática nas Organizações"
+			"SI": "Trabalho de Conclusão II"
 		},
 		"requirement": {
-			"SI": ["4133"]
+			"SI": [
+				"4178"
+			]
 		},
-		"credit": 4,
-		"workload": 60
+		"credit": 8,
+		"workload": 120,
+		"description": "Trabalho a ser executado pelo aluno sob a forma de pesquisa e desenvolvimento experimental, orientado por um<br/>docente do Curso de Sistemas de Informação, consistindo na elaboração de uma monografia redigida pelo aluno;<br/>Reuniões e relatórios sobre o andamento do trabalho do aluno supervisionado por um professor coordenador do<br/>Trabalho de Conclusão."
 	},
 	{
-		"semester": {
-			"SI": "E"
-		},
-		"code": {
-			"SI": "4166"
-		},
-		"name": {
-			"SI": "Sistemas Cooperativos"
-		},
-		"requirement": {
-			"SI": ["4153"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
-		"semester": {
-			"SI": "E"
-		},
-		"code": {
-			"SI": "4167"
-		},
-		"name": {
-			"SI": "Tópicos Avançados em Sistemas de Informação"
-		},
-		"requirement": {
-			"SI": ["4175"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
+		"_id": "EvJbDpS8w8fT8uNSs",
 		"semester": {
 			"SI": "E"
 		},
@@ -938,12 +1080,15 @@
 			"SI": "Aplicações Especiais em Informática"
 		},
 		"requirement": {
-			"SI": ["4175"]
+			"SI": [
+				"4175"
+			]
 		},
 		"credit": 4,
 		"workload": 60
 	},
 	{
+		"_id": "aJgdTnEBLH6mJZK6h",
 		"semester": {
 			"SI": "E",
 			"TSI": "1"
@@ -957,13 +1102,18 @@
 			"TSI": "Autoria e Design na Internet I"
 		},
 		"requirement": {
-			"SI": ["4133"],
-			"TSI": []
+			"SI": [
+				"4133"
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60
 	},
 	{
+		"_id": "nAtYgFPsTmpCZwhmy",
 		"semester": {
 			"SI": "E",
 			"TSI": "2"
@@ -977,101 +1127,18 @@
 			"TSI": "Autoria e Design na Internet II"
 		},
 		"requirement": {
-			"SI": ["4169"],
-			"TSI": ["44169"]
+			"SI": [
+				"4169"
+			],
+			"TSI": [
+				"44169"
+			]
 		},
 		"credit": 4,
 		"workload": 60
 	},
 	{
-		"semester": {
-			"SI": "E",
-			"TSI": "5"
-		},
-		"code": {
-			"SI": "4171",
-			"TSI": "44171"
-		},
-		"name": {
-			"SI": "Programação para Internet I",
-			"TSI": "Programação para Internet"
-		},
-		"requirement": {
-			"SI": ["4175"],
-			"TSI": ["44176","4418"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
-		"semester": {
-			"SI": "E",
-			"TSI": "6"
-		},
-		"code": {
-			"SI": "4172",
-			"TSI": "44172"
-		},
-		"name": {
-			"SI": "Programação para Internet II",
-			"TSI": "Programação para Internet II"
-		},
-		"requirement": {
-			"SI": ["4171"],
-			"TSI": ["44171"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
-		"semester": {
-			"SI": "E"
-		},
-		"code": {
-			"SI": "4173"
-		},
-		"name": {
-			"SI": "Ferramentas Gráficas e Multimídia"
-		},
-		"requirement": {
-			"SI": ["4133"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
-		"semester": {
-			"SI": "E"
-		},
-		"code": {
-			"SI": "4207"
-		},
-		"name": {
-			"SI": "Finanças Corporativas"
-		},
-		"requirement": {
-			"SI": ["4205"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
-		"semester": {
-			"SI": "E"
-		},
-		"code": {
-			"SI": "4208"
-		},
-		"name": {
-			"SI": "Economia e Finanças Públicas"
-		},
-		"requirement": {
-			"SI": ["4205"]
-		},
-		"credit": 4,
-		"workload": 60
-	},
-	{
+		"_id": "HZfitEjn4cjW8ezNr",
 		"semester": {
 			"SI": "E"
 		},
@@ -1082,12 +1149,116 @@
 			"SI": "Cálculo"
 		},
 		"requirement": {
-			"SI": ["4305"]
+			"SI": [
+				"4305"
+			]
 		},
 		"credit": 4,
 		"workload": 60
 	},
 	{
+		"_id": "K4an2kQWGXQAbSeFR",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4208"
+		},
+		"name": {
+			"SI": "Economia e Finanças Públicas"
+		},
+		"requirement": {
+			"SI": [
+				"4205"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "YvRyL5cWAmCRXTRQs",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4173"
+		},
+		"name": {
+			"SI": "Ferramentas Gráficas e Multimídia"
+		},
+		"requirement": {
+			"SI": [
+				"4133"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "hzajBdzbob7BnKjqe",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4207"
+		},
+		"name": {
+			"SI": "Finanças Corporativas"
+		},
+		"requirement": {
+			"SI": [
+				"4205"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "v6TQa5mEycxqL2H3B",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4165"
+		},
+		"name": {
+			"SI": "Informática nas Organizações"
+		},
+		"requirement": {
+			"SI": [
+				"4133"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "QGWJDmGB3Kg5C4Bvz",
+		"semester": {
+			"SI": "E",
+			"TSI": "3"
+		},
+		"code": {
+			"SI": "4164",
+			"TSI": "44164"
+		},
+		"name": {
+			"SI": "Inglês Técnico",
+			"TSI": "Inglês Técnico"
+		},
+		"requirement": {
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "4oYMo6ErwshszGEgv",
 		"semester": {
 			"SI": "E",
 			"TSI": "E"
@@ -1101,26 +1272,103 @@
 			"TSI": "Língua Brasileira de Sinais - Libras"
 		},
 		"requirement": {
-			"SI": [],
-			"TSI": []
+			"SI": [
+
+			],
+			"TSI": [
+
+			]
 		},
 		"credit": 4,
 		"workload": 60
 	},
 	{
+		"_id": "JzgjWQ3Aqbp2FHxLa",
 		"semester": {
+			"SI": "E",
+			"TSI": "5"
+		},
+		"code": {
+			"SI": "4171",
+			"TSI": "44171"
+		},
+		"name": {
+			"SI": "Programação para Internet I",
+			"TSI": "Programação para Internet"
+		},
+		"requirement": {
+			"SI": [
+				"4175"
+			],
+			"TSI": [
+				"44176",
+				"4418"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "L4aY4Hzj5aFCpsrtJ",
+		"semester": {
+			"SI": "E",
 			"TSI": "6"
 		},
 		"code": {
-			"TSI": "44183"
+			"SI": "4172",
+			"TSI": "44172"
 		},
 		"name": {
-			"TSI": "Projeto Prático de Sistemas"
+			"SI": "Programação para Internet II",
+			"TSI": "Programação para Internet II"
 		},
 		"requirement": {
-			"TSI": ["44144","44171"]
+			"SI": [
+				"4171"
+			],
+			"TSI": [
+				"44171"
+			]
 		},
-		"credit": 18,
-		"workload": 270
-  }
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "LQfDcJxTuvoQkifZT",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4166"
+		},
+		"name": {
+			"SI": "Sistemas Cooperativos"
+		},
+		"requirement": {
+			"SI": [
+				"4153"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	},
+	{
+		"_id": "6btdXZe3T2eori54u",
+		"semester": {
+			"SI": "E"
+		},
+		"code": {
+			"SI": "4167"
+		},
+		"name": {
+			"SI": "Tópicos Avançados em Sistemas de Informação"
+		},
+		"requirement": {
+			"SI": [
+				"4175"
+			]
+		},
+		"credit": 4,
+		"workload": 60
+	}
 ]
