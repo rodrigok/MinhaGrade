@@ -1,21 +1,21 @@
 <template name="Grade">
 	{{> GradeInfo}}
 
-	<div class="ui three column grid">
-		<div class="column">
-			<div class="ui fluid">
-				<div class="content">
-					<div class="ui centered header">Compartilhar</div>
-					<div class="description">
-						<div class="ui fluid left icon input large">
-							<input type="text" class="autoselect" value="{{url}}">
-							<i class="linkify icon"></i>
+	{{#with percentageDone}}
+		<div class="ui three column grid">
+			<div class="column">
+				<div class="ui fluid">
+					<div class="content">
+						<div class="ui centered header">Compartilhar</div>
+						<div class="description">
+							<div class="ui fluid left icon input large">
+								<input type="text" class="autoselect" value="{{url}}">
+								<i class="linkify icon"></i>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		{{#with percentageDone}}
 			<div class="column">
 				<div class="ui fluid">
 					<div class="content">
@@ -46,8 +46,8 @@
 					</div>
 				</div>
 			</div>
-		{{/with}}
-	</div>
+		</div>
+	{{/with}}
 
 	{{#if Template.subscriptionsReady}}
 	<table class="ui celled padded table">

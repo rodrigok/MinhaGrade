@@ -27,10 +27,15 @@ Template.Grade.helpers
 		return Router.current().params.course
 
 	myEmail: ->
+		if Router.current().params.email?
+			return Router.current().params.email
+
 		return Meteor.user().emails[0].address
 
 	url: ->
-		params = _.extend {email: Meteor.user().emails[0].address}, Router.current().params
+		email = Router.current().params.email
+		email ?= Meteor.user().emails[0].address
+		params = _.extend {email: email}, Router.current().params
 
 		return Router.url('my', params, params)
 
