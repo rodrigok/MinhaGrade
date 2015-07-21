@@ -35,4 +35,4 @@ Migrations.add
 					user.calendar[key] = newValue
 
 
-				Meteor.users.update user._id, {$set: {grade: newGrade, calendar: user.calendar}}
+			Meteor.users.update user._id, {$set: {grade: newGrade, calendar: user.calendar}}
