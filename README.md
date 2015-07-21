@@ -22,9 +22,3 @@ meteor
 
 ### Abrir a aplicação no browser
 http://localhost:3000
-
-### Importar dados
-O projeto vai iniciar sem dados, para importar os dados é preciso abrir o console do navegador e executar o seguinte comando
-```javascript
-Meteor.call('import')
-```
