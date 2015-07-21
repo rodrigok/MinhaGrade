@@ -71,7 +71,9 @@
 		</thead>
 		<tbody>
 			{{#each grade}}
-				{{> GradeItem}}
+				{{#with getItemOfCourse}}
+					{{> GradeItem}}
+				{{/with}}
 			{{/each}}
 		</tbody>
 	</table>

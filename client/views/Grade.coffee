@@ -4,7 +4,14 @@ Template.Grade.helpers
 		if not grade in ['SI', 'TSI']
 			grade = 'SI'
 
-		return Grade.find({course: grade}, {sort: {_id: 1}})
+		query = {}
+		query['code.' + grade] = $exists: true
+
+		sort = {}
+		sort['semester.' + grade] = 1
+		sort['code.' + grade] = 1
+
+		return Grade.find(query, {sort: sort})
 
 	canEdit: ->
 		return Meteor.user()? and not Router.current().params.email?
@@ -39,13 +46,16 @@ Template.Grade.helpers
 		if not grade in ['SI', 'TSI']
 			grade = 'SI'
 
-		grade = Grade.find({course: grade}).fetch()
+		query = {}
+		query['code.' + grade] = $exists: true
+		grade = Grade.find(query).fetch()
 
 		total = 0
 		done = 0
 		doing = 0
 
 		for item in grade
+			item = getItemOfCourse item
 			if item.semester isnt 'E'
 				total++
 				if user?.grade?[item._id] is 'done'
@@ -61,6 +71,9 @@ Template.Grade.helpers
 			done: done
 			doing: doing
 		}
+
+	getItemOfCourse: ->
+		return getItemOfCourse @
 
 
 Template.Grade.events
