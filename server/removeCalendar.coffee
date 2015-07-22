@@ -1,5 +1,7 @@
 Meteor.methods
 	removeCalendar: (calendarId) ->
+		console.log 'removeCalendar', calendarId
+
 		if not @userId?
 			return
 

@@ -1,5 +1,7 @@
 Meteor.methods
 	updateCalendarItemInterest: (calendarId, gradeItemId, shift, day, interested) ->
+		console.log 'updateCalendarItemInterest', calendarId, gradeItemId, shift, day, interested
+
 		if not @userId?
 			return
 

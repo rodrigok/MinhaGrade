@@ -1,5 +1,7 @@
 Meteor.methods
 	setTeacherInCalendarItem: (calendarId, gradeItemId, shift, day, teacher) ->
+		console.log 'setTeacherInCalendarItem', calendarId, gradeItemId, shift, day, teacher
+
 		if not @userId?
 			return
 

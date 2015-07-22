@@ -1,5 +1,7 @@
 Meteor.methods
 	updateGradeItem: (gradeItemId, status) ->
+		console.log 'updateGradeItem', gradeItemId, status
+
 		if not @userId?
 			return
 

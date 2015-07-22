@@ -1,5 +1,7 @@
 Meteor.methods
 	addItemToCalendar: (calendarId, gradeItemId, shift, day) ->
+		console.log 'addItemToCalendar', calendarId, gradeItemId, shift, day
+
 		if not @userId?
 			return
 

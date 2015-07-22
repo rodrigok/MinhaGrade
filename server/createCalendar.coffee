@@ -1,5 +1,7 @@
 Meteor.methods
 	createCalendar: (calendarId) ->
+		console.log 'createCalendar', calendarId
+
 		if not @userId?
 			return
 

@@ -1,5 +1,7 @@
 Meteor.methods
 	removeItemFromCalendar: (calendarId, gradeItemId, shift, day) ->
+		console.log 'removeItemFromCalendar', calendarId, gradeItemId, shift, day
+
 		if not @userId?
 			return
 
