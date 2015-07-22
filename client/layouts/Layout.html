@@ -18,6 +18,11 @@
 			<a class="item {{isActive 'tsi'}}" href="/course/tsi">
 				Grade tSI
 			</a>
+			{{#if isAdmin}}
+				<a class="item" href="/calendars">
+					Calendários
+				</a>
+			{{/if}}
 			<div class="right menu">
 				{{> loginButtons}}
 			</div>

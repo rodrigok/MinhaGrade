@@ -3,7 +3,7 @@ Meteor.methods
 		if not @userId?
 			return
 
-		user = Meteor.user.find @userId
+		user = Meteor.users.findOne @userId
 		if user.admin isnt true
 			return
 

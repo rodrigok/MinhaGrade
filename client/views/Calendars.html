@@ -1,4 +1,8 @@
 <template name="Calendars">
+	<button class="ui green button add-calendar">
+		Adicionar
+	</button>
+
 	<table class="ui very compact celled table">
 		<thead>
 			<tr>
@@ -18,7 +22,7 @@
 							<a class="ui button" href="{{pathFor 'calendarEdit' calendarName=_id}}">
 								<i class="pencil icon"></i>
 							</a>
-							<button class="ui button">
+							<button class="ui button remove-calendar">
 								<i class="trash icon"></i>
 							</button>
 						</div>
