@@ -1,5 +1,5 @@
 <template name="CalendarEdit">
-	<div class="ui dropdown labeled icon button">
+	<div class="ui dropdown labeled icon button shift">
 		<i class="student icon"></i>
 		<span class="text">Escolha o dia e turno</span>
 		<div class="menu">
@@ -15,7 +15,7 @@
 						{{name}}
 					</div>
 					{{#each days}}
-						<div class="item">
+						<div class="item" data-day="{{day}}" data-shift="{{../shift}}">
 							{{name}} - {{../name}}
 						</div>
 					{{/each}}
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<div class="ui dropdown labeled icon button">
+	<div class="ui dropdown labeled icon button subject">
 		<i class="student icon"></i>
 		<span class="text">Escolha a matéria</span>
 		<div class="menu">
@@ -34,7 +34,7 @@
 			</div>
 			<div class="scrolling menu">
 				{{#each grade}}
-					<div class="item">
+					<div class="item" data-id="{{_id}}">
 						<div class="ui red empty circular label"></div>
 						{{getNames .}}
 					</div>
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<button class="ui green button">
+	<button class="ui green button add-calendar-item">
 		Adicionar
 	</button>
 
@@ -54,7 +54,19 @@
 					Ações
 				</th>
 				<th>
+					Turno
+				</th>
+				<th>
+					Dia
+				</th>
+				<th>
 					Nome
+				</th>
+				<th>
+					<i class="users icon"></i>
+				</th>
+				<th>
+					Professor
 				</th>
 			</tr>
 		</thead>
@@ -62,9 +74,15 @@
 			{{#each calendar.grade}}
 			<tr>
 				<td class="collapsing">
-					<button class="ui button">
+					<button class="ui button remove-item" tabindex="-1">
 						<i class="trash icon"></i>
 					</button>
+				</td>
+				<td class="collapsing">
+					{{getShift shift}}
+				</td>
+				<td class="collapsing">
+					{{getDay day}}
 				</td>
 				<td>
 					{{#each getGradeNames _id}}
@@ -72,6 +90,14 @@
 							{{.}}
 						</div>
 					{{/each}}
+				</td>
+				<td class="collapsing">
+					{{interested}}
+				</td>
+				<td class="collapsing">
+					<div class="ui input">
+						<input type="text" class="teacher" value="{{teacher}}">
+					</div>
 				</td>
 			</tr>
 			{{/each}}

@@ -1,5 +1,9 @@
 Router.configure
 	layoutTemplate: 'Layout'
+	waitOn: -> [
+		Meteor.subscribe 'Grade'
+		Meteor.subscribe 'userGradeInfo'
+	]
 
 
 Router.route '/', ->
@@ -16,12 +20,6 @@ Router.route '/tsi', ->
 
 Router.route '/course/:course',
 	name: 'course'
-
-	waitOn: ->
-		return [
-			Meteor.subscribe 'Grade'
-			Meteor.subscribe 'userGradeInfo'
-		]
 
 	action: ->
 		course = @params.course.toLowerCase()
@@ -42,7 +40,6 @@ Router.route '/my/:course/:email',
 
 	waitOn: ->
 		return [
-			Meteor.subscribe 'Grade'
 			Meteor.subscribe 'userGradeInfo', @params.email
 		]
 
@@ -68,8 +65,6 @@ Router.route '/calendar/:calendarName/:course?',
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Calendar', @params.calendarName
-			Meteor.subscribe 'Grade'
-			Meteor.subscribe 'userGradeInfo'
 		]
 
 	action: ->
@@ -88,10 +83,14 @@ Router.route '/calendar/:calendarName/:course?',
 Router.route '/calendars',
 	name: 'calendars'
 
+	onBeforeAction: ->
+		if Meteor.user().admin isnt true
+			return Router.go('/')
+		@next()
+
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Calendar'
-			Meteor.subscribe 'Grade'
 		]
 
 	action: ->
@@ -103,10 +102,14 @@ Router.route '/calendars',
 Router.route '/calendars/:calendarName',
 	name: 'calendarEdit'
 
+	onBeforeAction: ->
+		if Meteor.user().admin isnt true
+			return Router.go('/')
+		@next()
+
 	waitOn: ->
 		return [
 			Meteor.subscribe 'Calendar', @params.calendarName
-			Meteor.subscribe 'Grade'
 		]
 
 	action: ->
