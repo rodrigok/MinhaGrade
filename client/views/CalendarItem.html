@@ -5,10 +5,12 @@
 				<div>
 					{{gradeItem.name}}
 					<div class="sub header" style="{{style}}">
-						<div>
-							<i class="student icon"></i>
-							<span class="detail">{{calendarItem.teacher}}</span>
-						</div>
+						{{#if calendarItem.teacher}}
+							<div>
+								<i class="student icon"></i>
+								<span class="detail">{{calendarItem.teacher}}</span>
+							</div>
+						{{/if}}
 						<div>
 							<i class="users icon"></i>
 							{{calendarItem.interested}}
