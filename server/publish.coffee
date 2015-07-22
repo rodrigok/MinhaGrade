@@ -2,7 +2,11 @@ Meteor.publish 'Grade', ->
 	return Grade.find()
 
 Meteor.publish 'Calendar', (name) ->
-	return Calendar.find({_id: name})
+	query = {}
+	if name?
+		query._id = name
+
+	return Calendar.find(query)
 
 Meteor.publish 'userGradeInfo', (email) ->
 	query = @userId

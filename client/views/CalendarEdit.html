@@ -1,0 +1,80 @@
+<template name="CalendarEdit">
+	<div class="ui dropdown labeled icon button">
+		<i class="student icon"></i>
+		<span class="text">Escolha o dia e turno</span>
+		<div class="menu">
+			<div class="ui icon search input">
+				<i class="search icon"></i>
+				<input type="text" placeholder="Search tags...">
+			</div>
+			<div class="scrolling menu">
+				{{#each shifts}}
+					<div class="divider"></div>
+					<div class="header">
+						<i class="tags icon"></i>
+						{{name}}
+					</div>
+					{{#each days}}
+						<div class="item">
+							{{name}} - {{../name}}
+						</div>
+					{{/each}}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<div class="ui dropdown labeled icon button">
+		<i class="student icon"></i>
+		<span class="text">Escolha a matéria</span>
+		<div class="menu">
+			<div class="ui icon search input">
+				<i class="search icon"></i>
+				<input type="text" placeholder="Search tags...">
+			</div>
+			<div class="scrolling menu">
+				{{#each grade}}
+					<div class="item">
+						<div class="ui red empty circular label"></div>
+						{{getNames .}}
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<button class="ui green button">
+		Adicionar
+	</button>
+
+	<table class="ui very compact celled table">
+		<thead>
+			<tr>
+				<th>
+					Ações
+				</th>
+				<th>
+					Nome
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each calendar.grade}}
+			<tr>
+				<td class="collapsing">
+					<button class="ui button">
+						<i class="trash icon"></i>
+					</button>
+				</td>
+				<td>
+					{{#each getGradeNames _id}}
+						<div>
+							{{.}}
+						</div>
+					{{/each}}
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

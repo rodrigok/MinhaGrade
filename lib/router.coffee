@@ -84,3 +84,33 @@ Router.route '/calendar/:calendarName/:course?',
 
 	fastRender: true
 
+
+Router.route '/calendars',
+	name: 'calendars'
+
+	waitOn: ->
+		return [
+			Meteor.subscribe 'Calendar'
+			Meteor.subscribe 'Grade'
+		]
+
+	action: ->
+		@render 'Calendars'
+
+	fastRender: true
+
+
+Router.route '/calendars/:calendarName',
+	name: 'calendarEdit'
+
+	waitOn: ->
+		return [
+			Meteor.subscribe 'Calendar', @params.calendarName
+			Meteor.subscribe 'Grade'
+		]
+
+	action: ->
+		@render 'CalendarEdit'
+
+	fastRender: true
+
