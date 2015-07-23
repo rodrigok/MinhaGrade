@@ -18,7 +18,10 @@ Template.CalendarItem.helpers
 	canMarkInterrest: ->
 		user = Meteor.user()
 
-		return user?.grade?[@gradeItem._id] isnt 'done'
+		if not user?
+			return false
+
+		return user.grade?[@gradeItem._id] isnt 'done'
 
 	intereseted: ->
 		user = Meteor.user()

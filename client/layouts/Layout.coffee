@@ -4,4 +4,4 @@ Template.Layout.helpers
 			return 'active'
 
 	isAdmin: ->
-		return Meteor.user().admin is true
+		return Meteor.user()?.admin is true

@@ -84,7 +84,7 @@ Router.route '/calendars',
 	name: 'calendars'
 
 	onBeforeAction: ->
-		if Meteor.user().admin isnt true
+		if Meteor.user()?.admin isnt true
 			return Router.go('/')
 		@next()
 
@@ -103,7 +103,7 @@ Router.route '/calendars/:calendarName',
 	name: 'calendarEdit'
 
 	onBeforeAction: ->
-		if Meteor.user().admin isnt true
+		if Meteor.user()?.admin isnt true
 			return Router.go('/')
 		@next()
 
