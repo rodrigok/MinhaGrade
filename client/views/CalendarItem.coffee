@@ -28,6 +28,13 @@ Template.CalendarItem.helpers
 		key = "#{@calendarItem.shift}#{@calendarItem.day}-#{@gradeItem._id}"
 		return user?.calendar?[@calendar._id]?.indexOf(key) > -1
 
+	getOverlayColor: ->
+		r = Math.round(Math.random() * 4) * 10
+		l = 100 - r
+		h = 50 - r
+
+		return "hsl(#{h}, 100%, #{l}%)"
+
 
 Template.CalendarItem.events
 	'click button.remove-interest': (e) ->

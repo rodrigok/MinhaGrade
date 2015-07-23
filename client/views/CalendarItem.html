@@ -2,7 +2,15 @@
 	{{#if item}}
 		{{#each item}}
 			<h5 class="ui header calendar-item" style="{{style}}">
-				<div>
+				<div style="position:relative; overflow:visible;">
+					<div style="background-color: {{getOverlayColor}};" class="calendar-item-overlay">
+						{{gradeItem.name}}
+						<div>
+							<i class="users icon"></i>
+							{{calendarItem.interested}}
+							<span class="detail">interessados</span>
+						</div>
+					</div>
 					{{gradeItem.name}}
 					<div class="sub header" style="{{style}}">
 						{{#if calendarItem.teacher}}

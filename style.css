@@ -16,3 +16,17 @@ select:focus {
 .calendar tr {
 	vertical-align: top;
 }
+
+.calendar-item-overlay {
+	position:absolute;
+	/*opacity: .2;*/
+	top: -2px;
+	bottom: -4px;
+	left: -7px;
+	right: -7px;
+	border-radius: 5px;
+	z-index: 1;
+	color: rgba(0,0,0,.6);
+	padding: 2px 7px;
+	background-color: hsl(0, 100%, 80%);
+}
