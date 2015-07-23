@@ -68,10 +68,10 @@ Router.route '/calendar/:calendarName/:course?',
 		]
 
 	action: ->
-		course = @params.course or 'si'
+		course = @params.course or ''
 		course = course.toLowerCase()
 		if course not in ['si', 'tsi']
-			return @redirect "/course/si/#{@params.email}"
+			return @redirect "/calendar/#{@params.calendarName}/si"
 
 		Session.set 'grade', course
 
