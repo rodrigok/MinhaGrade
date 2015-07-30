@@ -47,21 +47,25 @@ Template.Grade.helpers
 		if not user?
 			return
 
-		grade = Session.get('grade').toUpperCase()
-		if not grade in ['SI', 'TSI']
-			grade = 'SI'
+		gradeCode = Session.get('grade').toUpperCase()
+		if not gradeCode in ['SI', 'TSI']
+			gradeCode = 'SI'
 
 		query = {}
-		query['code.' + grade] = $exists: true
+		query['code.' + gradeCode] = $exists: true
 		grade = Grade.find(query).fetch()
 
 		total = 0
 		done = 0
 		doing = 0
+		electiveMax = 0
+
+		if gradeCode is 'SI'
+			electiveMax = 1
 
 		for item in grade
 			item = getItemOfCourse item
-			if item.semester isnt 'E'
+			if item.semester isnt 'E' or electiveMax-- > 0
 				total++
 				if user?.grade?[item._id] is 'done'
 					done++

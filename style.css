@@ -16,3 +16,7 @@ select:focus {
 .calendar tr {
 	vertical-align: top;
 }
+
+.grade-item-name.link {
+	cursor: pointer;
+}
