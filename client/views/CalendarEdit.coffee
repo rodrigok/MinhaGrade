@@ -69,6 +69,7 @@ Template.CalendarEdit.helpers
 	getShift: (shift) ->
 		shift = String(shift)
 		shifts =
+			'0': 'EAD'
 			'1': 'Manhã'
 			'2': 'Tarde'
 			'3': 'Noite'
@@ -79,6 +80,7 @@ Template.CalendarEdit.helpers
 	getDay: (day) ->
 		day = String(day)
 		days =
+			'0': 'EAD'
 			'2': 'Segunda'
 			'3': 'Terça'
 			'4': 'Quarta'

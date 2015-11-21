@@ -1,4 +1,19 @@
 <template name="Calendar">
+	{{#with calendar}}
+		{{#if s0}}
+			<div class="ui top secondary attached header segment">
+				EAD
+			</div>
+			<div class="ui attached bottom segment four column stackable grid">
+				{{#each s0}}
+					<div class="column">
+						{{> CalendarItem item=value.d0}}
+					</div>
+				{{/each}}
+			</div>
+		{{/if}}
+	{{/with}}
+
 	<table class="ui definition very compact celled table calendar">
 		<thead>
 			<tr>
