@@ -2,6 +2,7 @@ Router.configure
 	layoutTemplate: 'Layout'
 	waitOn: -> [
 		Meteor.subscribe 'Grade'
+		Meteor.subscribe 'Calendar'
 		Meteor.subscribe 'userGradeInfo'
 	]
 

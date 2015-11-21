@@ -12,15 +12,34 @@
 			<div class="header item">
 				Grade Faccat
 			</div>
-			<a class="item {{isActive 'si'}}" href="/course/si">
-				Grade SI
-			</a>
-			<a class="item {{isActive 'tsi'}}" href="/course/tsi">
-				Grade tSI
-			</a>
+			<div class="ui dropdown item">
+				Cursos <i class="dropdown icon"></i>
+				<div class="menu">
+					<a class="item" href="/course/si">
+						Grade SI
+					</a>
+					<a class="item" href="/course/tsi">
+						Grade tSI
+					</a>
+				</div>
+			</div>
+			<div class="ui dropdown item">
+				Calendários <i class="dropdown icon"></i>
+				<div class="menu">
+					{{#each calendars}}
+						<a class="item" href="/calendar/{{_id}}/si">
+							{{_id}} SI
+						</a>
+						<a class="item" href="/calendar/{{_id}}/tsi">
+							{{_id}} tSI
+						</a>
+					{{/each}}
+				</div>
+			</div>
+
 			{{#if isAdmin}}
 				<a class="item" href="/calendars">
-					Calendários
+					Editar calendários
 				</a>
 			{{/if}}
 			<div class="right menu">
