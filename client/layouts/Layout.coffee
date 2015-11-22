@@ -7,4 +7,4 @@ Template.Layout.helpers
 
 
 Template.Layout.onRendered ->
-	$('.ui.dropdown').dropdown()
+	$('.menu .ui.dropdown').dropdown()
