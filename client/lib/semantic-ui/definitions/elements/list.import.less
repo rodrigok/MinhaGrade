@@ -1,6 +1,6 @@
 /*
   DO NOT MODIFY - This file has been generated and will be regenerated
-  Semantic UI v2.0.2
+  Semantic UI v2.1.8
 */
 /*!
  * # Semantic UI - List
@@ -131,8 +131,11 @@ ol.ui.list ol li,
   display: table-cell;
   background-color: transparent;
   margin: 0em;
-  padding-right: @imageDistance;
   vertical-align: @imageAlign;
+}
+.ui.list .list > .item > .image:not(:only-child):not(img),
+.ui.list > .item > .image:not(:only-child):not(img) {
+  padding-right: @imageDistance;
 }
 .ui.list .list > .item > .image img,
 .ui.list > .item > .image img {
@@ -144,7 +147,6 @@ ol.ui.list ol li,
 .ui.list > .item > img.image,
 .ui.list > .item > .image:only-child {
   display: inline-block;
-  padding-right: 0em;
 }
 
 /* Content */
@@ -222,6 +224,13 @@ ol.ui.list ol li,
 }
 
 /* Floated Content */
+.ui[class*="left floated"].list {
+  float: left;
+}
+.ui[class*="right floated"].list {
+  float: right;
+}
+
 .ui.list .list > .item [class*="left floated"],
 .ui.list > .item [class*="left floated"] {
   float: left;
@@ -634,6 +643,15 @@ ol.ui.inverted.list li:before,
   color: @orderedInvertedCountColor;
 }
 
+/* Value */
+.ui.ordered.list > .list > .item[data-value],
+.ui.ordered.list > .item[data-value] {
+  content: attr(data-value);
+}
+ol.ui.list li[value]:before {
+  content: attr(value);
+}
+
 /* Child Lists */
 ol.ui.list ol,
 .ui.ordered.list .list {
@@ -655,7 +673,6 @@ ol.ui.horizontal.list li:before,
   position: static;
   margin: 0em @horizontalOrderedCountDistance 0em 0em;
 }
-
 
 /*-------------------
        Divided
