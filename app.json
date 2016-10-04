@@ -1,0 +1,17 @@
+{
+  "name": "GradeFaccat",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/RocketChat/heroku-buildpack-meteor.git"
+    }
+  ]
+}
