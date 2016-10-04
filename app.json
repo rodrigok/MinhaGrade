@@ -3,6 +3,7 @@
   "scripts": {
   },
   "env": {
+    "ROOT_URL": "https://gradefaccat.herokuapp.com"
   },
   "formation": {
   },
