@@ -1,3 +1,5 @@
+import './Calendars.html';
+
 Template.Calendars.helpers({
 	calendars() {
 		return Calendar.find();

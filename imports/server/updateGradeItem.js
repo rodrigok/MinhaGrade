@@ -2,7 +2,7 @@ Meteor.methods({
 	updateGradeItem(gradeItemId, status) {
 		console.log('updateGradeItem', gradeItemId, status);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

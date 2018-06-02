@@ -1,3 +1,5 @@
+import './Layout.html';
+
 Template.Layout.helpers({
 	isAdmin() {
 		return __guard__(Meteor.user(), x => x.admin) === true;

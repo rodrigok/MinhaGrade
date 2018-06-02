@@ -2,7 +2,7 @@ Meteor.methods({
 	removeItemFromCalendar(calendarId, gradeItemId, shift, day) {
 		console.log('removeItemFromCalendar', calendarId, gradeItemId, shift, day);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

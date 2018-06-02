@@ -2,7 +2,7 @@ Meteor.methods({
 	removeCalendar(calendarId) {
 		console.log('removeCalendar', calendarId);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

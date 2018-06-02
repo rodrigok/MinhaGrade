@@ -1,3 +1,5 @@
+import './CalendarEdit.html';
+
 Template.CalendarEdit.helpers({
 	calendar() {
 		const calendar = Calendar.findOne({_id: Router.current().params.calendarName});

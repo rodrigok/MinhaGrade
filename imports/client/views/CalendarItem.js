@@ -1,3 +1,5 @@
+import './CalendarItem.html';
+
 Template.CalendarItem.helpers({
 	style() {
 		const user = Meteor.user();
@@ -22,7 +24,7 @@ Template.CalendarItem.helpers({
 	canMarkInterrest() {
 		const user = Meteor.user();
 
-		if ((user == null)) {
+		if (user == null) {
 			return false;
 		}
 

@@ -1,3 +1,5 @@
+import './GradeInfo.html';
+
 Template.GradeInfo.onRendered(() =>
 	Meteor.autorun(function() {
 		$('.ui.modal.grade-info').modal({

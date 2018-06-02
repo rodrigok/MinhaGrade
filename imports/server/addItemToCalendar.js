@@ -2,7 +2,7 @@ Meteor.methods({
 	addItemToCalendar(calendarId, gradeItemId, shift, day) {
 		console.log('addItemToCalendar', calendarId, gradeItemId, shift, day);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

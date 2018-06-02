@@ -2,7 +2,7 @@ Meteor.methods({
 	setTeacherInCalendarItem(calendarId, gradeItemId, shift, day, teacher) {
 		console.log('setTeacherInCalendarItem', calendarId, gradeItemId, shift, day, teacher);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

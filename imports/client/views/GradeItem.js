@@ -1,3 +1,5 @@
+import './GradeItem.html';
+
 Template.GradeItem.onRendered(function() {
 	return this.$('div.label').popup({});
 });

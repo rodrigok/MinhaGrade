@@ -1,3 +1,5 @@
+import './Grade.html';
+
 Template.Grade.helpers({
 	grade() {
 		let grade = Session.get('grade').toUpperCase();
@@ -54,7 +56,7 @@ Template.Grade.helpers({
 			user = Meteor.users.findOne({'emails.address': Router.current().params.email});
 		}
 
-		if ((user == null)) {
+		if (user == null) {
 			return;
 		}
 

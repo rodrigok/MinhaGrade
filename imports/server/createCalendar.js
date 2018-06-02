@@ -2,7 +2,7 @@ Meteor.methods({
 	createCalendar(calendarId) {
 		console.log('createCalendar', calendarId);
 
-		if ((this.userId == null)) {
+		if (this.userId == null) {
 			return;
 		}
 

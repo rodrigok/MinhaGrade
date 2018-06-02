@@ -1,3 +1,5 @@
+import './Calendar.html';
+
 Template.Calendar.helpers({
 	calendar() {
 		let key;
@@ -16,7 +18,7 @@ Template.Calendar.helpers({
 			query[`code.${grade}`] = {$exists: true};
 			const gradeItem = getItemOfCourse(Grade.findOne(query));
 
-			if ((gradeItem == null)) {
+			if (gradeItem == null) {
 				continue;
 			}
 
