@@ -28,3 +28,4 @@ standard-minifier-css@1.4.0
 standard-minifier-js@2.3.1
 shell-server@0.3.1
 dynamic-import
+react-meteor-data
