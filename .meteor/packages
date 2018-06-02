@@ -10,7 +10,6 @@ semantic:ui
 flemay:less-autoprefixer
 iron:router
 iandouglas:accounts-ui-semantic-ui
-meteorhacks:fast-render
 percolate:migrations
 meteor-base@1.3.0
 mobile-experience@1.0.5

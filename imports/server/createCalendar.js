@@ -1,3 +1,5 @@
+import {Calendar} from '../lib/collections';
+
 Meteor.methods({
 	createCalendar(calendarId) {
 		console.log('createCalendar', calendarId);

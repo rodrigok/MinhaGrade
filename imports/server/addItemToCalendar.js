@@ -1,3 +1,5 @@
+import {Calendar} from '../lib/collections';
+
 Meteor.methods({
 	addItemToCalendar(calendarId, gradeItemId, shift, day) {
 		console.log('addItemToCalendar', calendarId, gradeItemId, shift, day);

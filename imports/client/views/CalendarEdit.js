@@ -1,3 +1,6 @@
+import _ from 'meteor/underscore';
+import {Router} from 'meteor/iron:router';
+import {Calendar, Grade} from '../../lib/collections';
 import './CalendarEdit.html';
 
 Template.CalendarEdit.helpers({
@@ -18,21 +21,11 @@ Template.CalendarEdit.helpers({
 
 	getGradeNames(_id) {
 		const grade = Grade.findOne(_id);
-		const names = [];
-		for (let key in grade.name) {
-			const name = grade.name[key];
-			names.push(name);
-		}
-
-		return names;
+		return Object.values(grade).map(([, value]) => value);
 	},
 
 	getNames(item) {
-		const names = [];
-		for (let key in item.code) {
-			const value = item.code[key];
-			names.push(item.name[key]);
-		}
+		const names = Object.values(item.code).map(([, value]) => value);
 
 		return names.join(' | ');
 	},
@@ -41,50 +34,40 @@ Template.CalendarEdit.helpers({
 		const days = [{
 			name: 'Segunda',
 			day: '2'
-		}
-		, {
+		}, {
 			name: 'Terça',
 			day: '3'
-		}
-		, {
+		}, {
 			name: 'Quarta',
 			day: '4'
-		}
-		, {
+		}, {
 			name: 'Quinta',
 			day: '5'
-		}
-		, {
+		}, {
 			name: 'Sexta',
 			day: '6'
-		}
-		, {
+		}, {
 			name: 'Sábado',
 			day: '7'
-		}
-		];
+		}];
 
 		return [{
 			name: 'Noite',
 			shift: '3',
 			days
-		}
-		, {
+		}, {
 			name: 'Vespertino',
 			shift: '5',
 			days
-		}
-		, {
+		}, {
 			name: 'Tarde',
 			shift: '2',
 			days
-		}
-		, {
+		}, {
 			name: 'Manhã',
 			shift: '1',
 			days
-		}
-		];
+		}];
 	},
 
 	getShift(shift) {

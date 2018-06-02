@@ -1,7 +1,4 @@
-import '../imports/server/migrations/migrate';
-import '../imports/server/migrations/v1';
-import '../imports/server/migrations/v2';
-import '../imports/server/migrations/v3';
+import '../imports/server/migrations';
 
 import '../imports/server/addItemToCalendar';
 import '../imports/server/configMail';

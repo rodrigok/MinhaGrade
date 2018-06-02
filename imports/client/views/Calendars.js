@@ -1,3 +1,4 @@
+import {Calendar} from '../../lib/collections';
 import './Calendars.html';
 
 Template.Calendars.helpers({

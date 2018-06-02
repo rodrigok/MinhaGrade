@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/rodrigok/GradeFaccat#readme",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.49",
-    "bcrypt": "^2.0.1"
+    "bcrypt": "^2.0.1",
+    "eslint": "^4.19.1"
   }
 }

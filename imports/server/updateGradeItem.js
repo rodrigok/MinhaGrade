@@ -7,15 +7,20 @@ Meteor.methods({
 		}
 
 		switch (status) {
-			case 'done': case 'doing':
-				var update = {};
-				update[`grade.${gradeItemId}`] = status;
-				return Meteor.users.update(this.userId, {$set: update});
+			case 'done':
+			case 'doing':
+				return Meteor.users.update(this.userId, {
+					$set: {
+						[`grade.${ gradeItemId }`]: status
+					}
+				});
 
 			case 'pending':
-				update = {};
-				update[`grade.${gradeItemId}`] = 1;
-				return Meteor.users.update(this.userId, {$unset: update});
+				return Meteor.users.update(this.userId, {
+					$unset: {
+						[`grade.${ gradeItemId }`]: 1
+					}
+				});
 		}
 	}
 });

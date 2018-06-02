@@ -1,10 +1,14 @@
+import {Router} from 'meteor/iron:router';
+
 Router.configure({
 	layoutTemplate: 'Layout',
-	waitOn() { return [
-		Meteor.subscribe('Grade'),
-		Meteor.subscribe('Calendar'),
-		Meteor.subscribe('userGradeInfo')
-	]; }});
+	waitOn() {
+		return [
+			Meteor.subscribe('Grade'),
+			Meteor.subscribe('Calendar'),
+			Meteor.subscribe('userGradeInfo')
+		];
+	}});
 
 
 Router.route('/', function() {
@@ -55,7 +59,7 @@ Router.route('/my/:course/:email', {
 	action() {
 		const course = this.params.course.toLowerCase();
 		if (!['si', 'tsi'].includes(course)) {
-			return this.redirect(`/course/si/${this.params.email}`);
+			return this.redirect(`/course/si/${ this.params.email }`);
 		}
 
 		Session.set('grade', course);
@@ -88,7 +92,7 @@ Router.route('/calendar/:calendarName/:course?', {
 		let course = this.params.course || '';
 		course = course.toLowerCase();
 		if (!['si', 'tsi'].includes(course)) {
-			return this.redirect(`/calendar/${this.params.calendarName}/si`);
+			return this.redirect(`/calendar/${ this.params.calendarName }/si`);
 		}
 
 		Session.set('grade', course);
@@ -105,7 +109,7 @@ Router.route('/calendars', {
 	name: 'calendars',
 
 	onBeforeAction() {
-		if (__guard__(Meteor.user(), x => x.admin) !== true) {
+		if (Meteor.user() && Meteor.user() !== true) {
 			return Router.go('/');
 		}
 		return this.next();
@@ -130,7 +134,7 @@ Router.route('/calendars/:calendarName', {
 	name: 'calendarEdit',
 
 	onBeforeAction() {
-		if (__guard__(Meteor.user(), x => x.admin) !== true) {
+		if (Meteor.user() && Meteor.user().admin !== true) {
 			return Router.go('/');
 		}
 		return this.next();
@@ -147,10 +151,4 @@ Router.route('/calendars/:calendarName', {
 	},
 
 	fastRender: true
-}
-);
-
-
-function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
-}
+});

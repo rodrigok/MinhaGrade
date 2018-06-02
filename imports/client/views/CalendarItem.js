@@ -6,7 +6,7 @@ Template.CalendarItem.helpers({
 
 		const styles = [];
 
-		let itemStatus = __guard__(user != null ? user.grade : undefined, x => x[this.gradeItem._id]);
+		let itemStatus = user && user.grade && user.grade[this.gradeItem._id];
 		if (itemStatus == null) { itemStatus = 'pending'; }
 
 		switch (itemStatus) {
@@ -33,21 +33,18 @@ Template.CalendarItem.helpers({
 
 	intereseted() {
 		const user = Meteor.user();
-		const key = `${this.calendarItem.shift}${this.calendarItem.day}-${this.gradeItem._id}`;
-		return __guard__(__guard__(user != null ? user.calendar : undefined, x1 => x1[this.calendar._id]), x => x.indexOf(key)) > -1;
+		const key = `${ this.calendarItem.shift }${ this.calendarItem.day }-${ this.gradeItem._id }`;
+		return user && user.calendar && user.calendar[this.calendar._id] && user.calendar[this.calendar._id].indexOf(key) > -1;
 	}
 });
 
 
 Template.CalendarItem.events({
-	'click button.remove-interest'(e) {
+	'click button.remove-interest'() {
 		return Meteor.call('updateCalendarItemInterest', this.calendar._id, this.gradeItem._id, this.calendarItem.shift, this.calendarItem.day, false);
 	},
 
-	'click button.mark-interest'(e) {
+	'click button.mark-interest'() {
 		return Meteor.call('updateCalendarItemInterest', this.calendar._id, this.gradeItem._id, this.calendarItem.shift, this.calendarItem.day, true);
 	}
 });
-function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
-}

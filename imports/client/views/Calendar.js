@@ -1,8 +1,9 @@
+import {Calendar, Grade} from '../../lib/collections';
+import {getItemOfCourse} from '../lib/getItemOfCourse';
 import './Calendar.html';
 
 Template.Calendar.helpers({
 	calendar() {
-		let key;
 		let grade = Session.get('grade') || 'SI';
 		grade = grade.toUpperCase();
 
@@ -11,24 +12,24 @@ Template.Calendar.helpers({
 		const calendarRecord = Calendar.findOne();
 		const calendarGrade = calendarRecord.grade;
 
-		for (let calendarGradeItem of Array.from(calendarGrade)) {
+		for (const calendarGradeItem of Array.from(calendarGrade)) {
 			const query =
 				{_id: calendarGradeItem._id};
 
-			query[`code.${grade}`] = {$exists: true};
+			query[`code.${ grade }`] = {$exists: true};
 			const gradeItem = getItemOfCourse(Grade.findOne(query));
 
 			if (gradeItem == null) {
 				continue;
 			}
 
-			const shift =  `s${calendarGradeItem.shift}`;
+			const shift = `s${ calendarGradeItem.shift }`;
 
 			if (calendar[shift] == null) { calendar[shift] = {}; }
 
 			if (calendar[shift][gradeItem.semester] == null) { calendar[shift][gradeItem.semester] = {}; }
 
-			const day = `d${calendarGradeItem.day}`;
+			const day = `d${ calendarGradeItem.day }`;
 
 			if (calendar[shift][gradeItem.semester][day] == null) { calendar[shift][gradeItem.semester][day] = []; }
 
@@ -39,17 +40,11 @@ Template.Calendar.helpers({
 			});
 		}
 
-		for (key in calendar) {
-			var calendarItem = calendar[key];
-			calendar[key] = ((() => {
-				const result = [];
-				for (key in calendarItem) {
-					const value = calendarItem[key];
-					result.push({semester: key, value});
-				}
-				return result;
-			})());
-		}
+		Object.values(calendar).forEach(([key, calendarItem]) => {
+			calendar[key] = Object.values(calendarItem).map(([key, value]) => {
+				return {semester: key, value};
+			});
+		});
 
 		return calendar;
 	}

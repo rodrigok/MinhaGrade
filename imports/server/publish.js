@@ -1,3 +1,5 @@
+import {Calendar, Grade} from '../lib/collections';
+
 Meteor.publish('Grade', () => Grade.find());
 
 Meteor.publish('Calendar', function(name) {

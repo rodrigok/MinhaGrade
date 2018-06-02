@@ -1,4 +1,4 @@
-this.getItemOfCourse = function(item) {
+export const getItemOfCourse = function(item) {
 	let grade = Session.get('grade') || 'SI';
 	grade = grade.toUpperCase();
 

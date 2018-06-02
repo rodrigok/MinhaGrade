@@ -1,3 +1,6 @@
+import {Router} from 'meteor/iron:router';
+import {Grade} from '../../lib/collections';
+import {getItemOfCourse} from '../lib/getItemOfCourse';
 import './GradeItem.html';
 
 Template.GradeItem.onRendered(function() {
@@ -18,7 +21,7 @@ Template.GradeItem.helpers({
 			styles.push('background-color: #f1f1f1');
 		}
 
-		let itemStatus = __guard__(user != null ? user.grade : undefined, x => x[this._id]);
+		let itemStatus = user && user.grade && user.grade[this._id];
 		if (itemStatus == null) { itemStatus = 'pending'; }
 
 		switch (itemStatus) {
@@ -53,7 +56,7 @@ Template.GradeItem.helpers({
 		const grade = Session.get('grade').toUpperCase();
 
 		const query = {};
-		query[`code.${grade}`] = code;
+		query[`code.${ grade }`] = code;
 
 		return getItemOfCourse(Grade.findOne(query));
 	},
@@ -63,7 +66,7 @@ Template.GradeItem.helpers({
 		if (Router.current().params.email != null) {
 			user = Meteor.users.findOne({'emails.address': Router.current().params.email});
 		}
-		switch (__guard__(user != null ? user.grade : undefined, x => x[_id])) {
+		switch (user && user.grade && user.grade[_id]) {
 			case 'done':
 				return 'grey';
 			case 'doing':
@@ -85,7 +88,7 @@ Template.GradeItem.events({
 		return Meteor.call('updateGradeItem', this._id, status);
 	},
 
-	'click .grade-item-name'(e) {
+	'click .grade-item-name'() {
 		if (this.description != null) {
 			Session.set('modalInfoTitle', this.name);
 			Session.set('modalInfoDescription', this.description);
@@ -93,7 +96,3 @@ Template.GradeItem.events({
 		}
 	}
 });
-
-function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
-}

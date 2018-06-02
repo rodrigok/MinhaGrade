@@ -1,3 +1,5 @@
+import {Calendar} from '../lib/collections';
+
 Meteor.methods({
 	updateCalendarItemInterest(calendarId, gradeItemId, shift, day, interested) {
 		console.log('updateCalendarItemInterest', calendarId, gradeItemId, shift, day, interested);
@@ -7,7 +9,7 @@ Meteor.methods({
 		}
 
 		let update = {};
-		update[`calendar.${calendarId}`] = `${shift}${day}-${gradeItemId}`;
+		update[`calendar.${ calendarId }`] = `${ shift }${ day }-${ gradeItemId }`;
 
 		if (interested === true) {
 			Meteor.users.update(this.userId, {$push: update});

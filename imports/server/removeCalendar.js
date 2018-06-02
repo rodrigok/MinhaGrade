@@ -1,3 +1,5 @@
+import {Calendar} from '../lib/collections';
+
 Meteor.methods({
 	removeCalendar(calendarId) {
 		console.log('removeCalendar', calendarId);

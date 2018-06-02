@@ -1,3 +1,7 @@
+import _ from 'meteor/underscore';
+import {Grade} from '../../lib/collections';
+import {getItemOfCourse} from '../lib/getItemOfCourse';
+import {Router} from 'meteor/iron:router';
 import './Grade.html';
 
 Template.Grade.helpers({
@@ -8,11 +12,11 @@ Template.Grade.helpers({
 		}
 
 		const query = {};
-		query[`code.${grade}`] = {$exists: true};
+		query[`code.${ grade }`] = {$exists: true};
 
 		const sort = {};
-		sort[`semester.${grade}`] = 1;
-		sort[`code.${grade}`] = 1;
+		sort[`semester.${ grade }`] = 1;
+		sort[`code.${ grade }`] = 1;
 
 		return Grade.find(query, {sort});
 	},
@@ -66,7 +70,7 @@ Template.Grade.helpers({
 		}
 
 		const query = {};
-		query[`code.${gradeCode}`] = {$exists: true};
+		query[`code.${ gradeCode }`] = {$exists: true};
 		const grade = Grade.find(query).fetch();
 
 		let total = 0;
@@ -78,14 +82,14 @@ Template.Grade.helpers({
 			electiveMax = 1;
 		}
 
-		for (var item of Array.from(grade)) {
+		for (let item of Array.from(grade)) {
 			item = getItemOfCourse(item);
 			if ((item.semester !== 'E') || (electiveMax-- > 0)) {
 				total++;
-				if (__guard__(user != null ? user.grade : undefined, x => x[item._id]) === 'done') {
+				if (user && user.grade && user.grade[item._id] === 'done') {
 					done++;
 					doing++;
-				} else if (__guard__(user != null ? user.grade : undefined, x1 => x1[item._id]) === 'doing') {
+				} else if (user && user.grade && user.grade[item._id] === 'doing') {
 					doing++;
 				}
 			}
@@ -130,7 +134,3 @@ Template.Grade.events({
 		return $(e.target).select();
 	}
 });
-
-function __guard__(value, transform) {
-  return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
-}
