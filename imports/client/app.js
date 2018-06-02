@@ -93,14 +93,28 @@ class App extends Component {
 			render: (text) => {
 				if (text && text.length) {
 					return text.map(t => {
+						const {user} = this.props;
+						const style = {
+							color: '#f50'
+						};
 						const tip = Grade.findOne({'code.SI': t});
+
+						switch (tip && user && user.grade && user.grade[tip._id]) {
+							case 'done':
+								style.color = '#d3d3d3';
+								break;
+							case 'doing':
+								style.color = '#ffa500';
+								break;
+						}
+
 						if (tip && tip.name && tip.name.SI) {
 							return <Tooltip key={t} title={`${ tip.name.SI } - Semestre ${ tip.semester.SI }`}>
-								<Tag color='red'>{t}</Tag>
+								<Tag color={style.color}>{t}</Tag>
 							</Tooltip>;
 						}
 
-						return <Tag key={t} color='red'>{t}</Tag>;
+						return <Tag key={t} color={style.color}>{t}</Tag>;
 					});
 				}
 			}
