@@ -1,0 +1,26 @@
+{
+  "name": "gradefaccat",
+  "version": "1.0.0",
+  "description": "## Como rodar o projeto",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigok/GradeFaccat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigok/GradeFaccat/issues"
+  },
+  "homepage": "https://github.com/rodrigok/GradeFaccat#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.49",
+    "bcrypt": "^2.0.1"
+  }
+}
