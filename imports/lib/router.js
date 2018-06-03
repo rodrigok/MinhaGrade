@@ -109,7 +109,7 @@ Router.route('/calendars', {
 	name: 'calendars',
 
 	onBeforeAction() {
-		if (Meteor.user() && Meteor.user() !== true) {
+		if (Meteor.user() && Meteor.user().admin !== true) {
 			return Router.go('/');
 		}
 		return this.next();

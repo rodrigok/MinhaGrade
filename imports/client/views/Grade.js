@@ -49,7 +49,7 @@ Template.Grade.helpers({
 	url() {
 		let { email } = Router.current().params;
 		if (email == null) { email = Meteor.user().emails[0].address; }
-		const params = _.extend({email}, Router.current().params);
+		const params = Object.assign({email}, Router.current().params);
 
 		return Router.url('my', params, params);
 	},
