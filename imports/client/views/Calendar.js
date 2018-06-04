@@ -40,8 +40,8 @@ Template.Calendar.helpers({
 			});
 		}
 
-		Object.values(calendar).forEach(([key, calendarItem]) => {
-			calendar[key] = Object.values(calendarItem).map(([key, value]) => {
+		Object.entries(calendar).forEach(([key, calendarItem]) => {
+			calendar[key] = Object.entries(calendarItem).map(([key, value]) => {
 				return {semester: key, value};
 			});
 		});

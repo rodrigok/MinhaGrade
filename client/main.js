@@ -8,7 +8,6 @@ import '../imports/client/views/CalendarEdit';
 import '../imports/client/views/CalendarItem';
 import '../imports/client/views/Calendars';
 import '../imports/client/views/Grade';
-import '../imports/client/views/GradeInfo';
 import '../imports/client/views/GradeItem';
 
 import '../imports/client/views/Loading.html';
