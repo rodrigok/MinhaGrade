@@ -21,13 +21,11 @@ Template.CalendarEdit.helpers({
 
 	getGradeNames(_id) {
 		const grade = Grade.findOne(_id);
-		return Object.values(grade).map(([, value]) => value);
+		return Object.values(grade.name);
 	},
 
 	getNames(item) {
-		const names = Object.values(item.code).map(([, value]) => value);
-
-		return names.join(' | ');
+		return Object.values(item.name).join(' | ');
 	},
 
 	shifts() {
