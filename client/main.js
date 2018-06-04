@@ -1,6 +1,5 @@
 import '../imports/lib/router';
 
-import '../imports/client/main';
 import '../imports/client/lib/getCourse';
 import '../imports/client/lib/getItemOfCourse';
 import '../imports/client/layouts/Layout';

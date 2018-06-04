@@ -1,4 +1,4 @@
-import _ from 'meteor/underscore';
+import _ from 'underscore';
 import {Router} from 'meteor/iron:router';
 import {Calendar, Grade} from '../../lib/collections';
 import './CalendarEdit.html';
