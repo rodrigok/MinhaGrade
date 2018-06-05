@@ -1,0 +1,42 @@
+.ant-card-meta-title {
+	white-space: normal !important;
+	font-size: 14px !important;
+}
+
+.ant-card-meta-description {
+	white-space: normal !important;
+	font-size: 12px !important;
+}
+
+.ant-card ~ .ant-card {
+	margin-top: 10px !important;
+}
+
+.shift-table-title-line {
+	background-color: #fafafa;
+}
+
+.shift-table-title-line td {
+	padding: 8px 16px !important;
+}
+
+.shift-table-line td {
+	padding: 8px !important;
+	vertical-align: top !important;
+}
+
+.shift-table-line .ant-card-body {
+	padding: 12px !important;
+}
+
+.card-done .ant-card-meta-title {
+	color: lightgray;
+}
+
+.card-done .ant-card-meta-description {
+	color: lightgray;
+}
+
+.card-doing .ant-card-meta-title {
+	color: orange;
+}

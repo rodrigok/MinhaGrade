@@ -25,6 +25,7 @@
     "antd": "^3.6.1",
     "bcrypt": "^2.0.1",
     "eslint": "^4.19.1",
+    "indexof": "0.0.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router": "^4.2.0",
