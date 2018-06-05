@@ -180,9 +180,11 @@ class CalendarEdit extends Component {
 }
 
 const CalendarEditsWithTracking = withTracker(() => {
+	const calendar = Calendar.findOne({_id: Router.current().params.calendarName});
+
 	return {
 		user: Meteor.user(),
-		data: Calendar.findOne({_id: Router.current().params.calendarName}).grade
+		data: (calendar && calendar.grade) || []
 	};
 })(CalendarEdit);
 

@@ -203,6 +203,15 @@ const CalendarComponentWithTracking = withTracker(() => {
 		name: 'Vespertino'
 	}];
 
+	if (!data) {
+		return {
+			user: Meteor.user(),
+			shifts: [],
+			hasEAD: false,
+			data: []
+		};
+	}
+
 	return {
 		user: Meteor.user(),
 		shifts: shifts.filter(s => data.grade.filter(d => d.shift === s.shift).length),
