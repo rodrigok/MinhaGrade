@@ -1,5 +1,4 @@
 import {Calendar, Grade} from '../../lib/collections';
-import {getItemOfCourse} from '../lib/getItemOfCourse';
 import './Calendar.html';
 
 
