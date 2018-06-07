@@ -295,7 +295,7 @@ class MenuComponent extends Component {
 		}
 
 		return (
-			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>}>
+			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{float: 'right'}}>
 				<WrappedAccountComponent user={this.props.user} />
 			</Menu.SubMenu>
 		);
