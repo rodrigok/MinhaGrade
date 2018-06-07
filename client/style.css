@@ -40,3 +40,13 @@
 .card-doing .ant-card-meta-title {
 	color: orange;
 }
+
+.login-form {
+	max-width: 300px;
+}
+.login-form-register {
+	float: right;
+}
+.login-form-button {
+	width: 100%;
+}
