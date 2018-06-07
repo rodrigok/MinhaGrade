@@ -1,12 +1,9 @@
-import './Layout.html';
-
+import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
-import {Router} from 'meteor/iron:router';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import {
 	Menu,
-	Layout,
 	Icon,
 	Form,
 	Input,
@@ -14,8 +11,6 @@ import {
 	message,
 	Card
 } from 'antd';
-
-import { render } from 'react-dom';
 
 class AccountComponent extends Component {
 	static propTypes = {
@@ -267,23 +262,20 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 
 class MenuComponent extends Component {
 	static propTypes = {
-		user: PropTypes.object
+		user: PropTypes.object,
+		history: PropTypes.object
 	}
 
 	state = {}
 
-	constructor() {
-		super();
-	}
-
-	handleClick(e) {
+	handleClick = (e) => {
 		switch (e.key) {
 			case 'logout':
 				Meteor.logout();
 				break;
 
 			default:
-				Router.go(e.key);
+				this.props.history.push(e.key);
 		}
 	}
 
@@ -311,33 +303,25 @@ class MenuComponent extends Component {
 
 	render() {
 		return (
-			<React.Fragment>
-				<Layout.Header>
-					<div className='logo' />
-					<Menu
-						theme='light'
-						mode='horizontal'
-						// defaultSelectedKeys={['2']}
-						style={{ lineHeight: '64px' }}
-						onClick={this.handleClick}
-					>
-						<Menu.Item key='/course/si'>Curso</Menu.Item>
-						<Menu.Item key='/calendar/2018-2'>Calendario</Menu.Item>
-						{this.renderAdminMenu()}
-						{this.renderAccounts()}
-					</Menu>
-				</Layout.Header>
-			</React.Fragment>
+			<Menu
+				theme='dark'
+				mode='horizontal'
+				// defaultSelectedKeys={['2']}
+				style={{ lineHeight: '64px' }}
+				onClick={this.handleClick}
+			>
+				<Menu.Item key='/course'>Curso</Menu.Item>
+				<Menu.Item key='/calendar'>Calendario</Menu.Item>
+				{this.renderAdminMenu()}
+				{this.renderAccounts()}
+			</Menu>
 		);
 	}
 }
 
-const MenuComponentWithTracking = withTracker(() => {
+export default withTracker(() => {
 	return {
+		history,
 		user: Meteor.user()
 	};
-})(MenuComponent);
-
-Template.Layout.onRendered(() => {
-	render(<MenuComponentWithTracking />, document.getElementById('render-menu'));
-});
+})(withRouter(MenuComponent));

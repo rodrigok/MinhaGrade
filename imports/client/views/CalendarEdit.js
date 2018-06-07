@@ -1,10 +1,5 @@
 import _ from 'underscore';
-import {Router} from 'meteor/iron:router';
 import {Calendar, Grade} from '../../lib/collections';
-import './CalendarEdit.html';
-
-
-
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -15,9 +10,6 @@ import {
 	Input,
 	Select
 } from 'antd';
-
-
-import { render } from 'react-dom';
 
 const days = {
 	'0': 'EAD',
@@ -39,7 +31,8 @@ const shifts = {
 
 class CalendarEdit extends Component {
 	static propTypes = {
-		data: PropTypes.any
+		data: PropTypes.any,
+		match: PropTypes.object
 	}
 
 	state = {}
@@ -101,17 +94,17 @@ class CalendarEdit extends Component {
 	setTeacher(teacher, record) {
 		teacher = teacher.trim();
 		if (teacher !== record.teacher) {
-			return Meteor.call('setTeacherInCalendarItem', Router.current().params.calendarName, record._id, record.shift, record.day, teacher);
+			return Meteor.call('setTeacherInCalendarItem', this.props.match.params.calendarName, record._id, record.shift, record.day, teacher);
 		}
 	}
 
 	onDelete(record) {
-		return Meteor.call('removeItemFromCalendar', Router.current().params.calendarName, record._id, record.shift, record.day);
+		return Meteor.call('removeItemFromCalendar', this.props.match.params.calendarName, record._id, record.shift, record.day);
 	}
 
 	handleAdd() {
 		if (this.state.selectedItem && this.state.selectedShift && this.state.selectedDay) {
-			return Meteor.call('addItemToCalendar', Router.current().params.calendarName, this.state.selectedItem, this.state.selectedShift, this.state.selectedDay);
+			return Meteor.call('addItemToCalendar', this.props.match.params.calendarName, this.state.selectedItem, this.state.selectedShift, this.state.selectedDay);
 		}
 	}
 
@@ -179,15 +172,11 @@ class CalendarEdit extends Component {
 	}
 }
 
-const CalendarEditsWithTracking = withTracker(() => {
-	const calendar = Calendar.findOne({_id: Router.current().params.calendarName});
+export default withTracker((props) => {
+	const calendar = Calendar.findOne({_id: props.match.params.calendarName});
 
 	return {
 		user: Meteor.user(),
 		data: (calendar && calendar.grade) || []
 	};
 })(CalendarEdit);
-
-Template.CalendarEdit.onRendered(() => {
-	render(<CalendarEditsWithTracking />, document.getElementById('render-calendarEdit'));
-});

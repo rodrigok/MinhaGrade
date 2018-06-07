@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import {Router} from 'meteor/iron:router';
+import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import {Calendar} from '../../lib/collections';
-import './Calendars.html';
 import {
 	Table,
 	Divider,
 	Popconfirm,
 	Button
 } from 'antd';
-
-
-import { render } from 'react-dom';
 
 class Calendars extends Component {
 	static propTypes = {
@@ -31,7 +27,8 @@ class Calendars extends Component {
 			render: (text, record) => {
 				return (
 					<span>
-						<a href='javascript:;' onClick={() => Router.go('calendarEdit', {calendarName: record._id})}>Editar</a>
+						<Link to={`/calendars/${ record._id }`}>Editar</Link>
+
 						<Divider type='vertical' />
 						<Popconfirm title='Deseja deletar?' onConfirm={() => this.onDelete(record._id)}>
 							<a href='javascript:;'>Deletar</a>
@@ -78,13 +75,9 @@ class Calendars extends Component {
 	}
 }
 
-const CalendarsWithTracking = withTracker(() => {
+export default withTracker(() => {
 	return {
 		user: Meteor.user(),
 		data: Calendar.find().fetch()
 	};
 })(Calendars);
-
-Template.Calendars.onRendered(() => {
-	render(<CalendarsWithTracking />, document.getElementById('render-calendars'));
-});

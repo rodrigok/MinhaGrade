@@ -1,9 +1,5 @@
 import {Calendar, Grade} from '../../lib/collections';
-import './Calendar.html';
-
-
 import React, { Component } from 'react';
-import {Router} from 'meteor/iron:router';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import {
@@ -11,9 +7,6 @@ import {
 	Icon,
 	Tooltip
 } from 'antd';
-
-
-import { render } from 'react-dom';
 
 class CalendarItemComponent extends Component {
 	static propTypes = {
@@ -186,8 +179,9 @@ class CalendarComponent extends Component {
 	}
 }
 
-const CalendarComponentWithTracking = withTracker(() => {
-	const data = Calendar.findOne({_id: Router.current().params.calendarName});
+export default withTracker(() => {
+	// TODO: make this dynamic
+	const data = Calendar.findOne({_id: '2018-2'});
 	const shifts = [{
 		shift: '1',
 		name: 'Manhã'
@@ -218,7 +212,3 @@ const CalendarComponentWithTracking = withTracker(() => {
 		data
 	};
 })(CalendarComponent);
-
-Template.Calendar.onRendered(() => {
-	render(<CalendarComponentWithTracking />, document.getElementById('render-calendar'));
-});
