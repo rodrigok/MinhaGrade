@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {Teachers} from '../../lib/collections';
+import {Courses} from '../../lib/collections';
 import {
 	Table,
 	Divider,
@@ -13,7 +13,7 @@ import {
 	message
 } from 'antd';
 
-class TeachersComponent extends Component {
+class CoursesComponent extends Component {
 	static propTypes = {
 		data: PropTypes.any
 	}
@@ -21,7 +21,7 @@ class TeachersComponent extends Component {
 	state = {}
 
 	errors = {
-		'teacher-name-already-exists': 'Professor já existente'
+		'course-name-already-exists': 'Curso já existente'
 	}
 
 	constructor() {
@@ -44,7 +44,7 @@ class TeachersComponent extends Component {
 							<Divider type='vertical' />
 
 							<Tooltip title='Salvar (ENTER)'>
-								<a href='javascript:;' onClick={() => this.saveTeacher()}>
+								<a href='javascript:;' onClick={() => this.saveData()}>
 									<Icon type='check-circle'/>
 								</a>
 							</Tooltip>
@@ -83,8 +83,8 @@ class TeachersComponent extends Component {
 						onKeyDown={(e) => e.keyCode === 27 && this.setState({editing: undefined})}
 						value={this.state.editingName}
 						onChange={(value) => this.setState({editingName: value.target.value})}
-						placeholder='Nome do professor'
-						onPressEnter={() => this.saveTeacher()}
+						placeholder='Nome do curso'
+						onPressEnter={() => this.saveData()}
 					/>;
 				}
 
@@ -97,7 +97,7 @@ class TeachersComponent extends Component {
 		};
 	}
 
-	saveTeacher() {
+	saveData() {
 		const name = this.state.editingName;
 		const _id = this.state.editing;
 		if (!name.trim()) {
@@ -116,14 +116,14 @@ class TeachersComponent extends Component {
 		};
 
 		if (_id === 'new') {
-			return Meteor.call('createTeacher', {name}, cb);
+			return Meteor.call('createCourse', {name}, cb);
 		}
 
-		return Meteor.call('updateTeacher', {_id, name}, cb);
+		return Meteor.call('updateCourse', {_id, name}, cb);
 	}
 
 	onDelete(_id) {
-		return Meteor.call('removeTeacher', {_id});
+		return Meteor.call('removeCourse', {_id});
 	}
 
 	handleAdd = () => {
@@ -161,6 +161,6 @@ class TeachersComponent extends Component {
 export default withTracker(() => {
 	return {
 		user: Meteor.user(),
-		data: Teachers.find().fetch()
+		data: Courses.find().fetch()
 	};
-})(TeachersComponent);
+})(CoursesComponent);

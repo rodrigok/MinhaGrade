@@ -7,7 +7,6 @@ import {
 	Table,
 	Popconfirm,
 	Button,
-	Input,
 	Select
 } from 'antd';
 
