@@ -68,6 +68,7 @@ class Calendars extends Component {
 				<Table
 					dataSource={this.props.data}
 					columns={this.state.columns}
+					rowKey='_id'
 					pagination={false}
 				/>
 			</div>

@@ -211,6 +211,7 @@ class GradeComponent extends Component {
 					dataSource={this.props.grade}
 					columns={this.state.columns}
 					pagination={false}
+					rowKey='_id'
 					expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
 					onRow={this.onRow.bind(this)}
 				/>

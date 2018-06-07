@@ -165,6 +165,7 @@ class CalendarEdit extends Component {
 				<Table
 					dataSource={this.props.data}
 					columns={this.state.columns}
+					rowKey={(r) => r._id + r.shift + r.day}
 					pagination={false}
 				/>
 			</div>
