@@ -13,6 +13,7 @@ import GradeComponent from '../client/views/Grade';
 import CalendarComponent from '../client/views/Calendar';
 import CalendarsComponent from '../client/views/Calendars';
 import CalendaEditsComponent from '../client/views/CalendarEdit';
+import TeachersComponent from '../client/views/Teachers';
 import MenuComponent from '../client/components/Menu';
 
 class MainRouter extends Router {
@@ -30,6 +31,8 @@ class MainRouter extends Router {
 							<Route exact path='/calendar' component={CalendarComponent}/>
 							<Route exact path='/calendars' component={CalendarsComponent}/>
 							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
+							<Route exact path='/teachers' component={TeachersComponent}/>
+							{/* <Route exact path='/teachers/:id' component={CalendaEditsComponent}/> */}
 						</div>
 					</Layout.Content>
 				</Layout>

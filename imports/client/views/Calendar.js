@@ -1,4 +1,4 @@
-import {Calendar, Grade} from '../../lib/collections';
+import {Calendar, Grade, Teachers} from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -59,10 +59,13 @@ class CalendarItemComponent extends Component {
 		description = `Interessados: ${ calendarItem.interested }`;
 
 		if (calendarItem.teacher) {
-			description = <React.Fragment>
-				<div>{description}</div>
-				<div>Professor: {calendarItem.teacher}</div>
-			</React.Fragment>;
+			const teacher = Teachers.findOne({_id: calendarItem.teacher});
+			if (teacher) {
+				description = <React.Fragment>
+					<div>{description}</div>
+					<div>Professor: {teacher.name}</div>
+				</React.Fragment>;
+			}
 		}
 
 		return (
@@ -195,6 +198,7 @@ export default withTracker(() => {
 		shift: '5',
 		name: 'Vespertino'
 	}];
+	Teachers.find().fetch();
 
 	if (!data) {
 		return {

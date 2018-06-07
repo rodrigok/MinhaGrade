@@ -1,4 +1,4 @@
-import {Calendar, Grade} from '../lib/collections';
+import {Calendar, Grade, Teachers} from '../lib/collections';
 
 Meteor.publish('Grade', () => Grade.find());
 
@@ -20,3 +20,5 @@ Meteor.publish('userGradeInfo', function(email) {
 
 	return Meteor.users.find(query, {fields: {grade: 1, emails: 1, calendar: 1, admin: 1}, sort: {_id: 1}});
 });
+
+Meteor.publish('Teacher', () => Teachers.find());

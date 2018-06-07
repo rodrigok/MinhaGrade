@@ -3,6 +3,7 @@ import '../imports/server/migrations';
 import '../imports/server/addItemToCalendar';
 import '../imports/server/configMail';
 import '../imports/server/createCalendar';
+import '../imports/server/createTeacher';
 import '../imports/server/publish';
 import '../imports/server/removeCalendar';
 import '../imports/server/removeItemFromCalendar';

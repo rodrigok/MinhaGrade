@@ -25,8 +25,17 @@ Meteor.methods({
 		};
 
 		const update = {};
-		update['grade.$.teacher'] = teacher;
 
-		return Calendar.update(query, {$set: update});
+		if (teacher === '') {
+			update.$unset = {
+				'grade.$.teacher': 1
+			};
+		} else {
+			update.$set = {
+				'grade.$.teacher': teacher
+			};
+		}
+
+		return Calendar.update(query, update);
 	}
 });

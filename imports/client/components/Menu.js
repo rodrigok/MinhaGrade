@@ -282,7 +282,13 @@ class MenuComponent extends Component {
 	renderAdminMenu() {
 		const {user} = this.props;
 		if (user && user.admin) {
-			return <Menu.Item key='calendars'>Editar Calendários</Menu.Item>;
+			return (
+				<Menu.SubMenu title='Administrar'>
+					<Menu.Item key='calendars'>Calendários</Menu.Item>
+					<Menu.Item key='teachers'>Professores</Menu.Item>
+					<Menu.Item key='courses'>Cursos</Menu.Item>
+				</Menu.SubMenu>
+			);
 		}
 	}
 

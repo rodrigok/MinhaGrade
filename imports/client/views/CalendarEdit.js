@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Calendar, Grade} from '../../lib/collections';
+import {Calendar, Grade, Teachers} from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -32,6 +32,7 @@ const shifts = {
 class CalendarEdit extends Component {
 	static propTypes = {
 		data: PropTypes.any,
+		teachers: PropTypes.any,
 		match: PropTypes.object
 	}
 
@@ -82,7 +83,20 @@ class CalendarEdit extends Component {
 			dataIndex: 'teacher',
 			width: 200,
 			render: (text, record) => {
-				return <Input placeholder='Professor' defaultValue={text} onBlur={(value) => this.setTeacher(value.target.value, record)} />;
+				return (
+					<Select
+						showSearch
+						defaultValue={record.teacher}
+						placeholder='Professores'
+						style={{ width: 200 }}
+						onChange={(value) => this.setTeacher(value, record)}
+					>
+						<Select.Option key='undefined' value=''>Não definido</Select.Option>
+						{this.props.teachers.map(teacher => (
+							<Select.Option key={teacher._id} value={teacher._id}>{teacher.name}</Select.Option>
+						))}
+					</Select>
+				);
 			}
 		}];
 
@@ -178,6 +192,7 @@ export default withTracker((props) => {
 
 	return {
 		user: Meteor.user(),
-		data: (calendar && calendar.grade) || []
+		data: (calendar && calendar.grade) || [],
+		teachers: Teachers.find().fetch()
 	};
 })(CalendarEdit);
