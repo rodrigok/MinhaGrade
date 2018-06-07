@@ -23,6 +23,7 @@ const Status = {
 
 class GradeComponent extends Component {
 	static propTypes = {
+		course: PropTypes.string,
 		grade: PropTypes.any,
 		user: PropTypes.object
 	}
@@ -30,27 +31,27 @@ class GradeComponent extends Component {
 	state = {}
 
 	static getDerivedStateFromProps(props) {
-		const {user} = props;
+		const {user, course} = props;
 
 		const columns = [{
 			title: 'Semestre / Código',
-			dataIndex: 'semester.SI',
+			dataIndex: `semester.${ course }`,
 			render: (text, record) => (
-				`${ record.semester.SI } / ${ record.code.SI }`
+				`${ record.semester[course] } / ${ record.code[course] }`
 			)
 		}, {
 			title: 'Nome',
-			dataIndex: 'name.SI'
+			dataIndex: `name.${ course }`
 		}, {
 			title: 'Dependencias',
-			dataIndex: 'requirement.SI',
+			dataIndex: `requirement.${ course }`,
 			render: (text) => {
 				if (text && text.length) {
 					return text.map(t => {
 						const style = {
 							color: '#f50'
 						};
-						const tip = Grade.findOne({'code.SI': t});
+						const tip = Grade.findOne({[`code.${ course }`]: t});
 
 						switch (tip && user && user.grade && user.grade[tip._id]) {
 							case 'done':
@@ -61,8 +62,8 @@ class GradeComponent extends Component {
 								break;
 						}
 
-						if (tip && tip.name && tip.name.SI) {
-							return <Tooltip key={t} title={`${ tip.name.SI } - Semestre ${ tip.semester.SI }`}>
+						if (tip && tip.name && tip.name[course]) {
+							return <Tooltip key={t} title={`${ tip.name[course] } - Semestre ${ tip.semester[course] }`}>
 								<Tag color={style.color}>{t}</Tag>
 							</Tooltip>;
 						}
@@ -139,12 +140,13 @@ class GradeComponent extends Component {
 		};
 	}
 
-	onRow(record) {
+	onRow = (record) => {
 		const style = {};
+		const {course} = this.props;
 
-		if (record.semester.SI === 'E') {
+		if (record.semester[course] === 'E') {
 			style.backgroundColor = '#DBEAFF';
-		} else if ((record.semester.SI % 2) === 0) {
+		} else if ((record.semester[course] % 2) === 0) {
 			style.backgroundColor = '#f1f1f1';
 		}
 
@@ -166,14 +168,14 @@ class GradeComponent extends Component {
 		};
 	}
 
-	percentageDone() {
-		const {user} = this.props;
+	percentageDone = () => {
+		const {user, course} = this.props;
 		if (user == null) {
 			return;
 		}
 
 		const query = {
-			'code.SI': {$exists: true}
+			[`code.${ course }`]: {$exists: true}
 		};
 
 		const grade = Grade.find(query).fetch();
@@ -184,7 +186,7 @@ class GradeComponent extends Component {
 		let electiveMax = 1;
 
 		for (const item of grade) {
-			if ((item.semester.SI !== 'E') || (electiveMax-- > 0)) {
+			if ((item.semester[course] !== 'E') || (electiveMax-- > 0)) {
 				total++;
 				if (user && user.grade && user.grade[item._id] === 'done') {
 					done++;
@@ -221,22 +223,19 @@ class GradeComponent extends Component {
 }
 
 export default withTracker(() => {
+	const course = 'SI';
 	return {
+		course,
 		user: Meteor.user(),
 		grade: Grade.find({
-			'code.SI': {
+			[`code.${ course }`]: {
 				$exists: true
 			}
 		}, {
 			sort: {
-				'semester.SI': 1,
-				'code.SI': 1
+				[`semester.${ course }`]: 1,
+				[`code.${ course }`]: 1
 			}
 		}).fetch()
 	};
 })(GradeComponent);
-
-
-// Template.Grade.onRendered(() => {
-// 	render(<App />, document.getElementById('render-grade'));
-// });

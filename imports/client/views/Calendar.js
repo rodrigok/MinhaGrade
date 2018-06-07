@@ -1,15 +1,17 @@
-import {Calendar, Grade, Teachers} from '../../lib/collections';
+import {Calendar, Grade, Teachers, Courses} from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import {
 	Card,
 	Icon,
-	Tooltip
+	Tooltip,
+	Select
 } from 'antd';
 
 class CalendarItemComponent extends Component {
 	static propTypes = {
+		course: PropTypes.string,
 		gradeItem: PropTypes.any,
 		calendarItem: PropTypes.any,
 		user: PropTypes.object,
@@ -29,7 +31,7 @@ class CalendarItemComponent extends Component {
 	}
 
 	render() {
-		const {user, gradeItem, calendarItem, calendar} = this.props;
+		const {user, gradeItem, calendarItem, calendar, course} = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[gradeItem._id]) || 'pending';
 
@@ -74,7 +76,7 @@ class CalendarItemComponent extends Component {
 				actions={actions}
 			>
 				<Card.Meta
-					title={gradeItem.name.SI}
+					title={gradeItem.name[course]}
 					description={description}
 				/>
 			</Card>
@@ -84,6 +86,7 @@ class CalendarItemComponent extends Component {
 
 class CalendarComponent extends Component {
 	static propTypes = {
+		courses: PropTypes.any,
 		shifts: PropTypes.any,
 		data: PropTypes.any,
 		user: PropTypes.object,
@@ -101,7 +104,16 @@ class CalendarComponent extends Component {
 		return data.map(d => {
 			const item = Grade.findOne({_id: d._id});
 			if (item.code.SI) {
-				return <CalendarItemComponent key={d._id} gradeItem={item} calendarItem={d} calendar={this.props.data} user={this.props.user} />;
+				return (
+					<CalendarItemComponent
+						key={d._id}
+						gradeItem={item}
+						calendarItem={d}
+						calendar={this.props.data}
+						user={this.props.user}
+						course='SI'
+					/>
+				);
 			}
 		}).filter(i => i);
 	}
@@ -156,6 +168,18 @@ class CalendarComponent extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<Select
+					showSearch
+					// defaultValue={record.teacher}
+					placeholder='Cursos'
+					style={{ width: 200 }}
+					// onChange={(value) => this.setTeacher(value, record)}
+				>
+					{this.props.courses.map(course => (
+						<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+					))}
+				</Select>
+
 				{this.renderEAD()}
 
 				<div className='ant-table ant-table-large ant-table-bordered ant-table-scroll-position-left'>
@@ -202,6 +226,7 @@ export default withTracker(() => {
 
 	if (!data) {
 		return {
+			courses: [],
 			user: Meteor.user(),
 			shifts: [],
 			hasEAD: false,
@@ -210,6 +235,7 @@ export default withTracker(() => {
 	}
 
 	return {
+		courses: Courses.find().fetch(),
 		user: Meteor.user(),
 		shifts: shifts.filter(s => data.grade.filter(d => d.shift === s.shift).length),
 		hasEAD: data.grade.filter(d => d.shift === '0').length > 0,
