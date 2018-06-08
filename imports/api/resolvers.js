@@ -34,6 +34,17 @@ export const resolvers = {
 			}
 		}
 	},
+	Mutation: {
+		addTeacher: (root, { teacher }, context) => {
+			if (context.user && context.user.admin) {
+				if (Teachers.findOne({name: teacher.name})) {
+					throw new Error('teacher-name-already-exists');
+				}
+
+				return Teachers.findOne(Teachers.insert({name: teacher.name}));
+			}
+		}
+	},
 	User: {
 		mainEmail: ({emails}) => emails && emails[0]
 	},

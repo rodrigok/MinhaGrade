@@ -1,3 +1,8 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
 type Email {
   address: String
   verified: Boolean
@@ -49,4 +54,12 @@ type Query {
   calendars: [Calendar]
   grades(course: String): [Grade]
   courses: [Course]
+}
+
+type Mutation {
+  addTeacher(teacher: TeacherInput): Teacher
+}
+
+input TeacherInput {
+  name: String!
 }
