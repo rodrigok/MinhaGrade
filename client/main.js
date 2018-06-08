@@ -1,6 +1,7 @@
 import 'antd/dist/antd.css';
 import './style.css';
 
+import '../imports/client/graphql/config';
 import '../imports/lib/router';
 
 Meteor.subscribe('Grade');
