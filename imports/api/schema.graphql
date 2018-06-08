@@ -1,0 +1,34 @@
+type Email {
+  address: String
+  verified: Boolean
+}
+
+type User {
+  emails: [Email]
+  randomString: String
+  _id: String
+}
+
+type Teacher {
+  _id: String
+  name: String
+}
+
+type CalendarItem {
+  _id: String
+  day: String
+  shift: String
+  interested: Float
+  teacher: Teacher
+}
+
+type Calendar {
+  _id: String
+  grade: [CalendarItem]
+}
+
+type Query {
+  user: User
+  teachers: [Teacher]
+  calendars: [Calendar]
+}
