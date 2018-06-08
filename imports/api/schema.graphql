@@ -4,9 +4,10 @@ type Email {
 }
 
 type User {
-  emails: [Email]
-  randomString: String
   _id: String
+  mainEmail: Email
+  admin: Boolean
+  emails: [Email]
 }
 
 type Teacher {
@@ -27,8 +28,25 @@ type Calendar {
   grade: [CalendarItem]
 }
 
+type Grade {
+  _id: String
+  semester: String
+  code: String
+  name: String
+  requirement: [Grade]
+  credit: Float
+  workload: Float
+}
+
+type Course {
+  _id: String
+  name: String
+}
+
 type Query {
   user: User
   teachers: [Teacher]
   calendars: [Calendar]
+  grades(course: String): [Grade]
+  courses: [Course]
 }
