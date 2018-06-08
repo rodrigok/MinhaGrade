@@ -1,4 +1,4 @@
-import {Calendar, Grade, Teachers, Courses} from '../../lib/collections';
+import { Calendar, Grade, Teachers, Courses } from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -21,17 +21,17 @@ class CalendarItemComponent extends Component {
 	state = {}
 
 	removeInterest() {
-		const {gradeItem, calendarItem, calendar} = this.props;
+		const { gradeItem, calendarItem, calendar } = this.props;
 		return Meteor.call('updateCalendarItemInterest', calendar._id, gradeItem._id, calendarItem.shift, calendarItem.day, false);
 	}
 
 	addInterest() {
-		const {gradeItem, calendarItem, calendar} = this.props;
+		const { gradeItem, calendarItem, calendar } = this.props;
 		return Meteor.call('updateCalendarItemInterest', calendar._id, gradeItem._id, calendarItem.shift, calendarItem.day, true);
 	}
 
 	render() {
-		const {user, gradeItem, calendarItem, calendar, course} = this.props;
+		const { user, gradeItem, calendarItem, calendar, course } = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[gradeItem._id]) || 'pending';
 
@@ -61,7 +61,7 @@ class CalendarItemComponent extends Component {
 		description = `Interessados: ${ calendarItem.interested }`;
 
 		if (calendarItem.teacher) {
-			const teacher = Teachers.findOne({_id: calendarItem.teacher});
+			const teacher = Teachers.findOne({ _id: calendarItem.teacher });
 			if (teacher) {
 				description = <React.Fragment>
 					<div>{description}</div>
@@ -102,7 +102,7 @@ class CalendarComponent extends Component {
 	renderCalendarItem(shift, day) {
 		const data = this.props.data.grade.filter(d => d.shift === shift && d.day === day);
 		return data.map(d => {
-			const item = Grade.findOne({_id: d._id});
+			const item = Grade.findOne({ _id: d._id });
 			if (item.code.SI) {
 				return (
 					<CalendarItemComponent
@@ -208,7 +208,7 @@ class CalendarComponent extends Component {
 
 export default withTracker(() => {
 	// TODO: make this dynamic
-	const data = Calendar.findOne({_id: '2018-2'});
+	const data = Calendar.findOne({ _id: '2018-2' });
 	const shifts = [{
 		shift: '1',
 		name: 'Manhã'

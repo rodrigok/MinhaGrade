@@ -1,4 +1,4 @@
-import {Calendar} from '../lib/collections';
+import { Calendar } from '../lib/collections';
 
 Meteor.methods({
 	createCalendar(calendarId) {
@@ -15,5 +15,5 @@ Meteor.methods({
 
 		return Calendar.insert({
 			_id: calendarId,
-			grade: []});
-	}});
+			grade: [] });
+	} });

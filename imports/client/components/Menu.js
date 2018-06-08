@@ -23,11 +23,11 @@ class AccountComponent extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
-		this.setState({loading: true});
+		this.setState({ loading: true });
 		this.props.form.validateFields((err, values) => {
-			this.setState({loading: false});
+			this.setState({ loading: false });
 			if (!err) {
-				Meteor.loginWithPassword({email: values.email}, values.password, (error) => {
+				Meteor.loginWithPassword({ email: values.email }, values.password, (error) => {
 					if (error) {
 						message.error(error.reason);
 					}
@@ -38,16 +38,16 @@ class AccountComponent extends Component {
 
 	handleSignup = (e) => {
 		e.preventDefault();
-		this.setState({loading: true});
-		this.props.form.validateFields((err, {email, password}) => {
-			this.setState({loading: false});
+		this.setState({ loading: true });
+		this.props.form.validateFields((err, { email, password }) => {
+			this.setState({ loading: false });
 			if (!err) {
-				Accounts.createUser({email, password}, (error) => {
+				Accounts.createUser({ email, password }, (error) => {
 					if (error) {
 						return message.error(error.reason);
 					}
 
-					Meteor.loginWithPassword({email}, password, (error) => {
+					Meteor.loginWithPassword({ email }, password, (error) => {
 						if (error) {
 							message.error(error.reason);
 						}
@@ -59,11 +59,11 @@ class AccountComponent extends Component {
 
 	handleForgotPassword = (e) => {
 		e.preventDefault();
-		this.setState({loading: true});
-		this.props.form.validateFields((err, {email}) => {
-			this.setState({loading: false});
+		this.setState({ loading: true });
+		this.props.form.validateFields((err, { email }) => {
+			this.setState({ loading: false });
 			if (!err) {
-				Accounts.forgotPassword({email}, (error) => {
+				Accounts.forgotPassword({ email }, (error) => {
 					if (error) {
 						return message.error(error.reason);
 					}
@@ -79,9 +79,9 @@ class AccountComponent extends Component {
 
 	handleChangePassword = (e) => {
 		e.preventDefault();
-		this.setState({loading: true});
-		this.props.form.validateFields((err, {password, newPassword}) => {
-			this.setState({loading: false});
+		this.setState({ loading: true });
+		this.props.form.validateFields((err, { password, newPassword }) => {
+			this.setState({ loading: false });
 			if (!err) {
 				Accounts.changePassword(password, newPassword, (error) => {
 					if (error) {
@@ -121,8 +121,8 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Entrar
 						</Button>
-						<a href='' onClick={() => this.setState({action: 'forgot-password'})}>Esqueci minha senha</a>
-						<a href='' className='login-form-register' onClick={() => this.setState({action: 'signup'})}>Criar conta</a>
+						<a href='' onClick={() => this.setState({ action: 'forgot-password' })}>Esqueci minha senha</a>
+						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'signup' })}>Criar conta</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -152,7 +152,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Criar conta
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({action: 'login'})}>Entrar</a>
+						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -175,7 +175,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Resetar senha
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({action: 'login'})}>Entrar</a>
+						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -205,7 +205,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Mudar senha
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({action: ''})}>Cancelar</a>
+						<a href='' className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -213,7 +213,7 @@ class AccountComponent extends Component {
 	}
 
 	renderAccount() {
-		const {user} = this.props;
+		const { user } = this.props;
 		let userEmail;
 		if (user && user.admin) {
 			userEmail = user.emails[0].address;
@@ -223,7 +223,7 @@ class AccountComponent extends Component {
 			<Card title={userEmail}>
 				<Form className='login-form'>
 					<Form.Item>
-						<Button onClick={() => this.setState({action: 'change-password'})} className='login-form-button'>
+						<Button onClick={() => this.setState({ action: 'change-password' })} className='login-form-button'>
 							Mudar senha
 						</Button>
 						<Button type='primary' onClick={() => Meteor.logout()} className='login-form-button'>
@@ -280,7 +280,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAdminMenu() {
-		const {user} = this.props;
+		const { user } = this.props;
 		if (user && user.admin) {
 			return (
 				<Menu.SubMenu title='Administrar'>
@@ -293,7 +293,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAccounts() {
-		const {user} = this.props;
+		const { user } = this.props;
 		let userEmail = 'Entrar / Criar Conta';
 
 		if (user) {
@@ -301,7 +301,7 @@ class MenuComponent extends Component {
 		}
 
 		return (
-			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{float: 'right'}}>
+			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }}>
 				<WrappedAccountComponent user={this.props.user} />
 			</Menu.SubMenu>
 		);

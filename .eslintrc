@@ -104,6 +104,7 @@
 		"space-in-parens": [2, "never"],
 		"space-before-function-paren": [2, "never"],
 		"space-before-blocks": [2, "always"],
+		"object-curly-spacing": [2, "always"],
 		"indent": [2, "tab", {"SwitchCase": 1}],
 		"eol-last": [2, "always"],
 		"comma-dangle": [2, "never"],

@@ -57,9 +57,21 @@ type Query {
 }
 
 type Mutation {
-  addTeacher(teacher: TeacherInput): Teacher
-}
+  addTeacher(
+    name: String!
+  ): Teacher
 
-input TeacherInput {
-  name: String!
+  updateTeacher(
+    _id: String!
+    name: String!
+  ): Teacher
+
+  addCourse(
+    name: String!
+  ): Course
+
+  updateCourse(
+    _id: String!
+    name: String!
+  ): Course
 }

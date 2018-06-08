@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {Calendar} from '../../lib/collections';
+import { Calendar } from '../../lib/collections';
 import {
 	Table,
 	Divider,

@@ -31,7 +31,7 @@ class GradeComponent extends Component {
 	state = {}
 
 	static getDerivedStateFromProps(props) {
-		const {user, course} = props;
+		const { user, course } = props;
 
 		const columns = [{
 			title: 'Semestre / Código',
@@ -51,7 +51,7 @@ class GradeComponent extends Component {
 						const style = {
 							color: '#f50'
 						};
-						const tip = Grade.findOne({[`code.${ course }`]: t});
+						const tip = Grade.findOne({ [`code.${ course }`]: t });
 
 						switch (tip && user && user.grade && user.grade[tip._id]) {
 							case 'done':
@@ -142,7 +142,7 @@ class GradeComponent extends Component {
 
 	onRow = (record) => {
 		const style = {};
-		const {course} = this.props;
+		const { course } = this.props;
 
 		if (record.semester[course] === 'E') {
 			style.backgroundColor = '#DBEAFF';
@@ -150,7 +150,7 @@ class GradeComponent extends Component {
 			style.backgroundColor = '#f1f1f1';
 		}
 
-		const {user} = this.props;
+		const { user } = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[record._id]) || 'pending';
 
@@ -169,13 +169,13 @@ class GradeComponent extends Component {
 	}
 
 	percentageDone = () => {
-		const {user, course} = this.props;
+		const { user, course } = this.props;
 		if (user == null) {
 			return;
 		}
 
 		const query = {
-			[`code.${ course }`]: {$exists: true}
+			[`code.${ course }`]: { $exists: true }
 		};
 
 		const grade = Grade.find(query).fetch();

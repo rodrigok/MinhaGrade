@@ -1,8 +1,8 @@
-import {Teachers} from '../lib/collections';
+import { Teachers } from '../lib/collections';
 
 Meteor.methods({
-	createTeacher({name}) {
-		console.log('createTeacher', {name});
+	createTeacher({ name }) {
+		console.log('createTeacher', { name });
 
 		if (this.userId == null) {
 			return;
@@ -13,15 +13,15 @@ Meteor.methods({
 			return;
 		}
 
-		if (Teachers.findOne({name})) {
+		if (Teachers.findOne({ name })) {
 			throw new Meteor.Error('teacher-name-already-exists');
 		}
 
-		return Teachers.insert({name});
+		return Teachers.insert({ name });
 	},
 
-	removeTeacher({_id}) {
-		console.log('removeTeacher', {_id});
+	removeTeacher({ _id }) {
+		console.log('removeTeacher', { _id });
 
 		if (this.userId == null) {
 			return;
@@ -32,11 +32,11 @@ Meteor.methods({
 			return;
 		}
 
-		return Teachers.remove({_id});
+		return Teachers.remove({ _id });
 	},
 
-	updateTeacher({_id, name}) {
-		console.log('updateTeacher', {_id});
+	updateTeacher({ _id, name }) {
+		console.log('updateTeacher', { _id });
 
 		if (this.userId == null) {
 			return;
@@ -47,6 +47,6 @@ Meteor.methods({
 			return;
 		}
 
-		return Teachers.update({_id}, {$set: {name}});
+		return Teachers.update({ _id }, { $set: { name } });
 	}
 });

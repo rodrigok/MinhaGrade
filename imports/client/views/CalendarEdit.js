@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Calendar, Grade, Teachers} from '../../lib/collections';
+import { Calendar, Grade, Teachers } from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -71,7 +71,7 @@ class CalendarEdit extends Component {
 			title: 'Nome',
 			dataIndex: '_id',
 			render(text) {
-				return _.unique(Object.values(Grade.findOne({_id: text}).name)).join(' | ');
+				return _.unique(Object.values(Grade.findOne({ _id: text }).name)).join(' | ');
 			}
 		}, {
 			title: 'Alunos',
@@ -154,7 +154,7 @@ class CalendarEdit extends Component {
 					style={{ width: 200 }}
 					onChange={(value) => {
 						const [selectedShift, selectedDay] = value.split('-');
-						this.setState({selectedShift, selectedDay});
+						this.setState({ selectedShift, selectedDay });
 					}}
 				>
 					<Select.Option key='EAD' value='0-0'>EAD</Select.Option>
@@ -166,7 +166,7 @@ class CalendarEdit extends Component {
 					placeholder='Escolha a matéria'
 					style={{ width: 200 }}
 					dropdownMatchSelectWidth={false}
-					onChange={(value) => this.setState({selectedItem: value})}
+					onChange={(value) => this.setState({ selectedItem: value })}
 				>
 					{this.grade()}
 				</Select>
@@ -187,7 +187,7 @@ class CalendarEdit extends Component {
 }
 
 export default withTracker((props) => {
-	const calendar = Calendar.findOne({_id: props.match.params.calendarName});
+	const calendar = Calendar.findOne({ _id: props.match.params.calendarName });
 
 	return {
 		user: Meteor.user(),

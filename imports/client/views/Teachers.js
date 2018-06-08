@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {Teachers} from '../../lib/collections';
+import { Teachers } from '../../lib/collections';
 import {
 	Table,
 	Divider,
@@ -36,7 +36,7 @@ class TeachersComponent extends Component {
 					return (
 						<span>
 							<Tooltip title='Cancelar (ESC)'>
-								<a href='javascript:;' onClick={() => this.setState({editing: undefined})}>
+								<a href='javascript:;' onClick={() => this.setState({ editing: undefined })}>
 									<Icon type='close-circle'/>
 								</a>
 							</Tooltip>
@@ -55,7 +55,7 @@ class TeachersComponent extends Component {
 				return (
 					<span>
 						<Tooltip title='Editar'>
-							<a href='javascript:;' onClick={() => this.setState({editing: record._id, editingName: record.name})}>
+							<a href='javascript:;' onClick={() => this.setState({ editing: record._id, editingName: record.name })}>
 								<Icon type='edit'/>
 							</a>
 						</Tooltip>
@@ -80,9 +80,9 @@ class TeachersComponent extends Component {
 					return <Input
 						type='text'
 						autoFocus
-						onKeyDown={(e) => e.keyCode === 27 && this.setState({editing: undefined})}
+						onKeyDown={(e) => e.keyCode === 27 && this.setState({ editing: undefined })}
 						value={this.state.editingName}
-						onChange={(value) => this.setState({editingName: value.target.value})}
+						onChange={(value) => this.setState({ editingName: value.target.value })}
 						placeholder='Nome do professor'
 						onPressEnter={() => this.saveTeacher()}
 					/>;
@@ -116,14 +116,14 @@ class TeachersComponent extends Component {
 		};
 
 		if (_id === 'new') {
-			return Meteor.call('createTeacher', {name}, cb);
+			return Meteor.call('createTeacher', { name }, cb);
 		}
 
-		return Meteor.call('updateTeacher', {_id, name}, cb);
+		return Meteor.call('updateTeacher', { _id, name }, cb);
 	}
 
 	onDelete(_id) {
-		return Meteor.call('removeTeacher', {_id});
+		return Meteor.call('removeTeacher', { _id });
 	}
 
 	handleAdd = () => {

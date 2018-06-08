@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import {Courses} from '../../lib/collections';
+import { Courses } from '../../lib/collections';
 import {
 	Table,
 	Divider,
@@ -36,7 +36,7 @@ class CoursesComponent extends Component {
 					return (
 						<span>
 							<Tooltip title='Cancelar (ESC)'>
-								<a href='javascript:;' onClick={() => this.setState({editing: undefined})}>
+								<a href='javascript:;' onClick={() => this.setState({ editing: undefined })}>
 									<Icon type='close-circle'/>
 								</a>
 							</Tooltip>
@@ -55,7 +55,7 @@ class CoursesComponent extends Component {
 				return (
 					<span>
 						<Tooltip title='Editar'>
-							<a href='javascript:;' onClick={() => this.setState({editing: record._id, editingName: record.name})}>
+							<a href='javascript:;' onClick={() => this.setState({ editing: record._id, editingName: record.name })}>
 								<Icon type='edit'/>
 							</a>
 						</Tooltip>
@@ -80,9 +80,9 @@ class CoursesComponent extends Component {
 					return <Input
 						type='text'
 						autoFocus
-						onKeyDown={(e) => e.keyCode === 27 && this.setState({editing: undefined})}
+						onKeyDown={(e) => e.keyCode === 27 && this.setState({ editing: undefined })}
 						value={this.state.editingName}
-						onChange={(value) => this.setState({editingName: value.target.value})}
+						onChange={(value) => this.setState({ editingName: value.target.value })}
 						placeholder='Nome do curso'
 						onPressEnter={() => this.saveData()}
 					/>;
@@ -116,14 +116,14 @@ class CoursesComponent extends Component {
 		};
 
 		if (_id === 'new') {
-			return Meteor.call('createCourse', {name}, cb);
+			return Meteor.call('createCourse', { name }, cb);
 		}
 
-		return Meteor.call('updateCourse', {_id, name}, cb);
+		return Meteor.call('updateCourse', { _id, name }, cb);
 	}
 
 	onDelete(_id) {
-		return Meteor.call('removeCourse', {_id});
+		return Meteor.call('removeCourse', { _id });
 	}
 
 	handleAdd = () => {

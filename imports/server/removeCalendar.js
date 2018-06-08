@@ -1,4 +1,4 @@
-import {Calendar} from '../lib/collections';
+import { Calendar } from '../lib/collections';
 
 Meteor.methods({
 	removeCalendar(calendarId) {
@@ -14,6 +14,6 @@ Meteor.methods({
 		}
 
 		return Calendar.remove({
-			_id: calendarId});
+			_id: calendarId });
 	}
 });

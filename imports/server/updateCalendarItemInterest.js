@@ -1,4 +1,4 @@
-import {Calendar} from '../lib/collections';
+import { Calendar } from '../lib/collections';
 
 Meteor.methods({
 	updateCalendarItemInterest(calendarId, gradeItemId, shift, day, interested) {
@@ -12,12 +12,12 @@ Meteor.methods({
 		update[`calendar.${ calendarId }`] = `${ shift }${ day }-${ gradeItemId }`;
 
 		if (interested === true) {
-			Meteor.users.update(this.userId, {$push: update});
+			Meteor.users.update(this.userId, { $push: update });
 		} else {
-			Meteor.users.update(this.userId, {$pull: update});
+			Meteor.users.update(this.userId, { $pull: update });
 		}
 
-		const count = Meteor.users.find(update, {fields: {_id: 1}}).count();
+		const count = Meteor.users.find(update, { fields: { _id: 1 } }).count();
 
 		const query = {
 			_id: calendarId,
@@ -33,6 +33,6 @@ Meteor.methods({
 		update = {};
 		update['grade.$.interested'] = count;
 
-		return Calendar.update(query, {$set: update});
+		return Calendar.update(query, { $set: update });
 	}
 });

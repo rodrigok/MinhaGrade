@@ -1,8 +1,8 @@
-import {Courses} from '../lib/collections';
+import { Courses } from '../lib/collections';
 
 Meteor.methods({
-	createCourse({name}) {
-		console.log('createCourse', {name});
+	createCourse({ name }) {
+		console.log('createCourse', { name });
 
 		if (this.userId == null) {
 			return;
@@ -13,15 +13,15 @@ Meteor.methods({
 			return;
 		}
 
-		if (Courses.findOne({name})) {
+		if (Courses.findOne({ name })) {
 			throw new Meteor.Error('Course-name-already-exists');
 		}
 
-		return Courses.insert({name});
+		return Courses.insert({ name });
 	},
 
-	removeCourse({_id}) {
-		console.log('removeCourse', {_id});
+	removeCourse({ _id }) {
+		console.log('removeCourse', { _id });
 
 		if (this.userId == null) {
 			return;
@@ -32,11 +32,11 @@ Meteor.methods({
 			return;
 		}
 
-		return Courses.remove({_id});
+		return Courses.remove({ _id });
 	},
 
-	updateCourse({_id, name}) {
-		console.log('updateCourse', {_id});
+	updateCourse({ _id, name }) {
+		console.log('updateCourse', { _id });
 
 		if (this.userId == null) {
 			return;
@@ -47,6 +47,6 @@ Meteor.methods({
 			return;
 		}
 
-		return Courses.update({_id}, {$set: {name}});
+		return Courses.update({ _id }, { $set: { name } });
 	}
 });
