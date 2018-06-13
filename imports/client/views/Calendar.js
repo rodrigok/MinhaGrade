@@ -1,7 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { Calendar, Grade, Teachers, Courses } from '../../lib/collections';
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import {
 	Card,
@@ -12,27 +11,31 @@ import {
 
 class CalendarItemComponent extends Component {
 	static propTypes = {
-		course: PropTypes.string,
 		gradeItem: PropTypes.any,
 		calendarItem: PropTypes.any,
 		user: PropTypes.object,
-		calendar: PropTypes.object
+		calendar: PropTypes.object,
+		updateInterest: PropTypes.func
 	}
 
 	state = {}
 
-	removeInterest() {
+	updateInterest = (interested) => {
 		const { gradeItem, calendarItem, calendar } = this.props;
-		return Meteor.call('updateCalendarItemInterest', calendar._id, gradeItem._id, calendarItem.shift, calendarItem.day, false);
+
+		this.props.updateInterest(gradeItem, calendarItem, calendar, interested);
+	}
+
+	removeInterest() {
+		this.updateInterest(false);
 	}
 
 	addInterest() {
-		const { gradeItem, calendarItem, calendar } = this.props;
-		return Meteor.call('updateCalendarItemInterest', calendar._id, gradeItem._id, calendarItem.shift, calendarItem.day, true);
+		this.updateInterest(true);
 	}
 
 	render() {
-		const { user, gradeItem, calendarItem, calendar, course } = this.props;
+		const { user, gradeItem, calendarItem, calendar } = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[gradeItem._id]) || 'pending';
 
@@ -61,14 +64,11 @@ class CalendarItemComponent extends Component {
 
 		description = `Interessados: ${ calendarItem.interested }`;
 
-		if (calendarItem.teacher) {
-			const teacher = Teachers.findOne({ _id: calendarItem.teacher });
-			if (teacher) {
-				description = <React.Fragment>
-					<div>{description}</div>
-					<div>Professor: {teacher.name}</div>
-				</React.Fragment>;
-			}
+		if (calendarItem.teacher && calendarItem.teacher.name) {
+			description = <React.Fragment>
+				<div>{description}</div>
+				<div>Professor: {calendarItem.teacher.name}</div>
+			</React.Fragment>;
 		}
 
 		return (
@@ -77,7 +77,7 @@ class CalendarItemComponent extends Component {
 				actions={actions}
 			>
 				<Card.Meta
-					title={gradeItem.name[course]}
+					title={gradeItem.name}
 					description={description}
 				/>
 			</Card>
@@ -87,32 +87,69 @@ class CalendarItemComponent extends Component {
 
 class CalendarComponent extends Component {
 	static propTypes = {
-		courses: PropTypes.any,
-		shifts: PropTypes.any,
-		data: PropTypes.any,
-		user: PropTypes.object,
-		hasEAD: PropTypes.bool
+		data: PropTypes.object,
+		updateCalendarItemInterest: PropTypes.func
 	}
 
 	state = {}
 
-	constructor() {
-		super();
+	static getDerivedStateFromProps(props) {
+		const { data: { calendar } } = props;
+
+		if (!calendar) {
+			return {};
+		}
+
+		const shifts = [{
+			shift: '1',
+			name: 'Manhã'
+		}, {
+			shift: '2',
+			name: 'Tarde'
+		}, {
+			shift: '3',
+			name: 'Noite'
+		}, {
+			shift: '5',
+			name: 'Vespertino'
+		}];
+
+
+		return {
+			hasEAD: calendar.grade.filter(d => d.shift === '0').length > 0,
+			shifts: shifts.filter(s => calendar.grade.filter(d => d.shift === s.shift).length)
+		};
+	}
+
+	updateInterest = (gradeItem, calendarItem, calendar, interested) => {
+		this.props.updateCalendarItemInterest({
+			variables: {
+				calendarId: calendar._id,
+				gradeItemId: gradeItem._id,
+				shift: calendarItem.shift,
+				day: calendarItem.day,
+				interested
+			}
+		}).then(() => {
+			this.props.data.refetch();
+		});
 	}
 
 	renderCalendarItem(shift, day) {
-		const data = this.props.data.grade.filter(d => d.shift === shift && d.day === day);
-		return data.map(d => {
-			const item = Grade.findOne({ _id: d._id });
-			if (item.code.SI) {
+		const { data: { calendar, user } } = this.props;
+
+		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day);
+
+		return grade.map(item => {
+			if (item.grade.code) {
 				return (
 					<CalendarItemComponent
-						key={d._id}
-						gradeItem={item}
-						calendarItem={d}
-						calendar={this.props.data}
-						user={this.props.user}
-						course='SI'
+						key={item._id}
+						gradeItem={item.grade}
+						calendarItem={item}
+						calendar={calendar}
+						user={user}
+						updateInterest={this.updateInterest}
 					/>
 				);
 			}
@@ -120,7 +157,7 @@ class CalendarComponent extends Component {
 	}
 
 	renderShifts() {
-		return this.props.shifts.map(shit => (
+		return this.state.shifts.map(shit => (
 			<React.Fragment key={shit.shift}>
 				<tr className='shift-table-title-line'>
 					<td colSpan='7'>
@@ -140,7 +177,7 @@ class CalendarComponent extends Component {
 	}
 
 	renderEAD() {
-		if (!this.props.hasEAD) {
+		if (!this.state.hasEAD) {
 			return;
 		}
 
@@ -167,6 +204,17 @@ class CalendarComponent extends Component {
 	}
 
 	render() {
+		const { data: { loading, error, courses } } = this.props;
+
+		if (loading) {
+			return <p>Loading...</p>;
+		}
+
+		if (error) {
+			console.log(error);
+			return <p>Error :(</p>;
+		}
+
 		return (
 			<React.Fragment>
 				<Select
@@ -176,7 +224,7 @@ class CalendarComponent extends Component {
 					style={{ width: 200 }}
 					// onChange={(value) => this.setTeacher(value, record)}
 				>
-					{this.props.courses.map(course => (
+					{courses.map(course => (
 						<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
 					))}
 				</Select>
@@ -207,39 +255,53 @@ class CalendarComponent extends Component {
 	}
 }
 
-export default withTracker(() => {
-	// TODO: make this dynamic
-	const data = Calendar.findOne({ _id: '2018-2' });
-	const shifts = [{
-		shift: '1',
-		name: 'Manhã'
-	}, {
-		shift: '2',
-		name: 'Tarde'
-	}, {
-		shift: '3',
-		name: 'Noite'
-	}, {
-		shift: '5',
-		name: 'Vespertino'
-	}];
-	Teachers.find().fetch();
-
-	if (!data) {
-		return {
-			courses: [],
-			user: Meteor.user(),
-			shifts: [],
-			hasEAD: false,
-			data: []
-		};
-	}
-
-	return {
-		courses: Courses.find().fetch(),
-		user: Meteor.user(),
-		shifts: shifts.filter(s => data.grade.filter(d => d.shift === s.shift).length),
-		hasEAD: data.grade.filter(d => d.shift === '0').length > 0,
-		data
-	};
-})(CalendarComponent);
+// TODO: make the course dynamic
+export default compose(
+	graphql(gql`
+		query {
+			courses {
+				_id
+				name
+			}
+			calendar (_id: "2018-2") {
+				_id
+				grade {
+					_id
+					day
+					shift
+					interested
+					teacher {
+						name
+					}
+					grade (course: "SI") {
+						_id
+						code
+						name
+					}
+				}
+			}
+			user {
+				_id
+				grade
+				calendar
+			}
+		}
+	`),
+	graphql(gql`
+		mutation updateCalendarItemInterest(
+			$calendarId: String!
+			$gradeItemId: String!
+			$shift: String!
+			$day: String!
+			$interested: Boolean!
+		) {
+			updateCalendarItemInterest(
+				calendarId: $calendarId
+				gradeItemId: $gradeItemId
+				shift: $shift
+				day: $day
+				interested: $interested
+			)
+		}
+	`, { name: 'updateCalendarItemInterest' })
+)(CalendarComponent);

@@ -17,6 +17,7 @@ type User {
   admin: Boolean
   emails: [Email]
   grade: JSON
+  calendar: JSON
 }
 
 type Teacher {
@@ -30,6 +31,7 @@ type CalendarItem {
   shift: String
   interested: Float
   teacher: Teacher
+  grade (course: String!): Grade
 }
 
 type Calendar {
@@ -55,6 +57,7 @@ type Course {
 type Query {
   user: User
   teachers: [Teacher]
+  calendar(_id: String!): Calendar
   calendars: [Calendar]
   grades(course: String): [Grade]
   courses: [Course]
@@ -65,6 +68,14 @@ type Mutation {
       _id: String!
       status: String!
   ): User
+
+  updateCalendarItemInterest(
+    calendarId: String!
+    gradeItemId: String!
+    shift: String!
+    day: String!
+    interested: Boolean!
+  ): Boolean
 
   addTeacher(
     name: String!

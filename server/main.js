@@ -9,6 +9,5 @@ import '../imports/server/publish';
 import '../imports/server/removeCalendar';
 import '../imports/server/removeItemFromCalendar';
 import '../imports/server/setTeacherInCalendarItem';
-import '../imports/server/updateCalendarItemInterest';
 
 import '../imports/api';
