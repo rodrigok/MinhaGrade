@@ -1,3 +1,4 @@
+import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';

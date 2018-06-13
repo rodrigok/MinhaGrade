@@ -1,3 +1,6 @@
+import { Session } from 'meteor/session';
+import { Match } from 'meteor/check';
+
 export const getItemOfCourse = function(item) {
 	let grade = Session.get('grade') || 'SI';
 	grade = grade.toUpperCase();

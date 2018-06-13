@@ -133,10 +133,6 @@
 		"object-shorthand": 2
 	},
 	"globals": {
-		"Session": true,
-		"Template": true,
-		"Match": true,
-		"Accounts": true,
 		"Assets": true
 	}
 }
