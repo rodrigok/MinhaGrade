@@ -36,6 +36,7 @@ type CalendarItem {
 
 type Calendar {
   _id: String
+  name: String
   grade: [CalendarItem]
 }
 
@@ -100,6 +101,19 @@ type Mutation {
   ): Course
 
   removeCourse(
+    _id: String!
+  ): Boolean
+
+  createCalendar(
+    name: String!
+  ): Calendar
+
+  updateCalendar(
+    _id: String!
+    name: String!
+  ): Calendar
+
+  removeCalendar(
     _id: String!
   ): Boolean
 }

@@ -1,18 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Calendar, Teachers, Grade } from '../../lib/collections';
-import { isAuthenticatedResolver } from '../acl';
-// import { createResolver, and } from 'apollo-resolvers';
-// import { createError } from 'apollo-errors';
+import { isAuthenticatedResolver, isAdminResolver } from '../acl';
+import { createResolver, and } from 'apollo-resolvers';
+import { createError } from 'apollo-errors';
 
-// const TeacherNameAlreadyExists = createError('TeacherNameAlreadyExists', {
-// 	message: 'Teacher name already exists'
-// });
+const NameAlreadyExists = createError('NameAlreadyExists', {
+	message: 'Name already exists'
+});
 
-// const checkIfNameAlreadyExists = createResolver((root, { name }) => {
-// 	if (Calendar.findOne({ name })) {
-// 		throw new TeacherNameAlreadyExists();
-// 	}
-// });
+const checkIfNameAlreadyExists = createResolver((root, { name }) => {
+	if (Calendar.findOne({ name })) {
+		throw new NameAlreadyExists();
+	}
+});
 
 const findOne = (root, args) => {
 	return Calendar.findOne({
@@ -23,15 +23,6 @@ const findOne = (root, args) => {
 const find = () => {
 	return Calendar.find().fetch();
 };
-
-// const add = (root, { name }) => {
-// 	return Calendar.findOne(Calendar.insert({ name }));
-// };
-
-// const update = (root, { _id, name }) => {
-// 	Calendar.update({ _id }, { $set: { name } });
-// 	return Calendar.findOne(_id);
-// };
 
 const updateCalendarItemInterest = (root, { calendarId, gradeItemId, shift, day, interested }, { userId }) => {
 	console.log('updateCalendarItemInterest', calendarId, gradeItemId, shift, day, interested);
@@ -64,14 +55,28 @@ const updateCalendarItemInterest = (root, { calendarId, gradeItemId, shift, day,
 	return Calendar.update(query, { $set: update }) === 1;
 };
 
+const createCalendar = (root, { name }) => {
+	return Calendar.findOne(Calendar.insert({ name }));
+};
+
+const updateCalendar = (root, { _id, name }) => {
+	Calendar.update({ _id }, { $set: { name } });
+	return Calendar.findOne({ _id });
+};
+
+const removeCalendar = (root, { _id }) => {
+	return Calendar.remove({ _id });
+};
+
 export default {
 	Query: {
 		calendar: isAuthenticatedResolver.createResolver(findOne),
 		calendars: isAuthenticatedResolver.createResolver(find)
 	},
 	Mutation: {
-		// addCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(add),
-		// updateCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(update)
+		createCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(createCalendar),
+		updateCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(updateCalendar),
+		removeCalendar: and(isAdminResolver)(removeCalendar),
 		updateCalendarItemInterest: isAuthenticatedResolver.createResolver(updateCalendarItemInterest)
 	},
 	CalendarItem: {
