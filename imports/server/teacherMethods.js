@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Teachers } from '../lib/collections';
 
 Meteor.methods({

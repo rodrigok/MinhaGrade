@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import {
@@ -22,7 +22,8 @@ const Status = {
 
 class GradeComponent extends Component {
 	static propTypes = {
-		data: PropTypes.object
+		data: PropTypes.object,
+		updateGradeItem: PropTypes.func
 	}
 
 	state = {}
@@ -57,13 +58,26 @@ class GradeComponent extends Component {
 		// });
 	}
 
+	updateGradeItem = (_id, status) => {
+		this.props.updateGradeItem({
+			variables: {
+				_id,
+				status
+			}
+		}).then(() => {
+			message.success('Status alterado');
+		});
+	}
+
 	static getDerivedStateFromProps(props) {
 		const { data: { user } } = props;
 
-		if (!user) {
-			return {};
-		}
+		return {
+			hasUser: user != null
+		};
+	}
 
+	componentDidMount() {
 		const columns = [{
 			title: 'Semestre / Código',
 			dataIndex: 'semester',
@@ -77,6 +91,12 @@ class GradeComponent extends Component {
 			title: 'Dependencias',
 			dataIndex: 'requirement',
 			render: (requirements) => {
+				const { data: { user } } = this.props;
+
+				if (!user) {
+					return;
+				}
+
 				return requirements.map(requirement => {
 					const style = {
 						color: '#f50'
@@ -108,7 +128,7 @@ class GradeComponent extends Component {
 			)
 		}];
 
-		if (user !== null) {
+		if (this.state.hasUser !== null) {
 			columns.unshift({
 				title: 'Status',
 				dataIndex: 'status',
@@ -123,17 +143,27 @@ class GradeComponent extends Component {
 					value: 'done'
 				}],
 				onFilter: (value, record) => {
+					const { data: { user } } = this.props;
+
+					if (!user) {
+						return;
+					}
+
 					const status = (user.grade && user.grade[record._id]) || 'pending';
 					return status.includes(value);
 				},
 				render: (text, record) => {
+					const { data: { user } } = this.props;
+
+					if (!user) {
+						return;
+					}
+
 					const status = (user.grade && user.grade[record._id]) || 'pending';
 
 					const onClick = ({ key }) => {
 						message.info(`Alterando status para ${ Status[key] }`);
-						return Meteor.call('updateGradeItem', record._id, key, () => {
-							message.success('Status alterado');
-						});
+						return this.updateGradeItem(record._id, key);
 					};
 
 					const menu = (
@@ -163,9 +193,9 @@ class GradeComponent extends Component {
 			});
 		}
 
-		return {
+		this.setState({
 			columns
-		};
+		});
 	}
 
 	onRow = (record) => {
@@ -255,25 +285,32 @@ class GradeComponent extends Component {
 	}
 }
 
-export default graphql(gql`
-	query {
-		grades (course: "SI") {
-			_id
-			credit
-			workload
-			code
-			name
-			semester
-			requirement {
+export default compose(
+	graphql(gql`
+		query {
+			grades (course: "SI") {
 				_id
-				semester
+				credit
+				workload
 				code
 				name
+				semester
+				requirement {
+					_id
+					semester
+					code
+					name
+				}
+			}
+			user {
+				_id
+				grade
 			}
 		}
-		user {
-      		_id
-			grade
+	`),
+	graphql(gql`
+		mutation updateGradeItem($_id: String! $status: String!) {
+			updateGradeItem(_id: $_id, status: $status)
 		}
-	}
-`)(GradeComponent);
+	`, { name: 'updateGradeItem' })
+)(GradeComponent);

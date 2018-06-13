@@ -133,11 +133,9 @@
 		"object-shorthand": 2
 	},
 	"globals": {
-		"Meteor": true,
 		"Session": true,
 		"Template": true,
 		"Match": true,
-		"Blaze": true,
 		"Accounts": true,
 		"Assets": true
 	}

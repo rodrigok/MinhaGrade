@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import _ from 'underscore';
 import { Calendar, Grade, Teachers } from '../../lib/collections';
 import React, { Component } from 'react';

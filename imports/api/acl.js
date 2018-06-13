@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { createResolver } from 'apollo-resolvers';
 import { createError, isInstance } from 'apollo-errors';
 

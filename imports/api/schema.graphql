@@ -61,6 +61,11 @@ type Query {
 }
 
 type Mutation {
+  updateGradeItem(
+      _id: String!
+      status: String!
+  ): User
+
   addTeacher(
     name: String!
   ): Teacher

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Calendar } from '../lib/collections';
 
 Meteor.methods({

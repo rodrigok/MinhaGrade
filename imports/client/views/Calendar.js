@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Calendar, Grade, Teachers, Courses } from '../../lib/collections';
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
