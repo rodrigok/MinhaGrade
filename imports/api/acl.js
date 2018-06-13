@@ -25,15 +25,17 @@ export const baseResolver = createResolver(
 );
 
 export const isAuthenticatedResolver = baseResolver.createResolver(
-	(root, args, { user }) => {
-		if (!user) {
+	(root, args, { userId }) => {
+		if (!userId) {
 			throw new AuthenticationRequiredError();
 		}
 	}
 );
 
 export const isAdminResolver = isAuthenticatedResolver.createResolver(
-	(root, args, { user }) => {
+	(root, args, { userId }) => {
+		const user = Meteor.users.findOne(userId, { fields: { admin: 1 } });
+
 		if (!user.admin) {
 			throw new ForbiddenError();
 		}

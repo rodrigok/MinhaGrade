@@ -1,6 +1,9 @@
+scalar JSON
+
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 type Email {
@@ -13,6 +16,7 @@ type User {
   mainEmail: Email
   admin: Boolean
   emails: [Email]
+  grade: JSON
 }
 
 type Teacher {
@@ -74,4 +78,8 @@ type Mutation {
     _id: String!
     name: String!
   ): Course
+}
+
+type Subscription {
+  user: User
 }

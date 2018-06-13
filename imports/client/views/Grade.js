@@ -1,8 +1,7 @@
-// import './Grade.html';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Grade } from '../../lib/collections';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import {
 	Menu,
@@ -23,54 +22,83 @@ const Status = {
 
 class GradeComponent extends Component {
 	static propTypes = {
-		course: PropTypes.string,
-		grade: PropTypes.any,
-		user: PropTypes.object
+		data: PropTypes.object
 	}
 
 	state = {}
 
+	constructor(props) {
+		super();
+
+		const SUBSCRIBE_USER_RANDOM_CHANGES = gql`
+			subscription user {
+				user {
+					_id,
+					grade
+				}
+			}
+		`;
+
+		props.data.subscribeToMore({
+			document: SUBSCRIBE_USER_RANDOM_CHANGES
+		});
+
+
+		// const observer = client.subscribe({
+		// 	query: SUBSCRIBE_USER_RANDOM_CHANGES
+		// });
+
+		// observer.subscribe({
+		// 	next({ data }) {
+		// 		console.log(data.user.admin);
+		// 		// We _could_ do stuff with the new user here, but the UI will update automatically anyway!
+		// 	},
+		// 	error(err) { console.error('err', err); }
+		// });
+	}
+
 	static getDerivedStateFromProps(props) {
-		const { user, course } = props;
+		const { data: { user } } = props;
+
+		if (!user) {
+			return {};
+		}
 
 		const columns = [{
 			title: 'Semestre / Código',
-			dataIndex: `semester.${ course }`,
+			dataIndex: 'semester',
 			render: (text, record) => (
-				`${ record.semester[course] } / ${ record.code[course] }`
+				`${ record.semester } / ${ record.code }`
 			)
 		}, {
 			title: 'Nome',
-			dataIndex: `name.${ course }`
+			dataIndex: 'name'
 		}, {
 			title: 'Dependencias',
-			dataIndex: `requirement.${ course }`,
-			render: (text) => {
-				if (text && text.length) {
-					return text.map(t => {
-						const style = {
-							color: '#f50'
-						};
-						const tip = Grade.findOne({ [`code.${ course }`]: t });
+			dataIndex: 'requirement',
+			render: (requirements) => {
+				return requirements.map(requirement => {
+					const style = {
+						color: '#f50'
+					};
 
-						switch (tip && user && user.grade && user.grade[tip._id]) {
-							case 'done':
-								style.color = '#d3d3d3';
-								break;
-							case 'doing':
-								style.color = '#ffa500';
-								break;
-						}
+					switch (user && user.grade && user.grade[requirement._id]) {
+						case 'done':
+							style.color = '#d3d3d3';
+							break;
+						case 'doing':
+							style.color = '#ffa500';
+							break;
+					}
 
-						if (tip && tip.name && tip.name[course]) {
-							return <Tooltip key={t} title={`${ tip.name[course] } - Semestre ${ tip.semester[course] }`}>
-								<Tag color={style.color}>{t}</Tag>
-							</Tooltip>;
-						}
+					if (requirement.name) {
+						return <Tooltip key={requirement.code} title={`${ requirement.name } - Semestre ${ requirement.semester }`}>
+							<Tag color={style.color}>{requirement.code}</Tag>
+						</Tooltip>;
+					}
 
-						return <Tag key={t} color={style.color}>{t}</Tag>;
-					});
-				}
+					return <Tag key={requirement.code} color={style.color}>{requirement.code}</Tag>;
+				});
 			}
 		}, {
 			title: 'Créditos / Carga Horária',
@@ -142,15 +170,14 @@ class GradeComponent extends Component {
 
 	onRow = (record) => {
 		const style = {};
-		const { course } = this.props;
 
-		if (record.semester[course] === 'E') {
+		if (record.semester === 'E') {
 			style.backgroundColor = '#DBEAFF';
-		} else if ((record.semester[course] % 2) === 0) {
+		} else if ((record.semester % 2) === 0) {
 			style.backgroundColor = '#f1f1f1';
 		}
 
-		const { user } = this.props;
+		const { data: { user } } = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[record._id]) || 'pending';
 
@@ -169,24 +196,19 @@ class GradeComponent extends Component {
 	}
 
 	percentageDone = () => {
-		const { user, course } = this.props;
+		const { data: { grades, user } } = this.props;
+
 		if (user == null) {
 			return;
 		}
-
-		const query = {
-			[`code.${ course }`]: { $exists: true }
-		};
-
-		const grade = Grade.find(query).fetch();
 
 		let total = 0;
 		let done = 0;
 		let doing = 0;
 		let electiveMax = 1;
 
-		for (const item of grade) {
-			if ((item.semester[course] !== 'E') || (electiveMax-- > 0)) {
+		for (const item of grades) {
+			if ((item.semester !== 'E') || (electiveMax-- > 0)) {
 				total++;
 				if (user && user.grade && user.grade[item._id] === 'done') {
 					done++;
@@ -205,12 +227,23 @@ class GradeComponent extends Component {
 	}
 
 	render() {
+		const { data: { error, loading, grades } } = this.props;
+
+		if (loading) {
+			return <p>Loading...</p>;
+		}
+
+		if (error) {
+			console.log(error);
+			return <p>Error :(</p>;
+		}
+
 		return (
 			<div>
 				{this.percentageDone()}
 
 				<Table
-					dataSource={this.props.grade}
+					dataSource={grades}
 					columns={this.state.columns}
 					pagination={false}
 					rowKey='_id'
@@ -222,20 +255,25 @@ class GradeComponent extends Component {
 	}
 }
 
-export default withTracker(() => {
-	const course = 'SI';
-	return {
-		course,
-		user: Meteor.user(),
-		grade: Grade.find({
-			[`code.${ course }`]: {
-				$exists: true
+export default graphql(gql`
+	query {
+		grades (course: "SI") {
+			_id
+			credit
+			workload
+			code
+			name
+			semester
+			requirement {
+				_id
+				semester
+				code
+				name
 			}
-		}, {
-			sort: {
-				[`semester.${ course }`]: 1,
-				[`code.${ course }`]: 1
-			}
-		}).fetch()
-	};
-})(GradeComponent);
+		}
+		user {
+      		_id
+			grade
+		}
+	}
+`)(GradeComponent);

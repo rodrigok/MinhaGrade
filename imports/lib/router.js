@@ -1,5 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import { client } from '../api/ApolloClientProvider';
 import {
 	BrowserRouter as Router,
 	Route
@@ -7,7 +9,6 @@ import {
 import {
 	Layout
 } from 'antd';
-
 
 import GradeComponent from '../client/views/Grade';
 import CalendarComponent from '../client/views/Calendar';
@@ -20,24 +21,26 @@ import MenuComponent from '../client/components/Menu';
 class MainRouter extends Router {
 	render() {
 		return (
-			<Router>
-				<Layout>
-					<Layout.Header>
-						<MenuComponent />
-					</Layout.Header>
-					<Layout.Content>
-						<div style={{ background: '#fff', padding: 24 }}>
-							<Route exact path='/' component={GradeComponent}/>
-							<Route exact path='/course' component={GradeComponent}/>
-							<Route exact path='/calendar' component={CalendarComponent}/>
-							<Route exact path='/calendars' component={CalendarsComponent}/>
-							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
-							<Route exact path='/teachers' component={TeachersComponent}/>
-							<Route exact path='/courses' component={CoursesComponent}/>
-						</div>
-					</Layout.Content>
-				</Layout>
-			</Router>
+			<ApolloProvider client={client}>
+				<Router>
+					<Layout>
+						<Layout.Header>
+							<MenuComponent />
+						</Layout.Header>
+						<Layout.Content>
+							<div style={{ background: '#fff', padding: 24 }}>
+								<Route exact path='/' component={GradeComponent}/>
+								<Route exact path='/course' component={GradeComponent}/>
+								<Route exact path='/calendar' component={CalendarComponent}/>
+								<Route exact path='/calendars' component={CalendarsComponent}/>
+								<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
+								<Route exact path='/teachers' component={TeachersComponent}/>
+								<Route exact path='/courses' component={CoursesComponent}/>
+							</div>
+						</Layout.Content>
+					</Layout>
+				</Router>
+			</ApolloProvider>
 		);
 	}
 }
@@ -45,15 +48,6 @@ class MainRouter extends Router {
 Meteor.startup(() => {
 	render(<MainRouter />, document.body);
 });
-
-
-
-
-
-
-
-
-
 
 
 

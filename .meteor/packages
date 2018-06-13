@@ -23,5 +23,5 @@ standard-minifier-js@2.3.1
 shell-server@0.3.1
 dynamic-import
 react-meteor-data
-apollo
 swydo:graphql
+swydo:ddp-apollo

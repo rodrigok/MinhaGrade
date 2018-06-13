@@ -1,5 +1,5 @@
-import { createApolloServer } from 'meteor/apollo';
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { setup as createApolloServer } from 'meteor/swydo:ddp-apollo';
+import { makeExecutableSchema } from 'graphql-tools';
 
 import typeDefs from '/imports/api/schema.graphql';
 import { resolvers } from '/imports/api/resolvers';
