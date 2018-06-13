@@ -59,7 +59,6 @@ Meteor.startup(() => {
 // 		return [
 // 			Meteor.subscribe('Grade'),
 // 			Meteor.subscribe('Calendar'),
-// 			Meteor.subscribe('userGradeInfo')
 // 		];
 // 	}});
 

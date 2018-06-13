@@ -1,8 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Teachers } from '../../lib/collections';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import {
 	Table,
 	Divider,
@@ -16,13 +15,16 @@ import {
 
 class TeachersComponent extends Component {
 	static propTypes = {
-		data: PropTypes.any
+		data: PropTypes.object,
+		removeTeacher: PropTypes.func,
+		createTeacher: PropTypes.func,
+		updateTeacher: PropTypes.func
 	}
 
 	state = {}
 
 	errors = {
-		'teacher-name-already-exists': 'Professor já existente'
+		'Teacher name already exists': 'Professor já existente'
 	}
 
 	constructor() {
@@ -105,10 +107,15 @@ class TeachersComponent extends Component {
 			return;
 		}
 
-		const cb = (error) => {
+		const error = (error) => {
+			window.a = error;
 			if (error) {
-				return message.error(this.errors[error.error] || error.error);
+				error.graphQLErrors.forEach(e => message.error(this.errors[e.message] || e.message));
 			}
+		};
+
+		const success = () => {
+			this.props.data.refetch();
 
 			this.setState({
 				editing: _id === 'new' ? 'new' : undefined,
@@ -117,14 +124,29 @@ class TeachersComponent extends Component {
 		};
 
 		if (_id === 'new') {
-			return Meteor.call('createTeacher', { name }, cb);
+			return this.props.createTeacher({
+				variables: {
+					name
+				}
+			}).then(success).catch(error);
 		}
 
-		return Meteor.call('updateTeacher', { _id, name }, cb);
+		return this.props.updateTeacher({
+			variables: {
+				_id,
+				name
+			}
+		}).then(success).catch(error);
 	}
 
 	onDelete(_id) {
-		return Meteor.call('removeTeacher', { _id });
+		this.props.removeTeacher({
+			variables: {
+				_id
+			}
+		}).then(() => {
+			this.props.data.refetch();
+		});
 	}
 
 	handleAdd = () => {
@@ -135,9 +157,9 @@ class TeachersComponent extends Component {
 	}
 
 	render() {
-		let data = this.props.data;
+		let { data: { teachers } } = this.props;
 		if (this.state.editing === 'new') {
-			data = data.concat([{
+			teachers = teachers.concat([{
 				_id: 'new'
 			}]);
 		}
@@ -149,7 +171,7 @@ class TeachersComponent extends Component {
 
 				<Table
 					bordered
-					dataSource={data}
+					dataSource={teachers}
 					columns={this.state.columns}
 					rowKey='_id'
 					pagination={false}
@@ -159,9 +181,22 @@ class TeachersComponent extends Component {
 	}
 }
 
-export default withTracker(() => {
-	return {
-		user: Meteor.user(),
-		data: Teachers.find().fetch()
-	};
-})(TeachersComponent);
+
+export default compose(
+	graphql(gql`
+		query {
+			teachers {
+				_id
+				name
+			}
+			user {
+				_id
+				grade
+				calendar
+			}
+		}
+	`),
+	graphql(gql` mutation removeTeacher($_id: String!) { removeTeacher(_id: $_id) }`, { name: 'removeTeacher' }),
+	graphql(gql` mutation createTeacher($name: String!) { createTeacher(name: $name) }`, { name: 'createTeacher' }),
+	graphql(gql` mutation updateTeacher($_id: String! $name: String!) { updateTeacher(_id: $_id name: $name) }`, { name: 'updateTeacher' })
+)(TeachersComponent);

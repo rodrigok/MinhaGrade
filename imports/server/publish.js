@@ -12,15 +12,5 @@ Meteor.publish('Calendar', function(name) {
 	return Calendar.find(query);
 });
 
-Meteor.publish('userGradeInfo', function(email) {
-	let query = this.userId;
-	if (email != null) {
-		query =
-			{ 'emails.address': email };
-	}
-
-	return Meteor.users.find(query, { fields: { grade: 1, emails: 1, calendar: 1, admin: 1 }, sort: { _id: 1 } });
-});
-
 Meteor.publish('Teachers', () => Teachers.find());
 Meteor.publish('Courses', () => Courses.find());

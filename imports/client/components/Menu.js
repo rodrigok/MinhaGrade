@@ -2,7 +2,8 @@ import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import {
 	Menu,
@@ -218,7 +219,7 @@ class AccountComponent extends Component {
 		const { user } = this.props;
 		let userEmail;
 		if (user && user.admin) {
-			userEmail = user.emails[0].address;
+			userEmail = user.mainEmail.address;
 		}
 
 		return (
@@ -264,7 +265,7 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 
 class MenuComponent extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		data: PropTypes.object,
 		history: PropTypes.object
 	}
 
@@ -282,7 +283,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAdminMenu() {
-		const { user } = this.props;
+		const { data: { user } } = this.props;
 		if (user && user.admin) {
 			return (
 				<Menu.SubMenu title='Administrar'>
@@ -295,16 +296,16 @@ class MenuComponent extends Component {
 	}
 
 	renderAccounts() {
-		const { user } = this.props;
+		const { data: { user } } = this.props;
 		let userEmail = 'Entrar / Criar Conta';
 
 		if (user) {
-			userEmail = user.emails[0].address;
+			userEmail = user.mainEmail.address;
 		}
 
 		return (
 			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }}>
-				<WrappedAccountComponent user={this.props.user} />
+				<WrappedAccountComponent user={user} />
 			</Menu.SubMenu>
 		);
 	}
@@ -327,9 +328,14 @@ class MenuComponent extends Component {
 	}
 }
 
-export default withTracker(() => {
-	return {
-		history,
-		user: Meteor.user()
-	};
-})(withRouter(MenuComponent));
+export default graphql(gql`
+	query {
+		user {
+			_id
+			admin
+			mainEmail {
+				address
+			}
+		}
+	}
+`)(withRouter(MenuComponent));

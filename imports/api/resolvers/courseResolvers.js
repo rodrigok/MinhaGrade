@@ -17,7 +17,7 @@ const findAllCourses = () => {
 	return Courses.find().fetch();
 };
 
-const addCourse = (root, { name }) => {
+const createCourse = (root, { name }) => {
 	return Courses.findOne(Courses.insert({ name }));
 };
 
@@ -26,12 +26,17 @@ const updateCourse = (root, { _id, name }) => {
 	return Courses.findOne(_id);
 };
 
+const removeCourse = (root, { _id }) => {
+	return Courses.remove({ _id });
+};
+
 export default {
 	Query: {
 		courses: isAuthenticatedResolver.createResolver(findAllCourses)
 	},
 	Mutation: {
-		addCourse: and(isAdminResolver, checkIfNameAlreadyExists)(addCourse),
-		updateCourse: and(isAdminResolver, checkIfNameAlreadyExists)(updateCourse)
+		createCourse: and(isAdminResolver, checkIfNameAlreadyExists)(createCourse),
+		updateCourse: and(isAdminResolver, checkIfNameAlreadyExists)(updateCourse),
+		removeCourse: and(isAdminResolver)(removeCourse)
 	}
 };

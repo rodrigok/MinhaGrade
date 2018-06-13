@@ -77,7 +77,7 @@ type Mutation {
     interested: Boolean!
   ): Boolean
 
-  addTeacher(
+  createTeacher(
     name: String!
   ): Teacher
 
@@ -86,7 +86,11 @@ type Mutation {
     name: String!
   ): Teacher
 
-  addCourse(
+  removeTeacher(
+    _id: String!
+  ): Boolean
+
+  createCourse(
     name: String!
   ): Course
 
@@ -94,6 +98,10 @@ type Mutation {
     _id: String!
     name: String!
   ): Course
+
+  removeCourse(
+    _id: String!
+  ): Boolean
 }
 
 type Subscription {

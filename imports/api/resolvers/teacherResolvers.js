@@ -17,13 +17,17 @@ const findAllTeachers = () => {
 	return Teachers.find().fetch();
 };
 
-const addTeacher = (root, { name }) => {
+const createTeacher = (root, { name }) => {
 	return Teachers.findOne(Teachers.insert({ name }));
 };
 
 const updateTeacher = (root, { _id, name }) => {
 	Teachers.update({ _id }, { $set: { name } });
-	return Teachers.findOne(_id);
+	return Teachers.findOne({ _id });
+};
+
+const removeTeacher = (root, { _id }) => {
+	return Teachers.remove({ _id });
 };
 
 export default {
@@ -31,7 +35,8 @@ export default {
 		teachers: isAuthenticatedResolver.createResolver(findAllTeachers)
 	},
 	Mutation: {
-		addTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(addTeacher),
-		updateTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(updateTeacher)
+		createTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(createTeacher),
+		updateTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(updateTeacher),
+		removeTeacher: and(isAdminResolver)(removeTeacher)
 	}
 };
