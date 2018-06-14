@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { isAuthenticatedResolver } from '../acl';
-import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '../pubsub';
+import { isAuthenticatedResolver } from '/api/acl';
+import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '/api/pubsub';
 
 const findOne = (root, args, { userId }) => {
 	return Meteor.users.findOne(userId);

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { Calendar, Teachers, Grade } from '../../lib/collections';
-import { isAuthenticatedResolver, isAdminResolver } from '../acl';
+import { Calendar, Teachers, Grade } from '/lib/collections';
+import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 

@@ -1,5 +1,5 @@
-import { Grade } from '../../lib/collections';
-import { isAuthenticatedResolver } from '../acl';
+import { Grade } from '/lib/collections';
+import { isAuthenticatedResolver } from '/api/acl';
 
 const find = (root, args, context) => {
 	context.course = args.course;

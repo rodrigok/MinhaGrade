@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
-import { EditableTableComponent } from '../components/EditableTable';
+import { EditableTableComponent } from '/client/components/EditableTable';
 
 import {
 	Icon

@@ -1,5 +1,5 @@
 import { Migrations } from 'meteor/percolate:migrations';
-import { Grade } from '../../lib/collections';
+import { Grade } from '/lib/collections';
 
 Migrations.add({
 	version: 1,

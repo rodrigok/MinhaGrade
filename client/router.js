@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import { client } from '../api/ApolloClientProvider';
+import { client } from '/api/ApolloClientProvider';
 import {
 	BrowserRouter as Router,
 	Route
@@ -11,13 +11,13 @@ import {
 	Layout
 } from 'antd';
 
-import GradeComponent from '../client/views/Grade';
-import CalendarComponent from '../client/views/Calendar';
-import CalendarsComponent from '../client/views/Calendars';
-import CalendaEditsComponent from '../client/views/CalendarEdit';
-import TeachersComponent from '../client/views/Teachers';
-import CoursesComponent from '../client/views/Courses';
-import MenuComponent from '../client/components/Menu';
+import GradeComponent from './views/Grade';
+import CalendarComponent from './views/Calendar';
+import CalendarsComponent from './views/Calendars';
+import CalendaEditsComponent from './views/CalendarEdit';
+import TeachersComponent from './views/Teachers';
+import CoursesComponent from './views/Courses';
+import MenuComponent from './components/Menu';
 
 class MainRouter extends Router {
 	render() {

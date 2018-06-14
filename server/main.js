@@ -1,5 +1,5 @@
-import '../imports/server/migrations';
+import '/server/migrations';
 
-import '../imports/server/configMail';
+import '/server/configMail';
 
-import '../imports/api';
+import '/api';

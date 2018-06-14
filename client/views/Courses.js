@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
-import { EditableTableComponent } from '../components/EditableTable';
+import { EditableTableComponent } from '/client/components/EditableTable';
 
 class CoursesComponent extends EditableTableComponent {
 

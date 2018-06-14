@@ -51,5 +51,11 @@
     "babel-eslint": "^8.2.3",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2"
-  }
+	},
+	"meteor": {
+		"mainModule": {
+			"client": "client/main.js",
+			"server": "server/main.js"
+		}
+	}
 }
