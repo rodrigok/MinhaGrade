@@ -1,4 +1,4 @@
-import { Courses } from '/lib/collections';
+import CourseModel from '../models/course';
 import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
@@ -8,35 +8,18 @@ const CourseNameAlreadyExists = createError('CourseNameAlreadyExists', {
 });
 
 const checkIfNameAlreadyExists = createResolver((root, { name }) => {
-	if (Courses.findOne({ name })) {
+	if (CourseModel.findOne({ name })) {
 		throw new CourseNameAlreadyExists();
 	}
 });
 
-const findAllCourses = () => {
-	return Courses.find().fetch();
-};
-
-const createCourse = (root, { name }) => {
-	return Courses.findOne(Courses.insert({ name }));
-};
-
-const updateCourse = (root, { _id, name }) => {
-	Courses.update({ _id }, { $set: { name } });
-	return Courses.findOne(_id);
-};
-
-const removeCourse = (root, { _id }) => {
-	return Courses.remove({ _id });
-};
-
 export default {
 	Query: {
-		courses: isAuthenticatedResolver.createResolver(findAllCourses)
+		courses: isAuthenticatedResolver.createResolver(CourseModel.resolverFindAll)
 	},
 	Mutation: {
-		createCourse: and(isAdminResolver, checkIfNameAlreadyExists)(createCourse),
-		updateCourse: and(isAdminResolver, checkIfNameAlreadyExists)(updateCourse),
-		removeCourse: and(isAdminResolver)(removeCourse)
+		createCourse: and(isAdminResolver, checkIfNameAlreadyExists)(CourseModel.mutationCreate),
+		updateCourse: and(isAdminResolver, checkIfNameAlreadyExists)(CourseModel.mutationUpdate),
+		removeCourse: and(isAdminResolver)(CourseModel.mutationRemove)
 	}
 };

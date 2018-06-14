@@ -1,9 +1,9 @@
-import { Grade } from '/lib/collections';
+import GradeModel from '../models/grade';
 import { isAuthenticatedResolver } from '/api/acl';
 
 const find = (root, args, context) => {
 	context.course = args.course;
-	return Grade.find({
+	return GradeModel.find({
 		[`code.${ args.course }`]: { $exists: true }
 	}).fetch();
 };
@@ -16,7 +16,7 @@ export default {
 		code: ({ code }, args, context) => code[context.course],
 		name: ({ name }, args, context) => name[context.course],
 		semester: ({ semester }, args, context) => semester[context.course],
-		requirement: ({ requirement }, args, context) => Grade.find({ [`code.${ context.course }`]: { $in: requirement[context.course] } }).fetch(),
+		requirement: ({ requirement }, args, context) => GradeModel.find({ [`code.${ context.course }`]: { $in: requirement[context.course] } }).fetch(),
 		allNames: ({ name }) => Object.values(name)
 	}
 };

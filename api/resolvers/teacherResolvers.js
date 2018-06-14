@@ -1,4 +1,4 @@
-import { Teachers } from '/lib/collections';
+import TeacherModel from '../models/teacher';
 import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
@@ -8,35 +8,18 @@ const TeacherNameAlreadyExists = createError('TeacherNameAlreadyExists', {
 });
 
 const checkIfNameAlreadyExists = createResolver((root, { name }) => {
-	if (Teachers.findOne({ name })) {
+	if (TeacherModel.findOne({ name })) {
 		throw new TeacherNameAlreadyExists();
 	}
 });
 
-const findAllTeachers = () => {
-	return Teachers.find().fetch();
-};
-
-const createTeacher = (root, { name }) => {
-	return Teachers.findOne(Teachers.insert({ name }));
-};
-
-const updateTeacher = (root, { _id, name }) => {
-	Teachers.update({ _id }, { $set: { name } });
-	return Teachers.findOne({ _id });
-};
-
-const removeTeacher = (root, { _id }) => {
-	return Teachers.remove({ _id });
-};
-
 export default {
 	Query: {
-		teachers: isAuthenticatedResolver.createResolver(findAllTeachers)
+		teachers: isAuthenticatedResolver.createResolver(TeacherModel.resolverFindAll)
 	},
 	Mutation: {
-		createTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(createTeacher),
-		updateTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(updateTeacher),
-		removeTeacher: and(isAdminResolver)(removeTeacher)
+		createTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(TeacherModel.mutationCreate),
+		updateTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(TeacherModel.mutationUpdate),
+		removeTeacher: and(isAdminResolver)(TeacherModel.mutationRemove)
 	}
 };
