@@ -106,10 +106,6 @@ class GradeComponent extends Component {
 			render: (requirements) => {
 				const { user: { user } } = this.props;
 
-				if (!user) {
-					return;
-				}
-
 				return requirements.map(requirement => {
 					const style = {
 						color: '#f50'
@@ -239,10 +235,10 @@ class GradeComponent extends Component {
 	}
 
 	percentageDone = () => {
-		const { data: { grades } } = this.props;
+		const { data: { grades, loading } } = this.props;
 		const { user: { user } } = this.props;
 
-		if (user == null) {
+		if (user == null || loading) {
 			return;
 		}
 
@@ -273,10 +269,6 @@ class GradeComponent extends Component {
 	render() {
 		const { data: { error, loading, grades } } = this.props;
 
-		if (loading) {
-			return <p>Loading...</p>;
-		}
-
 		if (error) {
 			console.log(error);
 			return <p>Error :(</p>;
@@ -288,6 +280,7 @@ class GradeComponent extends Component {
 
 				<Table
 					dataSource={grades}
+					loading={loading}
 					columns={this.state.columns}
 					pagination={false}
 					rowKey='_id'

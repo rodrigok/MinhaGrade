@@ -127,14 +127,14 @@ class AccountComponent extends Component {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
 							validateTrigger: 'onBlur'
 						})(
-							<Input prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder='email' />
+							<Input placeholder='email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
 						})(
-							<Input prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='senha' />
+							<Input type='password' placeholder='senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -159,7 +159,7 @@ class AccountComponent extends Component {
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
 						})(
-							<Input prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder='email' />
+							<Input placeholder='email' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -181,7 +181,7 @@ class AccountComponent extends Component {
 						{getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
 						})(
-							<Input prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='senha' />
+							<Input type='password' placeholder='senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -204,7 +204,7 @@ class AccountComponent extends Component {
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
 						})(
-							<Input prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder='email' />
+							<Input placeholder='email' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -227,14 +227,14 @@ class AccountComponent extends Component {
 						{getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
 						})(
-							<Input prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='senha atual' />
+							<Input type='password' placeholder='senha atual' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('newPassword', {
 							rules: [{ required: true, message: 'Por favor entre com a nova senha!' }]
 						})(
-							<Input prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='nova senha' />
+							<Input type='password' placeholder='nova senha' />
 						)}
 					</Form.Item>
 					<Form.Item>

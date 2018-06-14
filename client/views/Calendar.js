@@ -8,7 +8,8 @@ import {
 	Card,
 	Icon,
 	Tooltip,
-	Select
+	Select,
+	Spin
 } from 'antd';
 
 class CalendarItemComponent extends Component {
@@ -94,7 +95,7 @@ class CalendarComponent extends Component {
 	static getDerivedStateFromProps(props) {
 		const { data: { calendar } } = props;
 
-		if (!calendar) {
+		if (!calendar || !calendar.grade) {
 			return {};
 		}
 
@@ -204,7 +205,7 @@ class CalendarComponent extends Component {
 		const { data: { loading, error, courses, calendar } } = this.props;
 
 		if (loading) {
-			return <p>Loading...</p>;
+			return <Spin size='large' />;
 		}
 
 		if (error) {
