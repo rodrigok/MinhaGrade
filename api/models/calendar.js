@@ -6,7 +6,7 @@ class CalendarModel extends _BaseModel {
 		super('calendar');
 	}
 
-	updateCalendarItemInterest(root, { calendarId, gradeItemId, shift, day, interested }, { userId }) {
+	updateCalendarItemInterest = (root, { calendarId, gradeItemId, shift, day, interested }, { userId }) => {
 		console.log('updateCalendarItemInterest', calendarId, gradeItemId, shift, day, interested);
 
 		let update = {};
@@ -37,7 +37,7 @@ class CalendarModel extends _BaseModel {
 		return this.update(query, { $set: update }) === 1;
 	}
 
-	setTeacherInCalendarItem(root, { calendarId, gradeItemId, shift, day, teacherId }) {
+	setTeacherInCalendarItem = (root, { calendarId, gradeItemId, shift, day, teacherId }) => {
 		console.log('setTeacherInCalendarItem', calendarId, gradeItemId, shift, day, teacherId);
 
 		const query = {
@@ -66,7 +66,7 @@ class CalendarModel extends _BaseModel {
 		return this.update(query, update) === 1;
 	}
 
-	removeItemFromCalendar(root, { calendarId, gradeItemId, shift, day }) {
+	removeItemFromCalendar = (root, { calendarId, gradeItemId, shift, day }) => {
 		console.log('removeItemFromCalendar', calendarId, gradeItemId, shift, day);
 
 		const query = {
@@ -93,7 +93,7 @@ class CalendarModel extends _BaseModel {
 		return this.update(query, update);
 	}
 
-	addItemToCalendar(root, { calendarId, gradeItemId, shift, day }) {
+	addItemToCalendar = (root, { calendarId, gradeItemId, shift, day }) => {
 		console.log('addItemToCalendar', calendarId, gradeItemId, shift, day);
 
 		const query = {

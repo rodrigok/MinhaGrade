@@ -10,12 +10,13 @@ import {
 	Input,
 	Button,
 	message,
-	Card
+	Card,
+	Select
 } from 'antd';
 
 class AccountComponent extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		routeData: PropTypes.object,
 		getFieldDecorator: PropTypes.any,
 		form: PropTypes.any
 	}
@@ -25,7 +26,7 @@ class AccountComponent extends Component {
 	handleLogin = (e) => {
 		e.preventDefault();
 
-		const { user } = this.props;
+		const { routeData } = this.props;
 
 		this.setState({ loading: true });
 		this.props.form.validateFields((err, values) => {
@@ -36,7 +37,7 @@ class AccountComponent extends Component {
 						message.error(error.reason);
 					}
 
-					user.refetch();
+					routeData.refetch();
 				});
 			}
 		});
@@ -44,11 +45,14 @@ class AccountComponent extends Component {
 
 	handleSignup = (e) => {
 		e.preventDefault();
+
+		const { routeData } = this.props;
+
 		this.setState({ loading: true });
-		this.props.form.validateFields((err, { email, password }) => {
+		this.props.form.validateFields((err, { email, password, course }) => {
 			this.setState({ loading: false });
 			if (!err) {
-				Accounts.createUser({ email, password }, (error) => {
+				Accounts.createUser({ email, password, profile: { course } }, (error) => {
 					if (error) {
 						return message.error(error.reason);
 					}
@@ -57,6 +61,8 @@ class AccountComponent extends Component {
 						if (error) {
 							message.error(error.reason);
 						}
+
+						routeData.refetch();
 					});
 				});
 			}
@@ -105,9 +111,9 @@ class AccountComponent extends Component {
 	}
 
 	handleLogout = () => {
-		const { user } = this.props;
+		const { routeData } = this.props;
 		Meteor.logout((() => {
-			user.refetch();
+			routeData.refetch();
 		}));
 	}
 
@@ -144,6 +150,7 @@ class AccountComponent extends Component {
 	}
 
 	renderSignup() {
+		const { routeData: { courses } } = this.props;
 		const { getFieldDecorator } = this.props.form;
 		return (
 			<Card title='Criar conta'>
@@ -153,6 +160,21 @@ class AccountComponent extends Component {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
 						})(
 							<Input prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder='email' />
+						)}
+					</Form.Item>
+					<Form.Item>
+						{getFieldDecorator('course', {
+							rules: [{ required: true, message: 'Por favor selecione um curso!' }]
+						})(
+							<Select
+								showSearch
+								placeholder='Curso'
+								// onChange={(value) => this.setTeacher(value, record)}
+							>
+								{courses.map(course => (
+									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+								))}
+							</Select>
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -227,7 +249,7 @@ class AccountComponent extends Component {
 	}
 
 	renderAccount() {
-		const { user: { user } } = this.props;
+		const { routeData: { user } } = this.props;
 		let userEmail;
 		if (user && user.admin) {
 			userEmail = user.mainEmail.address;
@@ -237,6 +259,7 @@ class AccountComponent extends Component {
 			<Card title={userEmail}>
 				<Form className='login-form'>
 					<Form.Item>
+						Curso: {user.profile.course.name}
 						<Button onClick={() => this.setState({ action: 'change-password' })} className='login-form-button'>
 							Mudar senha
 						</Button>
@@ -250,7 +273,7 @@ class AccountComponent extends Component {
 	}
 
 	renderMenu() {
-		const { user: { user } } = this.props;
+		const { routeData: { user } } = this.props;
 		if (user) {
 			switch (this.state.action) {
 				case 'change-password':
@@ -285,7 +308,7 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 
 class MenuComponent extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		routeData: PropTypes.object,
 		history: PropTypes.object
 	}
 
@@ -296,7 +319,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAdminMenu() {
-		const { user: { user } } = this.props;
+		const { routeData: { user } } = this.props;
 		if (user && user.admin) {
 			return (
 				<Menu.SubMenu title='Administrar'>
@@ -309,7 +332,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAccounts() {
-		const { user, user: { loading } } = this.props;
+		const { routeData, routeData: { user, loading } } = this.props;
 
 		if (loading) {
 			return;
@@ -317,13 +340,13 @@ class MenuComponent extends Component {
 
 		let userEmail = 'Entrar / Criar Conta';
 
-		if (user.user) {
-			userEmail = user.user.mainEmail.address;
+		if (user) {
+			userEmail = user.mainEmail.address;
 		}
 
 		return (
 			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }}>
-				<WrappedAccountComponent user={user} />
+				<WrappedAccountComponent routeData={routeData} />
 			</Menu.SubMenu>
 		);
 	}

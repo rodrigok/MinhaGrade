@@ -1,4 +1,5 @@
 import UserModel from '../models/user';
+import CourseModel from '../models/course';
 import { isAuthenticatedResolver } from '/api/acl';
 import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '/api/pubsub';
 
@@ -12,6 +13,10 @@ export default {
 	},
 	User: {
 		mainEmail: ({ emails }) => emails && emails[0]
+
+	},
+	UserProfile: {
+		course: ({ course }) => CourseModel.findOne(course)
 	},
 	Subscription: {
 		user: {

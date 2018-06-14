@@ -29,13 +29,13 @@ class MainRouter extends Router {
 			<Router>
 				<Layout>
 					<Layout.Header>
-						<MenuComponent user={data} />
+						<MenuComponent routeData={data} />
 					</Layout.Header>
 					<Layout.Content>
 						<div style={{ background: '#fff', padding: 24 }}>
 							<Route exact path='/' component={GradeComponent}/>
 							<Route exact path='/course' component={GradeComponent}/>
-							<Route exact path='/calendar' render={() => <CalendarComponent user={data}/> }/>
+							<Route exact path='/calendar' component={CalendarComponent}/>
 							<Route exact path='/calendars' component={CalendarsComponent}/>
 							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
 							<Route exact path='/teachers' component={TeachersComponent}/>
@@ -50,9 +50,19 @@ class MainRouter extends Router {
 
 MainRouter = graphql(gql`
 	query {
+		courses {
+			_id
+			name
+		}
 		user {
 			_id
 			admin
+			profile {
+				course {
+					_id
+					name
+				}
+			}
 			mainEmail {
 				address
 			}

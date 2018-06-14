@@ -1,12 +1,15 @@
 import GradeModel from '../models/grade';
+import UserModel from '../models/user';
 
 const find = (root, { course }, context) => {
 	if (course) {
 		context.course = course;
+	} else if (context.userId) {
+		context.course = UserModel.findOne(context.userId).profile.course;
 	}
 
 	return GradeModel.find({
-		[`code.${ course }`]: { $exists: true }
+		[`code.${ context.course }`]: { $exists: true }
 	}).fetch();
 };
 

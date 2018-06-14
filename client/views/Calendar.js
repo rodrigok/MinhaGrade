@@ -14,7 +14,6 @@ class CalendarItemComponent extends Component {
 	static propTypes = {
 		gradeItem: PropTypes.any,
 		calendarItem: PropTypes.any,
-		user: PropTypes.object,
 		calendar: PropTypes.object,
 		updateInterest: PropTypes.func
 	}
@@ -36,18 +35,15 @@ class CalendarItemComponent extends Component {
 	}
 
 	render() {
-		const { user, gradeItem, calendarItem, calendar } = this.props;
+		const { gradeItem, calendarItem } = this.props;
 
-		const itemStatus = (user && user.grade && user.grade[gradeItem._id]) || 'pending';
+		const itemStatus = calendarItem.userStatus || 'pending';
 
 		const actions = [];
 		let description;
 
-		if (user && itemStatus === 'pending') {
-			const key = `${ calendarItem.shift }${ calendarItem.day }-${ gradeItem._id }`;
-			const interested = user && user.calendar && user.calendar[calendar._id] && user.calendar[calendar._id].indexOf(key) > -1;
-
-			if (interested) {
+		if (itemStatus === 'pending') {
+			if (calendarItem.userInterested) {
 				actions.push(
 					<Tooltip placement='bottom' title='Remover interesse'>
 						<Icon type='heart' onClick={this.removeInterest.bind(this)} />
@@ -89,7 +85,6 @@ class CalendarItemComponent extends Component {
 class CalendarComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
-		user: PropTypes.object,
 		updateCalendarItemInterest: PropTypes.func
 	}
 
@@ -138,7 +133,7 @@ class CalendarComponent extends Component {
 	}
 
 	renderCalendarItem(shift, day) {
-		const { user: { user }, data: { calendar } } = this.props;
+		const { data: { calendar } } = this.props;
 
 		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day);
 
@@ -150,7 +145,6 @@ class CalendarComponent extends Component {
 						gradeItem={item.grade}
 						calendarItem={item}
 						calendar={calendar}
-						user={user}
 						updateInterest={this.updateInterest}
 					/>
 				);
@@ -275,7 +269,9 @@ export default compose(
 					teacher {
 						name
 					}
-					grade (course: "SI") {
+					userStatus
+					userInterested
+					grade {
 						_id
 						code
 						name

@@ -11,6 +11,10 @@ type Email {
   verified: Boolean
 }
 
+type UserProfile {
+  course: Course
+}
+
 type User {
   _id: String
   mainEmail: Email
@@ -18,6 +22,7 @@ type User {
   emails: [Email]
   grade: JSON
   calendar: JSON
+  profile: UserProfile
 }
 
 type Teacher {
@@ -32,6 +37,8 @@ type CalendarItem {
   interested: Float
   teacher: Teacher
   grade (course: String): Grade
+  userStatus: String
+  userInterested: Boolean
 }
 
 type Calendar {

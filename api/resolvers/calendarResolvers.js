@@ -1,6 +1,7 @@
 import CalendarModel from '../models/calendar';
 import TeacherModel from '../models/teacher';
 import GradeModel from '../models/grade';
+import UserModel from '../models/user';
 import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
@@ -42,9 +43,43 @@ export default {
 		grade: ({ _id }, { course }, context) => {
 			if (course) {
 				context.course = course;
+			} else if (context.userId) {
+				context.course = UserModel.findOne(context.userId).profile.course;
 			}
 
 			return GradeModel.findOne({ _id });
+		},
+		userStatus: ({ _id }, args, { userId }) => {
+			if (!userId) {
+				return;
+			}
+
+			const user = UserModel.findOne({
+				_id: userId,
+				[`grade.${ _id }`]: {
+					$exists: true
+				}
+			}, { grade: 1 });
+
+			if (user) {
+				return user.grade[_id];
+			}
+		},
+		userInterested: ({ _id, shift, day }, args, { userId }) => {
+			if (!userId) {
+				return false;
+			}
+
+			const key = `${ shift }${ day }-${ _id }`;
+
+			const user = UserModel.findOne({
+				_id: userId,
+				['calendar.2018-2']: key
+			}, { fields: { grade: 1 } });
+
+			if (user) {
+				return true;
+			}
 		}
 	}
 };

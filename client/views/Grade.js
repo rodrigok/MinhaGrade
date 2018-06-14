@@ -84,7 +84,19 @@ class GradeComponent extends Component {
 			dataIndex: 'semester',
 			render: (text, record) => (
 				`${ record.semester } / ${ record.code }`
-			)
+			),
+			sortOrder: 'descend',
+			sorter: (a, b) => {
+				const aText = `${ a.semester } / ${ a.code }`;
+				const bText = `${ b.semester } / ${ b.code }`;
+				if (aText > bText) {
+					return -1;
+				}
+				if (aText < bText) {
+					return 1;
+				}
+				return 0;
+			}
 		}, {
 			title: 'Nome',
 			dataIndex: 'name'
@@ -290,7 +302,7 @@ class GradeComponent extends Component {
 export default compose(
 	graphql(gql`
 		query {
-			grades (course: "SI") {
+			grades {
 				_id
 				credit
 				workload
