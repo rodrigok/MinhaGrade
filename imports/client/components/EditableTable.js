@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { BaseTableComponent } from './BaseTable';
+
 import {
-	Table,
 	Divider,
 	Popconfirm,
 	Button,
@@ -11,7 +12,7 @@ import {
 	message
 } from 'antd';
 
-export class EditableTableComponent extends Component {
+export class EditableTableComponent extends BaseTableComponent {
 	static propTypes = {
 		data: PropTypes.object,
 		removeMutation: PropTypes.func,
@@ -153,6 +154,18 @@ export class EditableTableComponent extends Component {
 		});
 	}
 
+	static getDerivedStateFromProps(props, state) {
+		state = super.getDerivedStateFromProps(props, state);
+
+		if (state.records && state.editing === 'new') {
+			state.records = state.records.concat([{
+				_id: 'new'
+			}]);
+		}
+
+		return state;
+	}
+
 	onAdd = () => {
 		this.setState({
 			editing: 'new',
@@ -161,29 +174,13 @@ export class EditableTableComponent extends Component {
 	}
 
 	render() {
-		let { data: { records } } = this.props;
-		const { data: { loading } } = this.props;
-
-		if (this.state.editing === 'new') {
-			records = records.concat([{
-				_id: 'new'
-			}]);
-		}
-
 		return (
 			<React.Fragment>
 				<Button onClick={this.onAdd} type='primary' style={{ marginBottom: 16 }}>
 					Adicionar
 				</Button>
 
-				<Table
-					bordered
-					loading={loading}
-					dataSource={records}
-					columns={this.state.columns}
-					rowKey='_id'
-					pagination={false}
-				/>
+				{super.render()}
 			</React.Fragment>
 		);
 	}

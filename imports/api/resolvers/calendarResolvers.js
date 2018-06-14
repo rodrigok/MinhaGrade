@@ -55,8 +55,94 @@ const updateCalendarItemInterest = (root, { calendarId, gradeItemId, shift, day,
 	return Calendar.update(query, { $set: update }) === 1;
 };
 
+const setTeacherInCalendarItem = (root, { calendarId, gradeItemId, shift, day, teacherId }) => {
+	console.log('setTeacherInCalendarItem', calendarId, gradeItemId, shift, day, teacherId);
+
+	const query = {
+		_id: calendarId,
+		grade: {
+			$elemMatch: {
+				_id: gradeItemId,
+				day,
+				shift
+			}
+		}
+	};
+
+	const update = {};
+
+	if (teacherId === '') {
+		update.$unset = {
+			'grade.$.teacher': 1
+		};
+	} else {
+		update.$set = {
+			'grade.$.teacher': teacherId
+		};
+	}
+
+	return Calendar.update(query, update) === 1;
+};
+
+const removeItemFromCalendar = (root, { calendarId, gradeItemId, shift, day }) => {
+	console.log('removeItemFromCalendar', calendarId, gradeItemId, shift, day);
+
+	const query = {
+		_id: calendarId,
+		grade: {
+			$elemMatch: {
+				_id: gradeItemId,
+				day,
+				shift
+			}
+		}
+	};
+
+	const update = {
+		$pull: {
+			grade: {
+				_id: gradeItemId,
+				day,
+				shift
+			}
+		}
+	};
+
+	return Calendar.update(query, update);
+};
+
+const addItemToCalendar = (root, { calendarId, gradeItemId, shift, day }) => {
+	console.log('addItemToCalendar', calendarId, gradeItemId, shift, day);
+
+	const query = {
+		_id: calendarId,
+		grade: {
+			$not: {
+				$elemMatch: {
+					_id: gradeItemId,
+					day,
+					shift
+				}
+			}
+		}
+	};
+
+	const update = {
+		$push: {
+			grade: {
+				_id: gradeItemId,
+				day,
+				shift,
+				interested: 0
+			}
+		}
+	};
+
+	return Calendar.update(query, update);
+};
+
 const createCalendar = (root, { name }) => {
-	return Calendar.findOne(Calendar.insert({ name }));
+	return Calendar.findOne(Calendar.insert({ name, grade: [] }));
 };
 
 const updateCalendar = (root, { _id, name }) => {
@@ -77,14 +163,16 @@ export default {
 		createCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(createCalendar),
 		updateCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(updateCalendar),
 		removeCalendar: and(isAdminResolver)(removeCalendar),
-		updateCalendarItemInterest: isAuthenticatedResolver.createResolver(updateCalendarItemInterest)
+		updateCalendarItemInterest: isAuthenticatedResolver.createResolver(updateCalendarItemInterest),
+		setTeacherInCalendarItem: and(isAdminResolver)(setTeacherInCalendarItem),
+		removeItemFromCalendar: and(isAdminResolver)(removeItemFromCalendar),
+		addItemToCalendar: and(isAdminResolver)(addItemToCalendar)
 	},
 	CalendarItem: {
 		// _id needs to hava a unique identifier
 		_id: ({ _id, shift, day }) => `${ _id }:${ shift }:${ day }`,
 		teacher: ({ teacher }) => Teachers.findOne({ _id: teacher }),
-		grade: ({ _id }, { course }, context) => {
-			context.course = course;
+		grade: ({ _id }) => {
 			return Grade.findOne({ _id });
 		}
 	}

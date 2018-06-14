@@ -31,7 +31,7 @@ type CalendarItem {
   shift: String
   interested: Float
   teacher: Teacher
-  grade (course: String!): Grade
+  grade (course: String): Grade
 }
 
 type Calendar {
@@ -48,6 +48,7 @@ type Grade {
   requirement: [Grade]
   credit: Float
   workload: Float
+  allNames: [String]
 }
 
 type Course {
@@ -76,6 +77,28 @@ type Mutation {
     shift: String!
     day: String!
     interested: Boolean!
+  ): Boolean
+
+  setTeacherInCalendarItem(
+    calendarId: String!
+    gradeItemId: String!
+    shift: String!
+    day: String!
+    teacherId: String!
+  ): Boolean
+
+  removeItemFromCalendar(
+    calendarId: String!
+    gradeItemId: String!
+    shift: String!
+    day: String!
+  ): Boolean
+
+  addItemToCalendar(
+    calendarId: String!
+    gradeItemId: String!
+    shift: String!
+    day: String!
   ): Boolean
 
   createTeacher(

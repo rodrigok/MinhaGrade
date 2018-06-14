@@ -1,9 +1,9 @@
-import { Meteor } from 'meteor/meteor';
 import _ from 'underscore';
-import { Calendar, Grade, Teachers } from '../../lib/collections';
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+
 import {
 	Table,
 	Popconfirm,
@@ -31,9 +31,11 @@ const shifts = {
 
 class CalendarEdit extends Component {
 	static propTypes = {
-		data: PropTypes.any,
-		teachers: PropTypes.any,
-		match: PropTypes.object
+		data: PropTypes.object,
+		match: PropTypes.object,
+		setTeacherInCalendarItem: PropTypes.func,
+		removeItemFromCalendar: PropTypes.func,
+		addItemToCalendar: PropTypes.func
 	}
 
 	state = {}
@@ -70,9 +72,9 @@ class CalendarEdit extends Component {
 			}
 		}, {
 			title: 'Nome',
-			dataIndex: '_id',
+			dataIndex: 'grade.allNames',
 			render(text) {
-				return _.unique(Object.values(Grade.findOne({ _id: text }).name)).join(' | ');
+				return _.unique(Object.values(text)).join(' | ');
 			}
 		}, {
 			title: 'Alunos',
@@ -80,19 +82,21 @@ class CalendarEdit extends Component {
 			width: 80
 		}, {
 			title: 'Professor',
-			dataIndex: 'teacher',
+			dataIndex: 'teacher._id',
 			width: 200,
 			render: (text, record) => {
+				const { data: { teachers } } = this.props;
+
 				return (
 					<Select
 						showSearch
-						defaultValue={record.teacher}
+						defaultValue={text}
 						placeholder='Professores'
 						style={{ width: 200 }}
 						onChange={(value) => this.setTeacher(value, record)}
 					>
 						<Select.Option key='undefined' value=''>Não definido</Select.Option>
-						{this.props.teachers.map(teacher => (
+						{teachers.map(teacher => (
 							<Select.Option key={teacher._id} value={teacher._id}>{teacher.name}</Select.Option>
 						))}
 					</Select>
@@ -108,17 +112,45 @@ class CalendarEdit extends Component {
 	setTeacher(teacher, record) {
 		teacher = teacher.trim();
 		if (teacher !== record.teacher) {
-			return Meteor.call('setTeacherInCalendarItem', this.props.match.params.calendarName, record._id, record.shift, record.day, teacher);
+			this.props.setTeacherInCalendarItem({
+				variables: {
+					calendarId: this.props.match.params.calendarName,
+					gradeItemId: record.grade._id,
+					shift: record.shift,
+					day: record.day,
+					teacherId: teacher
+				}
+			}).then(() => {
+				this.props.data.refetch();
+			}).catch(e => console.error(e));
 		}
 	}
 
 	onDelete(record) {
-		return Meteor.call('removeItemFromCalendar', this.props.match.params.calendarName, record._id, record.shift, record.day);
+		this.props.removeItemFromCalendar({
+			variables: {
+				calendarId: this.props.match.params.calendarName,
+				gradeItemId: record.grade._id,
+				shift: record.shift,
+				day: record.day
+			}
+		}).then(() => {
+			this.props.data.refetch();
+		}).catch(e => console.error(e));
 	}
 
 	handleAdd() {
 		if (this.state.selectedItem && this.state.selectedShift && this.state.selectedDay) {
-			return Meteor.call('addItemToCalendar', this.props.match.params.calendarName, this.state.selectedItem, this.state.selectedShift, this.state.selectedDay);
+			this.props.addItemToCalendar({
+				variables: {
+					calendarId: this.props.match.params.calendarName,
+					gradeItemId: this.state.selectedItem,
+					shift: this.state.selectedShift,
+					day: this.state.selectedDay
+				}
+			}).then(() => {
+				this.props.data.refetch();
+			}).catch(e => console.error(e));
 		}
 	}
 
@@ -139,13 +171,16 @@ class CalendarEdit extends Component {
 	}
 
 	grade() {
-		return Grade.find().fetch().map(item => {
-			const name = _.unique(Object.values(item.name)).join(' | ');
-			return <Select.Option key={item._id} value={item._id}>{name}</Select.Option>;
+		const { data: { grades = [] } } = this.props;
+
+		return grades.map(item => {
+			return <Select.Option key={item._id} value={item._id}>{item.name}</Select.Option>;
 		});
 	}
 
 	render() {
+		const { data: { calendar: { grade = [] } = {}, loading } } = this.props;
+
 		return (
 			<div>
 				<Select
@@ -177,7 +212,9 @@ class CalendarEdit extends Component {
 				</Button>
 
 				<Table
-					dataSource={this.props.data}
+					bordered
+					dataSource={grade}
+					loading={loading}
 					columns={this.state.columns}
 					rowKey={(r) => r._id + r.shift + r.day}
 					pagination={false}
@@ -187,12 +224,94 @@ class CalendarEdit extends Component {
 	}
 }
 
-export default withTracker((props) => {
-	const calendar = Calendar.findOne({ _id: props.match.params.calendarName });
 
-	return {
-		user: Meteor.user(),
-		data: (calendar && calendar.grade) || [],
-		teachers: Teachers.find().fetch()
-	};
-})(CalendarEdit);
+export default compose(
+	graphql(gql`
+		query ($calendarName: String) {
+			grades (course: "SI") {
+				_id
+				name
+			}
+			teachers {
+				_id
+				name
+			}
+			calendar (_id: $calendarName) {
+				_id
+				grade {
+					_id
+					day
+					shift
+					interested
+					teacher {
+						_id,
+						name
+					}
+					grade {
+						_id
+						code
+						allNames
+					}
+				}
+			}
+		}
+	`, {
+		options: ({ match }) => ({
+			variables: {
+				calendarName: match.params.calendarName
+			}
+		})
+	}),
+	graphql(gql`
+		mutation setTeacherInCalendarItem(
+			$calendarId: String!
+			$gradeItemId: String!
+			$shift: String!
+			$day: String!
+			$teacherId: String!
+		) {
+			setTeacherInCalendarItem(
+				calendarId: $calendarId
+				gradeItemId: $gradeItemId
+				shift: $shift
+				day: $day
+				teacherId: $teacherId
+			)
+		}
+	`, { name: 'setTeacherInCalendarItem' }),
+	graphql(gql`
+		mutation removeItemFromCalendar(
+			$calendarId: String!
+			$gradeItemId: String!
+			$shift: String!
+			$day: String!
+		) {
+			removeItemFromCalendar(
+				calendarId: $calendarId
+				gradeItemId: $gradeItemId
+				shift: $shift
+				day: $day
+			)
+		}
+	`, { name: 'removeItemFromCalendar' }),
+	graphql(gql`
+		mutation addItemToCalendar(
+			$calendarId: String!
+			$gradeItemId: String!
+			$shift: String!
+			$day: String!
+		) {
+			addItemToCalendar(
+				calendarId: $calendarId
+				gradeItemId: $gradeItemId
+				shift: $shift
+				day: $day
+			)
+		}
+	`, { name: 'addItemToCalendar' })
+)(CalendarEdit);
+
+
+
+// return Meteor.call('removeItemFromCalendar', this.props.match.params.calendarName, record._id, record.shift, record.day);
+// return Meteor.call('addItemToCalendar', this.props.match.params.calendarName, this.state.selectedItem, this.state.selectedShift, this.state.selectedDay);
