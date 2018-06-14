@@ -251,7 +251,7 @@ class AccountComponent extends Component {
 	renderAccount() {
 		const { routeData: { user } } = this.props;
 		let userEmail;
-		if (user && user.admin) {
+		if (user) {
 			userEmail = user.mainEmail.address;
 		}
 
@@ -351,6 +351,13 @@ class MenuComponent extends Component {
 		);
 	}
 
+	renderCalendar() {
+		const { routeData: { calendar, loading } } = this.props;
+		if (!loading && calendar) {
+			return <Menu.Item key='/calendar'>Calendario</Menu.Item>;
+		}
+	}
+
 	render() {
 		return (
 			<Menu
@@ -360,8 +367,8 @@ class MenuComponent extends Component {
 				style={{ lineHeight: '64px' }}
 				onClick={this.handleClick}
 			>
-				<Menu.Item key='/course'>Curso</Menu.Item>
-				<Menu.Item key='/calendar'>Calendario</Menu.Item>
+				<Menu.Item key='/course'>Meu Currículo</Menu.Item>
+				{this.renderCalendar()}
 				{this.renderAdminMenu()}
 				{this.renderAccounts()}
 			</Menu>

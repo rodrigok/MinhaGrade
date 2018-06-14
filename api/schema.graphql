@@ -44,6 +44,7 @@ type CalendarItem {
 type Calendar {
   _id: String
   name: String
+  active: Boolean
   grade: [CalendarItem]
 }
 
@@ -67,7 +68,7 @@ type Course {
 type Query {
   user: User
   teachers: [Teacher]
-  calendar(_id: String!): Calendar
+  calendar: Calendar
   calendars: [Calendar]
   grades(course: String): [Grade]
   courses: [Course]
@@ -146,6 +147,11 @@ type Mutation {
 
   removeCalendar(
     _id: String!
+  ): Boolean
+
+  activateCalendar(
+    _id: String!
+    active: Boolean!
   ): Boolean
 }
 

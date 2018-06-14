@@ -67,6 +67,9 @@ MainRouter = graphql(gql`
 				address
 			}
 		}
+		calendar {
+			_id
+		}
 	}
 `)(MainRouter);
 

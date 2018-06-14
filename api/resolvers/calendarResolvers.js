@@ -10,16 +10,28 @@ const NameAlreadyExists = createError('NameAlreadyExists', {
 	message: 'Name already exists'
 });
 
+const AnotherCalendarActive = createError('AnotherCalendarActive', {
+	message: 'Another calendar is already active'
+});
+
 const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 	if (CalendarModel.findOne({ name })) {
 		throw new NameAlreadyExists();
 	}
 });
 
-const findOne = (root, args) => {
+const findOne = () => {
 	return CalendarModel.findOne({
-		_id: args._id
+		active: true
 	});
+};
+
+const activateCalendar = (root, { _id, active }) => {
+	if (active && CalendarModel.findOne({ active: true })) {
+		throw new AnotherCalendarActive();
+	}
+
+	CalendarModel.update({ _id }, { $set: { active } }) === 1;
 };
 
 export default {
@@ -31,10 +43,14 @@ export default {
 		createCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(CalendarModel.mutationCreate),
 		updateCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(CalendarModel.mutationUpdate),
 		removeCalendar: and(isAdminResolver)(CalendarModel.mutationRemove),
+		activateCalendar: and(isAdminResolver)(activateCalendar),
 		updateCalendarItemInterest: isAuthenticatedResolver.createResolver(CalendarModel.updateCalendarItemInterest),
 		setTeacherInCalendarItem: and(isAdminResolver)(CalendarModel.setTeacherInCalendarItem),
 		removeItemFromCalendar: and(isAdminResolver)(CalendarModel.removeItemFromCalendar),
 		addItemToCalendar: and(isAdminResolver)(CalendarModel.addItemToCalendar)
+	},
+	Calendar: {
+		grade: ({ grade }) => grade || []
 	},
 	CalendarItem: {
 		// _id needs to hava a unique identifier

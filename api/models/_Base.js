@@ -19,6 +19,10 @@ export class _BaseModel {
 	}
 
 	create = (record) => {
+		return this.insert(record);
+	}
+
+	insert = (record) => {
 		return this.model.insert(record);
 	}
 

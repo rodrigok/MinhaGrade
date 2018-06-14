@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 
 import {
+	Alert,
 	Card,
 	Icon,
 	Tooltip,
@@ -200,7 +201,7 @@ class CalendarComponent extends Component {
 	}
 
 	render() {
-		const { data: { loading, error, courses } } = this.props;
+		const { data: { loading, error, courses, calendar } } = this.props;
 
 		if (loading) {
 			return <p>Loading...</p>;
@@ -209,6 +210,15 @@ class CalendarComponent extends Component {
 		if (error) {
 			console.log(error);
 			return <p>Error :(</p>;
+		}
+
+		if (!calendar) {
+			return <Alert
+				message='Erro'
+				description='Nenhum calendário está ativo'
+				type='error'
+				showIcon
+			/>;
 		}
 
 		return (
@@ -251,7 +261,6 @@ class CalendarComponent extends Component {
 	}
 }
 
-// TODO: make the course dynamic
 export default compose(
 	graphql(gql`
 		query {
@@ -259,7 +268,7 @@ export default compose(
 				_id
 				name
 			}
-			calendar (_id: "2018-2") {
+			calendar {
 				_id
 				grade {
 					_id
