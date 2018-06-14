@@ -1,5 +1,5 @@
 import CourseModel from '../models/course';
-import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
+import { isAdminResolver } from '/api/acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 
@@ -15,7 +15,7 @@ const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 
 export default {
 	Query: {
-		courses: isAuthenticatedResolver.createResolver(CourseModel.resolverFindAll)
+		courses: CourseModel.resolverFindAll
 	},
 	Mutation: {
 		createCourse: and(isAdminResolver, checkIfNameAlreadyExists)(CourseModel.mutationCreate),

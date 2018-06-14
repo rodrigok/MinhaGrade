@@ -1,5 +1,4 @@
 import GradeModel from '../models/grade';
-import { isAuthenticatedResolver } from '/api/acl';
 
 const find = (root, { course }, context) => {
 	if (course) {
@@ -13,7 +12,7 @@ const find = (root, { course }, context) => {
 
 export default {
 	Query: {
-		grades: isAuthenticatedResolver.createResolver(find)
+		grades: find
 	},
 	Grade: {
 		code: ({ code }, args, context) => code[context.course],

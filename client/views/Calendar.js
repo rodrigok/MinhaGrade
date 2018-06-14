@@ -138,7 +138,7 @@ class CalendarComponent extends Component {
 	}
 
 	renderCalendarItem(shift, day) {
-		const { user, data: { calendar } } = this.props;
+		const { user: { user }, data: { calendar } } = this.props;
 
 		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day);
 

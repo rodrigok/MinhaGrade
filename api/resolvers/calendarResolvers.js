@@ -23,7 +23,7 @@ const findOne = (root, args) => {
 
 export default {
 	Query: {
-		calendar: isAuthenticatedResolver.createResolver(findOne),
+		calendar: findOne,
 		calendars: isAuthenticatedResolver.createResolver(CalendarModel.resolverFindAll)
 	},
 	Mutation: {

@@ -2,8 +2,6 @@ import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import {
 	Menu,
@@ -26,6 +24,9 @@ class AccountComponent extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
+
+		const { user } = this.props;
+
 		this.setState({ loading: true });
 		this.props.form.validateFields((err, values) => {
 			this.setState({ loading: false });
@@ -34,6 +35,8 @@ class AccountComponent extends Component {
 					if (error) {
 						message.error(error.reason);
 					}
+
+					user.refetch();
 				});
 			}
 		});
@@ -101,6 +104,13 @@ class AccountComponent extends Component {
 		});
 	}
 
+	handleLogout = () => {
+		const { user } = this.props;
+		Meteor.logout((() => {
+			user.refetch();
+		}));
+	}
+
 	renderLogin() {
 		const { getFieldDecorator } = this.props.form;
 		return (
@@ -108,7 +118,8 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleLogin} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('email', {
-							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
+							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
+							validateTrigger: 'onBlur'
 						})(
 							<Input prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder='email' />
 						)}
@@ -216,7 +227,7 @@ class AccountComponent extends Component {
 	}
 
 	renderAccount() {
-		const { user } = this.props;
+		const { user: { user } } = this.props;
 		let userEmail;
 		if (user && user.admin) {
 			userEmail = user.mainEmail.address;
@@ -229,7 +240,7 @@ class AccountComponent extends Component {
 						<Button onClick={() => this.setState({ action: 'change-password' })} className='login-form-button'>
 							Mudar senha
 						</Button>
-						<Button type='primary' onClick={() => Meteor.logout()} className='login-form-button'>
+						<Button type='primary' onClick={this.handleLogout} className='login-form-button'>
 							Sair
 						</Button>
 					</Form.Item>
@@ -239,7 +250,8 @@ class AccountComponent extends Component {
 	}
 
 	render() {
-		if (this.props.user) {
+		const { user: { user } } = this.props;
+		if (user) {
 			switch (this.state.action) {
 				case 'change-password':
 					return this.renderChangePassword();
@@ -272,18 +284,11 @@ class MenuComponent extends Component {
 	state = {}
 
 	handleClick = (e) => {
-		switch (e.key) {
-			case 'logout':
-				Meteor.logout();
-				break;
-
-			default:
-				this.props.history.push(e.key);
-		}
+		this.props.history.push(e.key);
 	}
 
 	renderAdminMenu() {
-		const { user } = this.props;
+		const { user: { user } } = this.props;
 		if (user && user.admin) {
 			return (
 				<Menu.SubMenu title='Administrar'>
@@ -296,11 +301,16 @@ class MenuComponent extends Component {
 	}
 
 	renderAccounts() {
-		const { user } = this.props;
+		const { user, user: { loading } } = this.props;
+
+		if (loading) {
+			return;
+		}
+
 		let userEmail = 'Entrar / Criar Conta';
 
-		if (user) {
-			userEmail = user.mainEmail.address;
+		if (user.user) {
+			userEmail = user.user.mainEmail.address;
 		}
 
 		return (

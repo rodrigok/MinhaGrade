@@ -46,6 +46,7 @@ type Grade {
   code: String
   name: String
   requirement: [Grade]
+  description: String
   credit: Float
   workload: Float
   allNames: [String]

@@ -23,6 +23,7 @@ const Status = {
 class GradeComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
+		user: PropTypes.object,
 		updateGradeItem: PropTypes.func
 	}
 
@@ -70,7 +71,7 @@ class GradeComponent extends Component {
 	}
 
 	static getDerivedStateFromProps(props) {
-		const { data: { user } } = props;
+		const { user: { user } } = props;
 
 		return {
 			hasUser: user != null
@@ -91,7 +92,7 @@ class GradeComponent extends Component {
 			title: 'Dependencias',
 			dataIndex: 'requirement',
 			render: (requirements) => {
-				const { data: { user } } = this.props;
+				const { user: { user } } = this.props;
 
 				if (!user) {
 					return;
@@ -128,7 +129,7 @@ class GradeComponent extends Component {
 			)
 		}];
 
-		if (this.state.hasUser !== null) {
+		if (this.state.hasUser) {
 			columns.unshift({
 				title: 'Status',
 				dataIndex: 'status',
@@ -143,7 +144,7 @@ class GradeComponent extends Component {
 					value: 'done'
 				}],
 				onFilter: (value, record) => {
-					const { data: { user } } = this.props;
+					const { user: { user } } = this.props;
 
 					if (!user) {
 						return;
@@ -153,7 +154,7 @@ class GradeComponent extends Component {
 					return status.includes(value);
 				},
 				render: (text, record) => {
-					const { data: { user } } = this.props;
+					const { user: { user } } = this.props;
 
 					if (!user) {
 						return;
@@ -207,7 +208,7 @@ class GradeComponent extends Component {
 			style.backgroundColor = '#f1f1f1';
 		}
 
-		const { data: { user } } = this.props;
+		const { user: { user } } = this.props;
 
 		const itemStatus = (user && user.grade && user.grade[record._id]) || 'pending';
 
@@ -226,7 +227,8 @@ class GradeComponent extends Component {
 	}
 
 	percentageDone = () => {
-		const { data: { grades, user } } = this.props;
+		const { data: { grades } } = this.props;
+		const { user: { user } } = this.props;
 
 		if (user == null) {
 			return;
@@ -295,6 +297,7 @@ export default compose(
 				code
 				name
 				semester
+				description
 				requirement {
 					_id
 					semester
@@ -302,12 +305,16 @@ export default compose(
 					name
 				}
 			}
+		}
+	`),
+	graphql(gql`
+		query {
 			user {
 				_id
 				grade
 			}
 		}
-	`),
+	`, { name: 'user' }),
 	graphql(gql`
 		mutation updateGradeItem($_id: String! $status: String!) {
 			updateGradeItem(_id: $_id, status: $status)

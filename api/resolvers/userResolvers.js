@@ -2,9 +2,13 @@ import UserModel from '../models/user';
 import { isAuthenticatedResolver } from '/api/acl';
 import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '/api/pubsub';
 
+const findOne = (root, args, { userId }) => {
+	return UserModel.findOne(userId);
+};
+
 export default {
 	Query: {
-		user: isAuthenticatedResolver.createResolver(UserModel.findOne)
+		user: findOne
 	},
 	User: {
 		mainEmail: ({ emails }) => emails && emails[0]

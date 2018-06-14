@@ -1,9 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 
 export class _BaseModel {
-	constructor(name) {
-		this.name = name;
-		this.model = new Meteor.Collection(name);
+	constructor(nameOrCollection) {
+		if (typeof nameOrCollection === 'string') {
+			this.name = nameOrCollection;
+			this.model = new Meteor.Collection(nameOrCollection);
+		} else {
+			this.model = nameOrCollection;
+		}
 	}
 
 	find(query = {}) {

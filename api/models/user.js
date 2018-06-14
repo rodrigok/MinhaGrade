@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { pubsub, USER_CHANGE_CHANNEL } from '/api/pubsub';
+import { _BaseModel } from './_Base';
 
-class UserModel {
-	findOne(root, args, { userId }) {
-		return Meteor.users.findOne(userId);
+class UserModel extends _BaseModel {
+
+	constructor() {
+		super(Meteor.users);
 	}
 
 	updateGradeItem(root, { _id, status }, { userId }) {
