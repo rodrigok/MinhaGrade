@@ -310,8 +310,3 @@ export default compose(
 		}
 	`, { name: 'addItemToCalendar' })
 )(CalendarEdit);
-
-
-
-// return Meteor.call('removeItemFromCalendar', this.props.match.params.calendarName, record._id, record.shift, record.day);
-// return Meteor.call('addItemToCalendar', this.props.match.params.calendarName, this.state.selectedItem, this.state.selectedShift, this.state.selectedDay);

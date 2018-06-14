@@ -39,7 +39,11 @@ export default {
 		// _id needs to hava a unique identifier
 		_id: ({ _id, shift, day }) => `${ _id }:${ shift }:${ day }`,
 		teacher: ({ teacher }) => TeacherModel.findOne({ _id: teacher }),
-		grade: ({ _id }) => {
+		grade: ({ _id }, { course }, context) => {
+			if (course) {
+				context.course = course;
+			}
+
 			return GradeModel.findOne({ _id });
 		}
 	}

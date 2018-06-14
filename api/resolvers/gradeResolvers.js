@@ -1,10 +1,13 @@
 import GradeModel from '../models/grade';
 import { isAuthenticatedResolver } from '/api/acl';
 
-const find = (root, args, context) => {
-	context.course = args.course;
+const find = (root, { course }, context) => {
+	if (course) {
+		context.course = course;
+	}
+
 	return GradeModel.find({
-		[`code.${ args.course }`]: { $exists: true }
+		[`code.${ course }`]: { $exists: true }
 	}).fetch();
 };
 

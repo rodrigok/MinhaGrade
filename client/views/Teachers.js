@@ -13,11 +13,6 @@ export default compose(
 				_id
 				name
 			}
-			user {
-				_id
-				grade
-				calendar
-			}
 		}
 	`),
 	graphql(gql` mutation removeTeacher($_id: String!) { removeTeacher(_id: $_id) }`, { name: 'removeMutation' }),

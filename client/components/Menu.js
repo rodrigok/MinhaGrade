@@ -265,7 +265,7 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 
 class MenuComponent extends Component {
 	static propTypes = {
-		data: PropTypes.object,
+		user: PropTypes.object,
 		history: PropTypes.object
 	}
 
@@ -283,7 +283,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAdminMenu() {
-		const { data: { user } } = this.props;
+		const { user } = this.props;
 		if (user && user.admin) {
 			return (
 				<Menu.SubMenu title='Administrar'>
@@ -296,7 +296,7 @@ class MenuComponent extends Component {
 	}
 
 	renderAccounts() {
-		const { data: { user } } = this.props;
+		const { user } = this.props;
 		let userEmail = 'Entrar / Criar Conta';
 
 		if (user) {
@@ -328,14 +328,4 @@ class MenuComponent extends Component {
 	}
 }
 
-export default graphql(gql`
-	query {
-		user {
-			_id
-			admin
-			mainEmail {
-				address
-			}
-		}
-	}
-`)(withRouter(MenuComponent));
+export default withRouter(MenuComponent);

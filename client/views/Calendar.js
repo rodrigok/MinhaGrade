@@ -89,6 +89,7 @@ class CalendarItemComponent extends Component {
 class CalendarComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
+		user: PropTypes.object,
 		updateCalendarItemInterest: PropTypes.func
 	}
 
@@ -137,7 +138,7 @@ class CalendarComponent extends Component {
 	}
 
 	renderCalendarItem(shift, day) {
-		const { data: { calendar, user } } = this.props;
+		const { user, data: { calendar } } = this.props;
 
 		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day);
 
@@ -280,11 +281,6 @@ export default compose(
 						name
 					}
 				}
-			}
-			user {
-				_id
-				grade
-				calendar
 			}
 		}
 	`),
