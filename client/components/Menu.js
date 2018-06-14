@@ -135,8 +135,8 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Entrar
 						</Button>
-						<a href='' onClick={() => this.setState({ action: 'forgot-password' })}>Esqueci minha senha</a>
-						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'signup' })}>Criar conta</a>
+						<a onClick={() => this.setState({ action: 'forgot-password' })}>Esqueci minha senha</a>
+						<a className='login-form-register' onClick={() => this.setState({ action: 'signup' })}>Criar conta</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -166,7 +166,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Criar conta
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
+						<a className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -189,7 +189,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Resetar senha
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
+						<a className='login-form-register' onClick={() => this.setState({ action: 'login' })}>Entrar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -219,7 +219,7 @@ class AccountComponent extends Component {
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Mudar senha
 						</Button>
-						<a href='' className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
+						<a className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
 					</Form.Item>
 				</Form>
 			</Card>
@@ -249,7 +249,7 @@ class AccountComponent extends Component {
 		);
 	}
 
-	render() {
+	renderMenu() {
 		const { user: { user } } = this.props;
 		if (user) {
 			switch (this.state.action) {
@@ -268,6 +268,14 @@ class AccountComponent extends Component {
 			default:
 				return this.renderLogin();
 		}
+	}
+
+	render() {
+		return (
+			<div style={{ width: '300px' }}>
+				{this.renderMenu()}
+			</div>
+		);
 	}
 }
 
