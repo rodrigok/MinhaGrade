@@ -2,7 +2,7 @@ import CalendarModel from '../models/calendar';
 import TeacherModel from '../models/teacher';
 import GradeModel from '../models/grade';
 import UserModel from '../models/user';
-import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
+import { isAuthenticatedResolver, isAdminResolver } from '../acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 

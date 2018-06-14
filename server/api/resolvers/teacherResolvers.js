@@ -1,5 +1,5 @@
 import TeacherModel from '../models/teacher';
-import { isAuthenticatedResolver, isAdminResolver } from '/api/acl';
+import { isAuthenticatedResolver, isAdminResolver } from '../acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 

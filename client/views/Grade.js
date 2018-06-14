@@ -78,7 +78,7 @@ class GradeComponent extends Component {
 		};
 	}
 
-	componentDidMount() {
+	getColumns() {
 		const columns = [{
 			title: 'Semestre / Código',
 			dataIndex: 'semester',
@@ -202,9 +202,7 @@ class GradeComponent extends Component {
 			});
 		}
 
-		this.setState({
-			columns
-		});
+		return columns;
 	}
 
 	onRow = (record) => {
@@ -281,7 +279,7 @@ class GradeComponent extends Component {
 				<Table
 					dataSource={grades}
 					loading={loading}
-					columns={this.state.columns}
+					columns={this.getColumns()}
 					pagination={false}
 					rowKey='_id'
 					expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}

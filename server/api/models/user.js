@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { pubsub, USER_CHANGE_CHANNEL } from '/api/pubsub';
+import { pubsub, USER_CHANGE_CHANNEL } from '../pubsub';
 import { _BaseModel } from './_Base';
 
 class UserModel extends _BaseModel {

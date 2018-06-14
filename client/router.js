@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import { client } from '/api/ApolloClientProvider';
+import { client } from './ApolloClientProvider';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import {

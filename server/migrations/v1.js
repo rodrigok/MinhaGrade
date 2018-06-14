@@ -1,5 +1,5 @@
 import { Migrations } from 'meteor/percolate:migrations';
-import GradeModel from '../../api/models/grade';
+import GradeModel from '../api/models/grade';
 
 Migrations.add({
 	version: 1,

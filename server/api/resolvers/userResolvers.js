@@ -1,10 +1,14 @@
 import UserModel from '../models/user';
 import CourseModel from '../models/course';
-import { isAuthenticatedResolver } from '/api/acl';
-import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '/api/pubsub';
+import { isAuthenticatedResolver } from '../acl';
+import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '../pubsub';
 
 const findOne = (root, args, { userId }) => {
-	return UserModel.findOne(userId);
+	if (!userId) {
+		return;
+	}
+
+	return UserModel.findOne({ _id: userId });
 };
 
 export default {

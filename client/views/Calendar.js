@@ -202,7 +202,7 @@ class CalendarComponent extends Component {
 	}
 
 	render() {
-		const { data: { loading, error, courses, calendar } } = this.props;
+		const { data: { loading, error, calendar } } = this.props;
 
 		if (loading) {
 			return <Spin size='large' />;
@@ -224,18 +224,6 @@ class CalendarComponent extends Component {
 
 		return (
 			<React.Fragment>
-				<Select
-					showSearch
-					// defaultValue={record.teacher}
-					placeholder='Cursos'
-					style={{ width: 200 }}
-					// onChange={(value) => this.setTeacher(value, record)}
-				>
-					{courses.map(course => (
-						<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
-					))}
-				</Select>
-
 				{this.renderEAD()}
 
 				<div className='ant-table ant-table-large ant-table-bordered ant-table-scroll-position-left'>
@@ -265,10 +253,6 @@ class CalendarComponent extends Component {
 export default compose(
 	graphql(gql`
 		query {
-			courses {
-				_id
-				name
-			}
 			calendar {
 				_id
 				grade {

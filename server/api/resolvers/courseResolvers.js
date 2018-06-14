@@ -1,5 +1,5 @@
 import CourseModel from '../models/course';
-import { isAdminResolver } from '/api/acl';
+import { isAdminResolver } from '../acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 
