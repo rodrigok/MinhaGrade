@@ -8,9 +8,15 @@ import {
 	Card,
 	Icon,
 	Tooltip,
-	Select,
+	Tag,
 	Spin
 } from 'antd';
+
+const Status = {
+	pending: 'Pendente',
+	doing: 'Cursando',
+	done: 'Concluído'
+};
 
 class CalendarItemComponent extends Component {
 	static propTypes = {
@@ -69,6 +75,32 @@ class CalendarItemComponent extends Component {
 				<div>Professor: {calendarItem.teacher.name}</div>
 			</React.Fragment>;
 		}
+
+		const requirements = gradeItem.requirement.filter(r => r.userStatus !== 'done').map(requirement => {
+			const style = {
+				color: '#f50'
+			};
+
+			switch (requirement.userStatus) {
+				case 'done':
+					style.color = '#d3d3d3';
+					break;
+				case 'doing':
+					style.color = '#ffa500';
+					break;
+			}
+
+			return <div key={requirement._id}>
+				<Tooltip key={requirement.code} title={Status[requirement.userStatus]}>
+					<Tag color={style.color}>{requirement.name}</Tag>
+				</Tooltip>
+			</div>;
+		});
+
+		description = <React.Fragment>
+			{description}
+			{requirements}
+		</React.Fragment>;
 
 		return (
 			<Card
@@ -269,6 +301,12 @@ export default compose(
 						_id
 						code
 						name
+						requirement {
+							_id
+							code
+							name
+							userStatus
+						}
 					}
 				}
 			}

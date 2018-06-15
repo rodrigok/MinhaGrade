@@ -4,8 +4,6 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema.graphql';
 import { resolvers } from './resolvers';
 
-console.log(a);
-
 const schema = makeExecutableSchema({
 	typeDefs,
 	resolvers

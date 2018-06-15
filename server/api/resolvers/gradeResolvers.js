@@ -22,6 +22,24 @@ export default {
 		name: ({ name }, args, context) => name[context.course],
 		semester: ({ semester }, args, context) => semester[context.course],
 		requirement: ({ requirement }, args, context) => GradeModel.find({ [`code.${ context.course }`]: { $in: requirement[context.course] } }).fetch(),
-		allNames: ({ name }) => Object.values(name)
+		allNames: ({ name }) => Object.values(name),
+		userStatus: ({ _id }, args, { userId }) => {
+			if (!userId) {
+				return;
+			}
+
+			const user = UserModel.findOne({
+				_id: userId,
+				[`grade.${ _id }`]: {
+					$exists: true
+				}
+			}, { grade: 1 });
+
+			if (user) {
+				return user.grade[_id];
+			}
+
+			return 'pending';
+		}
 	}
 };

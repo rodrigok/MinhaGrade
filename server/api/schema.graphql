@@ -58,6 +58,7 @@ type Grade {
   credit: Float
   workload: Float
   allNames: [String]
+  userStatus: String
 }
 
 type Course {
@@ -153,6 +154,27 @@ type Mutation {
     _id: String!
     active: Boolean!
   ): Boolean
+
+  signup(
+    email: String!
+    course: String!
+    password: String!
+  ): SignupResult
+
+  login(
+    email: String!
+    password: String!
+  ): LoginResult
+}
+
+type SignupResult {
+  success: Boolean
+}
+
+type LoginResult {
+  success: Boolean
+  token: String
+  tokenExpires: String
 }
 
 type Subscription {
