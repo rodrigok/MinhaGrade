@@ -1,5 +1,6 @@
 import GradeModel from '../models/grade';
 import UserModel from '../models/user';
+import { pubsub, withFilter, GRADE_CHANGE_CHANNEL } from '../pubsub';
 
 const find = (root, { course }, context) => {
 	if (course) {
@@ -40,6 +41,13 @@ export default {
 			}
 
 			return 'pending';
+		}
+	},
+	Subscription: {
+		grade: {
+			subscribe: withFilter(() => pubsub.asyncIterator(GRADE_CHANGE_CHANNEL), (payload, variables, { userId }) => {
+				return payload.userId === userId;
+			})
 		}
 	}
 };

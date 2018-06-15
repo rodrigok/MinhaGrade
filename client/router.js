@@ -22,6 +22,21 @@ import CoursesComponent from './views/Courses';
 import MenuComponent from './components/Menu';
 
 class MainRouter extends Router {
+	constructor(props) {
+		super();
+
+		props.data.subscribeToMore({
+			document: gql`
+				subscription grade {
+					grade {
+						_id,
+						userStatus
+					}
+				}
+			`
+		});
+	}
+
 	render() {
 		const { data } = this.props;
 

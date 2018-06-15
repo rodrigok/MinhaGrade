@@ -29,36 +29,6 @@ class GradeComponent extends Component {
 
 	state = {}
 
-	constructor(props) {
-		super();
-
-		const SUBSCRIBE_USER_RANDOM_CHANGES = gql`
-			subscription user {
-				user {
-					_id,
-					grade
-				}
-			}
-		`;
-
-		props.data.subscribeToMore({
-			document: SUBSCRIBE_USER_RANDOM_CHANGES
-		});
-
-
-		// const observer = client.subscribe({
-		// 	query: SUBSCRIBE_USER_RANDOM_CHANGES
-		// });
-
-		// observer.subscribe({
-		// 	next({ data }) {
-		// 		console.log(data.user.admin);
-		// 		// We _could_ do stuff with the new user here, but the UI will update automatically anyway!
-		// 	},
-		// 	error(err) { console.error('err', err); }
-		// });
-	}
-
 	updateGradeItem = (_id, status) => {
 		this.props.updateGradeItem({
 			variables: {

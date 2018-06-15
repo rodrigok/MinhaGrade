@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { pubsub, USER_CHANGE_CHANNEL } from '../pubsub';
+import { pubsub, GRADE_CHANGE_CHANNEL } from '../pubsub';
 import { _BaseModel } from './_Base';
+import GradeModel from './grade';
 
 class UserModel extends _BaseModel {
 
@@ -30,8 +31,9 @@ class UserModel extends _BaseModel {
 				break;
 		}
 
-		pubsub.publish(USER_CHANGE_CHANNEL, {
-			user: Meteor.users.findOne(userId)
+		pubsub.publish(GRADE_CHANGE_CHANNEL, {
+			userId,
+			grade: GradeModel.findOne({ _id })
 		});
 	}
 }

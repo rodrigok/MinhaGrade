@@ -72,13 +72,6 @@ export default {
 	UserProfile: {
 		course: ({ course }) => CourseModel.findOne(course)
 	},
-	Subscription: {
-		user: {
-			subscribe: withFilter(() => pubsub.asyncIterator(USER_CHANGE_CHANNEL), (payload, variables, { userId }) => {
-				return payload.user._id === userId;
-			})
-		}
-	},
 	Mutation: {
 		updateGradeItem: isAuthenticatedResolver.createResolver(UserModel.updateGradeItem),
 		login,
