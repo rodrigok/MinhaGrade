@@ -70,15 +70,9 @@ class GradeComponent extends Component {
 		});
 	}
 
-	static getDerivedStateFromProps(props) {
-		const { user: { user } } = props;
+	getColumns = () => {
+		const { user: { user } } = this.props;
 
-		return {
-			hasUser: user != null
-		};
-	}
-
-	getColumns() {
 		const columns = [{
 			title: 'Semestre / Código',
 			dataIndex: 'semester',
@@ -104,14 +98,12 @@ class GradeComponent extends Component {
 			title: 'Dependencias',
 			dataIndex: 'requirement',
 			render: (requirements) => {
-				const { user: { user } } = this.props;
-
 				return requirements.map(requirement => {
 					const style = {
 						color: '#f50'
 					};
 
-					switch (user && user.grade && user.grade[requirement._id]) {
+					switch (requirement.userStatus) {
 						case 'done':
 							style.color = '#d3d3d3';
 							break;
@@ -137,7 +129,7 @@ class GradeComponent extends Component {
 			)
 		}];
 
-		if (this.state.hasUser) {
+		if (user) {
 			columns.unshift({
 				title: 'Status',
 				dataIndex: 'status',
@@ -158,8 +150,7 @@ class GradeComponent extends Component {
 						return;
 					}
 
-					const status = (user.grade && user.grade[record._id]) || 'pending';
-					return status.includes(value);
+					return record.userStatus.includes(value);
 				},
 				render: (text, record) => {
 					const { user: { user } } = this.props;
@@ -168,7 +159,7 @@ class GradeComponent extends Component {
 						return;
 					}
 
-					const status = (user.grade && user.grade[record._id]) || 'pending';
+					const status = record.userStatus;
 
 					const onClick = ({ key }) => {
 						message.info(`Alterando status para ${ Status[key] }`);
@@ -214,11 +205,7 @@ class GradeComponent extends Component {
 			style.backgroundColor = '#f1f1f1';
 		}
 
-		const { user: { user } } = this.props;
-
-		const itemStatus = (user && user.grade && user.grade[record._id]) || 'pending';
-
-		switch (itemStatus) {
+		switch (record.userStatus) {
 			case 'done':
 				style.color = 'lightgray';
 				break;
@@ -234,9 +221,8 @@ class GradeComponent extends Component {
 
 	percentageDone = () => {
 		const { data: { grades, loading } } = this.props;
-		const { user: { user } } = this.props;
 
-		if (user == null || loading) {
+		if (loading) {
 			return;
 		}
 
@@ -246,11 +232,11 @@ class GradeComponent extends Component {
 		let electiveMax = 1;
 
 		for (const item of grades) {
-			if ((item.semester !== 'E') || (electiveMax-- > 0)) {
+			if (item.semester !== 'E' || electiveMax-- > 0) {
 				total++;
-				if (user && user.grade && user.grade[item._id] === 'done') {
+				if (item.userStatus === 'done') {
 					done++;
-				} else if (user && user.grade && user.grade[item._id] === 'doing') {
+				} else if (item.userStatus === 'doing') {
 					doing++;
 				}
 			}
@@ -301,11 +287,13 @@ export default compose(
 				name
 				semester
 				description
+				userStatus
 				requirement {
 					_id
 					semester
 					code
 					name
+					userStatus
 				}
 			}
 		}
@@ -314,7 +302,6 @@ export default compose(
 		query {
 			user {
 				_id
-				grade
 			}
 		}
 	`, { name: 'user' }),
