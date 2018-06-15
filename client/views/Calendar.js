@@ -9,7 +9,9 @@ import {
 	Icon,
 	Tooltip,
 	Tag,
-	Spin
+	Spin,
+	Switch,
+	Form
 } from 'antd';
 
 const Status = {
@@ -122,34 +124,39 @@ class CalendarComponent extends Component {
 		updateCalendarItemInterest: PropTypes.func
 	}
 
-	state = {}
+	state = {
+		done: false,
+		blocked: true
+	}
 
-	static getDerivedStateFromProps(props) {
-		const { data: { calendar } } = props;
+	shifts = [{
+		shift: '1',
+		name: 'Manhã'
+	}, {
+		shift: '2',
+		name: 'Tarde'
+	}, {
+		shift: '3',
+		name: 'Noite'
+	}, {
+		shift: '5',
+		name: 'Vespertino'
+	}];
 
-		if (!calendar || !calendar.grade) {
-			return {};
+	baseFilter = (item) => {
+		if (!item.grade.code) {
+			return false;
 		}
 
-		const shifts = [{
-			shift: '1',
-			name: 'Manhã'
-		}, {
-			shift: '2',
-			name: 'Tarde'
-		}, {
-			shift: '3',
-			name: 'Noite'
-		}, {
-			shift: '5',
-			name: 'Vespertino'
-		}];
+		if (this.state.done === false && item.userStatus !== 'pending') {
+			return false;
+		}
 
+		if (this.state.blocked === false) {
+			return !item.grade.requirement.find(r => r.userStatus === 'pending');
+		}
 
-		return {
-			hasEAD: calendar.grade.filter(d => d.shift === '0').length > 0,
-			shifts: shifts.filter(s => calendar.grade.filter(d => d.shift === s.shift).length)
-		};
+		return true;
 	}
 
 	updateInterest = (gradeItem, calendarItem, calendar, interested) => {
@@ -169,25 +176,27 @@ class CalendarComponent extends Component {
 	renderCalendarItem(shift, day) {
 		const { data: { calendar } } = this.props;
 
-		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day);
+		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day).filter(this.baseFilter);
 
 		return grade.map(item => {
-			if (item.grade.code) {
-				return (
-					<CalendarItemComponent
-						key={item._id}
-						gradeItem={item.grade}
-						calendarItem={item}
-						calendar={calendar}
-						updateInterest={this.updateInterest}
-					/>
-				);
-			}
+			return (
+				<CalendarItemComponent
+					key={item._id}
+					gradeItem={item.grade}
+					calendarItem={item}
+					calendar={calendar}
+					updateInterest={this.updateInterest}
+				/>
+			);
 		}).filter(i => i);
 	}
 
 	renderShifts() {
-		return this.state.shifts.map(shit => (
+		const { data: { calendar } } = this.props;
+
+		const shifts = this.shifts.filter(s => calendar.grade.filter(d => d.shift === s.shift).filter(this.baseFilter).length);
+
+		return shifts.map(shit => (
 			<React.Fragment key={shit.shift}>
 				<tr className='shift-table-title-line'>
 					<td colSpan='7'>
@@ -207,7 +216,11 @@ class CalendarComponent extends Component {
 	}
 
 	renderEAD() {
-		if (!this.state.hasEAD) {
+		const { data: { calendar } } = this.props;
+
+		const hasEAD = calendar.grade.filter(d => d.shift === '0').filter(this.baseFilter).length > 0;
+
+		if (!hasEAD) {
 			return;
 		}
 
@@ -256,6 +269,18 @@ class CalendarComponent extends Component {
 
 		return (
 			<React.Fragment>
+				<div>
+					<div className='components-table-demo-control-bar'>
+						<Form layout='inline'>
+							<Form.Item label='Concluídas our Cursando'>
+								<Switch checked={this.state.done} onChange={(value) => this.setState({ done: value })} />
+							</Form.Item>
+							<Form.Item label='Bloqueadas'>
+								<Switch checked={this.state.blocked} onChange={(value) => this.setState({ blocked: value })} />
+							</Form.Item>
+						</Form>
+					</div>
+				</div>
 				{this.renderEAD()}
 
 				<div className='ant-table ant-table-large ant-table-bordered ant-table-scroll-position-left'>

@@ -80,6 +80,8 @@ export default {
 			if (user) {
 				return user.grade[_id];
 			}
+
+			return 'pending';
 		},
 		userInterested: ({ _id, shift, day }, args, { userId }) => {
 			if (!userId) {
