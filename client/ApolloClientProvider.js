@@ -14,7 +14,6 @@ const httpLink = new HttpLink({
 const authLink = new ApolloLink((operation, forward) => {
 	operation.setContext(() => {
 		const token = localStorage.getItem('Meteor.loginToken');
-		console.log({ token, operation });
 
 		return {
 			headers: {

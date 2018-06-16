@@ -50,3 +50,11 @@
 .login-form-button {
 	width: 100%;
 }
+
+.ant-card .ant-tag {
+	display: block;
+	white-space: initial;
+	height: auto;
+	margin-top: 2px !important;
+	margin-right: 0px !important;
+}
