@@ -20,10 +20,14 @@ const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 	}
 });
 
-const findOne = () => {
-	return CalendarModel.findOne({
+const findOne = (root, args, context) => {
+	const result = CalendarModel.findOne({
 		active: true
 	});
+
+	context.calendarId = result._id;
+
+	return result;
 };
 
 const activateCalendar = (root, { _id, active }) => {
@@ -83,7 +87,7 @@ export default {
 
 			return 'pending';
 		},
-		userInterested: ({ _id, shift, day }, args, { userId }) => {
+		userInterested: ({ _id, shift, day }, args, { userId, calendarId }) => {
 			if (!userId) {
 				return false;
 			}
@@ -92,7 +96,7 @@ export default {
 
 			const user = UserModel.findOne({
 				_id: userId,
-				['calendar.2018-2']: key
+				[`calendar.${ calendarId }`]: key
 			}, { fields: { grade: 1 } });
 
 			if (user) {
