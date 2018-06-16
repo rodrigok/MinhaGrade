@@ -100,6 +100,9 @@ class CalendarItemComponent extends Component {
 		});
 
 		description = <React.Fragment>
+			<div>
+				Semestre: {gradeItem.semester}
+			</div>
 			{description}
 			{requirements}
 		</React.Fragment>;
@@ -326,6 +329,7 @@ export default compose(
 						_id
 						code
 						name
+						semester
 						requirement {
 							_id
 							code
