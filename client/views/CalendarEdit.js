@@ -90,6 +90,8 @@ class CalendarEdit extends Component {
 				return (
 					<Select
 						showSearch
+						filterOption
+						optionFilterProp='name'
 						defaultValue={text}
 						placeholder='Professores'
 						style={{ width: 200 }}
@@ -97,7 +99,7 @@ class CalendarEdit extends Component {
 					>
 						<Select.Option key='undefined' value=''>Não definido</Select.Option>
 						{teachers.map(teacher => (
-							<Select.Option key={teacher._id} value={teacher._id}>{teacher.name}</Select.Option>
+							<Select.Option key={teacher._id} value={teacher._id} name={teacher.name}>{teacher.name}</Select.Option>
 						))}
 					</Select>
 				);
@@ -165,7 +167,7 @@ class CalendarEdit extends Component {
 					return;
 				}
 
-				return <Select.Option key={`${ shiftName } - ${ day.name }`} value={`${ shift }-${ day }`}>{`${ shiftName } - ${ dayName }`}</Select.Option>;
+				return <Select.Option key={`${ shiftName } - ${ day.name }`} value={`${ shift }-${ day }`} name={`${ shiftName } - ${ dayName }`}>{`${ shiftName } - ${ dayName }`}</Select.Option>;
 			});
 		});
 	}
@@ -174,7 +176,7 @@ class CalendarEdit extends Component {
 		const { data: { grades = [] } } = this.props;
 
 		return grades.map(item => {
-			return <Select.Option key={item._id} value={item._id}>{item.name}</Select.Option>;
+			return <Select.Option key={item._id} value={item._id} name={item.name}>{item.name}</Select.Option>;
 		});
 	}
 
@@ -186,6 +188,8 @@ class CalendarEdit extends Component {
 				<Select
 					showSearch
 					autoFocus
+					filterOption
+					optionFilterProp='name'
 					placeholder='Escolha dia e turno'
 					style={{ width: 200 }}
 					onChange={(value) => {
@@ -199,6 +203,8 @@ class CalendarEdit extends Component {
 
 				<Select
 					showSearch
+					filterOption
+					optionFilterProp='name'
 					placeholder='Escolha a matéria'
 					style={{ width: 200 }}
 					dropdownMatchSelectWidth={false}
