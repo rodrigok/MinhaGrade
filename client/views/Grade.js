@@ -155,7 +155,7 @@ class GradeComponent extends Component {
 					}
 
 					return <Dropdown overlay={menu}>
-						<a className='ant-dropdown-link' style={style} href='#'>
+						<a className='ant-dropdown-link' style={style}>
 							{Status[status]} <Icon type='down' />
 						</a>
 					</Dropdown>;
