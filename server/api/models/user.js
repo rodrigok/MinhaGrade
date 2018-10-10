@@ -9,10 +9,31 @@ class UserModel extends _BaseModel {
 		super(Meteor.users);
 	}
 
+	findOneByIdWithFacebookToken(_id, options) {
+		const query = {
+			_id,
+			'services.facebook.accessToken': {
+				$exists: true
+			}
+		};
+		return Meteor.users.findOne(query, options);
+	}
+
 	findOneByEmailAddress(emailAddress, options) {
 		const query = { 'emails.address': emailAddress.toLowerCase() };
 
 		return Meteor.users.findOne(query, options);
+	}
+
+	findFriendsFacebookByIdsInterestedIn(friendIds, calendarId, key, options) {
+		const query = {
+			'services.facebook.id': {
+				$in: friendIds
+			},
+			[`calendar.${ calendarId }`]: key
+		};
+
+		return Meteor.users.find(query, options);
 	}
 
 	setServiceId(_id, serviceName, serviceId) {

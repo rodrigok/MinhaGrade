@@ -25,6 +25,12 @@ type User {
   profile: UserProfile
 }
 
+type FacebookUser {
+  id: String
+  name: String
+  pictureUrl: String
+}
+
 type Teacher {
   _id: String
   name: String
@@ -39,6 +45,7 @@ type CalendarItem {
   grade (course: String): Grade
   userStatus: String
   userInterested: Boolean
+  friendsInterested: [FacebookUser]
 }
 
 type Calendar {

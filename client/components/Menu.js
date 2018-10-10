@@ -151,9 +151,8 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleLogin} className='login-form'>
 					<FacebookLogin
 						appId='185969382302390'
-						// autoLoad={true}
 						fields='name,email,picture'
-						// onClick={componentClicked}
+						scope='public_profile,email,user_friends'
 						callback={responseFacebook}
 					/>
 					<Form.Item>

@@ -5,6 +5,11 @@ import UserModel from '../models/user';
 import { isAuthenticatedResolver, isAdminResolver } from '../acl';
 import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
+import graph from 'fbgraph';
+import promisify from 'promisify-node';
+
+
+graph.get = promisify(graph.get);
 
 const NameAlreadyExists = createError('NameAlreadyExists', {
 	message: 'Name already exists'
@@ -20,12 +25,22 @@ const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 	}
 });
 
-const findOne = (root, args, context) => {
+const findOne = async(root, args, context) => {
 	const result = CalendarModel.findOne({
 		active: true
 	});
 
 	context.calendarId = result._id;
+
+	const user = UserModel.findOneByIdWithFacebookToken(context.userId, { fields: { 'services.facebook.accessToken': 1 } });
+	if (user) {
+		graph.setAccessToken(user.services.facebook.accessToken);
+		const { data } = await graph.get('me/friends?fields=id,name,picture');
+		context.friends = data.map((i) => {
+			i.pictureUrl = i.picture.data.url;
+			return i;
+		});
+	}
 
 	return result;
 };
@@ -102,6 +117,21 @@ export default {
 			if (user) {
 				return true;
 			}
+		},
+		friendsInterested: ({ _id, shift, day }, args, { userId, friends, calendarId }) => {
+			if (!userId) {
+				return [];
+			}
+
+			if (!friends || friends.length === 0) {
+				return [];
+			}
+
+			const key = `${ shift }${ day }-${ _id }`;
+
+			const ids = friends.map((i) => i.id);
+			const users = UserModel.findFriendsFacebookByIdsInterestedIn(ids, calendarId, key, { fields: { 'services.facebook.id': 1 } }).fetch().map((i) => i.services.facebook.id);
+			return friends.filter((i) => users.includes(i.id));
 		}
 	}
 };

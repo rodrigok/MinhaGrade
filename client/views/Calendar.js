@@ -56,13 +56,13 @@ class CalendarItemComponent extends Component {
 			if (calendarItem.userInterested) {
 				actions.push(
 					<Tooltip placement='bottom' title='Remover interesse'>
-						<Icon type='heart' onClick={this.removeInterest.bind(this)} />
+						<Icon type='heart' theme='filled' onClick={this.removeInterest.bind(this)} />
 					</Tooltip>
 				);
 			} else {
 				actions.push(
 					<Tooltip placement='bottom' title='Marcar interesse'>
-						<Icon type='heart-o' onClick={this.addInterest.bind(this)} />
+						<Icon type='heart' onClick={this.addInterest.bind(this)} />
 					</Tooltip>
 				);
 			}
@@ -99,12 +99,19 @@ class CalendarItemComponent extends Component {
 			</div>;
 		});
 
+		const friends = calendarItem.friendsInterested.map(friend => {
+			return <div key={friend.id}>
+				<img src={friend.pictureUrl} style={{ height: 20, borderRadius: 100, marginRight: 10 }}></img>{friend.name}
+			</div>;
+		});
+
 		description = <React.Fragment>
 			<div>
 				Semestre: {gradeItem.semester}
 			</div>
 			{description}
 			{requirements}
+			{friends}
 		</React.Fragment>;
 
 		return (
@@ -325,6 +332,11 @@ export default compose(
 					}
 					userStatus
 					userInterested
+					friendsInterested {
+						id
+						name
+						pictureUrl
+					}
 					grade {
 						_id
 						code
