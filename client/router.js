@@ -85,6 +85,23 @@ MainRouter = graphql(gql`
 		calendar {
 			_id
 		}
+		grades {
+			_id
+			credit
+			workload
+			code
+			name
+			semester
+			description
+			userStatus
+			requirement {
+				_id
+				semester
+				code
+				name
+				userStatus
+			}
+		}
 	}
 `)(MainRouter);
 

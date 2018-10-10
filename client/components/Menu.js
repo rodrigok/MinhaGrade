@@ -110,6 +110,24 @@ class AccountComponent extends Component {
 		});
 	}
 
+	handleChangeCourse = (e) => {
+		e.preventDefault();
+		this.setState({ loading: true });
+		this.props.form.validateFields((err, { course }) => {
+			this.setState({ loading: false });
+			if (!err) {
+				Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.course': course } });
+				message.info('Curso alterado');
+
+				this.setState({
+					action: ''
+				});
+
+				this.props.routeData.refetch();
+			}
+		});
+	}
+
 	handleLogout = () => {
 		const { routeData } = this.props;
 		Meteor.logout((() => {
@@ -248,6 +266,39 @@ class AccountComponent extends Component {
 		);
 	}
 
+	renderChangeCourse() {
+		const { routeData: { courses, user } } = this.props;
+		const { getFieldDecorator } = this.props.form;
+		return (
+			<Card title='Mudar curso'>
+				<Form onSubmit={this.handleChangeCourse} className='login-form'>
+					<Form.Item>
+						{getFieldDecorator('course', {
+							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
+							initialValue: user.profile.course._id
+						})(
+							<Select
+								showSearch
+								placeholder='Curso'
+								// onChange={(value) => this.setTeacher(value, record)}
+							>
+								{courses.map(course => (
+									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+								))}
+							</Select>
+						)}
+					</Form.Item>
+					<Form.Item>
+						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
+							Mudar curso
+						</Button>
+						<a className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
+					</Form.Item>
+				</Form>
+			</Card>
+		);
+	}
+
 	renderAccount() {
 		const { routeData: { user } } = this.props;
 		let userEmail;
@@ -260,6 +311,9 @@ class AccountComponent extends Component {
 				<Form className='login-form'>
 					<Form.Item>
 						Curso: {user.profile.course.name}
+						<Button onClick={() => this.setState({ action: 'change-course' })} className='login-form-button'>
+							Mudar curso
+						</Button>
 						<Button onClick={() => this.setState({ action: 'change-password' })} className='login-form-button'>
 							Mudar senha
 						</Button>
@@ -278,6 +332,8 @@ class AccountComponent extends Component {
 			switch (this.state.action) {
 				case 'change-password':
 					return this.renderChangePassword();
+				case 'change-course':
+					return this.renderChangeCourse();
 				default:
 					return this.renderAccount();
 			}
