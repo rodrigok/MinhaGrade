@@ -275,7 +275,7 @@ class CalendarComponent extends Component {
 				<div>
 					<div className='components-table-demo-control-bar'>
 						<Form layout='inline'>
-							<Form.Item label='Concluídas our Cursando'>
+							<Form.Item label='Concluídas ou Cursando'>
 								<Switch checked={this.state.done} onChange={(value) => this.setState({ done: value })} />
 							</Form.Item>
 							<Form.Item label='Bloqueadas'>
