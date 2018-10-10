@@ -209,9 +209,21 @@ class GradeComponent extends Component {
 		const percentageDone = Math.round((100 / total) * done);
 		const percentageDoing = Math.round((100 / total) * doing);
 
-		return <Tooltip title={`${ done } concluída(s) + ${ doing } cursando de ${ total }`}>
+		return <div>
 			<Progress percent={percentageDone+percentageDoing} successPercent={percentageDone} />
-		</Tooltip>;
+			<div style={{ textAlign: 'center' }}>
+				{
+					done === 1
+						? <div>{ done + doing } de { total } ({ done } concluída + { doing } cursando)</div>
+						: <div>{ done + doing } de { total } ({ done } concluídas + { doing } cursando)</div>
+				}
+				{
+					electiveMax === 1
+						? <div>Considerando {electiveMax} disciplina eletiva</div>
+						: <div>Considerando {electiveMax} disciplinas eletivas</div>
+				}
+			</div>
+		</div>;
 	}
 
 	render() {
