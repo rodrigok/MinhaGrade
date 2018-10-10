@@ -118,5 +118,7 @@ class App extends Component {
 }
 
 Meteor.startup(() => {
-	render(<App />, document.body);
+	render(<App />, document.getElementById('app'));
 });
+
+export const ApolloClient = client;

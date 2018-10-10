@@ -3,6 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FacebookLogin from 'react-facebook-login';
+import { loginWithFacebook } from 'meteor-apollo-accounts';
+import { ApolloClient } from '../router';
 import {
 	Menu,
 	Icon,
@@ -137,9 +140,22 @@ class AccountComponent extends Component {
 
 	renderLogin() {
 		const { getFieldDecorator } = this.props.form;
+
+		const responseFacebook = async({ accessToken }) => {
+			await loginWithFacebook({ accessToken }, ApolloClient);
+			ApolloClient.resetStore();
+		};
+
 		return (
 			<Card title='Entrar'>
 				<Form onSubmit={this.handleLogin} className='login-form'>
+					<FacebookLogin
+						appId='185969382302390'
+						// autoLoad={true}
+						fields='name,email,picture'
+						// onClick={componentClicked}
+						callback={responseFacebook}
+					/>
 					<Form.Item>
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],

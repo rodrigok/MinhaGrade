@@ -9,6 +9,41 @@ class UserModel extends _BaseModel {
 		super(Meteor.users);
 	}
 
+	findOneByEmailAddress(emailAddress, options) {
+		const query = { 'emails.address': emailAddress.toLowerCase() };
+
+		return Meteor.users.findOne(query, options);
+	}
+
+	setServiceId(_id, serviceName, serviceId) {
+		const update = { $set: {} };
+
+		const serviceIdKey = `services.${ serviceName }.id`;
+		update.$set[serviceIdKey] = serviceId;
+
+		return Meteor.users.update(_id, update);
+	}
+
+	setEmailVerified(_id, email) {
+		const query = {
+			_id,
+			emails: {
+				$elemMatch: {
+					address: email,
+					verified: false
+				}
+			}
+		};
+
+		const update = {
+			$set: {
+				'emails.$.verified': true
+			}
+		};
+
+		return Meteor.users.update(query, update);
+	}
+
 	updateGradeItem(root, { _id, status }, { userId }) {
 		console.log('updateGradeItem', { _id, status, userId });
 

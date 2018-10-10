@@ -26,3 +26,5 @@ react-meteor-data
 swydo:graphql
 swydo:ddp-apollo
 apollo
+nicolaslopezj:apollo-accounts
+static-html
