@@ -190,27 +190,21 @@ class GradeComponent extends Component {
 	}
 
 	percentageDone = () => {
-		const { data: { grades, loading } } = this.props;
+		const { data: { grades, loading }, user: { user } } = this.props;
 
 		if (loading) {
 			return;
 		}
 
-		let total = 0;
-		let done = 0;
-		let doing = 0;
-		let electiveMax = 1;
+		const electiveMax = (user && user.profile && user.profile.course && user.profile.course.elective) || 0;
 
-		for (const item of grades) {
-			if (item.semester !== 'E' || electiveMax-- > 0) {
-				total++;
-				if (item.userStatus === 'done') {
-					done++;
-				} else if (item.userStatus === 'doing') {
-					doing++;
-				}
-			}
-		}
+		const total = grades.filter((item) => item.semester !== 'E').length + electiveMax;
+
+		const electiveDone = Math.min(grades.filter((item) => item.semester === 'E' && item.userStatus === 'done').length, electiveMax);
+		const electiveDoing = Math.min(grades.filter((item) => item.semester === 'E' && item.userStatus === 'doing').length, electiveMax - electiveDone);
+
+		const done = grades.filter((item) => item.semester !== 'E' && item.userStatus === 'done').length + electiveDone;
+		const doing = grades.filter((item) => item.semester !== 'E' && item.userStatus === 'doing').length + electiveDoing;
 
 		const percentageDone = Math.round((100 / total) * done);
 		const percentageDoing = Math.round((100 / total) * doing);
@@ -272,6 +266,11 @@ export default compose(
 		query {
 			user {
 				_id
+				profile {
+					course {
+						elective
+					}
+				}
 			}
 		}
 	`, { name: 'user' }),

@@ -64,6 +64,7 @@ type Grade {
 type Course {
   _id: String
   name: String
+  elective: Float
 }
 
 type Query {
@@ -126,11 +127,13 @@ type Mutation {
 
   createCourse(
     name: String!
+    elective: Float!
   ): Course
 
   updateCourse(
     _id: String!
     name: String!
+    elective: Float!
   ): Course
 
   removeCourse(

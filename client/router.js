@@ -68,6 +68,7 @@ MainRouter = graphql(gql`
 		courses {
 			_id
 			name
+			elective
 		}
 		user {
 			_id

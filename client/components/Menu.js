@@ -378,7 +378,7 @@ class MenuComponent extends Component {
 		const { routeData: { user } } = this.props;
 		if (user && user.admin) {
 			return (
-				<Menu.SubMenu title='Administrar'>
+				<Menu.SubMenu title='Administrar' style={{ float: 'right' }}>
 					<Menu.Item key='calendars'>Calendários</Menu.Item>
 					<Menu.Item key='teachers'>Professores</Menu.Item>
 					<Menu.Item key='courses'>Cursos</Menu.Item>
@@ -425,8 +425,8 @@ class MenuComponent extends Component {
 			>
 				<Menu.Item key='/course'>Meu Currículo</Menu.Item>
 				{this.renderCalendar()}
-				{this.renderAdminMenu()}
 				{this.renderAccounts()}
+				{this.renderAdminMenu()}
 			</Menu>
 		);
 	}

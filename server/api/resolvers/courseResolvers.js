@@ -7,8 +7,8 @@ const CourseNameAlreadyExists = createError('CourseNameAlreadyExists', {
 	message: 'Course name already exists'
 });
 
-const checkIfNameAlreadyExists = createResolver((root, { name }) => {
-	if (CourseModel.findOne({ name })) {
+const checkIfNameAlreadyExists = createResolver((root, { _id, name }) => {
+	if (CourseModel.findOne({ _id: { $ne: _id }, name })) {
 		throw new CourseNameAlreadyExists();
 	}
 });
