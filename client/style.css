@@ -58,3 +58,23 @@
 	margin-top: 2px !important;
 	margin-right: 0px !important;
 }
+
+.friends-picture {
+	height: 25px;
+	width: 25px;
+	background-size: contain;
+	border-radius: 100%;
+	display: inline-block;
+	margin-left: -12px;
+	border: 2px solid white;
+}
+
+.friends-picture-list {
+	padding-left: 12px;
+	line-height: 8px;
+}
+
+.friends-picture:hover {
+	z-index: 10;
+	position: relative;
+}

@@ -100,9 +100,9 @@ class CalendarItemComponent extends Component {
 		});
 
 		const friends = calendarItem.friendsInterested.map(friend => {
-			return <div key={friend.id}>
-				<img src={friend.pictureUrl} style={{ height: 20, borderRadius: 100, marginRight: 10 }}></img>{friend.name}
-			</div>;
+			return <Tooltip key={friend.id} title={friend.name} placement='bottom' arrowPointAtCenter={false} mouseEnterDelay={.1}>
+				<div key={friend.id} style={{ backgroundImage: `url(${ friend.pictureUrl })` }} className='friends-picture'></div>
+			</Tooltip>;
 		});
 
 		description = <React.Fragment>
@@ -111,7 +111,9 @@ class CalendarItemComponent extends Component {
 			</div>
 			{description}
 			{requirements}
-			{friends}
+			<div className='friends-picture-list'>
+				{friends}
+			</div>
 		</React.Fragment>;
 
 		return (
