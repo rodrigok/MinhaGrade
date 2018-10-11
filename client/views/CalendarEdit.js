@@ -234,7 +234,7 @@ class CalendarEdit extends Component {
 export default compose(
 	graphql(gql`
 		query ($calendarName: String) {
-			grades (course: "SI") {
+			grades {
 				_id
 				name
 			}

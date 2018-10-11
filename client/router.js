@@ -50,6 +50,7 @@ class MainRouter extends Router {
 						<div style={{ background: '#fff', padding: 24 }}>
 							<Route exact path='/' component={GradeComponent}/>
 							<Route exact path='/course' component={GradeComponent}/>
+							<Route exact path='/shared/:userId' component={GradeComponent}/>
 							<Route exact path='/calendar' component={CalendarComponent}/>
 							<Route exact path='/calendars' component={CalendarsComponent}/>
 							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
@@ -85,23 +86,6 @@ MainRouter = graphql(gql`
 		}
 		calendar {
 			_id
-		}
-		grades {
-			_id
-			credit
-			workload
-			code
-			name
-			semester
-			description
-			userStatus
-			requirement {
-				_id
-				semester
-				code
-				name
-				userStatus
-			}
 		}
 	}
 `)(MainRouter);

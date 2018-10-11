@@ -126,7 +126,7 @@ class AccountComponent extends Component {
 					action: ''
 				});
 
-				this.props.routeData.refetch();
+				ApolloClient.resetStore();
 			}
 		});
 	}

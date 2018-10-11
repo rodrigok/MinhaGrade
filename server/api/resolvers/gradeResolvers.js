@@ -2,12 +2,16 @@ import GradeModel from '../models/grade';
 import UserModel from '../models/user';
 import { pubsub, withFilter, GRADE_CHANGE_CHANNEL } from '../pubsub';
 
-const find = (root, { course }, context) => {
-	if (course) {
-		context.course = course;
-	} else if (context.userId) {
-		context.course = UserModel.findOne(context.userId).profile.course;
+const find = (root, { userId }, context) => {
+	if (userId) {
+		context.userId = userId;
 	}
+
+	if (!context.userId) {
+		return [];
+	}
+
+	context.course = UserModel.findOne(context.userId).profile.course;
 
 	return GradeModel.find({
 		[`code.${ context.course }`]: { $exists: true }

@@ -75,11 +75,11 @@ type Course {
 }
 
 type Query {
-  user: User
+  user(userId: String): User
   teachers: [Teacher]
   calendar: Calendar
   calendars: [Calendar]
-  grades(course: String): [Grade]
+  grades(userId: String): [Grade]
   courses: [Course]
 }
 

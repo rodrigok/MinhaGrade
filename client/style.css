@@ -78,3 +78,27 @@
 	z-index: 10;
 	position: relative;
 }
+
+.share-grade {
+	text-align: center;
+	background-color: #eee;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.share-grade > input {
+	flex-grow: 1;
+	min-width: 400px;
+	width: auto;
+}
+
+.share-grade > div {
+	flex-grow: 0;
+	white-space: nowrap;
+	margin-right: 5px;
+}

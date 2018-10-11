@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
@@ -11,7 +12,9 @@ import {
 	Tooltip,
 	Tag,
 	Table,
-	Progress
+	Progress,
+	Input,
+	Spin
 } from 'antd';
 
 const Status = {
@@ -24,6 +27,7 @@ class GradeComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
 		user: PropTypes.object,
+		match: PropTypes.object,
 		updateGradeItem: PropTypes.func
 	}
 
@@ -42,6 +46,7 @@ class GradeComponent extends Component {
 
 	getColumns = () => {
 		const { user: { user } } = this.props;
+		const { match: { params } } = this.props;
 
 		const columns = [{
 			title: 'Semestre / Código',
@@ -154,7 +159,7 @@ class GradeComponent extends Component {
 							break;
 					}
 
-					return <Dropdown overlay={menu}>
+					return <Dropdown overlay={menu} disabled={params.userId != null}>
 						<a className='ant-dropdown-link' style={style}>
 							{Status[status]} <Icon type='down' />
 						</a>
@@ -227,7 +232,12 @@ class GradeComponent extends Component {
 	}
 
 	render() {
-		const { data: { error, loading, grades } } = this.props;
+		const { data: { error, loading, grades }, user } = this.props;
+		const { match: { params } } = this.props;
+
+		if (loading || user.loading) {
+			return <Spin size='large' />;
+		}
 
 		if (error) {
 			console.log(error);
@@ -236,6 +246,17 @@ class GradeComponent extends Component {
 
 		return (
 			<div>
+				{ params.userId
+					? <div className='share-grade'>
+						<span>Currículo compartilhado de:&nbsp;</span>
+						<strong>{ user.user.mainEmail.address } ({ user.user.profile.course.name })</strong>
+					</div>
+					: <div className='share-grade'>
+						<div>Compartilhe sou currículo com amigos:</div>
+						<Input value={`${ location.protocol }//${ location.host }/shared/${ Meteor.userId() }`} readOnly onFocus={(e) => e.target.select()}></Input>
+					</div>
+				}
+
 				{this.percentageDone()}
 
 				<Table
@@ -254,8 +275,8 @@ class GradeComponent extends Component {
 
 export default compose(
 	graphql(gql`
-		query {
-			grades {
+		query ($userId: String) {
+			grades (userId: $userId) {
 				_id
 				credit
 				workload
@@ -273,19 +294,36 @@ export default compose(
 				}
 			}
 		}
-	`),
+	`, {
+		options: ({ match }) => ({
+			variables: {
+				userId: match.params.userId
+			}
+		})
+	}),
 	graphql(gql`
-		query {
-			user {
+		query ($userId: String) {
+			user (userId: $userId) {
 				_id
+				mainEmail {
+					address
+				}
 				profile {
 					course {
+						name
 						elective
 					}
 				}
 			}
 		}
-	`, { name: 'user' }),
+	`, {
+		name: 'user',
+		options: ({ match }) => ({
+			variables: {
+				userId: match.params.userId
+			}
+		})
+	}),
 	graphql(gql`
 		mutation updateGradeItem($_id: String! $status: String!) {
 			updateGradeItem(_id: $_id, status: $status)

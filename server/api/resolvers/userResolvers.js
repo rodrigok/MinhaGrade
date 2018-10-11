@@ -8,6 +8,10 @@ import { isAuthenticatedResolver } from '../acl';
 import { pubsub, withFilter, USER_CHANGE_CHANNEL } from '../pubsub';
 
 const findOne = (root, args, { userId }) => {
+	if (args.userId) {
+		userId = args.userId;
+	}
+
 	if (!userId) {
 		return;
 	}
