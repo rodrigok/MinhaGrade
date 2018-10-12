@@ -65,6 +65,15 @@ const signup = (root, { email, password, course }) => {
 	}
 };
 
+const setCourse = (root, { course }, { userId }) => {
+	if (!userId) {
+		return false;
+	}
+
+	Meteor.users.update({ _id: userId }, { $set: { 'profile.course': course } });
+	return true;
+};
+
 export default {
 	Query: {
 		user: findOne
@@ -74,11 +83,12 @@ export default {
 
 	},
 	UserProfile: {
-		course: ({ course }) => CourseModel.findOne(course)
+		course: ({ course }) => CourseModel.findOne({ _id: course })
 	},
 	Mutation: {
 		updateGradeItem: isAuthenticatedResolver.createResolver(UserModel.updateGradeItem),
 		login,
-		signup
+		signup,
+		setCourse
 	}
 };

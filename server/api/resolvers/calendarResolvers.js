@@ -34,12 +34,16 @@ const findOne = async(root, args, context) => {
 
 	const user = UserModel.findOneByIdWithFacebookToken(context.userId, { fields: { 'services.facebook.accessToken': 1 } });
 	if (user) {
-		graph.setAccessToken(user.services.facebook.accessToken);
-		const { data } = await graph.get('me/friends?fields=id,name,picture');
-		context.friends = data.map((i) => {
-			i.pictureUrl = i.picture.data.url;
-			return i;
-		});
+		try {
+			graph.setAccessToken(user.services.facebook.accessToken);
+			const { data } = await graph.get('me/friends?fields=id,name,picture');
+			context.friends = data.map((i) => {
+				i.pictureUrl = i.picture.data.url;
+				return i;
+			});
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	return result;

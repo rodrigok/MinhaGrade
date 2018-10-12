@@ -205,6 +205,10 @@ type Mutation {
     password: String!
   ): LoginResult
 
+  setCourse(
+    course: String!
+  ): Boolean
+
   # Log the user in with a password.
   loginWithPassword (username: String, email: String, password: HashedPassword, plainPassword: String): LoginMethodResponse
   # Create a new user.
