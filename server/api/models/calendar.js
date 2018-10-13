@@ -66,6 +66,35 @@ class CalendarModel extends _BaseModel {
 		return this.update(query, update) === 1;
 	}
 
+	setRoomInCalendarItem = (root, { calendarId, gradeItemId, shift, day, room }) => {
+		console.log('setRoomInCalendarItem', calendarId, gradeItemId, shift, day, room);
+
+		const query = {
+			_id: calendarId,
+			grade: {
+				$elemMatch: {
+					_id: gradeItemId,
+					day,
+					shift
+				}
+			}
+		};
+
+		const update = {};
+
+		if (room === '') {
+			update.$unset = {
+				'grade.$.room': 1
+			};
+		} else {
+			update.$set = {
+				'grade.$.room': room
+			};
+		}
+
+		return this.update(query, update) === 1;
+	}
+
 	removeItemFromCalendar = (root, { calendarId, gradeItemId, shift, day }) => {
 		console.log('removeItemFromCalendar', calendarId, gradeItemId, shift, day);
 

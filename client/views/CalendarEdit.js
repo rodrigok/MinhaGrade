@@ -8,7 +8,8 @@ import {
 	Table,
 	Popconfirm,
 	Button,
-	Select
+	Select,
+	Input
 } from 'antd';
 
 const days = {
@@ -35,7 +36,8 @@ class CalendarEdit extends Component {
 		match: PropTypes.object,
 		setTeacherInCalendarItem: PropTypes.func,
 		removeItemFromCalendar: PropTypes.func,
-		addItemToCalendar: PropTypes.func
+		addItemToCalendar: PropTypes.func,
+		setRoomInCalendarItem: PropTypes.func
 	}
 
 	state = {}
@@ -104,6 +106,20 @@ class CalendarEdit extends Component {
 					</Select>
 				);
 			}
+		}, {
+			title: 'Sala',
+			dataIndex: 'room',
+			width: 100,
+			render: (text, record) => {
+				return (
+					<Input
+						defaultValue={text}
+						placeholder='Sala'
+						style={{ width: 100 }}
+						onBlur={(e) => this.setRoom(e.target.value, record)}
+					></Input>
+				);
+			}
 		}];
 
 		this.state = {
@@ -121,6 +137,23 @@ class CalendarEdit extends Component {
 					shift: record.shift,
 					day: record.day,
 					teacherId: teacher
+				}
+			}).then(() => {
+				this.props.data.refetch();
+			}).catch(e => console.error(e));
+		}
+	}
+
+	setRoom(room, record) {
+		room = room.trim();
+		if (room !== record.room) {
+			this.props.setRoomInCalendarItem({
+				variables: {
+					calendarId: this.props.match.params.calendarName,
+					gradeItemId: record.grade._id,
+					shift: record.shift,
+					day: record.day,
+					room
 				}
 			}).then(() => {
 				this.props.data.refetch();
@@ -249,6 +282,7 @@ export default compose(
 					day
 					shift
 					interested
+					room
 					teacher {
 						_id,
 						name
@@ -285,6 +319,23 @@ export default compose(
 			)
 		}
 	`, { name: 'setTeacherInCalendarItem' }),
+	graphql(gql`
+		mutation setRoomInCalendarItem(
+			$calendarId: String!
+			$gradeItemId: String!
+			$shift: String!
+			$day: String!
+			$room: String!
+		) {
+			setRoomInCalendarItem(
+				calendarId: $calendarId
+				gradeItemId: $gradeItemId
+				shift: $shift
+				day: $day
+				room: $room
+			)
+		}
+	`, { name: 'setRoomInCalendarItem' }),
 	graphql(gql`
 		mutation removeItemFromCalendar(
 			$calendarId: String!

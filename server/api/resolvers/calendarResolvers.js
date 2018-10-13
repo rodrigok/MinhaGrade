@@ -69,6 +69,7 @@ export default {
 		activateCalendar: and(isAdminResolver)(activateCalendar),
 		updateCalendarItemInterest: isAuthenticatedResolver.createResolver(CalendarModel.updateCalendarItemInterest),
 		setTeacherInCalendarItem: and(isAdminResolver)(CalendarModel.setTeacherInCalendarItem),
+		setRoomInCalendarItem: and(isAdminResolver)(CalendarModel.setRoomInCalendarItem),
 		removeItemFromCalendar: and(isAdminResolver)(CalendarModel.removeItemFromCalendar),
 		addItemToCalendar: and(isAdminResolver)(CalendarModel.addItemToCalendar)
 	},
