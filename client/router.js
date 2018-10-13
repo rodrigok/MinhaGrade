@@ -75,6 +75,7 @@ MainRouter = graphql(gql`
 			_id
 			admin
 			profile {
+				name
 				course {
 					_id
 					name

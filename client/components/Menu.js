@@ -52,10 +52,10 @@ class AccountComponent extends Component {
 		const { routeData } = this.props;
 
 		this.setState({ loading: true });
-		this.props.form.validateFields((err, { email, password, course }) => {
+		this.props.form.validateFields((err, { name, email, password, course }) => {
 			this.setState({ loading: false });
 			if (!err) {
-				Accounts.createUser({ email, password, profile: { course } }, (error) => {
+				Accounts.createUser({ email, password, profile: { name, course } }, (error) => {
 					if (error) {
 						return message.error(error.reason);
 					}
@@ -160,14 +160,14 @@ class AccountComponent extends Component {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
 							validateTrigger: 'onBlur'
 						})(
-							<Input placeholder='email' />
+							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
 						})(
-							<Input type='password' placeholder='senha' />
+							<Input type='password' placeholder='Senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -189,10 +189,17 @@ class AccountComponent extends Component {
 			<Card title='Criar conta'>
 				<Form onSubmit={this.handleSignup} className='login-form'>
 					<Form.Item>
+						{getFieldDecorator('name', {
+							rules: [{ required: true, message: 'Por favor entre com seu nome!' }]
+						})(
+							<Input placeholder='Nome' />
+						)}
+					</Form.Item>
+					<Form.Item>
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
 						})(
-							<Input placeholder='email' />
+							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -214,7 +221,7 @@ class AccountComponent extends Component {
 						{getFieldDecorator('password', {
 							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
 						})(
-							<Input type='password' placeholder='senha' />
+							<Input type='password' placeholder='Senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -412,11 +419,14 @@ class MenuComponent extends Component {
 		let userEmail = 'Entrar / Criar Conta';
 
 		if (user) {
-			userEmail = user.mainEmail.address;
+			userEmail = <div className='user-menu-content'>
+				<div>{user.profile.name}</div>
+				<div>{user.mainEmail && user.mainEmail.address}</div>
+			</div>;
 		}
 
 		return (
-			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }}>
+			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }} className='user-menu'>
 				<WrappedAccountComponent routeData={routeData} />
 			</Menu.SubMenu>
 		);

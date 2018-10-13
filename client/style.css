@@ -67,6 +67,7 @@
 	display: inline-block;
 	margin-left: -12px;
 	border: 2px solid white;
+	flex-wrap:
 }
 
 .friends-picture-list {
@@ -101,4 +102,19 @@
 	flex-grow: 0;
 	white-space: nowrap;
 	margin-right: 5px;
+}
+
+.user-menu > div > span {
+	display: flex;
+	height: 64px;
+	justify-content: left;
+	align-items: center
+}
+
+.user-menu-content {
+	display: inline-flex;
+	flex-direction: column;
+	line-height: 20px;
+	align-items: left;
+	justify-content: center;
 }

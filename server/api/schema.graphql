@@ -12,6 +12,7 @@ type Email {
 }
 
 type UserProfile {
+  name: String
   course: Course
 }
 
