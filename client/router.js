@@ -10,7 +10,10 @@ import {
 	Route
 } from 'react-router-dom';
 import {
-	Layout
+	Layout,
+	Modal,
+	Form,
+	Select
 } from 'antd';
 
 import GradeComponent from './views/Grade';
@@ -22,6 +25,8 @@ import CoursesComponent from './views/Courses';
 import MenuComponent from './components/Menu';
 
 class MainRouter extends Router {
+	state = {}
+
 	constructor(props) {
 		super();
 
@@ -35,6 +40,56 @@ class MainRouter extends Router {
 				}
 			`
 		});
+	}
+
+	renderCourseModal() {
+		const { data: { user, courses, loading } } = this.props;
+
+		if (loading || !user) {
+			return;
+		}
+
+		if (user.profile && user.profile.course && user.profile.course._id) {
+			return;
+		}
+
+		return <Modal
+			title='Selecione um curso'
+			visible={!this.state.courseModalClosed}
+			closable={false}
+			cancelButtonProps={{
+				hidden: true
+			}}
+			okButtonProps={{
+				disabled: !this.state.courseModalSelected
+			}}
+			okText='Selecionar'
+			onOk={() => {
+				Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.course': this.state.courseModalSelected } });
+				this.setState({
+					courseModalClosed: true
+				});
+				client.resetStore();
+			}}
+		>
+			<Form onSubmit={this.handleChangeCourse}>
+				<Form.Item>
+					<Select
+						showSearch
+						placeholder='Curso'
+						onChange={(value) => {
+							this.setState({
+								courseModalSelected: value
+							});
+						}}
+					>
+						{courses.map(course => (
+							<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+						))}
+					</Select>
+				</Form.Item>
+			</Form>
+		</Modal>;
 	}
 
 	render() {
@@ -56,6 +111,7 @@ class MainRouter extends Router {
 							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
 							<Route exact path='/teachers' component={TeachersComponent}/>
 							<Route exact path='/courses' component={CoursesComponent}/>
+							{this.renderCourseModal()}
 						</div>
 					</Layout.Content>
 				</Layout>

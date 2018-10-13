@@ -297,7 +297,7 @@ class AccountComponent extends Component {
 					<Form.Item>
 						{getFieldDecorator('course', {
 							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
-							initialValue: user.profile.course._id
+							initialValue: user.profile.course && user.profile.course._id
 						})(
 							<Select
 								showSearch
@@ -332,7 +332,7 @@ class AccountComponent extends Component {
 			<Card title={userEmail}>
 				<Form className='login-form'>
 					<Form.Item>
-						Curso: {user.profile.course.name}
+						Curso: {user.profile.course && user.profile.course.name || 'Nenhum curso definido'}
 						<Button onClick={() => this.setState({ action: 'change-course' })} className='login-form-button'>
 							Mudar curso
 						</Button>
