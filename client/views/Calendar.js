@@ -106,6 +106,9 @@ class CalendarItemComponent extends Component {
 		});
 
 		description = <React.Fragment>
+			{ calendarItem.room &&
+				<div>Sala: {calendarItem.room}</div>
+			}
 			<div>
 				Semestre: {gradeItem.semester}
 			</div>
@@ -329,6 +332,7 @@ export default compose(
 					day
 					shift
 					interested
+					room
 					teacher {
 						name
 					}
