@@ -24,6 +24,7 @@ type User {
   grade: JSON
   calendar: JSON
   profile: UserProfile
+  hasPassword: Boolean
 }
 
 type FacebookUser {
@@ -196,6 +197,7 @@ type Mutation {
   ): Boolean
 
   signup(
+    name: String!
     email: String!
     course: String!
     password: String!
@@ -208,6 +210,11 @@ type Mutation {
 
   setCourse(
     course: String!
+  ): Boolean
+
+  setPassword(
+    currentPassword: String
+    password: String!
   ): Boolean
 
   # Log the user in with a password.

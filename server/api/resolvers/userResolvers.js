@@ -45,12 +45,13 @@ const login = (root, { email, password }) => {
 	}
 };
 
-const signup = (root, { email, password, course }) => {
+const signup = (root, { name, email, password, course }) => {
 	try {
 		Accounts.createUser({
 			email,
 			password,
 			profile: {
+				name,
 				course
 			}
 		});
@@ -74,13 +75,32 @@ const setCourse = (root, { course }, { userId }) => {
 	return true;
 };
 
+const setPassword = (root, { currentPassword, password }, { userId }) => {
+	if (!userId) {
+		return false;
+	}
+
+	const user = Meteor.users.findOne({ _id: userId, 'services.password.bcrypt': { $exists: true } }, { fields: { 'services.password.bcrypt': 1 } });
+
+	if (user) {
+		try {
+			Accounts._checkPassword(user, currentPassword, { logout: false });
+		} catch (e) {
+			return false;
+		}
+	}
+
+	Accounts.setPassword(userId, password);
+	return true;
+};
+
 export default {
 	Query: {
 		user: findOne
 	},
 	User: {
-		mainEmail: ({ emails }) => emails && emails[0]
-
+		mainEmail: ({ emails }) => emails && emails[0],
+		hasPassword: ({ services }) => services && services.password && services.password.bcrypt != null
 	},
 	UserProfile: {
 		course: ({ course }) => CourseModel.findOne({ _id: course })
@@ -89,6 +109,7 @@ export default {
 		updateGradeItem: isAuthenticatedResolver.createResolver(UserModel.updateGradeItem),
 		login,
 		signup,
-		setCourse
+		setCourse,
+		setPassword
 	}
 };
