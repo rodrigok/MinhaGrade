@@ -150,11 +150,15 @@ class AccountComponent extends Component {
 			<Card title='Entrar'>
 				<Form onSubmit={this.handleLogin} className='login-form'>
 					<FacebookLogin
+						textButton='Entrar com Facebook'
 						appId='185969382302390'
 						fields='name,email,picture'
 						scope='public_profile,email,user_friends'
 						callback={responseFacebook}
 					/>
+					<div className='login-or'>
+						ou
+					</div>
 					<Form.Item>
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],

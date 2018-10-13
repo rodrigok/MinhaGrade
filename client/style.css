@@ -118,3 +118,20 @@
 	align-items: left;
 	justify-content: center;
 }
+
+.kep-login-facebook {
+	font-family: inherit !important;
+	font-weight: 700 !important;
+	color: #fff !important;
+	font-size: 18px !important;
+	text-transform: none !important;
+	padding: 4px 0px !important;
+	width: 100% !important;
+}
+
+.login-or {
+	line-height: 60px;
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+}
