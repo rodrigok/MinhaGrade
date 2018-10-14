@@ -8,7 +8,7 @@ import { getMainDefinition } from 'apollo-utilities';
 const host = 'localhost';
 
 const httpLink = new HttpLink({
-	uri: `http://${ host }:3000/graphql`
+	uri: `http://${ host }:3000/graphql`,
 });
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -17,8 +17,8 @@ const authLink = new ApolloLink((operation, forward) => {
 
 		return {
 			headers: {
-				Authorization: `Bearer ${ token || '' }`
-			}
+				Authorization: `Bearer ${ token || '' }`,
+			},
 		};
 	});
 
@@ -33,10 +33,10 @@ const wsLink = new WebSocketLink({
 		connectionParams: () => {
 			const token = localStorage.getItem('Meteor.loginToken');
 			return {
-				authToken: token
+				authToken: token,
 			};
-		}
-	}
+		},
+	},
 });
 
 const link = split(
@@ -50,5 +50,5 @@ const link = split(
 
 export const client = new ApolloClient({
 	link: concat(authLink, link),
-	cache: new InMemoryCache()
+	cache: new InMemoryCache(),
 });

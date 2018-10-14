@@ -12,11 +12,11 @@ import promisify from 'promisify-node';
 graph.get = promisify(graph.get);
 
 const NameAlreadyExists = createError('NameAlreadyExists', {
-	message: 'Name already exists'
+	message: 'Name already exists',
 });
 
 const AnotherCalendarActive = createError('AnotherCalendarActive', {
-	message: 'Another calendar is already active'
+	message: 'Another calendar is already active',
 });
 
 const checkIfNameAlreadyExists = createResolver((root, { name }) => {
@@ -27,7 +27,7 @@ const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 
 const findOne = async(root, args, context) => {
 	const result = CalendarModel.findOne({
-		active: true
+		active: true,
 	});
 
 	context.calendarId = result._id;
@@ -60,7 +60,7 @@ const activateCalendar = (root, { _id, active }) => {
 export default {
 	Query: {
 		calendar: findOne,
-		calendars: isAuthenticatedResolver.createResolver(CalendarModel.resolverFindAll)
+		calendars: isAuthenticatedResolver.createResolver(CalendarModel.resolverFindAll),
 	},
 	Mutation: {
 		createCalendar: and(isAdminResolver, checkIfNameAlreadyExists)(CalendarModel.mutationCreate),
@@ -71,10 +71,10 @@ export default {
 		setTeacherInCalendarItem: and(isAdminResolver)(CalendarModel.setTeacherInCalendarItem),
 		setRoomInCalendarItem: and(isAdminResolver)(CalendarModel.setRoomInCalendarItem),
 		removeItemFromCalendar: and(isAdminResolver)(CalendarModel.removeItemFromCalendar),
-		addItemToCalendar: and(isAdminResolver)(CalendarModel.addItemToCalendar)
+		addItemToCalendar: and(isAdminResolver)(CalendarModel.addItemToCalendar),
 	},
 	Calendar: {
-		grade: ({ grade }) => grade || []
+		grade: ({ grade }) => grade || [],
 	},
 	CalendarItem: {
 		// _id needs to hava a unique identifier
@@ -97,8 +97,8 @@ export default {
 			const user = UserModel.findOne({
 				_id: userId,
 				[`grade.${ _id }`]: {
-					$exists: true
-				}
+					$exists: true,
+				},
 			}, { grade: 1 });
 
 			if (user) {
@@ -116,7 +116,7 @@ export default {
 
 			const user = UserModel.findOne({
 				_id: userId,
-				[`calendar.${ calendarId }`]: key
+				[`calendar.${ calendarId }`]: key,
 			}, { fields: { grade: 1 } });
 
 			if (user) {
@@ -137,6 +137,6 @@ export default {
 			const ids = friends.map((i) => i.id);
 			const users = UserModel.findFriendsFacebookByIdsInterestedIn(ids, calendarId, key, { fields: { 'services.facebook.id': 1 } }).fetch().map((i) => i.services.facebook.id);
 			return friends.filter((i) => users.includes(i.id));
-		}
-	}
+		},
+	},
 };

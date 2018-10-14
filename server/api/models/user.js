@@ -13,8 +13,8 @@ class UserModel extends _BaseModel {
 		const query = {
 			_id,
 			'services.facebook.accessToken': {
-				$exists: true
-			}
+				$exists: true,
+			},
 		};
 		return Meteor.users.findOne(query, options);
 	}
@@ -28,9 +28,9 @@ class UserModel extends _BaseModel {
 	findFriendsFacebookByIdsInterestedIn(friendIds, calendarId, key, options) {
 		const query = {
 			'services.facebook.id': {
-				$in: friendIds
+				$in: friendIds,
 			},
-			[`calendar.${ calendarId }`]: key
+			[`calendar.${ calendarId }`]: key,
 		};
 
 		return Meteor.users.find(query, options);
@@ -51,15 +51,15 @@ class UserModel extends _BaseModel {
 			emails: {
 				$elemMatch: {
 					address: email,
-					verified: false
-				}
-			}
+					verified: false,
+				},
+			},
 		};
 
 		const update = {
 			$set: {
-				'emails.$.verified': true
-			}
+				'emails.$.verified': true,
+			},
 		};
 
 		return Meteor.users.update(query, update);
@@ -73,23 +73,23 @@ class UserModel extends _BaseModel {
 			case 'doing':
 				Meteor.users.update(userId, {
 					$set: {
-						[`grade.${ _id }`]: status
-					}
+						[`grade.${ _id }`]: status,
+					},
 				});
 				break;
 
 			case 'pending':
 				Meteor.users.update(userId, {
 					$unset: {
-						[`grade.${ _id }`]: 1
-					}
+						[`grade.${ _id }`]: 1,
+					},
 				});
 				break;
 		}
 
 		pubsub.publish(GRADE_CHANGE_CHANNEL, {
 			userId,
-			grade: GradeModel.findOne({ _id })
+			grade: GradeModel.findOne({ _id }),
 		});
 	}
 }

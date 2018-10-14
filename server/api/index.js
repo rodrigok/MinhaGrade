@@ -16,19 +16,19 @@ initAccounts({
 	loginWithFacebook: true,
 	loginWithGoogle: false,
 	loginWithLinkedIn: false,
-	loginWithPassword: true
+	loginWithPassword: true,
 });
 
 const { resolvers: resolversAccounts } = getSchema();
 
 const resolversCombined = combineResolvers([
 	resolvers,
-	resolversAccounts
+	resolversAccounts,
 ]);
 
 const schema = makeExecutableSchema({
 	typeDefs,
-	resolvers: resolversCombined
+	resolvers: resolversCombined,
 });
 
 const websocketServer = createServer((request, response) => {
@@ -50,20 +50,18 @@ SubscriptionServer.create({
 	onConnect: (connectionParams) => {
 		if (connectionParams.authToken) {
 			return getUserIdByLoginToken(connectionParams.authToken)
-				.then((userId) => {
-					return {
-						userId
-					};
-				});
+				.then((userId) => ({
+					userId,
+				}));
 		}
 
 		throw new Error('Missing auth token!');
-	}
+	},
 }, {
 	server: websocketServer,
-	path: '/subscriptions'
+	path: '/subscriptions',
 });
 
 setupHttpEndpoint({
-	schema
+	schema,
 });

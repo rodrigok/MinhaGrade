@@ -10,5 +10,5 @@ Migrations.add({
 
 		return Array.from(courses).map((item) =>
 			GradeModel.insert(item));
-	}
+	},
 });

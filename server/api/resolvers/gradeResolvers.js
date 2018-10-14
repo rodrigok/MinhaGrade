@@ -14,13 +14,13 @@ const find = (root, { userId }, context) => {
 	context.course = UserModel.findOne(context.userId).profile.course;
 
 	return GradeModel.find({
-		[`code.${ context.course }`]: { $exists: true }
+		[`code.${ context.course }`]: { $exists: true },
 	}).fetch();
 };
 
 export default {
 	Query: {
-		grades: find
+		grades: find,
 	},
 	Grade: {
 		code: ({ code }, args, context) => code[context.course],
@@ -36,8 +36,8 @@ export default {
 			const user = UserModel.findOne({
 				_id: userId,
 				[`grade.${ _id }`]: {
-					$exists: true
-				}
+					$exists: true,
+				},
 			}, { grade: 1 });
 
 			if (user) {
@@ -45,13 +45,11 @@ export default {
 			}
 
 			return 'pending';
-		}
+		},
 	},
 	Subscription: {
 		grade: {
-			subscribe: withFilter(() => pubsub.asyncIterator(GRADE_CHANGE_CHANNEL), (payload, variables, { userId }) => {
-				return payload.userId === userId;
-			})
-		}
-	}
+			subscribe: withFilter(() => pubsub.asyncIterator(GRADE_CHANGE_CHANNEL), (payload, variables, { userId }) => payload.userId === userId),
+		},
+	},
 };

@@ -9,25 +9,25 @@ import {
 	Popconfirm,
 	Button,
 	Select,
-	Input
+	Input,
 } from 'antd';
 
 const days = {
-	'0': 'EAD',
-	'2': 'Segunda',
-	'3': 'Terça',
-	'4': 'Quarta',
-	'5': 'Quinta',
-	'6': 'Sexta',
-	'7': 'Sábado'
+	0: 'EAD',
+	2: 'Segunda',
+	3: 'Terça',
+	4: 'Quarta',
+	5: 'Quinta',
+	6: 'Sexta',
+	7: 'Sábado',
 };
 
 const shifts = {
-	'0': 'EAD',
-	'1': 'Manhã',
-	'2': 'Tarde',
-	'3': 'Noite',
-	'5': 'Vespertino'
+	0: 'EAD',
+	1: 'Manhã',
+	2: 'Tarde',
+	3: 'Noite',
+	5: 'Vespertino',
 };
 
 class CalendarEdit extends Component {
@@ -37,7 +37,7 @@ class CalendarEdit extends Component {
 		setTeacherInCalendarItem: PropTypes.func,
 		removeItemFromCalendar: PropTypes.func,
 		addItemToCalendar: PropTypes.func,
-		setRoomInCalendarItem: PropTypes.func
+		setRoomInCalendarItem: PropTypes.func,
 	}
 
 	state = {}
@@ -49,39 +49,37 @@ class CalendarEdit extends Component {
 			title: 'Ações',
 			key: 'actions',
 			width: 80,
-			render: (text, record) => {
-				return (
-					<span>
-						<Popconfirm title='Deseja deletar?' onConfirm={() => this.onDelete(record)}>
-							<a href='javascript:;'>Deletar</a>
-						</Popconfirm>
-					</span>
-				);
-			}
+			render: (text, record) => (
+				<span>
+					<Popconfirm title='Deseja deletar?' onConfirm={() => this.onDelete(record)}>
+						<a href='javascript:;'>Deletar</a>
+					</Popconfirm>
+				</span>
+			),
 		}, {
 			title: 'Turno',
 			dataIndex: 'shift',
 			width: 80,
 			render(text) {
 				return shifts[text];
-			}
+			},
 		}, {
 			title: 'Dia',
 			dataIndex: 'day',
 			width: 100,
 			render(text) {
 				return days[text];
-			}
+			},
 		}, {
 			title: 'Nome',
 			dataIndex: 'grade.allNames',
 			render(text) {
 				return _.unique(Object.values(text)).join(' | ');
-			}
+			},
 		}, {
 			title: 'Alunos',
 			dataIndex: 'interested',
-			width: 80
+			width: 80,
 		}, {
 			title: 'Professor',
 			dataIndex: 'teacher._id',
@@ -100,30 +98,28 @@ class CalendarEdit extends Component {
 						onChange={(value) => this.setTeacher(value, record)}
 					>
 						<Select.Option key='undefined' value=''>Não definido</Select.Option>
-						{teachers.map(teacher => (
+						{teachers.map((teacher) => (
 							<Select.Option key={teacher._id} value={teacher._id} name={teacher.name}>{teacher.name}</Select.Option>
 						))}
 					</Select>
 				);
-			}
+			},
 		}, {
 			title: 'Sala',
 			dataIndex: 'room',
 			width: 100,
-			render: (text, record) => {
-				return (
-					<Input
-						defaultValue={text}
-						placeholder='Sala'
-						style={{ width: 100 }}
-						onBlur={(e) => this.setRoom(e.target.value, record)}
-					></Input>
-				);
-			}
+			render: (text, record) => (
+				<Input
+					defaultValue={text}
+					placeholder='Sala'
+					style={{ width: 100 }}
+					onBlur={(e) => this.setRoom(e.target.value, record)}
+				></Input>
+			),
 		}];
 
 		this.state = {
-			columns
+			columns,
 		};
 	}
 
@@ -136,11 +132,11 @@ class CalendarEdit extends Component {
 					gradeItemId: record.grade._id,
 					shift: record.shift,
 					day: record.day,
-					teacherId: teacher
-				}
+					teacherId: teacher,
+				},
 			}).then(() => {
 				this.props.data.refetch();
-			}).catch(e => console.error(e));
+			}).catch((e) => console.error(e));
 		}
 	}
 
@@ -153,11 +149,11 @@ class CalendarEdit extends Component {
 					gradeItemId: record.grade._id,
 					shift: record.shift,
 					day: record.day,
-					room
-				}
+					room,
+				},
 			}).then(() => {
 				this.props.data.refetch();
-			}).catch(e => console.error(e));
+			}).catch((e) => console.error(e));
 		}
 	}
 
@@ -167,11 +163,11 @@ class CalendarEdit extends Component {
 				calendarId: this.props.match.params.calendarName,
 				gradeItemId: record.grade._id,
 				shift: record.shift,
-				day: record.day
-			}
+				day: record.day,
+			},
 		}).then(() => {
 			this.props.data.refetch();
-		}).catch(e => console.error(e));
+		}).catch((e) => console.error(e));
 	}
 
 	handleAdd() {
@@ -181,11 +177,11 @@ class CalendarEdit extends Component {
 					calendarId: this.props.match.params.calendarName,
 					gradeItemId: this.state.selectedItem,
 					shift: this.state.selectedShift,
-					day: this.state.selectedDay
-				}
+					day: this.state.selectedDay,
+				},
 			}).then(() => {
 				this.props.data.refetch();
-			}).catch(e => console.error(e));
+			}).catch((e) => console.error(e));
 		}
 	}
 
@@ -208,9 +204,7 @@ class CalendarEdit extends Component {
 	grade() {
 		const { data: { grades = [] } } = this.props;
 
-		return grades.map(item => {
-			return <Select.Option key={item._id} value={item._id} name={item.name}>{item.name}</Select.Option>;
-		});
+		return grades.map((item) => <Select.Option key={item._id} value={item._id} name={item.name}>{item.name}</Select.Option>);
 	}
 
 	render() {
@@ -298,9 +292,9 @@ export default compose(
 	`, {
 		options: ({ match }) => ({
 			variables: {
-				calendarName: match.params.calendarName
-			}
-		})
+				calendarName: match.params.calendarName,
+			},
+		}),
 	}),
 	graphql(gql`
 		mutation setTeacherInCalendarItem(

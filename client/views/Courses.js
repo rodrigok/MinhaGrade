@@ -6,7 +6,7 @@ import { EditableTableComponent } from '/client/components/EditableTable';
 import {
 	Input,
 	Icon,
-	message
+	message,
 } from 'antd';
 
 
@@ -31,7 +31,7 @@ class CoursesComponent extends EditableTableComponent {
 				}
 
 				return text || '0';
-			}
+			},
 		});
 	}
 
@@ -45,7 +45,7 @@ class CoursesComponent extends EditableTableComponent {
 
 		const error = (error) => {
 			if (error) {
-				error.graphQLErrors.forEach(e => message.error(this.errors[e.message] || e.message));
+				error.graphQLErrors.forEach((e) => message.error(this.errors[e.message] || e.message));
 			}
 		};
 
@@ -55,7 +55,7 @@ class CoursesComponent extends EditableTableComponent {
 			this.setState({
 				editing: _id === 'new' ? 'new' : undefined,
 				editingName: '',
-				editingElective: undefined
+				editingElective: undefined,
 			});
 		};
 
@@ -63,8 +63,8 @@ class CoursesComponent extends EditableTableComponent {
 			return this.props.createMutation({
 				variables: {
 					name,
-					elective
-				}
+					elective,
+				},
 			}).then(success).catch(error);
 		}
 
@@ -72,8 +72,8 @@ class CoursesComponent extends EditableTableComponent {
 			variables: {
 				_id,
 				name,
-				elective
-			}
+				elective,
+			},
 		}).then(success).catch(error);
 	}
 

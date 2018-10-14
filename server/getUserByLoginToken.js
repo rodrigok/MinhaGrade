@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 const USER_TOKEN_PATH = 'services.resume.loginTokens.hashedToken';
 export const NO_VALID_USER_ERROR = new Error('NO_VALID_USER');
 
@@ -24,7 +26,7 @@ export async function getUserIdByLoginToken(loginToken) {
 
 	// find the corresponding token: the user may have several open sessions on different clients
 	const currentToken = user.services.resume.loginTokens
-		.find(token => token.hashedToken === hashedToken);
+		.find((token) => token.hashedToken === hashedToken);
 
 	const tokenExpiresAt = Accounts._tokenExpiration(currentToken.when);
 	const isTokenExpired = tokenExpiresAt < new Date();

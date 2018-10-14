@@ -14,13 +14,13 @@ import {
 	Table,
 	Progress,
 	Input,
-	Spin
+	Spin,
 } from 'antd';
 
 const Status = {
 	pending: 'Pendente',
 	doing: 'Cursando',
-	done: 'Concluído'
+	done: 'Concluído',
 };
 
 class GradeComponent extends Component {
@@ -28,7 +28,7 @@ class GradeComponent extends Component {
 		data: PropTypes.object,
 		user: PropTypes.object,
 		match: PropTypes.object,
-		updateGradeItem: PropTypes.func
+		updateGradeItem: PropTypes.func,
 	}
 
 	state = {}
@@ -37,8 +37,8 @@ class GradeComponent extends Component {
 		this.props.updateGradeItem({
 			variables: {
 				_id,
-				status
-			}
+				status,
+			},
 		}).then(() => {
 			message.success('Status alterado');
 		});
@@ -65,43 +65,41 @@ class GradeComponent extends Component {
 					return 1;
 				}
 				return 0;
-			}
+			},
 		}, {
 			title: 'Nome',
-			dataIndex: 'name'
+			dataIndex: 'name',
 		}, {
 			title: 'Dependencias',
 			dataIndex: 'requirement',
-			render: (requirements) => {
-				return requirements.map(requirement => {
-					const style = {
-						color: '#f50'
-					};
+			render: (requirements) => requirements.map((requirement) => {
+				const style = {
+					color: '#f50',
+				};
 
-					switch (requirement.userStatus) {
-						case 'done':
-							style.color = '#d3d3d3';
-							break;
-						case 'doing':
-							style.color = '#ffa500';
-							break;
-					}
+				switch (requirement.userStatus) {
+					case 'done':
+						style.color = '#d3d3d3';
+						break;
+					case 'doing':
+						style.color = '#ffa500';
+						break;
+				}
 
-					if (requirement.name) {
-						return <Tooltip key={requirement.code} title={`${ requirement.name } - Semestre ${ requirement.semester }`}>
-							<Tag color={style.color}>{requirement.code}</Tag>
-						</Tooltip>;
-					}
+				if (requirement.name) {
+					return <Tooltip key={requirement.code} title={`${ requirement.name } - Semestre ${ requirement.semester }`}>
+						<Tag color={style.color}>{requirement.code}</Tag>
+					</Tooltip>;
+				}
 
-					return <Tag key={requirement.code} color={style.color}>{requirement.code}</Tag>;
-				});
-			}
+				return <Tag key={requirement.code} color={style.color}>{requirement.code}</Tag>;
+			}),
 		}, {
 			title: 'Créditos / Carga Horária',
 			dataIndex: 'credit',
 			render: (text, record) => (
 				`${ record.credit } / ${ record.workload }`
-			)
+			),
 		}];
 
 		if (user) {
@@ -110,13 +108,13 @@ class GradeComponent extends Component {
 				dataIndex: 'status',
 				filters: [{
 					text: Status.pending,
-					value: 'pending'
+					value: 'pending',
 				}, {
 					text: Status.doing,
-					value: 'doing'
+					value: 'doing',
 				}, {
 					text: Status.done,
-					value: 'done'
+					value: 'done',
 				}],
 				onFilter: (value, record) => {
 					const { user: { user } } = this.props;
@@ -164,7 +162,7 @@ class GradeComponent extends Component {
 							{Status[status]} <Icon type='down' />
 						</a>
 					</Dropdown>;
-				}
+				},
 			});
 		}
 
@@ -190,7 +188,7 @@ class GradeComponent extends Component {
 		}
 
 		return {
-			style
+			style,
 		};
 	}
 
@@ -215,7 +213,7 @@ class GradeComponent extends Component {
 		const percentageDoing = Math.round((100 / total) * doing);
 
 		return <div>
-			<Progress percent={percentageDone+percentageDoing} successPercent={percentageDone} />
+			<Progress percent={percentageDone + percentageDoing} successPercent={percentageDone} />
 			<div style={{ textAlign: 'center' }}>
 				{
 					done === 1
@@ -265,7 +263,7 @@ class GradeComponent extends Component {
 					columns={this.getColumns()}
 					pagination={false}
 					rowKey='_id'
-					expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
+					expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
 					onRow={this.onRow.bind(this)}
 				/>
 			</div>
@@ -297,9 +295,9 @@ export default compose(
 	`, {
 		options: ({ match }) => ({
 			variables: {
-				userId: match.params.userId
-			}
-		})
+				userId: match.params.userId,
+			},
+		}),
 	}),
 	graphql(gql`
 		query ($userId: String) {
@@ -320,9 +318,9 @@ export default compose(
 		name: 'user',
 		options: ({ match }) => ({
 			variables: {
-				userId: match.params.userId
-			}
-		})
+				userId: match.params.userId,
+			},
+		}),
 	}),
 	graphql(gql`
 		mutation updateGradeItem($_id: String! $status: String!) {

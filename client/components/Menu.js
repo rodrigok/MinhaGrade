@@ -14,14 +14,14 @@ import {
 	Button,
 	message,
 	Card,
-	Select
+	Select,
 } from 'antd';
 
 class AccountComponent extends Component {
 	static propTypes = {
 		routeData: PropTypes.object,
 		getFieldDecorator: PropTypes.any,
-		form: PropTypes.any
+		form: PropTypes.any,
 	}
 
 	state = {}
@@ -85,7 +85,7 @@ class AccountComponent extends Component {
 
 					message.info('Email enviado');
 					this.setState({
-						action: 'login'
+						action: 'login',
 					});
 				});
 			}
@@ -106,7 +106,7 @@ class AccountComponent extends Component {
 					message.info('Senha alterada');
 
 					this.setState({
-						action: ''
+						action: '',
 					});
 				});
 			}
@@ -123,7 +123,7 @@ class AccountComponent extends Component {
 				message.info('Curso alterado');
 
 				this.setState({
-					action: ''
+					action: '',
 				});
 
 				ApolloClient.resetStore();
@@ -162,14 +162,14 @@ class AccountComponent extends Component {
 					<Form.Item>
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
-							validateTrigger: 'onBlur'
+							validateTrigger: 'onBlur',
 						})(
 							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
 							<Input type='password' placeholder='Senha' />
 						)}
@@ -194,28 +194,28 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleSignup} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('name', {
-							rules: [{ required: true, message: 'Por favor entre com seu nome!' }]
+							rules: [{ required: true, message: 'Por favor entre com seu nome!' }],
 						})(
 							<Input placeholder='Nome' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('email', {
-							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
+							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
 						})(
 							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('course', {
-							rules: [{ required: true, message: 'Por favor selecione um curso!' }]
+							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
 						})(
 							<Select
 								showSearch
 								placeholder='Curso'
 								// onChange={(value) => this.setTeacher(value, record)}
 							>
-								{courses.map(course => (
+								{courses.map((course) => (
 									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
 								))}
 							</Select>
@@ -223,7 +223,7 @@ class AccountComponent extends Component {
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
 							<Input type='password' placeholder='Senha' />
 						)}
@@ -246,7 +246,7 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleForgotPassword} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('email', {
-							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
+							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
 						})(
 							<Input placeholder='email' />
 						)}
@@ -269,14 +269,14 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleChangePassword} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
 							<Input type='password' placeholder='senha atual' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('newPassword', {
-							rules: [{ required: true, message: 'Por favor entre com a nova senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com a nova senha!' }],
 						})(
 							<Input type='password' placeholder='nova senha' />
 						)}
@@ -301,14 +301,14 @@ class AccountComponent extends Component {
 					<Form.Item>
 						{getFieldDecorator('course', {
 							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
-							initialValue: user.profile.course && user.profile.course._id
+							initialValue: user.profile.course && user.profile.course._id,
 						})(
 							<Select
 								showSearch
 								placeholder='Curso'
 								// onChange={(value) => this.setTeacher(value, record)}
 							>
-								{courses.map(course => (
+								{courses.map((course) => (
 									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
 								))}
 							</Select>
@@ -336,7 +336,7 @@ class AccountComponent extends Component {
 			<Card title={userEmail}>
 				<Form className='login-form'>
 					<Form.Item>
-						Curso: {user.profile.course && user.profile.course.name || 'Nenhum curso definido'}
+						Curso: {(user.profile.course && user.profile.course.name) || 'Nenhum curso definido'}
 						<Button onClick={() => this.setState({ action: 'change-course' })} className='login-form-button'>
 							Mudar curso
 						</Button>
@@ -391,7 +391,7 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 class MenuComponent extends Component {
 	static propTypes = {
 		routeData: PropTypes.object,
-		history: PropTypes.object
+		history: PropTypes.object,
 	}
 
 	state = {}

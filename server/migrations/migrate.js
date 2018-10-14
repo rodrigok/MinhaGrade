@@ -10,5 +10,5 @@ Meteor.methods({
 		}
 
 		return Migrations.migrateTo(version);
-	}
+	},
 });

@@ -10,37 +10,21 @@ export class _BaseModel {
 		}
 	}
 
-	find = (query = {}, options) => {
-		return this.model.find(query, options);
-	}
+	find = (query = {}, options) => this.model.find(query, options)
 
-	findOne = (query = {}, options) => {
-		return this.model.findOne(query, options);
-	}
+	findOne = (query = {}, options) => this.model.findOne(query, options)
 
-	create = (record) => {
-		return this.insert(record);
-	}
+	create = (record) => this.insert(record)
 
-	insert = (record) => {
-		return this.model.insert(record);
-	}
+	insert = (record) => this.model.insert(record)
 
-	update = (query, update, options) => {
-		return this.model.update(query, update, options);
-	}
+	update = (query, update, options) => this.model.update(query, update, options)
 
-	updateById = (_id, update) => {
-		return this.model.update({ _id }, update);
-	}
+	updateById = (_id, update) => this.model.update({ _id }, update)
 
-	removeById = (_id) => {
-		return this.model.remove({ _id });
-	}
+	removeById = (_id) => this.model.remove({ _id })
 
-	createAndReturn = (record) => {
-		return this.findOne(this.insert(record));
-	}
+	createAndReturn = (record) => this.findOne(this.insert(record))
 
 	updateByIdAndReturn = (_id, update) => {
 		this.update({ _id }, update);
@@ -48,20 +32,12 @@ export class _BaseModel {
 	}
 
 
-	resolverFindAll = () => {
-		return this.find().fetch();
-	}
+	resolverFindAll = () => this.find().fetch()
 
 
-	mutationCreate = (root, record) => {
-		return this.createAndReturn(record);
-	}
+	mutationCreate = (root, record) => this.createAndReturn(record)
 
-	mutationUpdate = (root, { _id, ...record }) => {
-		return this.updateByIdAndReturn(_id, record);
-	}
+	mutationUpdate = (root, { _id, ...record }) => this.updateByIdAndReturn(_id, record)
 
-	mutationRemove = (root, { _id }) => {
-		return this.removeById(_id);
-	}
+	mutationRemove = (root, { _id }) => this.removeById(_id)
 }

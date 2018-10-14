@@ -7,13 +7,13 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import {
 	BrowserRouter as Router,
-	Route
+	Route,
 } from 'react-router-dom';
 import {
 	Layout,
 	Modal,
 	Form,
-	Select
+	Select,
 } from 'antd';
 
 import GradeComponent from './views/Grade';
@@ -38,7 +38,7 @@ class MainRouter extends Router {
 						userStatus
 					}
 				}
-			`
+			`,
 		});
 	}
 
@@ -58,16 +58,16 @@ class MainRouter extends Router {
 			visible={!this.state.courseModalClosed}
 			closable={false}
 			cancelButtonProps={{
-				hidden: true
+				hidden: true,
 			}}
 			okButtonProps={{
-				disabled: !this.state.courseModalSelected
+				disabled: !this.state.courseModalSelected,
 			}}
 			okText='Selecionar'
 			onOk={() => {
 				Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.course': this.state.courseModalSelected } });
 				this.setState({
-					courseModalClosed: true
+					courseModalClosed: true,
 				});
 				client.resetStore();
 			}}
@@ -79,11 +79,11 @@ class MainRouter extends Router {
 						placeholder='Curso'
 						onChange={(value) => {
 							this.setState({
-								courseModalSelected: value
+								courseModalSelected: value,
 							});
 						}}
 					>
-						{courses.map(course => (
+						{courses.map((course) => (
 							<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
 						))}
 					</Select>
