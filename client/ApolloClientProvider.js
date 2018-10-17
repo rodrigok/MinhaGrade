@@ -5,10 +5,8 @@ import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
-const host = 'localhost';
-
 const httpLink = new HttpLink({
-	uri: `http://${ host }:3000/graphql`,
+	uri: `${location.protocol}//${ location.host }/graphql`,
 });
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -26,7 +24,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const wsLink = new WebSocketLink({
-	uri: `ws://${ host }:5000/subscriptions`,
+	uri: `ws://${ location.hostname }:5000/subscriptions`,
 	options: {
 		reconnect: true,
 		lazy: true,
