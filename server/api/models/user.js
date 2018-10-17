@@ -9,6 +9,62 @@ class UserModel extends _BaseModel {
 		super(Meteor.users);
 	}
 
+	findOneByIdWithFacebookToken(_id, options) {
+		const query = {
+			_id,
+			'services.facebook.accessToken': {
+				$exists: true,
+			},
+		};
+		return Meteor.users.findOne(query, options);
+	}
+
+	findOneByEmailAddress(emailAddress, options) {
+		const query = { 'emails.address': emailAddress.toLowerCase() };
+
+		return Meteor.users.findOne(query, options);
+	}
+
+	findFriendsFacebookByIdsInterestedIn(friendIds, calendarId, key, options) {
+		const query = {
+			'services.facebook.id': {
+				$in: friendIds,
+			},
+			[`calendar.${ calendarId }`]: key,
+		};
+
+		return Meteor.users.find(query, options);
+	}
+
+	setServiceId(_id, serviceName, serviceId) {
+		const update = { $set: {} };
+
+		const serviceIdKey = `services.${ serviceName }.id`;
+		update.$set[serviceIdKey] = serviceId;
+
+		return Meteor.users.update(_id, update);
+	}
+
+	setEmailVerified(_id, email) {
+		const query = {
+			_id,
+			emails: {
+				$elemMatch: {
+					address: email,
+					verified: false,
+				},
+			},
+		};
+
+		const update = {
+			$set: {
+				'emails.$.verified': true,
+			},
+		};
+
+		return Meteor.users.update(query, update);
+	}
+
 	updateGradeItem(root, { _id, status }, { userId }) {
 		console.log('updateGradeItem', { _id, status, userId });
 
@@ -17,23 +73,23 @@ class UserModel extends _BaseModel {
 			case 'doing':
 				Meteor.users.update(userId, {
 					$set: {
-						[`grade.${ _id }`]: status
-					}
+						[`grade.${ _id }`]: status,
+					},
 				});
 				break;
 
 			case 'pending':
 				Meteor.users.update(userId, {
 					$unset: {
-						[`grade.${ _id }`]: 1
-					}
+						[`grade.${ _id }`]: 1,
+					},
 				});
 				break;
 		}
 
 		pubsub.publish(GRADE_CHANGE_CHANNEL, {
 			userId,
-			grade: GradeModel.findOne({ _id })
+			grade: GradeModel.findOne({ _id }),
 		});
 	}
 }

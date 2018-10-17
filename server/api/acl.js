@@ -3,19 +3,19 @@ import { createResolver } from 'apollo-resolvers';
 import { createError, isInstance } from 'apollo-errors';
 
 const ForbiddenError = createError('ForbiddenError', {
-	message: 'You are not allowed to do this'
+	message: 'You are not allowed to do this',
 });
 
 const AuthenticationRequiredError = createError('AuthenticationRequiredError', {
-	message: 'You must be logged in to do this'
+	message: 'You must be logged in to do this',
 });
 
 const UnknownError = createError('UnknownError', {
-	message: 'An unknown error has occurred!  Please try again later'
+	message: 'An unknown error has occurred!  Please try again later',
 });
 
 export const baseResolver = createResolver(
-	//incoming requests will pass through this resolver like a no-op
+	// incoming requests will pass through this resolver like a no-op
 	null,
 
 	/*

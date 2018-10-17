@@ -9,7 +9,7 @@ import {
 	Input,
 	Icon,
 	Tooltip,
-	message
+	message,
 } from 'antd';
 
 export class EditableTableComponent extends BaseTableComponent {
@@ -17,13 +17,13 @@ export class EditableTableComponent extends BaseTableComponent {
 		data: PropTypes.object,
 		removeMutation: PropTypes.func,
 		createMutation: PropTypes.func,
-		updateMutation: PropTypes.func
+		updateMutation: PropTypes.func,
 	}
 
 	state = {}
 
 	errors = {
-		'Name already exists': 'Nome já existente'
+		'Name already exists': 'Nome já existente',
 	}
 
 	constructor() {
@@ -71,7 +71,7 @@ export class EditableTableComponent extends BaseTableComponent {
 						</Tooltip>
 					</span>
 				);
-			}
+			},
 		}, {
 			title: 'Nome',
 			dataIndex: 'name',
@@ -89,11 +89,11 @@ export class EditableTableComponent extends BaseTableComponent {
 				}
 
 				return text;
-			}
+			},
 		}];
 
 		this.state = {
-			columns
+			columns,
 		};
 	}
 
@@ -115,7 +115,7 @@ export class EditableTableComponent extends BaseTableComponent {
 		const error = (error) => {
 			window.a = error;
 			if (error) {
-				error.graphQLErrors.forEach(e => message.error(this.errors[e.message] || e.message));
+				error.graphQLErrors.forEach((e) => message.error(this.errors[e.message] || e.message));
 			}
 		};
 
@@ -124,31 +124,31 @@ export class EditableTableComponent extends BaseTableComponent {
 
 			this.setState({
 				editing: _id === 'new' ? 'new' : undefined,
-				editingName: ''
+				editingName: '',
 			});
 		};
 
 		if (_id === 'new') {
 			return this.props.createMutation({
 				variables: {
-					name
-				}
+					name,
+				},
 			}).then(success).catch(error);
 		}
 
 		return this.props.updateMutation({
 			variables: {
 				_id,
-				name
-			}
+				name,
+			},
 		}).then(success).catch(error);
 	}
 
 	onDelete(_id) {
 		this.props.removeMutation({
 			variables: {
-				_id
-			}
+				_id,
+			},
 		}).then(() => {
 			this.props.data.refetch();
 		});
@@ -159,7 +159,7 @@ export class EditableTableComponent extends BaseTableComponent {
 
 		if (state.records && state.editing === 'new') {
 			state.records = state.records.concat([{
-				_id: 'new'
+				_id: 'new',
 			}]);
 		}
 
@@ -169,7 +169,7 @@ export class EditableTableComponent extends BaseTableComponent {
 	onAdd = () => {
 		this.setState({
 			editing: 'new',
-			editingName: ''
+			editingName: '',
 		});
 	}
 

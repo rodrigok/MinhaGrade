@@ -26,9 +26,9 @@ class CalendarModel extends _BaseModel {
 				$elemMatch: {
 					_id: gradeItemId,
 					day,
-					shift
-				}
-			}
+					shift,
+				},
+			},
 		};
 
 		update = {};
@@ -46,20 +46,49 @@ class CalendarModel extends _BaseModel {
 				$elemMatch: {
 					_id: gradeItemId,
 					day,
-					shift
-				}
-			}
+					shift,
+				},
+			},
 		};
 
 		const update = {};
 
 		if (teacherId === '') {
 			update.$unset = {
-				'grade.$.teacher': 1
+				'grade.$.teacher': 1,
 			};
 		} else {
 			update.$set = {
-				'grade.$.teacher': teacherId
+				'grade.$.teacher': teacherId,
+			};
+		}
+
+		return this.update(query, update) === 1;
+	}
+
+	setRoomInCalendarItem = (root, { calendarId, gradeItemId, shift, day, room }) => {
+		console.log('setRoomInCalendarItem', calendarId, gradeItemId, shift, day, room);
+
+		const query = {
+			_id: calendarId,
+			grade: {
+				$elemMatch: {
+					_id: gradeItemId,
+					day,
+					shift,
+				},
+			},
+		};
+
+		const update = {};
+
+		if (room === '') {
+			update.$unset = {
+				'grade.$.room': 1,
+			};
+		} else {
+			update.$set = {
+				'grade.$.room': room,
 			};
 		}
 
@@ -75,9 +104,9 @@ class CalendarModel extends _BaseModel {
 				$elemMatch: {
 					_id: gradeItemId,
 					day,
-					shift
-				}
-			}
+					shift,
+				},
+			},
 		};
 
 		const update = {
@@ -85,9 +114,9 @@ class CalendarModel extends _BaseModel {
 				grade: {
 					_id: gradeItemId,
 					day,
-					shift
-				}
-			}
+					shift,
+				},
+			},
 		};
 
 		return this.update(query, update);
@@ -103,10 +132,10 @@ class CalendarModel extends _BaseModel {
 					$elemMatch: {
 						_id: gradeItemId,
 						day,
-						shift
-					}
-				}
-			}
+						shift,
+					},
+				},
+			},
 		};
 
 		const update = {
@@ -115,9 +144,9 @@ class CalendarModel extends _BaseModel {
 					_id: gradeItemId,
 					day,
 					shift,
-					interested: 0
-				}
-			}
+					interested: 0,
+				},
+			},
 		};
 
 		return this.update(query, update);

@@ -4,24 +4,27 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-ecmascript@0.11.0
+ecmascript@0.12.0
 accounts-password@1.5.1
 flemay:less-autoprefixer
 percolate:migrations
 meteor-base@1.4.0
 mobile-experience@1.0.5
-mongo@1.5.0
-session@1.1.7
+mongo@1.6.0
+session@1.1.8
 tracker@1.2.0
 logging@1.1.20
 reload@1.2.0
 random@1.1.0
 ejson@1.1.0
 check@1.3.1
-standard-minifier-css@1.4.1
-standard-minifier-js@2.3.4
-shell-server@0.3.1
-dynamic-import@0.4.0
+standard-minifier-css@1.5.0
+standard-minifier-js@2.4.0
+shell-server@0.4.0
+dynamic-import@0.5.0
 react-meteor-data
 swydo:graphql
 swydo:ddp-apollo
+apollo
+nicolaslopezj:apollo-accounts
+static-html

@@ -8,11 +8,11 @@ import GraphQLJSON from 'graphql-type-json';
 
 export const resolvers = combineResolvers([
 	{
-		JSON: GraphQLJSON
+		JSON: GraphQLJSON,
 	},
 	TeacherResolvers,
 	CalendarResolvers,
 	CourseResolvers,
 	UserResolvers,
-	GradeResolvers
+	GradeResolvers,
 ]);

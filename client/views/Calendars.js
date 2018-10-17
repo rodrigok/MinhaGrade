@@ -7,7 +7,7 @@ import { EditableTableComponent } from '/client/components/EditableTable';
 import {
 	Icon,
 	Switch,
-	message
+	message,
 } from 'antd';
 
 class Calendars extends EditableTableComponent {
@@ -19,7 +19,7 @@ class Calendars extends EditableTableComponent {
 
 		const error = (error) => {
 			if (error) {
-				error.graphQLErrors.forEach(e => message.error(this.errors[e.message] || e.message));
+				error.graphQLErrors.forEach((e) => message.error(this.errors[e.message] || e.message));
 				this.props.data.refetch();
 			}
 		};
@@ -28,21 +28,19 @@ class Calendars extends EditableTableComponent {
 			title: 'Ativo',
 			dataIndex: 'active',
 			width: 80,
-			render: (text, { _id }) => {
-				return <Switch
-					checked={text}
-					onChange={(value) => {
-						this.props.activateCalendar({
-							variables: {
-								_id,
-								active: value
-							}
-						}).then(() => {
-							this.props.data.refetch();
-						}).catch(error);
-					}}
-				/>;
-			}
+			render: (text, { _id }) => <Switch
+				checked={text}
+				onChange={(value) => {
+					this.props.activateCalendar({
+						variables: {
+							_id,
+							active: value,
+						},
+					}).then(() => {
+						this.props.data.refetch();
+					}).catch(error);
+				}}
+			/>,
 		});
 	}
 

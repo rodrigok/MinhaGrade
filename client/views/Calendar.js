@@ -11,13 +11,13 @@ import {
 	Tag,
 	Spin,
 	Switch,
-	Form
+	Form,
 } from 'antd';
 
 const Status = {
 	pending: 'Pendente',
 	doing: 'Cursando',
-	done: 'Concluído'
+	done: 'Concluído',
 };
 
 class CalendarItemComponent extends Component {
@@ -25,7 +25,7 @@ class CalendarItemComponent extends Component {
 		gradeItem: PropTypes.any,
 		calendarItem: PropTypes.any,
 		calendar: PropTypes.object,
-		updateInterest: PropTypes.func
+		updateInterest: PropTypes.func,
 	}
 
 	state = {}
@@ -56,13 +56,13 @@ class CalendarItemComponent extends Component {
 			if (calendarItem.userInterested) {
 				actions.push(
 					<Tooltip placement='bottom' title='Remover interesse'>
-						<Icon type='heart' onClick={this.removeInterest.bind(this)} />
+						<Icon type='heart' theme='filled' onClick={this.removeInterest.bind(this)} />
 					</Tooltip>
 				);
 			} else {
 				actions.push(
 					<Tooltip placement='bottom' title='Marcar interesse'>
-						<Icon type='heart-o' onClick={this.addInterest.bind(this)} />
+						<Icon type='heart' onClick={this.addInterest.bind(this)} />
 					</Tooltip>
 				);
 			}
@@ -78,9 +78,9 @@ class CalendarItemComponent extends Component {
 			</React.Fragment>;
 		}
 
-		const requirements = gradeItem.requirement.filter(r => r.userStatus !== 'done').map(requirement => {
+		const requirements = gradeItem.requirement.filter((r) => r.userStatus !== 'done').map((requirement) => {
 			const style = {
-				color: '#f50'
+				color: '#f50',
 			};
 
 			switch (requirement.userStatus) {
@@ -99,9 +99,22 @@ class CalendarItemComponent extends Component {
 			</div>;
 		});
 
+		const friends = calendarItem.friendsInterested.map((friend) => <Tooltip key={friend.id} title={friend.name} placement='bottom' arrowPointAtCenter={false} mouseEnterDelay={.1}>
+			<div key={friend.id} style={{ backgroundImage: `url(${ friend.pictureUrl })` }} className='friends-picture'></div>
+		</Tooltip>);
+
 		description = <React.Fragment>
+			{ calendarItem.room &&
+				<div>Sala: {calendarItem.room}</div>
+			}
+			<div>
+				Semestre: {gradeItem.semester}
+			</div>
 			{description}
 			{requirements}
+			<div className='friends-picture-list'>
+				{friends}
+			</div>
 		</React.Fragment>;
 
 		return (
@@ -121,26 +134,26 @@ class CalendarItemComponent extends Component {
 class CalendarComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
-		updateCalendarItemInterest: PropTypes.func
+		updateCalendarItemInterest: PropTypes.func,
 	}
 
 	state = {
 		done: false,
-		blocked: true
+		blocked: true,
 	}
 
 	shifts = [{
 		shift: '1',
-		name: 'Manhã'
+		name: 'Manhã',
 	}, {
 		shift: '2',
-		name: 'Tarde'
+		name: 'Tarde',
 	}, {
 		shift: '3',
-		name: 'Noite'
+		name: 'Noite',
 	}, {
 		shift: '5',
-		name: 'Vespertino'
+		name: 'Vespertino',
 	}];
 
 	baseFilter = (item) => {
@@ -153,7 +166,7 @@ class CalendarComponent extends Component {
 		}
 
 		if (this.state.blocked === false) {
-			return !item.grade.requirement.find(r => r.userStatus === 'pending');
+			return !item.grade.requirement.find((r) => r.userStatus === 'pending');
 		}
 
 		return true;
@@ -166,8 +179,8 @@ class CalendarComponent extends Component {
 				gradeItemId: gradeItem._id,
 				shift: calendarItem.shift,
 				day: calendarItem.day,
-				interested
-			}
+				interested,
+			},
 		}).then(() => {
 			this.props.data.refetch();
 		});
@@ -176,27 +189,25 @@ class CalendarComponent extends Component {
 	renderCalendarItem(shift, day) {
 		const { data: { calendar } } = this.props;
 
-		const grade = calendar.grade.filter(d => d.shift === shift && d.day === day).filter(this.baseFilter);
+		const grade = calendar.grade.filter((d) => d.shift === shift && d.day === day).filter(this.baseFilter);
 
-		return grade.map(item => {
-			return (
-				<CalendarItemComponent
-					key={item._id}
-					gradeItem={item.grade}
-					calendarItem={item}
-					calendar={calendar}
-					updateInterest={this.updateInterest}
-				/>
-			);
-		}).filter(i => i);
+		return grade.map((item) => (
+			<CalendarItemComponent
+				key={item._id}
+				gradeItem={item.grade}
+				calendarItem={item}
+				calendar={calendar}
+				updateInterest={this.updateInterest}
+			/>
+		)).filter((i) => i);
 	}
 
 	renderShifts() {
 		const { data: { calendar } } = this.props;
 
-		const shifts = this.shifts.filter(s => calendar.grade.filter(d => d.shift === s.shift).filter(this.baseFilter).length);
+		const shifts = this.shifts.filter((s) => calendar.grade.filter((d) => d.shift === s.shift).filter(this.baseFilter).length);
 
-		return shifts.map(shit => (
+		return shifts.map((shit) => (
 			<React.Fragment key={shit.shift}>
 				<tr className='shift-table-title-line'>
 					<td colSpan='7'>
@@ -218,7 +229,7 @@ class CalendarComponent extends Component {
 	renderEAD() {
 		const { data: { calendar } } = this.props;
 
-		const hasEAD = calendar.grade.filter(d => d.shift === '0').filter(this.baseFilter).length > 0;
+		const hasEAD = calendar.grade.filter((d) => d.shift === '0').filter(this.baseFilter).length > 0;
 
 		if (!hasEAD) {
 			return;
@@ -272,7 +283,7 @@ class CalendarComponent extends Component {
 				<div>
 					<div className='components-table-demo-control-bar'>
 						<Form layout='inline'>
-							<Form.Item label='Concluídas our Cursando'>
+							<Form.Item label='Concluídas ou Cursando'>
 								<Switch checked={this.state.done} onChange={(value) => this.setState({ done: value })} />
 							</Form.Item>
 							<Form.Item label='Bloqueadas'>
@@ -317,15 +328,22 @@ export default compose(
 					day
 					shift
 					interested
+					room
 					teacher {
 						name
 					}
 					userStatus
 					userInterested
+					friendsInterested {
+						id
+						name
+						pictureUrl
+					}
 					grade {
 						_id
 						code
 						name
+						semester
 						requirement {
 							_id
 							code

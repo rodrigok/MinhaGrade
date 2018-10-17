@@ -12,6 +12,7 @@ type Email {
 }
 
 type UserProfile {
+  name: String
   course: Course
 }
 
@@ -23,6 +24,13 @@ type User {
   grade: JSON
   calendar: JSON
   profile: UserProfile
+  hasPassword: Boolean
+}
+
+type FacebookUser {
+  id: String
+  name: String
+  pictureUrl: String
 }
 
 type Teacher {
@@ -36,9 +44,11 @@ type CalendarItem {
   shift: String
   interested: Float
   teacher: Teacher
+  room: String
   grade (course: String): Grade
   userStatus: String
   userInterested: Boolean
+  friendsInterested: [FacebookUser]
 }
 
 type Calendar {
@@ -64,15 +74,45 @@ type Grade {
 type Course {
   _id: String
   name: String
+  elective: Float
 }
 
 type Query {
-  user: User
+  user(userId: String): User
   teachers: [Teacher]
   calendar: Calendar
   calendars: [Calendar]
-  grades(course: String): [Grade]
+  grades(userId: String): [Grade]
   courses: [Course]
+}
+
+# Type returned when the user logs in
+type LoginMethodResponse {
+  # Id of the user logged in user
+  id: String!
+  # Token of the connection
+  token: String!
+  # Expiration date for the token
+  tokenExpires: Float!
+  # The logged in user
+  user: User
+}
+
+input CreateUserProfileInput {
+  name: String
+}
+
+type SuccessResponse {
+  # True if it succeeded
+  success: Boolean
+}
+
+# A hashsed password
+input HashedPassword {
+  # The hashed password
+  digest: String!
+  # Algorithm used to hash the password
+  algorithm: String!
 }
 
 type Mutation {
@@ -95,6 +135,14 @@ type Mutation {
     shift: String!
     day: String!
     teacherId: String!
+  ): Boolean
+
+  setRoomInCalendarItem(
+    calendarId: String!
+    gradeItemId: String!
+    shift: String!
+    day: String!
+    room: String!
   ): Boolean
 
   removeItemFromCalendar(
@@ -126,11 +174,13 @@ type Mutation {
 
   createCourse(
     name: String!
+    elective: Float!
   ): Course
 
   updateCourse(
     _id: String!
     name: String!
+    elective: Float!
   ): Course
 
   removeCourse(
@@ -156,6 +206,7 @@ type Mutation {
   ): Boolean
 
   signup(
+    name: String!
     email: String!
     course: String!
     password: String!
@@ -165,6 +216,34 @@ type Mutation {
     email: String!
     password: String!
   ): LoginResult
+
+  setCourse(
+    course: String!
+  ): Boolean
+
+  setPassword(
+    currentPassword: String
+    password: String!
+  ): Boolean
+
+  # Log the user in with a password.
+  loginWithPassword (username: String, email: String, password: HashedPassword, plainPassword: String): LoginMethodResponse
+  # Create a new user.
+  createUser (username: String, email: String, password: HashedPassword, plainPassword: String, profile: CreateUserProfileInput): LoginMethodResponse
+  # Change the current user's password. Must be logged in.
+  changePassword (oldPassword: HashedPassword!, newPassword: HashedPassword!): SuccessResponse
+  # Request a forgot password email.
+  forgotPassword (email: String!): SuccessResponse
+  # Reset the password for a user using a token received in email. Logs the user in afterwards.
+  resetPassword (newPassword: HashedPassword!, token: String!): LoginMethodResponse
+  # Log the user out.
+  logout (token: String!): SuccessResponse
+  # Marks the user's email address as verified. Logs the user in afterwards.
+  verifyEmail (token: String!): LoginMethodResponse
+  # Send an email with a link the user can use verify their email address.
+  resendVerificationEmail (email: String): SuccessResponse
+  # Login the user with a facebook access token
+  loginWithFacebook (accessToken: String!): LoginMethodResponse
 }
 
 type SignupResult {

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
@@ -11,20 +12,23 @@ import {
 	Tooltip,
 	Tag,
 	Table,
-	Progress
+	Progress,
+	Input,
+	Spin,
 } from 'antd';
 
 const Status = {
 	pending: 'Pendente',
 	doing: 'Cursando',
-	done: 'Concluído'
+	done: 'Concluído',
 };
 
 class GradeComponent extends Component {
 	static propTypes = {
 		data: PropTypes.object,
 		user: PropTypes.object,
-		updateGradeItem: PropTypes.func
+		match: PropTypes.object,
+		updateGradeItem: PropTypes.func,
 	}
 
 	state = {}
@@ -33,8 +37,8 @@ class GradeComponent extends Component {
 		this.props.updateGradeItem({
 			variables: {
 				_id,
-				status
-			}
+				status,
+			},
 		}).then(() => {
 			message.success('Status alterado');
 		});
@@ -42,6 +46,7 @@ class GradeComponent extends Component {
 
 	getColumns = () => {
 		const { user: { user } } = this.props;
+		const { match: { params } } = this.props;
 
 		const columns = [{
 			title: 'Semestre / Código',
@@ -60,43 +65,41 @@ class GradeComponent extends Component {
 					return 1;
 				}
 				return 0;
-			}
+			},
 		}, {
 			title: 'Nome',
-			dataIndex: 'name'
+			dataIndex: 'name',
 		}, {
 			title: 'Dependencias',
 			dataIndex: 'requirement',
-			render: (requirements) => {
-				return requirements.map(requirement => {
-					const style = {
-						color: '#f50'
-					};
+			render: (requirements) => requirements.map((requirement) => {
+				const style = {
+					color: '#f50',
+				};
 
-					switch (requirement.userStatus) {
-						case 'done':
-							style.color = '#d3d3d3';
-							break;
-						case 'doing':
-							style.color = '#ffa500';
-							break;
-					}
+				switch (requirement.userStatus) {
+					case 'done':
+						style.color = '#d3d3d3';
+						break;
+					case 'doing':
+						style.color = '#ffa500';
+						break;
+				}
 
-					if (requirement.name) {
-						return <Tooltip key={requirement.code} title={`${ requirement.name } - Semestre ${ requirement.semester }`}>
-							<Tag color={style.color}>{requirement.code}</Tag>
-						</Tooltip>;
-					}
+				if (requirement.name) {
+					return <Tooltip key={requirement.code} title={`${ requirement.name } - Semestre ${ requirement.semester }`}>
+						<Tag color={style.color}>{requirement.code}</Tag>
+					</Tooltip>;
+				}
 
-					return <Tag key={requirement.code} color={style.color}>{requirement.code}</Tag>;
-				});
-			}
+				return <Tag key={requirement.code} color={style.color}>{requirement.code}</Tag>;
+			}),
 		}, {
 			title: 'Créditos / Carga Horária',
 			dataIndex: 'credit',
 			render: (text, record) => (
 				`${ record.credit } / ${ record.workload }`
-			)
+			),
 		}];
 
 		if (user) {
@@ -105,13 +108,13 @@ class GradeComponent extends Component {
 				dataIndex: 'status',
 				filters: [{
 					text: Status.pending,
-					value: 'pending'
+					value: 'pending',
 				}, {
 					text: Status.doing,
-					value: 'doing'
+					value: 'doing',
 				}, {
 					text: Status.done,
-					value: 'done'
+					value: 'done',
 				}],
 				onFilter: (value, record) => {
 					const { user: { user } } = this.props;
@@ -154,12 +157,12 @@ class GradeComponent extends Component {
 							break;
 					}
 
-					return <Dropdown overlay={menu}>
-						<a className='ant-dropdown-link' style={style} href='#'>
+					return <Dropdown overlay={menu} disabled={params.userId != null}>
+						<a className='ant-dropdown-link' style={style}>
 							{Status[status]} <Icon type='down' />
 						</a>
 					</Dropdown>;
-				}
+				},
 			});
 		}
 
@@ -185,43 +188,54 @@ class GradeComponent extends Component {
 		}
 
 		return {
-			style
+			style,
 		};
 	}
 
 	percentageDone = () => {
-		const { data: { grades, loading } } = this.props;
+		const { data: { grades, loading }, user: { user } } = this.props;
 
 		if (loading) {
 			return;
 		}
 
-		let total = 0;
-		let done = 0;
-		let doing = 0;
-		let electiveMax = 1;
+		const electiveMax = (user && user.profile && user.profile.course && user.profile.course.elective) || 0;
 
-		for (const item of grades) {
-			if (item.semester !== 'E' || electiveMax-- > 0) {
-				total++;
-				if (item.userStatus === 'done') {
-					done++;
-				} else if (item.userStatus === 'doing') {
-					doing++;
-				}
-			}
-		}
+		const total = grades.filter((item) => item.semester !== 'E').length + electiveMax;
+
+		const electiveDone = Math.min(grades.filter((item) => item.semester === 'E' && item.userStatus === 'done').length, electiveMax);
+		const electiveDoing = Math.min(grades.filter((item) => item.semester === 'E' && item.userStatus === 'doing').length, electiveMax - electiveDone);
+
+		const done = grades.filter((item) => item.semester !== 'E' && item.userStatus === 'done').length + electiveDone;
+		const doing = grades.filter((item) => item.semester !== 'E' && item.userStatus === 'doing').length + electiveDoing;
 
 		const percentageDone = Math.round((100 / total) * done);
 		const percentageDoing = Math.round((100 / total) * doing);
 
-		return <Tooltip title={`${ done } concluída(s) + ${ doing } cursando de ${ total }`}>
-			<Progress percent={percentageDone+percentageDoing} successPercent={percentageDone} />
-		</Tooltip>;
+		return <div>
+			<Progress percent={percentageDone + percentageDoing} successPercent={percentageDone} />
+			<div style={{ textAlign: 'center' }}>
+				{
+					done === 1
+						? <div>{ done + doing } de { total } ({ done } concluída + { doing } cursando)</div>
+						: <div>{ done + doing } de { total } ({ done } concluídas + { doing } cursando)</div>
+				}
+				{
+					electiveMax === 1
+						? <div>Considerando {electiveMax} disciplina eletiva</div>
+						: <div>Considerando {electiveMax} disciplinas eletivas</div>
+				}
+			</div>
+		</div>;
 	}
 
 	render() {
-		const { data: { error, loading, grades } } = this.props;
+		const { data: { error, loading, grades }, user } = this.props;
+		const { match: { params } } = this.props;
+
+		if (loading || user.loading) {
+			return <Spin size='large' />;
+		}
 
 		if (error) {
 			console.log(error);
@@ -230,6 +244,17 @@ class GradeComponent extends Component {
 
 		return (
 			<div>
+				{ params.userId
+					? <div className='share-grade'>
+						<span>Currículo compartilhado de:&nbsp;</span>
+						<strong>{ user.user.mainEmail.address } ({ user.user.profile.course.name })</strong>
+					</div>
+					: <div className='share-grade'>
+						<div>Compartilhe sou currículo com amigos:</div>
+						<Input value={`${ location.protocol }//${ location.host }/shared/${ Meteor.userId() }`} readOnly onFocus={(e) => e.target.select()}></Input>
+					</div>
+				}
+
 				{this.percentageDone()}
 
 				<Table
@@ -238,7 +263,7 @@ class GradeComponent extends Component {
 					columns={this.getColumns()}
 					pagination={false}
 					rowKey='_id'
-					expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
+					expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
 					onRow={this.onRow.bind(this)}
 				/>
 			</div>
@@ -248,8 +273,8 @@ class GradeComponent extends Component {
 
 export default compose(
 	graphql(gql`
-		query {
-			grades {
+		query ($userId: String) {
+			grades (userId: $userId) {
 				_id
 				credit
 				workload
@@ -267,14 +292,36 @@ export default compose(
 				}
 			}
 		}
-	`),
+	`, {
+		options: ({ match }) => ({
+			variables: {
+				userId: match.params.userId,
+			},
+		}),
+	}),
 	graphql(gql`
-		query {
-			user {
+		query ($userId: String) {
+			user (userId: $userId) {
 				_id
+				mainEmail {
+					address
+				}
+				profile {
+					course {
+						name
+						elective
+					}
+				}
 			}
 		}
-	`, { name: 'user' }),
+	`, {
+		name: 'user',
+		options: ({ match }) => ({
+			variables: {
+				userId: match.params.userId,
+			},
+		}),
+	}),
 	graphql(gql`
 		mutation updateGradeItem($_id: String! $status: String!) {
 			updateGradeItem(_id: $_id, status: $status)

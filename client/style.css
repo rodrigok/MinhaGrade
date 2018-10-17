@@ -50,3 +50,88 @@
 .login-form-button {
 	width: 100%;
 }
+
+.ant-card .ant-tag {
+	display: block;
+	white-space: initial;
+	height: auto;
+	margin-top: 2px !important;
+	margin-right: 0px !important;
+}
+
+.friends-picture {
+	height: 25px;
+	width: 25px;
+	background-size: contain;
+	border-radius: 100%;
+	display: inline-block;
+	margin-left: -12px;
+	border: 2px solid white;
+	flex-wrap:
+}
+
+.friends-picture-list {
+	padding-left: 12px;
+	line-height: 8px;
+}
+
+.friends-picture:hover {
+	z-index: 10;
+	position: relative;
+}
+
+.share-grade {
+	text-align: center;
+	background-color: #eee;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.share-grade > input {
+	flex-grow: 1;
+	min-width: 400px;
+	width: auto;
+}
+
+.share-grade > div {
+	flex-grow: 0;
+	white-space: nowrap;
+	margin-right: 5px;
+}
+
+.user-menu > div > span {
+	display: flex;
+	height: 64px;
+	justify-content: left;
+	align-items: center
+}
+
+.user-menu-content {
+	display: inline-flex;
+	flex-direction: column;
+	line-height: 20px;
+	align-items: left;
+	justify-content: center;
+}
+
+.kep-login-facebook {
+	font-family: inherit !important;
+	font-weight: 700 !important;
+	color: #fff !important;
+	font-size: 18px !important;
+	text-transform: none !important;
+	padding: 4px 0px !important;
+	width: 100% !important;
+}
+
+.login-or {
+	line-height: 60px;
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+}

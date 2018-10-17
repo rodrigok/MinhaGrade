@@ -7,10 +7,13 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import {
 	BrowserRouter as Router,
-	Route
+	Route,
 } from 'react-router-dom';
 import {
-	Layout
+	Layout,
+	Modal,
+	Form,
+	Select,
 } from 'antd';
 
 import GradeComponent from './views/Grade';
@@ -22,6 +25,8 @@ import CoursesComponent from './views/Courses';
 import MenuComponent from './components/Menu';
 
 class MainRouter extends Router {
+	state = {}
+
 	constructor(props) {
 		super();
 
@@ -33,8 +38,58 @@ class MainRouter extends Router {
 						userStatus
 					}
 				}
-			`
+			`,
 		});
+	}
+
+	renderCourseModal() {
+		const { data: { user, courses, loading } } = this.props;
+
+		if (loading || !user) {
+			return;
+		}
+
+		if (user.profile && user.profile.course && user.profile.course._id) {
+			return;
+		}
+
+		return <Modal
+			title='Selecione um curso'
+			visible={!this.state.courseModalClosed}
+			closable={false}
+			cancelButtonProps={{
+				hidden: true,
+			}}
+			okButtonProps={{
+				disabled: !this.state.courseModalSelected,
+			}}
+			okText='Selecionar'
+			onOk={() => {
+				Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.course': this.state.courseModalSelected } });
+				this.setState({
+					courseModalClosed: true,
+				});
+				client.resetStore();
+			}}
+		>
+			<Form onSubmit={this.handleChangeCourse}>
+				<Form.Item>
+					<Select
+						showSearch
+						placeholder='Curso'
+						onChange={(value) => {
+							this.setState({
+								courseModalSelected: value,
+							});
+						}}
+					>
+						{courses.map((course) => (
+							<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+						))}
+					</Select>
+				</Form.Item>
+			</Form>
+		</Modal>;
 	}
 
 	render() {
@@ -50,11 +105,13 @@ class MainRouter extends Router {
 						<div style={{ background: '#fff', padding: 24 }}>
 							<Route exact path='/' component={GradeComponent}/>
 							<Route exact path='/course' component={GradeComponent}/>
+							<Route exact path='/shared/:userId' component={GradeComponent}/>
 							<Route exact path='/calendar' component={CalendarComponent}/>
 							<Route exact path='/calendars' component={CalendarsComponent}/>
 							<Route exact path='/calendars/:calendarName' component={CalendaEditsComponent}/>
 							<Route exact path='/teachers' component={TeachersComponent}/>
 							<Route exact path='/courses' component={CoursesComponent}/>
+							{this.renderCourseModal()}
 						</div>
 					</Layout.Content>
 				</Layout>
@@ -68,11 +125,13 @@ MainRouter = graphql(gql`
 		courses {
 			_id
 			name
+			elective
 		}
 		user {
 			_id
 			admin
 			profile {
+				name
 				course {
 					_id
 					name
@@ -100,160 +159,7 @@ class App extends Component {
 }
 
 Meteor.startup(() => {
-	render(<App />, document.body);
+	render(<App />, document.getElementById('app'));
 });
 
-
-
-
-// Router.configure({
-// 	layoutTemplate: 'Layout',
-// 	waitOn() {
-// 		return [
-// 			Meteor.subscribe('Grade'),
-// 			Meteor.subscribe('Calendar'),
-// 		];
-// 	}});
-
-
-// Router.route('/', function() {
-// 	return this.redirect('/course/si');
-// });
-
-
-// Router.route('/si', function() {
-// 	return this.redirect('/course/si');
-// });
-
-
-// Router.route('/tsi', function() {
-// 	return this.redirect('/course/tsi');
-// });
-
-
-// Router.route('/course/:course', {
-// 	name: 'course',
-
-// 	action() {
-// 		const course = this.params.course.toLowerCase();
-// 		if (!['si', 'tsi'].includes(course)) {
-// 			return this.redirect('/course/si');
-// 		}
-
-// 		Session.set('grade', course);
-
-// 		Session.set('grade-filter-status', this.params.query.status);
-
-// 		return this.render('Grade');
-// 	},
-
-// 	fastRender: true
-// }
-// );
-
-
-// Router.route('/my/:course/:email', {
-// 	name: 'my',
-
-// 	waitOn() {
-// 		return [
-// 			Meteor.subscribe('userGradeInfo', this.params.email)
-// 		];
-// 	},
-
-// 	action() {
-// 		const course = this.params.course.toLowerCase();
-// 		if (!['si', 'tsi'].includes(course)) {
-// 			return this.redirect(`/course/si/${ this.params.email }`);
-// 		}
-
-// 		Session.set('grade', course);
-
-// 		Session.set('grade-filter-status', this.params.query.status);
-
-// 		return this.render('Grade', {
-// 			data: {
-// 				email: this.params.email
-// 			}
-// 		}
-// 		);
-// 	},
-
-// 	fastRender: true
-// }
-// );
-
-
-// Router.route('/calendar/:calendarName/:course?', {
-// 	name: 'calendar',
-
-// 	waitOn() {
-// 		return [
-// 			Meteor.subscribe('Calendar', this.params.calendarName)
-// 		];
-// 	},
-
-// 	action() {
-// 		let course = this.params.course || '';
-// 		course = course.toLowerCase();
-// 		if (!['si', 'tsi'].includes(course)) {
-// 			return this.redirect(`/calendar/${ this.params.calendarName }/si`);
-// 		}
-
-// 		Session.set('grade', course);
-
-// 		return this.render('Calendar');
-// 	},
-
-// 	fastRender: true
-// }
-// );
-
-
-// Router.route('/calendars', {
-// 	name: 'calendars',
-
-// 	onBeforeAction() {
-// 		if (Meteor.user() && Meteor.user().admin !== true) {
-// 			return Router.go('/');
-// 		}
-// 		return this.next();
-// 	},
-
-// 	waitOn() {
-// 		return [
-// 			Meteor.subscribe('Calendar')
-// 		];
-// 	},
-
-// 	action() {
-// 		return this.render('Calendars');
-// 	},
-
-// 	fastRender: true
-// }
-// );
-
-
-// Router.route('/calendars/:calendarName', {
-// 	name: 'calendarEdit',
-
-// 	onBeforeAction() {
-// 		if (Meteor.user() && Meteor.user().admin !== true) {
-// 			return Router.go('/');
-// 		}
-// 		return this.next();
-// 	},
-
-// 	waitOn() {
-// 		return [
-// 			Meteor.subscribe('Calendar', this.params.calendarName)
-// 		];
-// 	},
-
-// 	action() {
-// 		return this.render('CalendarEdit');
-// 	},
-
-// 	fastRender: true
-// });
+export const ApolloClient = client;

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-	Table
+	Table,
 } from 'antd';
 
 export class BaseTableComponent extends Component {
 	static propTypes = {
-		data: PropTypes.object
+		data: PropTypes.object,
 	}
 
 	state = {}
@@ -14,7 +14,7 @@ export class BaseTableComponent extends Component {
 	static getDerivedStateFromProps(props, state) {
 		return {
 			...state,
-			records: props.data.records
+			records: props.data.records,
 		};
 	}
 

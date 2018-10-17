@@ -3,6 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FacebookLogin from 'react-facebook-login';
+import { loginWithFacebook } from 'meteor-apollo-accounts';
+import { ApolloClient } from '../router';
 import {
 	Menu,
 	Icon,
@@ -11,22 +14,20 @@ import {
 	Button,
 	message,
 	Card,
-	Select
+	Select,
 } from 'antd';
 
 class AccountComponent extends Component {
 	static propTypes = {
 		routeData: PropTypes.object,
 		getFieldDecorator: PropTypes.any,
-		form: PropTypes.any
+		form: PropTypes.any,
 	}
 
 	state = {}
 
 	handleLogin = (e) => {
 		e.preventDefault();
-
-		const { routeData } = this.props;
 
 		this.setState({ loading: true });
 		this.props.form.validateFields((err, values) => {
@@ -37,7 +38,7 @@ class AccountComponent extends Component {
 						message.error(error.reason);
 					}
 
-					routeData.refetch();
+					ApolloClient.resetStore();
 				});
 			}
 		});
@@ -49,10 +50,10 @@ class AccountComponent extends Component {
 		const { routeData } = this.props;
 
 		this.setState({ loading: true });
-		this.props.form.validateFields((err, { email, password, course }) => {
+		this.props.form.validateFields((err, { name, email, password, course }) => {
 			this.setState({ loading: false });
 			if (!err) {
-				Accounts.createUser({ email, password, profile: { course } }, (error) => {
+				Accounts.createUser({ email, password, profile: { name, course } }, (error) => {
 					if (error) {
 						return message.error(error.reason);
 					}
@@ -82,7 +83,7 @@ class AccountComponent extends Component {
 
 					message.info('Email enviado');
 					this.setState({
-						action: 'login'
+						action: 'login',
 					});
 				});
 			}
@@ -103,9 +104,27 @@ class AccountComponent extends Component {
 					message.info('Senha alterada');
 
 					this.setState({
-						action: ''
+						action: '',
 					});
 				});
+			}
+		});
+	}
+
+	handleChangeCourse = (e) => {
+		e.preventDefault();
+		this.setState({ loading: true });
+		this.props.form.validateFields((err, { course }) => {
+			this.setState({ loading: false });
+			if (!err) {
+				Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.course': course } });
+				message.info('Curso alterado');
+
+				this.setState({
+					action: '',
+				});
+
+				ApolloClient.resetStore();
 			}
 		});
 	}
@@ -119,22 +138,38 @@ class AccountComponent extends Component {
 
 	renderLogin() {
 		const { getFieldDecorator } = this.props.form;
+
+		const responseFacebook = async({ accessToken }) => {
+			await loginWithFacebook({ accessToken }, ApolloClient);
+			ApolloClient.resetStore();
+		};
+
 		return (
 			<Card title='Entrar'>
 				<Form onSubmit={this.handleLogin} className='login-form'>
+					{/* <FacebookLogin
+						textButton='Entrar com Facebook'
+						appId='185969382302390'
+						fields='name,email,picture'
+						scope='public_profile,email,user_friends'
+						callback={responseFacebook}
+					/>
+					<div className='login-or'>
+						ou
+					</div> */}
 					<Form.Item>
 						{getFieldDecorator('email', {
 							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
-							validateTrigger: 'onBlur'
+							validateTrigger: 'onBlur',
 						})(
-							<Input placeholder='email' />
+							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
-							<Input type='password' placeholder='senha' />
+							<Input type='password' placeholder='Senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -156,22 +191,29 @@ class AccountComponent extends Component {
 			<Card title='Criar conta'>
 				<Form onSubmit={this.handleSignup} className='login-form'>
 					<Form.Item>
-						{getFieldDecorator('email', {
-							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
+						{getFieldDecorator('name', {
+							rules: [{ required: true, message: 'Por favor entre com seu nome!' }],
 						})(
-							<Input placeholder='email' />
+							<Input placeholder='Nome' />
+						)}
+					</Form.Item>
+					<Form.Item>
+						{getFieldDecorator('email', {
+							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
+						})(
+							<Input placeholder='Email' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('course', {
-							rules: [{ required: true, message: 'Por favor selecione um curso!' }]
+							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
 						})(
 							<Select
 								showSearch
 								placeholder='Curso'
 								// onChange={(value) => this.setTeacher(value, record)}
 							>
-								{courses.map(course => (
+								{courses.map((course) => (
 									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
 								))}
 							</Select>
@@ -179,9 +221,9 @@ class AccountComponent extends Component {
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
-							<Input type='password' placeholder='senha' />
+							<Input type='password' placeholder='Senha' />
 						)}
 					</Form.Item>
 					<Form.Item>
@@ -202,7 +244,7 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleForgotPassword} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('email', {
-							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }]
+							rules: [{ required: true, type: 'email', message: 'Por favor entre com seu email!' }],
 						})(
 							<Input placeholder='email' />
 						)}
@@ -225,14 +267,14 @@ class AccountComponent extends Component {
 				<Form onSubmit={this.handleChangePassword} className='login-form'>
 					<Form.Item>
 						{getFieldDecorator('password', {
-							rules: [{ required: true, message: 'Por favor entre com sua senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com sua senha!' }],
 						})(
 							<Input type='password' placeholder='senha atual' />
 						)}
 					</Form.Item>
 					<Form.Item>
 						{getFieldDecorator('newPassword', {
-							rules: [{ required: true, message: 'Por favor entre com a nova senha!' }]
+							rules: [{ required: true, message: 'Por favor entre com a nova senha!' }],
 						})(
 							<Input type='password' placeholder='nova senha' />
 						)}
@@ -240,6 +282,39 @@ class AccountComponent extends Component {
 					<Form.Item>
 						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
 							Mudar senha
+						</Button>
+						<a className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
+					</Form.Item>
+				</Form>
+			</Card>
+		);
+	}
+
+	renderChangeCourse() {
+		const { routeData: { courses, user } } = this.props;
+		const { getFieldDecorator } = this.props.form;
+		return (
+			<Card title='Mudar curso'>
+				<Form onSubmit={this.handleChangeCourse} className='login-form'>
+					<Form.Item>
+						{getFieldDecorator('course', {
+							rules: [{ required: true, message: 'Por favor selecione um curso!' }],
+							initialValue: user.profile.course && user.profile.course._id,
+						})(
+							<Select
+								showSearch
+								placeholder='Curso'
+								// onChange={(value) => this.setTeacher(value, record)}
+							>
+								{courses.map((course) => (
+									<Select.Option key={course._id} value={course._id}>{course.name}</Select.Option>
+								))}
+							</Select>
+						)}
+					</Form.Item>
+					<Form.Item>
+						<Button type='primary' htmlType='submit' className='login-form-button' loading={this.state.loading}>
+							Mudar curso
 						</Button>
 						<a className='login-form-register' onClick={() => this.setState({ action: '' })}>Cancelar</a>
 					</Form.Item>
@@ -259,7 +334,10 @@ class AccountComponent extends Component {
 			<Card title={userEmail}>
 				<Form className='login-form'>
 					<Form.Item>
-						Curso: {user.profile.course.name}
+						Curso: {(user.profile.course && user.profile.course.name) || 'Nenhum curso definido'}
+						<Button onClick={() => this.setState({ action: 'change-course' })} className='login-form-button'>
+							Mudar curso
+						</Button>
 						<Button onClick={() => this.setState({ action: 'change-password' })} className='login-form-button'>
 							Mudar senha
 						</Button>
@@ -278,6 +356,8 @@ class AccountComponent extends Component {
 			switch (this.state.action) {
 				case 'change-password':
 					return this.renderChangePassword();
+				case 'change-course':
+					return this.renderChangeCourse();
 				default:
 					return this.renderAccount();
 			}
@@ -309,7 +389,7 @@ const WrappedAccountComponent = Form.create()(AccountComponent);
 class MenuComponent extends Component {
 	static propTypes = {
 		routeData: PropTypes.object,
-		history: PropTypes.object
+		history: PropTypes.object,
 	}
 
 	state = {}
@@ -322,7 +402,7 @@ class MenuComponent extends Component {
 		const { routeData: { user } } = this.props;
 		if (user && user.admin) {
 			return (
-				<Menu.SubMenu title='Administrar'>
+				<Menu.SubMenu title='Administrar' style={{ float: 'right' }}>
 					<Menu.Item key='calendars'>Calendários</Menu.Item>
 					<Menu.Item key='teachers'>Professores</Menu.Item>
 					<Menu.Item key='courses'>Cursos</Menu.Item>
@@ -341,11 +421,14 @@ class MenuComponent extends Component {
 		let userEmail = 'Entrar / Criar Conta';
 
 		if (user) {
-			userEmail = user.mainEmail.address;
+			userEmail = <div className='user-menu-content'>
+				<div>{user.profile.name}</div>
+				<div>{user.mainEmail && user.mainEmail.address}</div>
+			</div>;
 		}
 
 		return (
-			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }}>
+			<Menu.SubMenu title={<span><Icon type='user' />{userEmail}</span>} style={{ float: 'right' }} className='user-menu'>
 				<WrappedAccountComponent routeData={routeData} />
 			</Menu.SubMenu>
 		);
@@ -369,8 +452,8 @@ class MenuComponent extends Component {
 			>
 				<Menu.Item key='/course'>Meu Currículo</Menu.Item>
 				{this.renderCalendar()}
-				{this.renderAdminMenu()}
 				{this.renderAccounts()}
+				{this.renderAdminMenu()}
 			</Menu>
 		);
 	}

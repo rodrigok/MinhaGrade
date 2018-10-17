@@ -4,7 +4,7 @@ import { createResolver, and } from 'apollo-resolvers';
 import { createError } from 'apollo-errors';
 
 const TeacherNameAlreadyExists = createError('TeacherNameAlreadyExists', {
-	message: 'Teacher name already exists'
+	message: 'Teacher name already exists',
 });
 
 const checkIfNameAlreadyExists = createResolver((root, { name }) => {
@@ -15,11 +15,11 @@ const checkIfNameAlreadyExists = createResolver((root, { name }) => {
 
 export default {
 	Query: {
-		teachers: isAuthenticatedResolver.createResolver(TeacherModel.resolverFindAll)
+		teachers: isAuthenticatedResolver.createResolver(TeacherModel.resolverFindAll),
 	},
 	Mutation: {
 		createTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(TeacherModel.mutationCreate),
 		updateTeacher: and(isAdminResolver, checkIfNameAlreadyExists)(TeacherModel.mutationUpdate),
-		removeTeacher: and(isAdminResolver)(TeacherModel.mutationRemove)
-	}
+		removeTeacher: and(isAdminResolver)(TeacherModel.mutationRemove),
+	},
 };
