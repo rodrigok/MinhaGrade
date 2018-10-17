@@ -20,6 +20,8 @@ export class _BaseModel {
 
 	update = (query, update, options) => this.model.update(query, update, options)
 
+	remove = (query, options) => this.model.remove(query, options)
+
 	updateById = (_id, update) => this.model.update({ _id }, update)
 
 	removeById = (_id) => this.model.remove({ _id })
@@ -31,9 +33,7 @@ export class _BaseModel {
 		return this.findOne({ _id });
 	}
 
-
 	resolverFindAll = () => this.find().fetch()
-
 
 	mutationCreate = (root, record) => this.createAndReturn(record)
 

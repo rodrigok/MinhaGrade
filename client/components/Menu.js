@@ -29,8 +29,6 @@ class AccountComponent extends Component {
 	handleLogin = (e) => {
 		e.preventDefault();
 
-		const { routeData } = this.props;
-
 		this.setState({ loading: true });
 		this.props.form.validateFields((err, values) => {
 			this.setState({ loading: false });
@@ -40,7 +38,7 @@ class AccountComponent extends Component {
 						message.error(error.reason);
 					}
 
-					routeData.refetch();
+					ApolloClient.resetStore();
 				});
 			}
 		});

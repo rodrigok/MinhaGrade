@@ -30,6 +30,10 @@ const findOne = async(root, args, context) => {
 		active: true,
 	});
 
+	if (!result) {
+		return;
+	}
+
 	context.calendarId = result._id;
 
 	const user = UserModel.findOneByIdWithFacebookToken(context.userId, { fields: { 'services.facebook.accessToken': 1 } });
