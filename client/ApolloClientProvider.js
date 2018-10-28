@@ -24,7 +24,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const wsLink = new WebSocketLink({
-	uri: `${ location.protocol === 'https:' ? 'wss' : 'ws'}://${ location.hostname }:5000/subscriptions`,
+	uri: `${ location.protocol === 'https:' ? 'wss' : 'ws'}://${ location.host }/subscriptions`,
 	options: {
 		reconnect: true,
 		lazy: true,
