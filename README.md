@@ -1,4 +1,4 @@
-# gradefaccat
+# MinhaGrade
 
 ## Como rodar o projeto
 
@@ -12,7 +12,7 @@ Windows: https://install.meteor.com/windows
 
 ### Clonar o repositório
 ```shell
-git clone https://github.com/rodrigok/GradeFaccat
+git clone https://github.com/rodrigok/MinhaGrade
 ```
 
 ### Entrar na pastar e rodar o Meteor
