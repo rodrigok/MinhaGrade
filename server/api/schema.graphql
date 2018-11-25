@@ -244,6 +244,8 @@ type Mutation {
   resendVerificationEmail (email: String): SuccessResponse
   # Login the user with a facebook access token
   loginWithFacebook (accessToken: String!): LoginMethodResponse
+
+  setPushToken (token: String!): Boolean
 }
 
 type SignupResult {

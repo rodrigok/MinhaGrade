@@ -5,3 +5,5 @@ import '/server/configMail';
 import './account';
 
 import './api';
+
+import './push';

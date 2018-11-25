@@ -94,6 +94,21 @@ const setPassword = (root, { currentPassword, password }, { userId }) => {
 	return true;
 };
 
+const setPushToken = (root, { token }, { userId }) => {
+	// console.log({ token, userId });
+	if (!userId || !token) {
+		return false;
+	}
+
+	const count = Meteor.users.update({ _id: userId }, {
+		$addToSet: {
+			'services.pushTokens': token,
+		},
+	});
+
+	return count === 1;
+};
+
 export default {
 	Query: {
 		user: findOne,
@@ -111,5 +126,6 @@ export default {
 		signup,
 		setCourse,
 		setPassword,
+		setPushToken,
 	},
 };

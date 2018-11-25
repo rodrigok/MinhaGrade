@@ -1,5 +1,8 @@
 import { _BaseModel } from './_Base';
+import GradeModel from '../models/grade';
 import UserModel from './user';
+import TeacherModel from '../models/teacher';
+import { sendPush } from '../../push';
 
 class CalendarModel extends _BaseModel {
 	constructor() {
@@ -63,7 +66,39 @@ class CalendarModel extends _BaseModel {
 			};
 		}
 
-		return this.update(query, update) === 1;
+		const result = this.update(query, update) === 1;
+
+		if (!result) {
+			return result;
+		}
+
+		const users = UserModel.find({
+			[`calendar.${ calendarId }`]: `${ shift }${ day }-${ gradeItemId }`,
+		}, {
+			fields: { _id: 1, 'profile.course': 1 },
+		}).fetch();
+
+		if (users.length) {
+			const grade = GradeModel.findOne({ _id: gradeItemId });
+			const teacher = teacherId !== '' && TeacherModel.findOne({ _id: teacherId });
+
+			users.forEach((user) => {
+				let pushMessage;
+				if (teacherId === '') {
+					pushMessage = `A matéria ${ grade.name[user.profile.course] } está sem professor(a)`;
+				} else {
+					pushMessage = `A matéria ${ grade.name[user.profile.course] } será ministrada por: ${ teacher.name }`;
+				}
+
+				sendPush({
+					title: 'Professor alterado',
+					body: pushMessage,
+					userId: user._id,
+				});
+			});
+		}
+
+		return result;
 	}
 
 	setRoomInCalendarItem = (root, { calendarId, gradeItemId, shift, day, room }) => {
@@ -92,7 +127,38 @@ class CalendarModel extends _BaseModel {
 			};
 		}
 
-		return this.update(query, update) === 1;
+		const result = this.update(query, update) === 1;
+
+		if (!result) {
+			return result;
+		}
+
+		const users = UserModel.find({
+			[`calendar.${ calendarId }`]: `${ shift }${ day }-${ gradeItemId }`,
+		}, {
+			fields: { _id: 1, 'profile.course': 1 },
+		}).fetch();
+
+		if (users.length) {
+			const grade = GradeModel.findOne({ _id: gradeItemId });
+
+			users.forEach((user) => {
+				let pushMessage;
+				if (room === '') {
+					pushMessage = `A matéria ${ grade.name[user.profile.course] } está sem sala definida`;
+				} else {
+					pushMessage = `A matéria ${ grade.name[user.profile.course] } será ministrada na sala ${ room }`;
+				}
+
+				sendPush({
+					title: 'Sala alterada',
+					body: pushMessage,
+					userId: user._id,
+				});
+			});
+		}
+
+		return result;
 	}
 
 	removeItemFromCalendar = (root, { calendarId, gradeItemId, shift, day }) => {

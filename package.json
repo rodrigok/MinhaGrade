@@ -46,6 +46,7 @@
     "graphql-type-json": "^0.2.1",
     "indexof": "0.0.1",
     "meteor-apollo-accounts": "^2.0.3",
+    "node-pushnotifications": "^1.1.7",
     "promisify-node": "^0.5.0",
     "react": "^16.5.2",
     "react-apollo": "^2.2.4",
