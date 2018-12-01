@@ -181,6 +181,33 @@ class CalendarComponent extends Component {
 				day: calendarItem.day,
 				interested,
 			},
+			update: (store) => {
+				const fragment = gql`
+					fragment calendarFragment on calendar {
+						grade {
+							_id
+							userInterested
+						}
+					}
+				`;
+
+				const data = store.readFragment({
+					id: calendar._id,
+					fragment,
+				});
+
+				if (data) {
+					const item = data.grade.find((i) => i._id === `${ gradeItem._id }:${ calendarItem.shift }:${ calendarItem.day }`);
+					if (item) {
+						item.userInterested = interested;
+						store.writeFragment({
+							id: calendar._id,
+							fragment,
+							data,
+						});
+					}
+				}
+			},
 		}).then(() => {
 			this.props.data.refetch();
 		});

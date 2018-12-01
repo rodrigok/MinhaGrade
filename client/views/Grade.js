@@ -39,6 +39,27 @@ class GradeComponent extends Component {
 				_id,
 				status,
 			},
+			update: (store) => {
+				const fragment = gql`
+					fragment gradeFragment on grades {
+						userStatus
+					}
+				`;
+
+				const data = store.readFragment({
+					id: _id,
+					fragment,
+				});
+
+				if (data) {
+					data.userStatus = status;
+					store.writeFragment({
+						id: _id,
+						fragment,
+						data,
+					});
+				}
+			},
 		}).then(() => {
 			message.success('Status alterado');
 		});

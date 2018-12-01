@@ -6,7 +6,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
 const httpLink = new HttpLink({
-	uri: `${location.protocol}//${ location.host }/graphql`,
+	uri: `${ location.protocol }//${ location.host }/graphql`,
 });
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -24,7 +24,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const wsLink = new WebSocketLink({
-	uri: `${ location.protocol === 'https:' ? 'wss' : 'ws'}://${ location.host }/subscriptions`,
+	uri: `${ location.protocol === 'https:' ? 'wss' : 'ws' }://${ location.host }/subscriptions`,
 	options: {
 		reconnect: true,
 		lazy: true,
@@ -48,5 +48,7 @@ const link = split(
 
 export const client = new ApolloClient({
 	link: concat(authLink, link),
-	cache: new InMemoryCache(),
+	cache: new InMemoryCache({
+		dataIdFromObject: (object) => object._id,
+	}),
 });
